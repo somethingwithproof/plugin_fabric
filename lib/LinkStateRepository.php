@@ -30,18 +30,20 @@ namespace Somethingwithproof\Fabric;
  * counted, not guessed at: it is a node discovery has not imported yet.
  *
  * Only present, unconflicted nodes are updated. A stored port of such a
- * node that iblinkinfo did not print is missing, with its link unknown.
+ * node that iblinkinfo did not print is missing, with its link unknown,
+ * unless a line of that node was skipped: its other ports then keep their
+ * last state and age into stale, as the skipped line may have named them.
  */
 final class LinkStateRepository {
 	public function __construct(private readonly \PDO|false $connection, private readonly Clock $clock) {
 	}
 
 	/**
-	 * @param list<LinkRecord> $records
-	 *
 	 * @return int|null records that matched no node, or null when nothing was applied
 	 */
-	public function import(Fabric $fabric, array $records): ?int {
+	public function import(Fabric $fabric, LinkReport $report): ?int {
+		$records = $report->records;
+
 		$nodes = (new NodeRepository($this->connection))->forFabric($fabric->id);
 
 		if ($nodes === null) {
@@ -50,6 +52,7 @@ final class LinkStateRepository {
 
 		$switches = [];
 		$adapters = [];
+		$byGuid   = [];
 		$targets  = [];
 
 		foreach ($nodes as $node) {
@@ -76,6 +79,7 @@ final class LinkStateRepository {
 			foreach ($ports as $port) {
 				if ($port->portGuid !== null) {
 					$adapters[$port->portGuid->text . ':' . $port->number] = $node->id;
+					$byGuid[$port->portGuid->text]                         = $node->id;
 				}
 			}
 		}
@@ -111,8 +115,21 @@ final class LinkStateRepository {
 		}
 
 		$unknown = LinkState::unknown()->toRow();
+		$partial = [];
+
+		foreach ($report->skipped as $guid) {
+			$nodeId = $switches[$guid->text] ?? $byGuid[$guid->text] ?? null;
+
+			if ($nodeId !== null) {
+				$partial[$nodeId] = true;
+			}
+		}
 
 		foreach (array_keys($targets) as $nodeId) {
+			if (isset($partial[$nodeId])) {
+				continue;
+			}
+
 			$reported     = $seen[$nodeId] ?? [];
 			$placeholders = $reported === [] ? '' : ' AND port_number NOT IN (' . implode(', ', array_fill(0, count($reported), '?')) . ')';
 

@@ -18,6 +18,7 @@
  */
 
 use Somethingwithproof\Fabric\CounterGroup;
+use Somethingwithproof\Fabric\Guid;
 use Somethingwithproof\Fabric\IblinkinfoParser;
 use Somethingwithproof\Fabric\IbnetdiscoverParser;
 use Somethingwithproof\Fabric\LinkSpeed;
@@ -51,7 +52,8 @@ it('parses generated fabrics of 100, 1,000, and 10,000 ports whole', function (i
 	expect(count($topology->nodes))->toBe(count($fabric->nodes))
 		->and($topology->portCount())->toBe(count($fabric->links))
 		->and($topology->duplicates)->toBe([])
-		->and(count($links))->toBe(array_sum(array_column($fabric->nodes, 'ports')));
+		->and(count($links->records))->toBe(array_sum(array_column($fabric->nodes, 'ports')))
+		->and($links->skipped)->toBe([]);
 })->with(['100 ports' => [44], '1,000 ports' => [470], '10,000 ports' => [4850]]);
 
 it('counts the generated fabric sizes as their names say', function (int $cas, int $ports) {
@@ -116,7 +118,7 @@ it('rejects output that is cut short, altered, or not topology output', function
 ]);
 
 it('reads port state, active values, and the supported-intersection hint', function () {
-	$records = (new IblinkinfoParser())->parse(fabric_fixture('iblinkinfo-line.txt'));
+	$records = (new IblinkinfoParser())->parse(fabric_fixture('iblinkinfo-line.txt'))->records;
 	$byPort  = [];
 
 	foreach ($records as $record) {
@@ -159,9 +161,45 @@ it('rejects link output with any line it does not know', function (string $outpu
 })->with([
 	'stray'          => [fabric_fixture('iblinkinfo-line.txt') . "Switch: 0x0002c90300a00000 leaf:\n"],
 	'repeated port'  => [fabric_fixture('iblinkinfo-line.txt') . strtok(fabric_fixture('iblinkinfo-line.txt'), "\n") . "\n"],
-	'down with rate' => ['0x0002c90300a00000 "                          leaf"      1    5[  ] ==( 4X      25.78125 Gbps   Down/ Polling)==>             [  ] "" ( )'],
+	'down with rate' => ["0x0002c90300a00000 \"                          leaf\"      1    5[  ] ==( 4X      25.78125 Gbps   Down/ Polling)==>             [  ] \"\" ( )\n"],
+	'cut short'      => [substr(fabric_fixture('iblinkinfo-line.txt'), 0, -40)],
 	'not line mode'  => ["CA: node0000 HCA-1:\n      0x0002c90300b00001      3    1[  ] ==( 4X      25.78125 Gbps Active/  LinkUp)==>       1    1[  ] \"leaf\" ( )\n"],
 ]);
+
+it('reads node descriptions that hold quotes, link markers, and GUIDs without taking fields from them', function () {
+	$report = (new IblinkinfoParser())->parse(fabric_fixture('iblinkinfo-hostile.txt'));
+	$byPort = [];
+
+	foreach ($report->records as $record) {
+		$byPort[$record->portGuid->text . ':' . $record->port] = $record;
+	}
+
+	expect(array_keys($byPort))->toBe(['0x0002c90300b00001:1', '0x0002c90300b00011:1', '0x0002c90300a00000:3', '0x0002c90300a00000:5'])
+		->and($byPort['0x0002c90300b00001:1']->lid)->toBe(3)
+		->and($byPort['0x0002c90300b00001:1']->remotePortGuid?->text)->toBe('0x0002c90300a00000')
+		->and($byPort['0x0002c90300b00001:1']->remotePort)->toBe(1)
+		->and($byPort['0x0002c90300b00011:1']->remotePortGuid?->text)->toBe('0x0002c90300a00000')
+		->and($byPort['0x0002c90300b00011:1']->link->activeWidth)->toBe(LinkWidth::X1)
+		->and($byPort['0x0002c90300b00011:1']->link->bestWidth)->toBe(LinkWidth::X4)
+		->and($byPort['0x0002c90300a00000:3']->remotePortGuid?->text)->toBe('0x0002c90300b00021')
+		->and($byPort['0x0002c90300a00000:3']->remotePort)->toBe(1)
+		->and($byPort['0x0002c90300a00000:3']->link->bestWidth)->toBe(LinkWidth::X4)
+		->and($byPort['0x0002c90300a00000:5']->remotePortGuid?->text)->toBe('0x0002c90300b00041')
+		// The line whose description imitates a whole port line reads two
+		// ways, so it is skipped, never read as the imitated port.
+		->and(array_map(static fn (Guid $g): string => $g->text, $report->skipped))->toBe(['0x0002c90300b00031']);
+});
+
+it('skips only a line that starts like a port line and cannot be read in one way', function () {
+	$good = fabric_fixture('iblinkinfo-line.txt');
+	$odd  = "0x0002c90300b00051 \"node0006\" not a port line\n";
+
+	$report = (new IblinkinfoParser())->parse($good . $odd);
+
+	expect($report->records)->toHaveCount(7)
+		->and(array_map(static fn (Guid $g): string => $g->text, $report->skipped))->toBe(['0x0002c90300b00051'])
+		->and(fn () => (new IblinkinfoParser())->parse($good . "0x0000000000000000 \"zero\" x\n"))->toThrow(ParseFailure::class);
+});
 
 it('reads perfquery blocks as decimal strings with widths checked', function () {
 	$counters = (new PerfqueryParser())->parse(fabric_fixture('perfquery-basic.txt') . fabric_fixture('perfquery-extended.txt'));

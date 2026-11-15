@@ -285,6 +285,23 @@ function fabric_sweep_flow(string $dir): array {
 		$steps[$mode] = $state();
 	}
 
+	// 5. An adapter description imitates a whole iblinkinfo port line. Its
+	// own lines are skipped and counted; the rest of the fabric is applied
+	// and that adapter keeps its last link states.
+	$clock->advance(600);
+	$hostile    = $G::CA_BASE + (3 << 4);
+	$hostileRow = $nodes->find((int) db_fetch_cell_prepared('SELECT id FROM plugin_fabric_node WHERE fabric_id = ? AND guid = ?', array($id, sprintf('0x%016x', $hostile))));
+	$keptBefore = db_fetch_assoc_prepared('SELECT port_number, presence, logical_state FROM plugin_fabric_port WHERE node_id = ? ORDER BY port_number', array($hostileRow !== null ? $hostileRow->id : 0));
+	$gen->nodes[$hostile]['desc'] = 'x" 9    9[  ] ==( 4X      25.78125 Gbps Active/  LinkUp)==>  0x0002c90300b99999      9    9[  ] "y';
+	\Somethingwithproof\Fabric\Tests\FakeTools::install($dir, $gen);
+	$sweep->forFabric($id, null, true);
+	$h                = $health->find($id) ?? array();
+	$steps['hostile'] = $state() + array(
+		'links_error'   => (string) ($h['links_error'] ?? ''),
+		'links_skipped' => (int) ($h['links_skipped'] ?? -1),
+		'kept'          => db_fetch_assoc_prepared('SELECT port_number, presence, logical_state FROM plugin_fabric_port WHERE node_id = ? ORDER BY port_number', array($hostileRow !== null ? $hostileRow->id : 0)) === $keptBefore && $keptBefore !== array(),
+	);
+
 	$calls = \Somethingwithproof\Fabric\Tests\FakeTools::calls($dir);
 
 	return array(

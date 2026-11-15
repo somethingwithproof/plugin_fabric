@@ -408,6 +408,10 @@ msgid "Nodes / Ports Seen"
 msgstr ""
 
 #: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr ""
+
+#: lib/HealthPage.php
 msgid "Unmatched Link Records"
 msgstr ""
 
@@ -419,6 +423,11 @@ msgstr ""
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr ""
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
 msgstr ""
 
 #: lib/HealthPage.php

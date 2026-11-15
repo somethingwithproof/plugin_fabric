@@ -65,10 +65,10 @@ final class HealthPage {
 		$freshness = new FreshnessEvaluator($this->clock);
 
 		html_start_box(__('Fabrics', 'fabric'), '100%', '', '3', 'center', '');
-		print Format::header([__('Fabric', 'fabric'), __('Last Discovery', 'fabric'), __('Last Successful Discovery', 'fabric'), __('Discovery', 'fabric'), __('Nodes / Ports Seen', 'fabric'), __('Last Link Read', 'fabric'), __('Link Read', 'fabric'), __('Unmatched Link Records', 'fabric'), __('Counter Sweeps', 'fabric')]);
+		print Format::header([__('Fabric', 'fabric'), __('Last Discovery', 'fabric'), __('Last Successful Discovery', 'fabric'), __('Discovery', 'fabric'), __('Nodes / Ports Seen', 'fabric'), __('Last Link Read', 'fabric'), __('Link Read', 'fabric'), __('Unmatched Link Records', 'fabric'), __('Skipped Link Lines', 'fabric'), __('Counter Sweeps', 'fabric')]);
 
 		if ($fabrics === []) {
-			print '<tr><td colspan="9"><em>' . html_escape(__('No fabrics defined yet.', 'fabric')) . '</em></td></tr>';
+			print '<tr><td colspan="10"><em>' . html_escape(__('No fabrics defined yet.', 'fabric')) . '</em></td></tr>';
 		}
 
 		$warnings = [];
@@ -98,6 +98,10 @@ final class HealthPage {
 				$warnings[] = __('Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller.', $fabric->name, $fabric->pollerId, 'fabric');
 			}
 
+			if (Row::int($row, 'links_skipped') > 0 && Row::string($row, 'links_error') === '') {
+				$warnings[] = __('Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states.', $fabric->name, Row::int($row, 'links_skipped'), 'fabric');
+			}
+
 			foreach (array_filter(explode(',', Row::string($row, 'privilege'))) as $code) {
 				$warnings[] = __('Fabric %s: %s', $fabric->name, PrivilegeProbe::message($code), 'fabric');
 			}
@@ -111,6 +115,7 @@ final class HealthPage {
 				Format::age(Row::int($row, 'links_attempt'), $now),
 				self::step($row, 'links'),
 				(string) Row::int($row, 'links_unmatched'),
+				(string) Row::int($row, 'links_skipped'),
 				implode(', ', array_map(static fn (string $k, int $v): string => "$k $v", array_keys($outcomes), $outcomes)),
 			]);
 		}

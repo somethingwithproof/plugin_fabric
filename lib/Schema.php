@@ -358,6 +358,7 @@ final class Schema {
 					$float('links_duration'),
 					$text('links_error', 16),
 					$count('links_unmatched'),
+					$count('links_skipped'),
 					$guid('local_guid'),
 					$text('privilege', 128),
 				],

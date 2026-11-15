@@ -43,9 +43,9 @@ final class FabricHealthRepository {
 			: ['discovery_attempt' => $attempt, 'discovery_duration' => round($duration, 3), 'discovery_error' => $error->value]);
 	}
 
-	public function links(int $fabricId, int $attempt, ?CommandError $error, float $duration, int $unmatched): bool {
+	public function links(int $fabricId, int $attempt, ?CommandError $error, float $duration, int $unmatched, int $skipped = 0): bool {
 		return $this->upsert($fabricId, $error === null
-			? ['links_attempt' => $attempt, 'links_success' => $attempt, 'links_duration' => round($duration, 3), 'links_error' => '', 'links_unmatched' => $unmatched]
+			? ['links_attempt' => $attempt, 'links_success' => $attempt, 'links_duration' => round($duration, 3), 'links_error' => '', 'links_unmatched' => $unmatched, 'links_skipped' => $skipped]
 			: ['links_attempt' => $attempt, 'links_duration' => round($duration, 3), 'links_error' => $error->value]);
 	}
 

@@ -122,12 +122,17 @@ final class TopologySweep {
 
 		if ($error === null) {
 			try {
-				$unmatched = (new LinkStateRepository($this->connection, $this->clock))->import($fabric, (new IblinkinfoParser())->parse($result->stdout));
+				$report    = (new IblinkinfoParser())->parse($result->stdout);
+				$unmatched = (new LinkStateRepository($this->connection, $this->clock))->import($fabric, $report);
 
 				if ($unmatched === null) {
 					$error = CommandError::Storage;
 				} else {
-					$health->links($fabric->id, $now, null, $result->duration, $unmatched);
+					$health->links($fabric->id, $now, null, $result->duration, $unmatched, count($report->skipped));
+
+					if ($report->skipped !== []) {
+						Log::warning(sprintf('Fabric %d: %d iblinkinfo lines could not be read and were skipped; those nodes keep their last link states', $fabric->id, count($report->skipped)));
+					}
 				}
 			} catch (ParseFailure $e) {
 				Log::warning(sprintf('Fabric %d: iblinkinfo output not applied: %s', $fabric->id, $e->getMessage()));
