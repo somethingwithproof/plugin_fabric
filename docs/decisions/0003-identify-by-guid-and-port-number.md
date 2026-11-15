@@ -1,10 +1,10 @@
 # 0003. Identify nodes by GUID and ports by GUID plus port number
 
-Status: Accepted (2026-11-14), pending hardware evidence for switches
+Status: Accepted (2026-11-14), context corrected 2026-11-15; hardware evidence for switches pending
 
 ## Context
 
-Each fabric tool prints LIDs, node descriptions, and GUIDs. LIDs are assigned by the subnet manager and change. Node descriptions are set by operators and firmware. GUIDs are assigned to the hardware. The node information record carries a node GUID separate from the port GUID (`libibmad/fields.c`), and the discovery tool prints a port GUID per port (`ibnetdiscover.c`). Whether switch ports report distinct port GUIDs is not confirmed.
+Each fabric tool prints LIDs, node descriptions, and GUIDs. LIDs are assigned by the subnet manager and change. Node descriptions are set by operators and firmware. GUIDs are assigned to the hardware. The node information record carries a node GUID separate from the port GUID (`libibmad/fields.c`). The original text said the discovery tool prints a port GUID per port and that distinct switch port GUIDs were unconfirmed. Research on 2026-11-15 ([identity](../research/identity.md)) corrected this: `ibnetdiscover -p` and `iblinkinfo --line` print port GUIDs and never node GUIDs; the default `ibnetdiscover` topology output prints node GUIDs and, for switches, no port GUID except the switch's port 0 GUID on the `switchguid` line; and in rdma-core's discovery library every external port of a switch gets the one PortGUID from the switch's NodeInfo, so port GUID alone cannot identify a switch port. That last point is from source and still needs a real switch to confirm.
 
 ## Decision
 
@@ -15,6 +15,8 @@ A node is identified by its node GUID. A port is identified by node GUID and por
 - Re-addressing and renaming do not break history.
 - Hardware replacement needs an operator decision, which keeps old history readable.
 - A `Guid` value object is the only place GUID text is normalized.
+- Node GUIDs come from the default `ibnetdiscover` output (or `--list`), not from `-p` or `iblinkinfo --line`.
+- The tools do not detect two devices with one node GUID (the discovery library merges them), so the plugin needs its own conflict detection.
 - If research finds that node GUID plus port number is not unique for some node type, this record is superseded.
 
 ## Alternatives rejected
