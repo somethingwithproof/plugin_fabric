@@ -1,0 +1,25 @@
+#
+# Topology file: generated on Sat Nov 14 12:00:00 2026
+#
+# Initiated from node 0002c90300b00000 port 0002c90300b00001
+
+vendid=0x2c9
+devid=0xd2f0
+sysimgguid=0x2c90300a00000
+switchguid=0x2c90300a00000(2c90300a00000)
+Switch	36 "S-0002c90300a00000"		# "leaf01 mlx5_0" enhanced port 0 lid 1 lmc 0
+[1]	"H-0002c90300b00000"[1](2c90300b00001) 		# "node0001 HCA-1" lid 3 4xEDR
+[2]	"R-0002c90300c00000"[1](2c90300c00001) 		# "rtr <b>01</b> " ; $(id)" lid 4 4xHDR
+
+vendid=0x2c9
+devid=0x101b
+sysimgguid=0x2c90300b00000
+caguid=0x2c90300b00000
+Ca	2 "H-0002c90300b00000"		# "node0001 HCA-1"
+[1](2c90300b00001) 	"S-0002c90300a00000"[1]		# lid 3 lmc 0 "leaf01 mlx5_0" lid 1 4xEDR
+
+vendid=0x2c9
+devid=0x1021
+rtguid=0x2c90300c00000
+Rt	1 "R-0002c90300c00000"		# "rtr <b>01</b> " ; $(id)"
+[1](2c90300c00001) 	"S-0002c90300a00000"[2]		# lid 4 lmc 0 "leaf01 mlx5_0" lid 1 4xHDR
