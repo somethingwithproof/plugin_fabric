@@ -2,7 +2,7 @@
 
 Research for [#25](https://github.com/somethingwithproof/plugin_fabric/issues/25), run 2026-11-15. Question: how should counters be grouped into data templates so that RRD count, update cost, and graph usefulness stay reasonable?
 
-**Result.** Grouping A (four files per port: traffic, errors, congestion, state) is the better layout on every figure that differs. Both layouts store the same 25 data sources per port and use almost the same disk (2.34 MB per port for A, 2.39 MB for B, with Cacti 1.2.31's default "5 Minute Collection" profile). They differ in file count: 4,000 files for A and 25,000 for B at 1,000 ports. Applying one polling cycle of updates through one rrdtool pipe took 0.27 seconds for A and 1.92 seconds for B at 1,000 ports. Linear extrapolation to 10,000 ports gives about 2.7 and 19 seconds, which is arithmetic, not a measurement. These are rrdtool and file system costs on one development machine with warm caches; they are not Cacti poll times. Cacti's own row counts (data source, graph, and poller tables) were not measured because Cacti was not installed, and the "documented fabric size" claims in the plan stay unmeasured until M3. The plan's updates-per-second figures are file updates per cycle and hold as arithmetic.
+**Result.** Grouping A (four files per port: traffic, errors, congestion, state) is the better layout on every figure that differs. Both layouts store the same 25 data sources per port and use almost the same disk (2.34 MB per port for A, 2.39 MB for B, with Cacti 1.2.31's default "5 Minute Collection" profile). They differ in file count: 4,000 files for A and 25,000 for B at 1,000 ports. Applying one polling cycle of updates through one rrdtool pipe took 0.29 seconds for A and 1.67 seconds for B at 1,000 ports. Linear extrapolation to 10,000 ports gives about 2.9 and 17 seconds, which is arithmetic, not a measurement. These are rrdtool and file system costs on one development machine with warm caches; they are not Cacti poll times. Cacti's own row counts (data source, graph, and poller tables) were not measured because Cacti was not installed, and the "documented fabric size" claims in the plan stay unmeasured until M3. The plan's updates-per-second figures are file updates per cycle and hold as arithmetic.
 
 ## Method
 
@@ -16,18 +16,18 @@ Research for [#25](https://github.com/somethingwithproof/plugin_fabric/issues/25
 
 | Layout | Ports | Files | Data sources | Create (s) | Bytes per port | Update cycle (s) | File updates per second |
 |---|---|---|---|---|---|---|---|
-| A, four files per port | 100 | 400 | 2,500 | 0.31 | 2,344,168 | 0.040 | 10,108 |
-| B, one file per data source | 100 | 2,500 | 2,500 | 1.46 | 2,390,200 | 0.157 | 15,918 |
-| A | 1,000 | 4,000 | 25,000 | 3.57 | 2,344,168 | 0.269 | 14,861 |
-| B | 1,000 | 25,000 | 25,000 | 14.87 | 2,390,200 | 1.924 | 12,991 |
+| A, four files per port | 100 | 400 | 2,500 | 0.42 | 2,344,168 | 0.034 | 11,894 |
+| B, one file per data source | 100 | 2,500 | 2,500 | 1.44 | 2,390,200 | 0.154 | 16,184 |
+| A | 1,000 | 4,000 | 25,000 | 3.64 | 2,344,168 | 0.294 | 13,599 |
+| B | 1,000 | 25,000 | 25,000 | 15.23 | 2,390,200 | 1.674 | 14,934 |
 
 Observed, from those rows:
 
 - Disk per port is dominated by the data sources and consolidation functions: 25 data sources times 11,488 rows times 8 bytes is 2.30 MB, and A adds about 2.0 percent and B about 4.0 percent for file headers.
-- The update cost tracks the file count: at 1,000 ports B took about seven times as long per cycle as A for the same data.
+- The update cost tracks the file count: at 1,000 ports B took about six times as long per cycle as A for the same data.
 - Disk at 10,000 ports, from bytes per port: about 23.4 GB for A and 23.9 GB for B with this profile. Four consolidation functions is Cacti's default profile; a profile with only AVERAGE and MAX would shrink both.
 
-Extrapolation, not measured: 10,000 ports would be 40,000 files and about 2.7 seconds per cycle for A, and 250,000 files and about 19 seconds for B. B's per-file cost rose between 100 and 1,000 ports (0.063 to 0.077 ms), so the linear estimate probably understates it. A cold file cache would cost more.
+Extrapolation, not measured: 10,000 ports would be 40,000 files and about 2.9 seconds per cycle for A, and 250,000 files and about 17 seconds for B. B's per-file cost rose between 100 and 1,000 ports (0.062 to 0.067 ms), so the linear estimate may understate it. A cold file cache would cost more.
 
 ## Poll-path and database counts (arithmetic from table structure)
 

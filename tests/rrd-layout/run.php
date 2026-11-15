@@ -80,16 +80,33 @@ function layout_files($layout)
 	return $files;
 }
 
-/** Runs commands through one rrdtool pipe and returns the elapsed seconds. */
-function rrd_batch(array $commands)
+/** Starts one persistent rrdtool process reading commands on stdin. */
+function rrd_open()
 {
 	$proc = proc_open(array('rrdtool', '-'), array(0 => array('pipe', 'r'), 1 => array('pipe', 'w'), 2 => array('pipe', 'w')), $pipes);
 
 	if (!is_resource($proc)) {
-		fwrite(STDERR, "cannot start rrdtool\n");
-		exit(2);
+		throw new RuntimeException('cannot start rrdtool');
 	}
 
+	return array($proc, $pipes);
+}
+
+function rrd_close(array $handle)
+{
+	list($proc, $pipes) = $handle;
+
+	foreach ($pipes as $pipe) {
+		fclose($pipe);
+	}
+
+	proc_close($proc);
+}
+
+/** Sends commands through an open rrdtool process and returns the elapsed seconds. */
+function rrd_batch(array $handle, array $commands)
+{
+	$pipes = $handle[1];
 	$start = microtime(true);
 
 	foreach ($commands as $command) {
@@ -98,19 +115,11 @@ function rrd_batch(array $commands)
 		$line = fgets($pipes[1]);
 
 		if ($line === false || strpos($line, 'OK') !== 0) {
-			fwrite(STDERR, "rrdtool failed on: $command\n" . (string) $line . "\n");
-			exit(2);
+			throw new RuntimeException("rrdtool failed on: $command " . (string) $line);
 		}
 	}
 
-	$elapsed = microtime(true) - $start;
-
-	fclose($pipes[0]);
-	fclose($pipes[1]);
-	fclose($pipes[2]);
-	proc_close($proc);
-
-	return $elapsed;
+	return microtime(true) - $start;
 }
 
 function dir_bytes($dir)
@@ -138,9 +147,29 @@ function discard($dir)
 
 function run_layout($layout, $ports)
 {
-	$base = sys_get_temp_dir() . '/fabric-rrd-' . getmypid() . "-$layout-$ports";
-	mkdir($base, 0700);
+	$base = sys_get_temp_dir() . '/fabric-rrd-' . bin2hex(random_bytes(8)) . "-$layout-$ports";
 
+	if (!mkdir($base, 0700)) {
+		throw new RuntimeException("cannot create scratch directory $base");
+	}
+
+	$handle = null;
+
+	try {
+		$handle = rrd_open();
+
+		return measure_layout($layout, $ports, $base, $handle);
+	} finally {
+		if ($handle !== null) {
+			rrd_close($handle);
+		}
+
+		discard($base);
+	}
+}
+
+function measure_layout($layout, $ports, $base, array $handle)
+{
 	$files   = layout_files($layout);
 	$t0      = 1700000100 - (1700000100 % STEP);
 	$create  = array();
@@ -168,10 +197,11 @@ function run_layout($layout, $ports)
 		}
 	}
 
-	$createSeconds = rrd_batch($create);
+	$createSeconds = rrd_batch($handle, $create);
 	$bytes         = dir_bytes($base);
 
-	// One cycle at t0 (first values are unknown rates), then two timed cycles.
+	// One cycle at t0 (first values are unknown rates), then two timed cycles,
+	// all through the same rrdtool process.
 	$cycleSeconds = array();
 
 	for ($cycle = 0; $cycle < 3; $cycle++) {
@@ -188,10 +218,8 @@ function run_layout($layout, $ports)
 			$updates[] = 'update ' . $entry[0] . ' ' . $ts . ':' . implode(':', $values);
 		}
 
-		$cycleSeconds[] = rrd_batch($updates);
+		$cycleSeconds[] = rrd_batch($handle, $updates);
 	}
-
-	discard($base);
 
 	$timed = array_slice($cycleSeconds, 1);
 
@@ -218,7 +246,12 @@ printf("%-6s %7s %9s %9s %10s %12s %14s %14s\n", 'layout', 'ports', 'files', 'DS
 
 foreach ($sizes as $ports) {
 	foreach (array('A', 'B') as $layout) {
-		$r = run_layout($layout, $ports);
+		try {
+			$r = run_layout($layout, $ports);
+		} catch (RuntimeException $e) {
+			fwrite(STDERR, $e->getMessage() . "\n");
+			exit(2);
+		}
 
 		printf(
 			"%-6s %7d %9d %9d %10.2f %12d %14.3f %14.0f\n",
