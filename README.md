@@ -1,8 +1,8 @@
 # plugin_fabric
 
-A proposed Cacti 1.2 plugin that brings InfiniBand port counters, link width and speed, and congestion indicators into Cacti as ordinary devices, data sources, and graphs. A link that trained at 1X instead of 4X then shows up as a graph and a Thold alert next to the host it serves, under Cacti's permissions, with Maint able to suppress it.
+A Cacti 1.2 plugin that brings InfiniBand port counters, link width and speed, and congestion indicators into Cacti as ordinary devices, data sources, and graphs. A link that trained at 1X instead of 4X then shows up as a graph and a Thold alert next to the host it serves, under Cacti's permissions, with Maint able to suppress it.
 
-> **Status: proposal, milestone 1 research merged.** This repository contains no plugin code yet. Milestone 1 confirmed the design against documentation and upstream source (PR #71); the results, with sources, are in [docs/research/](docs/research/), and [docs/PLAN.md](docs/PLAN.md) is at revision 2. Checks that need an InfiniBand fabric remain open in each research page's live-checks table. Nothing below describes shipped behavior.
+> **Status: in development.** Milestone 1 research is merged; milestone 2 (foundation) is in progress. Plugin code is not published here yet. Milestone 1 confirmed the design against documentation and upstream source (PR #71); the results, with sources, are in [docs/research/](docs/research/), and [docs/PLAN.md](docs/PLAN.md) is at revision 2. Checks that need an InfiniBand fabric remain open in each research page's live-checks table. Nothing below describes shipped behavior.
 
 ## Why
 
@@ -31,7 +31,7 @@ Out of scope: changing fabric state, replacing a fabric manager or subnet manage
 |---|---|
 | Cacti | 1.2.31 or later, no core patches |
 | PHP | 8.2 or later; `setup.php` stays parseable on 8.0 so an unsupported runtime gets a refusal instead of a broken Cacti UI |
-| InfiniBand tools | infiniband-diags from rdma-core; design checked against v65.1, version matrix is a milestone 1 deliverable |
+| InfiniBand tools | infiniband-diags from rdma-core; design checked against rdma-core v66.0 (the plan's earlier pin, v65.1, has identical source files); see [the version research](docs/research/infiniband-diags-versions.md) |
 | UFM | UFM Enterprise REST API, phase 2; release matrix is a milestone 1 deliverable |
 | Thold, Maint | No changes required |
 
