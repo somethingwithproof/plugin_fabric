@@ -98,6 +98,24 @@ final class PerfqueryParser {
 	private const MAX = [4 => '15', 8 => '255', 16 => '65535', 32 => '4294967295', 64 => '18446744073709551615'];
 
 	/**
+	 * The width in bits of a counter in a group, or 0 for a selector or a
+	 * name the group does not have.
+	 */
+	public static function width(CounterGroup $group, string $name): int {
+		$layout = $group === CounterGroup::Basic ? self::BASIC : self::EXTENDED + self::EXTENDED_CAST + self::EXTENDED_ERRORS;
+
+		return $name === 'PortSelect' ? 0 : $layout[$name] ?? 0;
+	}
+
+	/**
+	 * The largest value a counter of the width holds, where a basic counter
+	 * stops (caps) instead of wrapping, as a decimal string; '' for 0.
+	 */
+	public static function cap(int $width): string {
+		return self::MAX[$width] ?? '';
+	}
+
+	/**
 	 * @return list<Counters> in print order
 	 */
 	public function parse(string $output): array {

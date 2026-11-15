@@ -73,24 +73,6 @@ enum LinkSpeed: string {
 		};
 	}
 
-	/**
-	 * Data rate of one lane in Gbit/s as signalled, for the RRD maximum the
-	 * milestone 3 templates derive from the best width and speed.
-	 */
-	public function laneGbps(): float {
-		return match ($this) {
-			self::Sdr   => 2.5,
-			self::Ddr   => 5.0,
-			self::Qdr   => 10.0,
-			self::Fdr10 => 10.3125,
-			self::Fdr   => 14.0625,
-			self::Edr   => 25.78125,
-			self::Hdr   => 53.125,
-			self::Ndr   => 106.25,
-			self::Xdr   => 212.5,
-		};
-	}
-
 	public function label(): string {
 		return strtoupper($this->value);
 	}

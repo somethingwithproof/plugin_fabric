@@ -29,14 +29,36 @@ final class SampleRepository {
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
-	public function record(int $nodeId, Counters $counters, Backend $backend, int $observedAt): bool {
-		return db_execute_prepared(
-			"INSERT INTO plugin_fabric_sample (node_id, port_number, counter_group, observed_at, attempted_at, backend, cap_mask, cap_mask2, counters, error) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '')
-			ON DUPLICATE KEY UPDATE observed_at = VALUES(observed_at), attempted_at = VALUES(attempted_at), backend = VALUES(backend), cap_mask = VALUES(cap_mask), cap_mask2 = VALUES(cap_mask2), counters = VALUES(counters), error = ''",
-			[$nodeId, $counters->port, $counters->group->value, $observedAt, $observedAt, $backend->value, $counters->capMask, $counters->capMask2 ?? 0, $counters->toJson()],
+	/**
+	 * Replace a port's sample of one group, with the rates and
+	 * discontinuities against the sample it replaces.
+	 *
+	 * @param array<array-key, mixed>|null $previous the stored row of the same port and group, null for none
+	 *
+	 * @return CounterDelta|null what changed, or null when the write failed
+	 */
+	public function record(int $nodeId, Counters $counters, Backend $backend, int $observedAt, ?array $previous = null): ?CounterDelta {
+		$before   = $previous === null ? null : Counters::valuesFromJson(Row::string($previous, 'counters'));
+		$beforeAt = $previous === null ? 0 : Row::int($previous, 'observed_at', 0, 0);
+		$delta    = CounterDelta::between($before, $beforeAt, $counters, $observedAt);
+		$count    = $previous === null ? 0 : Row::int($previous, 'discontinuities', 0, 0);
+		$lastAt   = $previous === null ? 0 : Row::int($previous, 'discontinuity_at', 0, 0);
+
+		if ($delta->reset !== []) {
+			$count++;
+			$lastAt = $observedAt;
+		}
+
+		$ok = db_execute_prepared(
+			"INSERT INTO plugin_fabric_sample (node_id, port_number, counter_group, observed_at, attempted_at, backend, cap_mask, cap_mask2, counters, error, previous_at, rates, reset, discontinuities, discontinuity_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '', ?, ?, ?, ?, ?)
+			ON DUPLICATE KEY UPDATE observed_at = VALUES(observed_at), attempted_at = VALUES(attempted_at), backend = VALUES(backend), cap_mask = VALUES(cap_mask), cap_mask2 = VALUES(cap_mask2), counters = VALUES(counters), error = '',
+				previous_at = VALUES(previous_at), rates = VALUES(rates), reset = VALUES(reset), discontinuities = VALUES(discontinuities), discontinuity_at = VALUES(discontinuity_at)",
+			[$nodeId, $counters->port, $counters->group->value, $observedAt, $observedAt, $backend->value, $counters->capMask, $counters->capMask2 ?? 0, $counters->toJson(), $delta->since, $delta->ratesJson(), $delta->resetJson(), $count, $lastAt],
 			true,
 			$this->connection,
-		) !== false;
+		);
+
+		return $ok === false ? null : $delta;
 	}
 
 	public function recordFailure(int $nodeId, int $port, CounterGroup $group, CommandError $error, int $attemptedAt): bool {
@@ -54,5 +76,26 @@ final class SampleRepository {
 	 */
 	public function forNode(int $nodeId): ?array {
 		return Row::rows(db_fetch_assoc_prepared('SELECT * FROM plugin_fabric_sample WHERE node_id = ? ORDER BY port_number, counter_group', [$nodeId], true, $this->connection));
+	}
+
+	/**
+	 * A node's rows keyed by port and group, as CounterSweep compares them.
+	 *
+	 * @return array<string, array<array-key, mixed>>|null "port:group" => row
+	 */
+	public function keyed(int $nodeId): ?array {
+		$rows = $this->forNode($nodeId);
+
+		if ($rows === null) {
+			return null;
+		}
+
+		$out = [];
+
+		foreach ($rows as $row) {
+			$out[Row::int($row, 'port_number') . ':' . Row::string($row, 'counter_group')] = $row;
+		}
+
+		return $out;
 	}
 }

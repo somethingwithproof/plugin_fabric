@@ -127,12 +127,20 @@ final class CounterSweep {
 			return;
 		}
 
-		$builder = new CommandBuilder($this->settings, $fabric);
-		$budget  = new SweepBudget($start + $this->settings->nodeBudget, $this->settings->failureBudget);
-		$samples = new SampleRepository($this->connection);
+		$builder  = new CommandBuilder($this->settings, $fabric);
+		$budget   = new SweepBudget($start + $this->settings->nodeBudget, $this->settings->failureBudget);
+		$samples  = new SampleRepository($this->connection);
+		$previous = $samples->keyed($node->id);
+
+		if ($previous === null) {
+			$result->error   = CommandError::Storage;
+			$result->skipped = $result->total;
+
+			return;
+		}
 
 		try {
-			$basic = $this->group($builder, $fabric, $node, $targets, CounterGroup::Basic, $budget, $samples);
+			$basic = $this->group($builder, $fabric, $node, $targets, CounterGroup::Basic, $budget, $samples, $previous);
 		} catch (\InvalidArgumentException $e) {
 			// Only the settings or the fabric record can make the first
 			// command invalid; nothing was run.
@@ -157,18 +165,19 @@ final class CounterSweep {
 		$result->error   = $basic['error'];
 
 		if ($extended !== []) {
-			$this->group($builder, $fabric, $node, $extended, CounterGroup::Extended, $budget, $samples);
+			$this->group($builder, $fabric, $node, $extended, CounterGroup::Extended, $budget, $samples, $previous);
 		}
 	}
 
 	/**
 	 * Read one counter group for the given ports and record every result.
 	 *
-	 * @param array<int, int> $targets port number => LID
+	 * @param array<int, int>                         $targets  port number => LID
+	 * @param array<string, array<array-key, mixed>> $previous stored rows, "port:group" => row
 	 *
 	 * @return array{read: array<int, Counters>, failed: array<int, CommandError>, error: ?CommandError}
 	 */
-	private function group(CommandBuilder $builder, Fabric $fabric, Node $node, array $targets, CounterGroup $group, SweepBudget $budget, SampleRepository $samples): array {
+	private function group(CommandBuilder $builder, Fabric $fabric, Node $node, array $targets, CounterGroup $group, SweepBudget $budget, SampleRepository $samples, array $previous): array {
 		$tools   = new ToolRunner($this->runner, $this->settings);
 		$parser  = new PerfqueryParser();
 		$read    = [];
@@ -217,7 +226,13 @@ final class CounterSweep {
 
 			foreach ($got as $port => $counters) {
 				$read[$port] = $counters;
-				$samples->record($node->id, $counters, $fabric->backend, $now);
+				$delta       = $samples->record($node->id, $counters, $fabric->backend, $now, $previous[$port . ':' . $group->value] ?? null);
+
+				// A counter that went down is published as unknown until
+				// the next sample (REQ-DISC-002).
+				if ($delta !== null && $delta->reset !== []) {
+					Log::warning(sprintf('Fabric %d: node %s port %d: %s counters went down (%s); their values are unknown until the next sample', $fabric->id, $node->guid->text, $port, $group->value, implode(', ', $delta->reset)));
+				}
 			}
 
 			$tried = $batch;
