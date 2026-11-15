@@ -56,7 +56,7 @@ The mechanism, from the rrdcreate documentation and the numbers: on a decrease R
 |---|---|---|---|
 | 4, 8, 16-bit counters | at most `cap / dt` | at least `(2^32 - cap) / dt` | Yes. `max = cap / step` always separates them. |
 | 32-bit counters | up to `(2^32 - 1) / dt` | anywhere from near zero to `2^32 / dt` | No `max` separates them in general. Needs the plugin's own decrease check. |
-| 64-bit counters, previous above 2^32 | link capacity | about `2^64 / dt` | Yes, with `max` near link capacity. |
+| 64-bit counters, previous above 2^32 | link capacity | about `(2^64 - previous + new) / dt`, at most `2^64 / dt` | Yes, with `max` near link capacity, unless previous is within link capacity times `dt` of 2^64 (then the false rate is small); those resets need the plugin's decrease check. |
 | 64-bit counters, previous below 2^32 | link capacity | up to `2^32 / dt`, below any link-capacity `max` | No. Needs the plugin's own check. |
 
 For data counters, a link-capacity `max` in words (octets divided by 4) per second is `lanes x per-lane Gbit/s x 1e9 / 8 / 4`, using the per-lane rates the tools print as the upper bound (raw signalling, so slightly above payload). Examples: 4X HDR 6.64e9, 4X NDR 1.33e10, 4X XDR 2.66e10, 12X XDR 7.97e10 words per second. These are derived from the rates in `ibnd_dump_agg_linkspeedext` ([ibnetdisc.c:1084-1115](https://github.com/linux-rdma/rdma-core/blob/0fa90c60fbc274edb3495f30c1afd02b3f5fd38e/libibnetdisc/ibnetdisc.c#L1084-L1115)), not measured.

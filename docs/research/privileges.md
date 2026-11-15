@@ -39,7 +39,7 @@ SUBSYSTEM=="infiniband_mad", KERNEL=="umad*", GROUP="cacti-ib", MODE="0660"
 
 then create the group, add the poller user, reload the rules, and trigger the subsystem. `issm*` nodes are not matched and stay root only. Per-distribution steps differ only in the group-creation command and the poller account name, neither of which was verified here. **Per-distribution verification of the steps is *live*.**
 
-Residual risk, in plain terms: the poller account can send any management datagram on that port. If the fabric does not protect its ports with an M_Key, that includes disabling ports and changing link and LID settings. Mitigations the plugin can document: dedicated group and host; M_Key protection on the fabric; no other use of the poller account; running the sweep from a dedicated account on a remote data collector so only that host holds the grant.
+Residual risk, in plain terms: the poller account can send any management datagram on that port. If the fabric does not protect its ports with an M_Key, that includes disabling ports and changing link and LID settings. Mitigations the plugin can document: dedicated group and host; M_Key protection on the fabric, which does not stop a poller that holds the key (the key sits in the config file the poller reads, so a compromised poller can use it for protected Sets); no other use of the poller account; running the sweep from a dedicated account on a remote data collector so only that host holds the grant.
 
 ## Sudo
 

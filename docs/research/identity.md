@@ -32,7 +32,7 @@ Read rdma-core `v66.0` (`0fa90c60fbc274edb3495f30c1afd02b3f5fd38e`) `libibnetdis
 1. Take node GUID, node type, port count, and display name from the default `ibnetdiscover` topology output (or `--list` for nodes only). Do not take identity from `-p` or `iblinkinfo --line`.
 2. Record each switch's `switchguid=0x<node>(<port 0>)` pair. Use the port 0 GUID only to join `iblinkinfo` rows (which label a switch by that GUID) to the node record. Do not use a port GUID as a port key for switches.
 3. A port key is `<node GUID>:<port number>`, as in ADR 0003. For channel adapters the port GUID printed on `[n](guid)` is an attribute, not part of the key.
-4. A GUID seen with a different node type, port count, or neighbor set between two sweeps is flagged as a possible conflict. The tools give no signal of their own (see the duplicate row), so the plan's statement "Two nodes reporting one GUID are recorded as a conflict" needs a detection rule, not just a state.
+4. A GUID seen with a different node type, port count, device ID, vendor ID, or system image GUID between two sweeps is flagged as a possible conflict. A neighbor-set change alone is a moved or disconnected cable, not evidence of a duplicate. The tools give no signal of their own (see the duplicate row), so the plan's statement "Two nodes reporting one GUID are recorded as a conflict" needs a detection rule, not just a state.
 
 ## Re-link scenarios
 
