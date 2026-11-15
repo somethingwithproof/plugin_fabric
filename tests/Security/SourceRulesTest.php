@@ -17,6 +17,10 @@
  * more details.
  */
 
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
+
 /*
  * Source rules from docs/PLAN.md "Code structure" and ADR 0004 that a parser
  * can check. The PHP 8.0 parse of the entry points themselves is proven by the
@@ -326,5 +330,40 @@ it('names no counter reset or clear option, no sudo, and no tool outside the all
 
 		expect($code)->not->toMatch("/'-(r|R|k|K|y)'|--reset_after_read|--Reset_only|--clear-errors|--clear-counts/", $file)
 			->and($code)->not->toMatch('/\b(sudo|smpquery|ibdiagnet|ibqueryerrors|ibportstate|ibclearcounters|ibclearerrors|perfquery\s+-[rRkK])\b/', $file);
+	}
+});
+
+it('stops every test PHP file outside tests/Unit unless it runs from the command line', function () {
+	$files    = [];
+	$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(fabric_root() . '/tests', FilesystemIterator::SKIP_DOTS));
+
+	foreach ($iterator as $file) {
+		$relative = substr($file->getPathname(), strlen(fabric_root()) + 1);
+
+		if ($file->getExtension() === 'php' && !str_starts_with($relative, 'tests/Unit/')) {
+			$files[] = $relative;
+		}
+	}
+
+	sort($files);
+
+	expect($files)->toContain('tests/bin/lifecycle.php');
+
+	foreach ($files as $file) {
+		// The first statement after any namespace, declare, and use
+		// statements must be the guard.
+		$tokens = array_values(array_filter(token_get_all((string) file_get_contents(fabric_root() . '/' . $file)), static fn ($t): bool => !is_array($t) || !in_array($t[0], [T_OPEN_TAG, T_WHITESPACE, T_COMMENT, T_DOC_COMMENT], true)));
+		$code   = array_map(static fn ($t): string => is_array($t) ? $t[1] : $t, $tokens);
+		$at     = 0;
+
+		while (in_array(strtolower($code[$at] ?? ''), ['namespace', 'declare', 'use'], true)) {
+			while (($code[$at] ?? ';') !== ';') {
+				$at++;
+			}
+
+			$at++;
+		}
+
+		expect(implode('', array_slice($code, $at, 13)))->toBe("if(PHP_SAPI!=='cli'){exit(1);}", $file);
 	}
 });

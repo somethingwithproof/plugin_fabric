@@ -19,6 +19,10 @@
 
 namespace Somethingwithproof\Fabric\Tests;
 
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
+
 /**
  * A synthetic fabric and the tool output it would produce (REQ-TEST-004).
  *

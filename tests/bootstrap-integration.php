@@ -17,6 +17,10 @@
  * more details.
  */
 
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
+
 /*
  * Integration bootstrap. The tests drive Cacti in separate PHP processes, as
  * plugins.php and the CLI tools do, so nothing from Cacti is loaded here.

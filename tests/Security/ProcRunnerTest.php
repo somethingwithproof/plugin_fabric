@@ -29,6 +29,10 @@ use Somethingwithproof\Fabric\Tests\FabricGenerator;
 use Somethingwithproof\Fabric\Tests\FakeTools;
 use Somethingwithproof\Fabric\Tests\Scratch;
 
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
+
 require_once dirname(__DIR__) . '/Support/FabricGenerator.php';
 require_once dirname(__DIR__) . '/Support/FakeTools.php';
 require_once dirname(__DIR__) . '/Support/Scratch.php';

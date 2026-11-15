@@ -19,6 +19,10 @@
 
 namespace Somethingwithproof\Fabric\Tests;
 
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
+
 /**
  * Fake perfquery, ibnetdiscover, and iblinkinfo executables for a scratch
  * tool directory (REQ-TEST-002). Each is a PHP script that prints what a

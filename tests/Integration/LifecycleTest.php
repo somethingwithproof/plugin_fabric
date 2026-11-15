@@ -17,6 +17,10 @@
  * more details.
  */
 
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
+
 // The version INFO declares, which Cacti records as the installed version.
 define('FABRIC_VERSION', (string) (parse_ini_file(dirname(__DIR__, 2) . '/INFO', true)['info']['version'] ?? ''));
 

@@ -19,6 +19,10 @@
 
 namespace Somethingwithproof\Fabric\Tests;
 
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
+
 /**
  * A private scratch directory for one test, removed again by the test.
  */

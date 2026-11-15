@@ -17,6 +17,10 @@
  * more details.
  */
 
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
+
 /*
  * Pest configuration. Bootstraps are named by phpunit.xml.
  */

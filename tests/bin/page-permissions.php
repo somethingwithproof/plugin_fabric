@@ -17,6 +17,10 @@
  * more details.
  */
 
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
+
 /*
  * Page permissions and POST-only actions over HTTP (REQ-UI-001 to
  * REQ-UI-005). Requests each plugin page as four users:

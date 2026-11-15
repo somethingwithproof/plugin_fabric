@@ -24,6 +24,10 @@ use Somethingwithproof\Fabric\Fabric;
 use Somethingwithproof\Fabric\Settings;
 use Somethingwithproof\Fabric\Tool;
 
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
+
 /*
  * The command boundary (REQ-EXEC-001 to REQ-EXEC-003, ADR 0009): every
  * argument vector the builder can make, and every way to push a value

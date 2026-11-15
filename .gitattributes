@@ -1,2 +1,12 @@
 * text=auto eol=lf
 *.rrd binary
+
+# Keep tests, CI, and development configuration out of release archives
+# (git archive and the GitHub source downloads).
+/tests export-ignore
+/.github export-ignore
+/.editorconfig export-ignore
+/.gitattributes export-ignore
+/phpstan.neon export-ignore
+/phpunit.xml export-ignore
+/phpunit-integration.xml export-ignore
