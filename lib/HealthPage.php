@@ -42,7 +42,39 @@ final class HealthPage {
 		private readonly RelinkRepository $relinks,
 		private readonly Clock $clock,
 		private readonly DeviceAccess $access,
+		private readonly ?TemplateInstaller $templates = null,
+		private readonly bool $canImport = false,
 	) {
+	}
+
+	/**
+	 * Whether the shipped Cacti objects are in place (REQ-OBJ-003), and a
+	 * reinstall for users who may import templates.
+	 */
+	private function renderObjects(): void {
+		if ($this->templates === null) {
+			return;
+		}
+
+		$problem = $this->templates->queryFileProblem();
+		$failure = $this->templates->failure();
+
+		html_start_box(__('Cacti Objects', 'fabric'), '100%', '', '3', 'center', '');
+		print Format::row([__('Templates', 'fabric'), $this->templates->present() ? __('Installed', 'fabric') : __('Missing', 'fabric')]);
+		print Format::row([__('Data Query File', 'fabric'), $problem ?? __('Installed', 'fabric')]);
+
+		if ($failure !== '') {
+			print Format::row([__('Last Install', 'fabric'), $failure]);
+		}
+
+		html_end_box();
+
+		if ($this->canImport && !$this->templates->isCurrent()) {
+			print '<form method="post" action="' . html_escape(self::FILE) . '">'
+				. '<input type="hidden" name="action" value="reinstall_templates">'
+				. '<input type="submit" class="ui-button" value="' . html_escape(__('Reinstall the Templates', 'fabric')) . '">'
+				. '</form>';
+		}
 	}
 
 	public function render(): void {
@@ -63,6 +95,8 @@ final class HealthPage {
 		$proposals = array_values(array_filter($proposals, fn (array $r): bool => $this->access->host(Row::int($r, 'old_host_id')) && $this->access->host(Row::int($r, 'new_host_id'))));
 		$now       = $this->clock->now();
 		$freshness = new FreshnessEvaluator($this->clock);
+
+		$this->renderObjects();
 
 		html_start_box(__('Fabrics', 'fabric'), '100%', '', '3', 'center', '');
 		print Format::header([__('Fabric', 'fabric'), __('Last Discovery', 'fabric'), __('Last Successful Discovery', 'fabric'), __('Discovery', 'fabric'), __('Nodes / Ports Seen', 'fabric'), __('Last Link Read', 'fabric'), __('Link Read', 'fabric'), __('Unmatched Link Records', 'fabric'), __('Skipped Link Lines', 'fabric'), __('Counter Sweeps', 'fabric')]);

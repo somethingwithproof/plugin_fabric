@@ -88,7 +88,7 @@ db_execute("INSERT INTO plugin_fabric_fabric (name, backend, poller_id, sweep_in
 $fabric  = (int) db_fetch_insert_id();
 $devices = array();
 $nodes   = array();
-$guids   = array('open' => '0x0002c90300b00010', 'hidden' => '0x0002c90300b00020', 'unmapped' => '0x0002c90300b00030', 'new' => '0x0002c90300b00040');
+$guids   = array('open' => '0x0002c90300b00010', 'hidden' => '0x0002c90300b00020', 'unmapped' => '0x0002c90300b00030', 'new' => '0x0002c90300b00040', 'fresh' => '0x0002c90300b00050');
 
 foreach ($guids as $key => $guid) {
 	$host = 0;
@@ -98,10 +98,21 @@ foreach ($guids as $key => $guid) {
 		$host = $devices[$key] = (int) db_fetch_insert_id();
 	}
 
-	// The unmapped node went missing; "new" replaced it on the same switch port.
+	// The unmapped node went missing; "new" replaced it on the same switch
+	// port. "fresh" is present and unmapped, for device creation.
 	db_execute_prepared("INSERT INTO plugin_fabric_node (fabric_id, guid, node_type, port_count, description, host_id, presence, identity) VALUES (?, ?, 'ca', 1, ?, ?, ?, 'ok')", array($fabric, $guid, '<img src=x id="nodename' . $key . '">', $host, $key === 'unmapped' ? 'missing' : 'present'));
 	$nodes[$key] = (int) db_fetch_insert_id();
+	db_execute_prepared("INSERT INTO plugin_fabric_port (node_id, port_number, presence) VALUES (?, 1, 'present')", array($nodes[$key]));
 }
+
+// A Fabric Port Traffic graph on the open device's port 1, as the New
+// Graphs page would make it, for the graph link checks.
+$traffic = (int) db_fetch_cell_prepared('SELECT id FROM graph_templates WHERE hash = ?', array(md5('plugin_fabric:graph_template:Fabric Port Traffic')));
+$query   = (int) db_fetch_cell_prepared('SELECT id FROM snmp_query WHERE hash = ?', array(md5('plugin_fabric:data_query:Fabric Port')));
+db_execute_prepared('INSERT INTO graph_local (host_id, graph_template_id, snmp_query_id, snmp_index) VALUES (?, ?, ?, ?)', array($devices['open'], $traffic, $query, $guids['open'] . ':1'));
+$graph = (int) db_fetch_insert_id();
+db_execute_prepared("INSERT INTO graph_templates_graph (local_graph_id, graph_template_id, title_cache) VALUES (?, ?, 'fabric probe graph')", array($graph, $traffic));
+$graphLink = 'graph.php?local_graph_id=' . $graph . '&amp;rra_id=all';
 
 foreach (array('viewer', 'restricted') as $name) {
 	db_execute_prepared('INSERT INTO user_auth_perms (user_id, item_id, type) VALUES (?, ?, 3)', array($users[$name], $devices['open']));
@@ -178,6 +189,14 @@ foreach ($plans as $user => $expect) {
 			perm_expect(strpos($body, 'login_username') !== false, "anonymous is sent to the login form from $page");
 		}
 
+		if ($page === 'fabric.php' && $allowed && $user !== 'anonymous') {
+			list(, $nodePage) = perm_http($base . 'fabric.php?node=' . $nodes['open'], $jar);
+			perm_expect($traffic > 0 && strpos($nodePage, $graphLink) !== false, "$user sees the link to a Traffic graph it may view (permissive graph permissions)");
+
+			list(, $ranking) = perm_http($base . 'fabric.php?view=congestion', $jar);
+			perm_expect(strpos($ranking, 'Ports with the Highest Transmit Wait') !== false && strpos($ranking, $guids['hidden']) === false, "$user's congestion ranking loads and leaves out what it may not see");
+		}
+
 		if ($page === 'fabric.php' && $allowed) {
 			$all   = $user === 'admin';
 			$realm = $user !== 'viewer';
@@ -241,6 +260,100 @@ perm_expect($code === 200 && is_array($document) && strpos($export, $guids['open
 
 list(, $health) = perm_http($base . 'fabric_health.php', $jar);
 perm_expect(strpos($health, '0 identity conflicts and 1 open re-link proposals') !== false, 'restricted admin: health counts leave out the hidden device node');
+
+// Fabric Admin alone does not grant Cacti's device management or template
+// import: no device is created and no template reinstalled.
+$hostCount = function () {
+	return (int) db_fetch_cell('SELECT COUNT(*) FROM host');
+};
+$before = $hostCount();
+list(, $edit) = perm_http($base . 'fabric_admin.php?action=edit_node&id=' . $nodes['fresh'], $jar);
+perm_expect(strpos($edit, 'name="host_id"') !== false && strpos($edit, 'create_device') === false, 'restricted admin without device management: no create action on an unmapped node');
+list(, $confirm) = perm_http($base . 'fabric_admin.php?action=create_device&id=' . $nodes['fresh'], $jar);
+perm_expect(strpos($confirm, 'Creating the device adds') === false, 'restricted admin without device management: the creation page is denied');
+perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => $token, 'action' => 'create_device_confirm', 'id' => $nodes['fresh'], 'revision' => $node_row($nodes['fresh'])['revision']));
+perm_expect($hostCount() === $before && $host_of($nodes['fresh']) === 0, 'restricted admin without device management: a creation POST creates nothing');
+// The query file goes missing, as when an operator removes it; only the
+// health page notices, and only a user who may import templates can put
+// it back.
+$queryFile = $config['base_path'] . '/resource/script_server/fabric_ports.xml';
+unlink($queryFile);
+list(, $health) = perm_http($base . 'fabric_health.php', $jar);
+perm_expect(strpos($health, 'is missing or differs') !== false && strpos($health, 'reinstall_templates') === false, 'restricted admin without template import: the missing query file is shown, with no reinstall action');
+perm_http($base . 'fabric_health.php', $jar, array('__csrf_magic' => perm_token($health), 'action' => 'reinstall_templates'));
+clearstatcache();
+perm_expect(!is_file($queryFile), 'restricted admin without template import: a reinstall POST installs nothing');
+
+unlink($jar);
+
+// Graph links follow core's graph permissions, not the plugin's: under
+// restrictive graph permissions the viewer, who has no grant on the graph
+// template, gets no link to the graph.
+db_execute("REPLACE INTO settings (name, value) VALUES ('graph_auth_method', '2')");
+// Core caches allowed-graph counts per user for a day.
+// A second graph on the device, from a template the viewer is granted, so
+// the device stays visible under the restrictive rule.
+$errorsTemplate = (int) db_fetch_cell_prepared('SELECT id FROM graph_templates WHERE hash = ?', array(md5('plugin_fabric:graph_template:Fabric Port Errors')));
+db_execute_prepared('INSERT INTO graph_local (host_id, graph_template_id, snmp_query_id, snmp_index) VALUES (?, ?, ?, ?)', array($devices['open'], $errorsTemplate, $query, $guids['open'] . ':1'));
+$errorsGraph = (int) db_fetch_insert_id();
+db_execute_prepared("INSERT INTO graph_templates_graph (local_graph_id, graph_template_id, title_cache) VALUES (?, ?, 'fabric probe errors graph')", array($errorsGraph, $errorsTemplate));
+db_execute_prepared('INSERT INTO user_auth_perms (user_id, item_id, type) VALUES (?, ?, 4)', array($users['viewer'], $errorsTemplate));
+db_execute('DELETE FROM user_auth_row_cache');
+$jar = perm_login('viewer');
+list(, $nodePage) = perm_http($base . 'fabric.php?node=' . $nodes['open'], $jar);
+include_once('./lib/auth.php');
+set_config_option('graph_auth_method', '2');
+$errorsLink = 'graph.php?local_graph_id=' . $errorsGraph . '&amp;rra_id=all';
+perm_expect(is_device_allowed($devices['open'], $users['viewer']) && strpos($nodePage, $guids['open']) !== false, 'viewer: the node of a device core allows under restrictive graph permissions is shown');
+perm_expect(!is_graph_allowed($graph, $users['viewer']) && strpos($nodePage, $graphLink) === false, 'viewer: no link to a graph whose template restrictive graph permissions deny, as core decides');
+perm_expect(is_graph_allowed($errorsGraph, $users['viewer']) && strpos($nodePage, $errorsLink) !== false, 'viewer: a link to the graph whose template is granted, as core decides');
+unlink($jar);
+db_execute("REPLACE INTO settings (name, value) VALUES ('graph_auth_method', '1')");
+db_execute_prepared('DELETE FROM user_auth_perms WHERE user_id = ? AND type = 4', array($users['viewer']));
+db_execute_prepared('DELETE FROM graph_templates_graph WHERE local_graph_id = ?', array($errorsGraph));
+db_execute_prepared('DELETE FROM graph_local WHERE id = ?', array($errorsGraph));
+
+// A full administrator creates a device for the fresh node: a GET shows
+// what will be added and changes nothing; the POST creates the device on
+// the fabric's poller, maps the node, and adds the data query.
+$jar             = perm_login('admin');
+$before          = $hostCount();
+list(, $confirm) = perm_http($base . 'fabric_admin.php?action=create_device&id=' . $nodes['fresh'], $jar);
+perm_expect(strpos($confirm, 'Creating the device adds') !== false && $hostCount() === $before, 'admin: the creation page shows the plan and creates nothing');
+perm_http($base . 'fabric_admin.php?action=create_device_confirm&id=' . $nodes['fresh'], $jar);
+perm_expect($hostCount() === $before, 'admin: a creation sent as GET has no effect');
+perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($confirm), 'action' => 'create_device_confirm', 'id' => $nodes['fresh'], 'revision' => $node_row($nodes['fresh'])['revision']));
+$created = $host_of($nodes['fresh']);
+$row     = db_fetch_row_prepared('SELECT hostname, poller_id, availability_method, snmp_version FROM host WHERE id = ?', array($created));
+perm_expect($created > 0 && $hostCount() === $before + 1 && is_array($row) && $row['hostname'] === '0002c90300b00050.fabric.invalid' && (int) $row['poller_id'] === 1 && (int) $row['availability_method'] === 0 && (int) $row['snmp_version'] === 0, 'admin: a creation POST makes one device with a reserved host name, no checks, and the fabric poller');
+perm_expect((int) db_fetch_cell_prepared('SELECT COUNT(*) FROM host_snmp_query WHERE host_id = ? AND snmp_query_id = ?', array($created, $query)) === 1, 'admin: the created device has the Fabric Port data query');
+list(, $again) = perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($confirm), 'action' => 'create_device_confirm', 'id' => $nodes['fresh'], 'revision' => $node_row($nodes['fresh'])['revision']));
+perm_expect($hostCount() === $before + 1, 'admin: a second creation for a mapped node creates nothing');
+
+// Mapping to a device another poller polls is refused.
+db_execute("REPLACE INTO poller (id, name, hostname, disabled) VALUES (3, 'fabric-other', 'other.invalid', 'on')");
+db_execute("INSERT INTO host (description, hostname, poller_id) VALUES ('Other poller', 'other.invalid', 3)");
+$other = (int) db_fetch_insert_id();
+list(, $list) = perm_http($base . 'fabric_admin.php', $jar);
+perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($list), 'action' => 'save_node', 'id' => $nodes['fresh'], 'revision' => $node_row($nodes['fresh'])['revision'], 'host_id' => $other));
+perm_expect($host_of($nodes['fresh']) === $created, 'admin: mapping a node to a device on another poller is refused');
+db_execute_prepared('DELETE FROM host WHERE id = ?', array($other));
+db_execute('DELETE FROM poller WHERE id = 3');
+
+// Deleting the device in Cacti clears the mapping through the device_remove hook.
+include_once('./lib/api_device.php');
+api_device_remove($created);
+perm_expect($host_of($nodes['fresh']) === 0, 'deleting a mapped device in Cacti unmaps its node');
+
+// The template reinstall needs template import, which the admin holds.
+list(, $health) = perm_http($base . 'fabric_health.php', $jar);
+perm_expect(strpos($health, 'reinstall_templates') !== false && strpos($health, 'Cacti Objects') !== false, 'admin: the health page offers the reinstall while the query file is missing');
+perm_http($base . 'fabric_health.php?action=reinstall_templates', $jar);
+clearstatcache();
+perm_expect(!is_file($queryFile), 'admin: a reinstall sent as GET has no effect');
+perm_http($base . 'fabric_health.php', $jar, array('__csrf_magic' => perm_token($health), 'action' => 'reinstall_templates'));
+clearstatcache();
+perm_expect(is_file($queryFile) && (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM graph_templates WHERE hash = ?', array(md5('plugin_fabric:graph_template:Fabric Port Traffic'))) === 1, 'admin: a reinstall POST restores the query file without duplicating the templates');
 
 unlink($jar);
 
@@ -323,12 +436,12 @@ perm_expect(strpos($confirm, 'those devices, their data sources, and RRD files a
 // The export is Fabric Admin only and holds every record.
 list($code, $export) = perm_http($base . 'fabric_admin.php?action=export', $jar);
 $document = json_decode($export, true);
-perm_expect($code === 200 && is_array($document) && count($document['fabrics']) === 1 && count($document['nodes']) === 4 && strpos($export, '<img') === false, 'Fabric Admin downloads every fabric and node record, with markup encoded');
+perm_expect($code === 200 && is_array($document) && count($document['fabrics']) === 1 && count($document['nodes']) === 5 && strpos($export, '<img') === false, 'Fabric Admin downloads every fabric and node record, with markup encoded');
 
 // A running sweep's claim holds the delete off.
 db_execute_prepared("REPLACE INTO plugin_fabric_claim (scope, claim_key, holder, expires_at) VALUES ('topology', ?, 'perm-check', ?)", array($fabric, time() + 600));
 list(, $busy) = perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($confirm), 'action' => 'delete_fabric_confirm', 'id' => $fabric));
-perm_expect($exists() && strpos($busy, 'A sweep of this fabric is running') !== false && (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_node WHERE fabric_id = ?', array($fabric)) === 4, 'a fabric delete is refused while a sweep of it holds a claim, and nothing is removed');
+perm_expect($exists() && strpos($busy, 'A sweep of this fabric is running') !== false && (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_node WHERE fabric_id = ?', array($fabric)) === 5, 'a fabric delete is refused while a sweep of it holds a claim, and nothing is removed');
 db_execute_prepared("UPDATE plugin_fabric_claim SET expires_at = 0 WHERE scope = 'topology' AND claim_key = ?", array($fabric));
 
 perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($confirm), 'action' => 'delete_fabric_confirm', 'id' => $fabric));

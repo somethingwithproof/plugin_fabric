@@ -39,7 +39,10 @@ $fabric_page  = new \Somethingwithproof\Fabric\InventoryPage(
 	new \Somethingwithproof\Fabric\SampleRepository(false),
 	$fabric_clock,
 	\Closure::fromCallable('fabric_device_allowed'),
-	fabric_is_admin()
+	fabric_is_admin(),
+	new \Somethingwithproof\Fabric\PortReadingRepository(false, $fabric_clock),
+	new \Somethingwithproof\Fabric\CactiObjectRepository(false),
+	\Closure::fromCallable('fabric_graph_allowed')
 );
 
 $fabric_node = (int) get_filter_request_var('node');
@@ -48,6 +51,8 @@ top_header();
 
 if ($fabric_node > 0) {
 	$fabric_page->renderNode($fabric_node);
+} elseif (get_nfilter_request_var('view') === 'congestion') {
+	$fabric_page->renderCongestion();
 } else {
 	$fabric_page->renderList();
 }
