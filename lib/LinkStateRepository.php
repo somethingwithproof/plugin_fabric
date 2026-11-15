@@ -39,9 +39,13 @@ final class LinkStateRepository {
 	}
 
 	/**
+	 * @param (\Closure(): bool)|null $owned asked just before the commit
+	 *                                       whether the caller still holds
+	 *                                       its sweep claim
+	 *
 	 * @return int|null records that matched no node, or null when nothing was applied
 	 */
-	public function import(Fabric $fabric, LinkReport $report): ?int {
+	public function import(Fabric $fabric, LinkReport $report, ?\Closure $owned = null): ?int {
 		$records = $report->records;
 
 		$nodes = (new NodeRepository($this->connection))->forFabric($fabric->id);
@@ -137,6 +141,13 @@ final class LinkStateRepository {
 				"UPDATE plugin_fabric_port SET presence = ?, logical_state = ?, phys_state = ?, active_width = 0, active_speed = '', best_width = 0, best_speed = '', enabled_width = 0, enabled_speed = '', has_peer = 0, link_observed_at = ? WHERE node_id = ?$placeholders",
 				[Presence::Missing->value, $unknown['logical_state'], $unknown['phys_state'], $now, $nodeId, ...$reported],
 			);
+		}
+
+		if ($owned !== null && !$owned()) {
+			$tx->rollback();
+			Log::warning(sprintf('Fabric %d: link states not applied: the sweep claim expired or another sweep took it', $fabric->id));
+
+			return null;
 		}
 
 		if (!$tx->commit()) {

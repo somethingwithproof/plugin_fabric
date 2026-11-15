@@ -51,12 +51,21 @@ final class CounterSweep {
 	}
 
 	/**
-	 * Sweep under the node's claim. Null when another sweep holds it.
+	 * Sweep under the node's claim. Null when another sweep holds it, or
+	 * with $ifDue when another sweep finished the node between the caller's
+	 * due check and the claim. The claim covers the node budget, the last
+	 * command started inside it, and the writes after it.
 	 */
-	public function run(Fabric $fabric, Node $node, string $holder): ?NodeSweepResult {
+	public function run(Fabric $fabric, Node $node, string $holder, bool $ifDue = false): ?NodeSweepResult {
 		$claims = new ClaimRepository($this->connection, $this->clock);
 
 		if (!$claims->acquire(ClaimRepository::NODE, $node->id, $holder, $this->settings->nodeBudget + $this->settings->commandTimeout + 30)) {
+			return null;
+		}
+
+		if ($ifDue && $this->due($fabric, $node) !== true) {
+			$claims->release(ClaimRepository::NODE, $node->id, $holder);
+
 			return null;
 		}
 

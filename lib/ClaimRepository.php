@@ -52,6 +52,27 @@ final class ClaimRepository {
 		return (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_claim WHERE scope = ? AND claim_key = ? AND holder = ? AND expires_at >= ?', [$scope, $key, $holder, $this->clock->now()], '', true, $this->connection) === 1;
 	}
 
+	/**
+	 * Extend a claim this holder still has. False when it expired or another
+	 * sweep took it.
+	 */
+	public function renew(string $scope, int $key, string $holder, int $seconds): bool {
+		$now = $this->clock->now();
+		$ok  = db_execute_prepared('UPDATE plugin_fabric_claim SET expires_at = ? WHERE scope = ? AND claim_key = ? AND holder = ? AND expires_at >= ?', [$now + $seconds, $scope, $key, $holder, $now], true, $this->connection);
+
+		return $ok !== false && $this->holds($scope, $key, $holder);
+	}
+
+	/**
+	 * holds() for a caller inside a transaction, just before it commits. The
+	 * locking read sees the latest claim rather than the transaction's
+	 * snapshot, and keeps another sweep from taking the claim until the
+	 * transaction ends, so a sweep that lost its claim never commits.
+	 */
+	public function holdsForCommit(string $scope, int $key, string $holder): bool {
+		return (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_claim WHERE scope = ? AND claim_key = ? AND holder = ? AND expires_at >= ? FOR UPDATE', [$scope, $key, $holder, $this->clock->now()], '', true, $this->connection) === 1;
+	}
+
 	public function release(string $scope, int $key, string $holder): void {
 		db_execute_prepared('UPDATE plugin_fabric_claim SET expires_at = 0 WHERE scope = ? AND claim_key = ? AND holder = ?', [$scope, $key, $holder], true, $this->connection);
 	}

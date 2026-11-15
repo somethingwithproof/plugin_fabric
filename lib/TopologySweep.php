@@ -51,18 +51,30 @@ final class TopologySweep {
 	}
 
 	/**
-	 * Run the sweep under the fabric's topology claim. False when another
-	 * sweep holds the claim or the sweep could not record its start.
+	 * Seconds an import may take. The claim is renewed before each tool run
+	 * to cover that run and the import after it, and each import checks the
+	 * claim again before it commits.
 	 */
-	public function run(Fabric $fabric, string $holder): bool {
+	public const IMPORT_SECONDS = 300;
+
+	/**
+	 * Run the sweep under the fabric's topology claim. False when another
+	 * sweep holds the claim, or with $ifDue when another sweep finished the
+	 * work between the caller's due check and the claim.
+	 */
+	public function run(Fabric $fabric, string $holder, bool $ifDue = false): bool {
 		$claims = new ClaimRepository($this->connection, $this->clock);
 
-		if (!$claims->acquire(ClaimRepository::TOPOLOGY, $fabric->id, $holder, 2 * $this->settings->commandTimeout + 30)) {
+		if (!$claims->acquire(ClaimRepository::TOPOLOGY, $fabric->id, $holder, $this->claimSeconds())) {
 			return false;
 		}
 
 		try {
-			$this->sweep($fabric);
+			if ($ifDue && $this->due($fabric) !== true) {
+				return false;
+			}
+
+			$this->sweep($fabric, $claims, $holder);
 		} finally {
 			$claims->release(ClaimRepository::TOPOLOGY, $fabric->id, $holder);
 		}
@@ -70,7 +82,15 @@ final class TopologySweep {
 		return true;
 	}
 
-	private function sweep(Fabric $fabric): void {
+	/**
+	 * One tool run and the import after it.
+	 */
+	private function claimSeconds(): int {
+		return $this->settings->commandTimeout + self::IMPORT_SECONDS + 30;
+	}
+
+	private function sweep(Fabric $fabric, ClaimRepository $claims, string $holder): void {
+		$owned  = static fn (): bool => $claims->holdsForCommit(ClaimRepository::TOPOLOGY, $fabric->id, $holder);
 		$health = new FabricHealthRepository($this->connection);
 		$tools  = new ToolRunner($this->runner, $this->settings);
 		$now    = $this->clock->now();
@@ -94,7 +114,7 @@ final class TopologySweep {
 		if ($error === null) {
 			try {
 				$topology = (new IbnetdiscoverParser())->parse($result->stdout);
-				$imported = (new InventoryRepository($this->connection, $this->clock))->import($fabric, $topology);
+				$imported = (new InventoryRepository($this->connection, $this->clock))->import($fabric, $topology, $owned);
 
 				if ($imported === null) {
 					$error = CommandError::Storage;
@@ -116,6 +136,12 @@ final class TopologySweep {
 			return;
 		}
 
+		if (!$claims->renew(ClaimRepository::TOPOLOGY, $fabric->id, $holder, $this->claimSeconds())) {
+			Log::warning(sprintf('Fabric %d: link states not read: the sweep claim expired or another sweep took it', $fabric->id));
+
+			return;
+		}
+
 		$now    = $this->clock->now();
 		$result = $tools->run($linkInfo);
 		$error  = $result->error();
@@ -123,7 +149,7 @@ final class TopologySweep {
 		if ($error === null) {
 			try {
 				$report    = (new IblinkinfoParser())->parse($result->stdout);
-				$unmatched = (new LinkStateRepository($this->connection, $this->clock))->import($fabric, $report);
+				$unmatched = (new LinkStateRepository($this->connection, $this->clock))->import($fabric, $report, $owned);
 
 				if ($unmatched === null) {
 					$error = CommandError::Storage;

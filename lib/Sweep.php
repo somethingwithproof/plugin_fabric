@@ -90,7 +90,7 @@ final class Sweep {
 		}
 
 		if ($force || $this->topology->due($fabric) === true) {
-			$this->topology->run($fabric, ClaimRepository::holder());
+			$this->topology->run($fabric, ClaimRepository::holder(), !$force);
 		}
 
 		$nodes = (new NodeRepository($this->connection))->forFabric($fabric->id);
@@ -119,7 +119,7 @@ final class Sweep {
 		}
 
 		if ($topology && $this->topology->due($fabric) === true) {
-			$this->topology->run($fabric, ClaimRepository::holder());
+			$this->topology->run($fabric, ClaimRepository::holder(), true);
 		}
 
 		$swept = 0;
@@ -133,7 +133,7 @@ final class Sweep {
 				continue;
 			}
 
-			if ($this->counters->run($fabric, $current, ClaimRepository::holder()) !== null) {
+			if ($this->counters->run($fabric, $current, ClaimRepository::holder(), !$force) !== null) {
 				$swept++;
 			}
 		}

@@ -24,6 +24,8 @@ use Somethingwithproof\Fabric\CommandError;
 use Somethingwithproof\Fabric\CounterSweep;
 use Somethingwithproof\Fabric\Fabric;
 use Somethingwithproof\Fabric\FixedClock;
+use Somethingwithproof\Fabric\IblinkinfoParser;
+use Somethingwithproof\Fabric\LinkStateRepository;
 use Somethingwithproof\Fabric\Node;
 use Somethingwithproof\Fabric\ProcessResult;
 use Somethingwithproof\Fabric\ProcessRunner;
@@ -221,4 +223,26 @@ it('logs the failure with a cleaned stderr excerpt and never the output', functi
 	expect($messages)->toContain('perfquery: exit_status, exit 255')
 		->and($messages)->toContain('ibwarn: mad_rpc failed')
 		->and($messages)->not->toContain('PortXmitData');
+});
+
+it('sweeps nothing when another sweep finished the node between the due check and the claim', function () {
+	fabric_queue_ports([1 => 0]);
+	// The claim is taken; the node was swept just now by the other caller.
+	$GLOBALS['__fabric_db_rows']['FROM plugin_fabric_node_sweep'] = [['last_attempt' => 1_800_000_000]];
+	$runner = new ScriptedRunner(FabricGenerator::forCas(1));
+
+	expect(fabric_sweeper($runner)->run(fabric_sweep_fabric(), fabric_node('switch', 1), 'test', true))->toBeNull()
+		->and($runner->argv)->toBe([])
+		->and(fabric_writes('UPDATE plugin_fabric_claim SET expires_at = 0'))->toHaveCount(1);
+});
+
+it('rolls link states back when the sweep no longer holds its claim at commit', function () {
+	$GLOBALS['__fabric_db_rows'] = ['FROM plugin_fabric_node' => []];
+	$report                      = (new IblinkinfoParser())->parse((string) file_get_contents(dirname(__DIR__) . '/fixtures/iblinkinfo-line.txt'));
+
+	$applied = (new LinkStateRepository(false, new FixedClock(1_800_000_000)))->import(fabric_sweep_fabric(), $report, static fn (): bool => false);
+
+	expect($applied)->toBeNull()
+		->and(fabric_writes('ROLLBACK'))->toHaveCount(1)
+		->and(fabric_writes('COMMIT'))->toBe([]);
 });

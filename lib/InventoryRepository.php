@@ -49,7 +49,12 @@ final class InventoryRepository {
 	/**
 	 * @return InventoryResult|null null when the stored inventory could not be read or written
 	 */
-	public function import(Fabric $fabric, Topology $topology): ?InventoryResult {
+	/**
+	 * @param (\Closure(): bool)|null $owned asked just before the commit
+	 *                                       whether the caller still holds
+	 *                                       its sweep claim
+	 */
+	public function import(Fabric $fabric, Topology $topology, ?\Closure $owned = null): ?InventoryResult {
 		$nodes = new NodeRepository($this->connection);
 		$known = $nodes->forFabric($fabric->id);
 
@@ -134,6 +139,13 @@ final class InventoryRepository {
 		} catch (\RuntimeException $e) {
 			$this->tx->rollback();
 			Log::error(sprintf('Fabric %d: discovery not applied: %s', $fabric->id, $e->getMessage()));
+
+			return null;
+		}
+
+		if ($owned !== null && !$owned()) {
+			$this->tx->rollback();
+			Log::warning(sprintf('Fabric %d: discovery not applied: the sweep claim expired or another sweep took it', $fabric->id));
 
 			return null;
 		}
