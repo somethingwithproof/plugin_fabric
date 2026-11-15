@@ -1,6 +1,6 @@
 # Cacti 1.2 InfiniBand Fabric Plugin Plan
 
-Status: proposal, revision 1 (2026-11-14). Nothing described here as a plugin capability exists yet. Statements about infiniband-diags, UFM, the Linux kernel, RRDtool, Cacti core, and Thold describe upstream behavior and cite the file or page that was checked. Anything not checked is listed under [Assumptions to confirm](#assumptions-to-confirm) and has a research issue in milestone 1. Owner and estimates are not assigned; milestone 1 produces the estimates.
+Status: proposal, revision 2 (2026-11-15). Nothing described here as a plugin capability exists yet. Statements about infiniband-diags, UFM, the Linux kernel, RRDtool, Cacti core, and Thold describe upstream behavior and cite the file or page that was checked. Revision 2 incorporates the documentation and source research of milestone 1 ([docs/research](research/)); everything that needs a fabric, a UFM instance, or an account is marked *live* and listed in [Live checks](#live-checks), so milestone 1 is not complete until those run. Anything still unchecked is listed under [Assumptions to confirm](#assumptions-to-confirm). Owner is not assigned; estimates are in [Estimates](#estimates).
 
 `plugin_fabric` brings InfiniBand port counters, link width and speed, and congestion indicators into Cacti 1.2 as ordinary devices, data sources, and graphs, so operators see fabric health next to the hosts and switches it belongs to, under Cacti's own permissions, and alert on it with Thold and Maint.
 
@@ -24,7 +24,7 @@ The Cacti GitHub organization has no InfiniBand plugin today (searched 2026-11-1
 **Goals**
 
 - A read-only view of port counters, link width and speed, and port state for the nodes of an InfiniBand fabric, with history in Cacti's RRD files.
-- A precise, tested rule for "degraded link": active width or speed below the best both ends support, excluding links an administrator limited on purpose.
+- A precise, tested rule for "degraded link": active width or speed below the best both ends support, excluding links an administrator limited on purpose where enabled values are available.
 - Congestion indicators (PortXmitWait and discard counters) shown as rates with documented meaning.
 - Identity by GUID and port number, never by LID or name, so history survives renames and re-addressing.
 - Alerting and maintenance through Thold and Maint, so one notification path covers SNMP and fabric data.
@@ -48,7 +48,7 @@ Each phase ships to users. Later phases are re-estimated after the phase before 
 
 | Phase | Label | Scope | Depends on |
 |---|---|---|---|
-| 0 | Research | Version matrix, upstream behavior confirmation, counter behavior on hardware, privilege model, MAD budget, UFM API (milestone 1) | Nothing |
+| 0 | Research | Version matrix, upstream behavior confirmation, counter behavior on hardware, privilege model, MAD budget, UFM API (milestone 1). Documentation and source work is done; hardware and UFM checks are open ([Live checks](#live-checks)) | Nothing |
 | 1 | Planned | Observe mode with the diagnostics-tools backend: inventory by GUID, devices, port data query, counter and link-state data sources, Thold alerting, Maint suppression, health page | Phase 0 |
 | 2 | Planned | UFM REST backend, credential handling, identity continuity between backends | Phase 1, security review |
 | 3 | Planned | Remote data collectors, replication, `remote_agent` actions, sharded sweeps for large fabrics | Phase 2, security review |
@@ -58,14 +58,14 @@ Each phase ships to users. Later phases are re-estimated after the phase before 
 
 **Cacti.** The minimum Cacti release is 1.2.31, with no core patches. The plugin uses only APIs present in that release (each checked in `release/1.2.31`):
 
-- Plugin lifecycle and hooks: `api_plugin_register_hook()`, `api_plugin_register_realm()`, and `api_plugin_db_table_create()` ([lib/plugins.php](https://github.com/Cacti/cacti/blob/release/1.2.31/lib/plugins.php)).
+- Plugin lifecycle and hooks: `api_plugin_register_hook()`, `api_plugin_register_realm()`, and `api_plugin_db_table_create()` ([lib/plugins.php](https://github.com/Cacti/cacti/blob/release/1.2.31/lib/plugins.php)). Core rejects hook and realm registration unless the function that calls `api_plugin_register_hook()` or `api_plugin_register_realm()` has `install`, `upgrade`, or `setup` in its name, so registration happens in `plugin_fabric_install()` and `plugin_fabric_upgrade()` directly, not in a helper class. `api_plugin_db_table_create()` handles an existing table differently at 1.2.31 and on `1.2.x`, so migrations do not depend on it.
 - Devices and permissions: `api_device_save()` ([lib/api_device.php](https://github.com/Cacti/cacti/blob/release/1.2.31/lib/api_device.php)), `is_device_allowed()` and `get_allowed_devices()` ([lib/auth.php](https://github.com/Cacti/cacti/blob/release/1.2.31/lib/auth.php)).
 - Templates: `import_xml_data()` ([lib/import.php](https://github.com/Cacti/cacti/blob/release/1.2.31/lib/import.php)).
 - Script data queries: `query_script_host()` and its `arg_index`, `arg_query`, `arg_get`, and `arg_num_indexes` elements ([lib/data_query.php](https://github.com/Cacti/cacti/blob/release/1.2.31/lib/data_query.php)).
-- Background work: `exec_background()` and `register_process_start()` ([lib/poller.php](https://github.com/Cacti/cacti/blob/release/1.2.31/lib/poller.php)).
+- Background work: `exec_background()` and `register_process_start()` ([lib/poller.php](https://github.com/Cacti/cacti/blob/release/1.2.31/lib/poller.php)). `exec_background()` runs its command through a shell (at 1.2.31 it does not quote the executable path; on `1.2.x` it does), so the plugin passes the PHP binary as the executable and a fixed script and options as arguments, with no operator text.
 - Remote collectors: `call_remote_data_collector()` ([lib/functions.php](https://github.com/Cacti/cacti/blob/release/1.2.31/lib/functions.php)) and the `remote_agent` hook ([remote_agent.php](https://github.com/Cacti/cacti/blob/release/1.2.31/remote_agent.php)).
 
-Milestone 1 records any difference on the current `1.2.x` branch.
+All fifteen functions named here have identical signatures at `release/1.2.31` and on `1.2.x` (`e2d5c25893221c3cd54ceb8293fba6ca38c936e6`); the differences are the two behaviors above ([research](research/cacti-core.md)).
 
 **PHP.** The plugin requires PHP 8.2 or later, matching the Cacti 1.2.x floor. The `1.2.x` branch declares `"php": ">=8.2"` and pins Composer resolution to `platform.php: 8.2.0` ([branch composer.json](https://github.com/Cacti/cacti/blob/1.2.x/composer.json), Cacti/cacti#8569). PHP 8.0 and 8.1 are not supported, even on a 1.2.31 installation whose `composer.json` still says `>=8.0` ([release composer.json](https://github.com/Cacti/cacti/blob/release/1.2.31/composer.json)).
 
@@ -78,85 +78,104 @@ Because Cacti includes plugin files on every request, a parse error in a plugin 
 
 Code loaded after the check uses language features through PHP 8.2 where they make the code clearer: `match`, enums, `readonly` properties and classes, first-class callable syntax, DNF types. Features from 8.3 and later are not used. Properties are always declared, because PHP 8.2 deprecates dynamic properties. PHPStan runs at `phpVersion` 8.2. No upper PHP bound is declared; the CI matrix defines the tested ceiling.
 
-**Fabric tools.** The design was checked against rdma-core tag `v65.1`; the latest release when this plan was written is `v66.0`. Milestone 1 builds the matrix of packaged versions on each distribution with full vendor support, plus the vendor driver stack's tools, and drops lines no supported distribution ships.
+**Fabric tools.** The design was checked against rdma-core `v66.0` (`0fa90c60fbc274edb3495f30c1afd02b3f5fd38e`); the source files behind every fact below are identical in `v65.1`. The option tables of `perfquery`, `ibnetdiscover`, and `iblinkinfo` are identical from `v28.0` to `v66.0`. The supported matrix, from Repology and endoflife.date ([research](research/infiniband-diags-versions.md)):
 
-**UFM.** The UFM backend (phase 2) targets the UFM Enterprise REST API as documented in the release 6200 guide path. Milestone 1 builds the matrix of releases operators run.
+| Distribution | Support end | rdma-core |
+|---|---|---|
+| Ubuntu 22.04 | 2027-06-01 | 39.0 |
+| Ubuntu 24.04 | 2029-05-31 | 50.0 |
+| Ubuntu 26.04 | 2031-05-29 | 61.0 |
+| Debian 12 | 2028-06-30 | 44.0 |
+| Debian 13 | 2030-06-30 | 56.1 |
+| RHEL 8 family | 2029-05-31 | 48.0 (rebuild proxy) |
+| RHEL 9 family | 2032-05-31 | 61.0 (rebuild proxy) |
+| RHEL 10 family | 2035-05-31 | 62.0 in CentOS Stream 10 (proxy) |
+| SLES 15 SP7, 16 | 2031-07-31, 2027-11-30 | unverified |
+| NVIDIA DOCA-Host | not found | unverified |
 
-**Plugin metadata.** `INFO` declares `compat = 1.2.31` and the same remote-collector capability set that servcheck and webseer declare, confirmed in milestone 1.
+Lines dropped from the plan: 28.0, 33.2, 35.0, 42.0, 49.1 (no listed distribution with current support ships them). Tools before `v50.0` (Ubuntu 22.04, Debian 12, RHEL 8 family) cannot decode XDR links. The tools install to `/usr/sbin` in the upstream Debian packaging. Captured `-h` output and output fixtures per version are *live*.
+
+**UFM.** The UFM backend (phase 2) targets the UFM Enterprise REST API. The guide exists for 6.15.0 through 6.26.1 (the `6200` path is 6.20.0); the endpoints the plugin needs are stable across them, and support dates are not published in the guide ([research](research/ufm-rest.md)). The releases operators actually run are *live* (ask operators).
+
+**Plugin metadata.** `INFO` declares `compat = 1.2.31` and the remote-collector capability set that servcheck and webseer declare (`online_view:1, online_mgmt:1, offline_view:0, offline_mgmt:0, remote_collect:1`). On a remote collector core runs `poller_bottom` only for plugins that declare `remote_poller:1`, so phase 3 adds that capability if the sweep runs from `poller_bottom` there.
 
 ## Upstream behavior the design depends on
 
-Each row is a milestone 1 test, because a change in any of them changes the design. Source paths are at the pinned tag or release named in the table heading.
+Each row was a milestone 1 test, because a change in any of them changes the design. Rows are marked as checked in the research documents; a row that needs a real fabric stays *live*. Source paths are at the pinned tag or release named in the table heading.
 
-**infiniband-diags and libibmad, rdma-core `v65.1`.** Paths are under [linux-rdma/rdma-core at v65.1](https://github.com/linux-rdma/rdma-core/tree/v65.1).
+**infiniband-diags and libibmad, rdma-core `v66.0`** (re-checked from `v65.1`; the files are identical). Paths are under [linux-rdma/rdma-core at v66.0](https://github.com/linux-rdma/rdma-core/tree/0fa90c60fbc274edb3495f30c1afd02b3f5fd38e). Details and corrections: [research](research/infiniband-diags-versions.md).
 
 | Fact | Consequence | Source |
 |---|---|---|
 | `perfquery` reads PerfMgt GMPs: PortCounters, PortExtendedCounters, and optional groups such as PortXmitDataSL, PortRcvErrorDetails, PortExtendedSpeedsCounters, and congestion-control groups. | Counters come from the performance management agent on each port, not from SNMP. | `infiniband-diags/man/perfquery.8.in.rst` |
 | Data counters (PortXmitData, PortRcvData) are octets divided by 4. | Graph definitions multiply by 4 to show bytes. | `perfquery.8.in.rst` |
-| `-x` shows extended counters; the attribute is optional, and `perfquery` warns when the PerfMgt ClassPortInfo capability mask indicates no extended counter support. | Extended counters must be probed per port, not assumed. | `perfquery.8.in.rst`; `infiniband-diags/perfquery.c` (`dump_perfcounters`) |
-| Basic PortCounters field widths: SymbolErrorCounter 16 bits, LinkErrorRecoveryCounter 8, LinkDownedCounter 8, PortRcvErrors 16, PortXmitDiscards 16, VL15Dropped 16, LocalLinkIntegrityErrors 4, ExcessiveBufferOverrunErrors 4, PortXmitData, PortRcvData, PortXmitPkts, PortRcvPkts, and PortXmitWait 32. | Narrow counters reach their cap quickly. | `libibmad/fields.c` (PortCounters fields) |
-| `perfquery.c` states that InfiniBand counter semantics cap a counter that exceeds its limit rather than wrap it. | A capped counter stops changing; it cannot be told from an idle counter without other evidence. | `infiniband-diags/perfquery.c` (comment above `aggregate_4bit`) |
-| In basic PortCounters, PortXmitWait is used only when the capability mask indicates support (`IB_PM_PC_XMIT_WAIT_SUP`); otherwise `perfquery` sets it to zero. | A zero PortXmitWait can mean "unsupported". It must not be treated as "no congestion". | `perfquery.c` (`dump_perfcounters`) |
+| `-x` shows extended counters; the attribute is optional, and `perfquery` warns only when neither extended-width capability bit is set, and still sends the query and prints. | Extended counters must be probed per port, not assumed. | `perfquery.8.in.rst`; `infiniband-diags/perfquery.c` (`dump_perfcounters`) |
+| Basic PortCounters field widths: SymbolErrorCounter 16 bits, LinkErrorRecoveryCounter 8, LinkDownedCounter 8, PortRcvErrors 16, PortRcvRemotePhysicalErrors 16, PortRcvSwitchRelayErrors 16, PortXmitDiscards 16, PortXmitConstraintErrors 8, PortRcvConstraintErrors 8, VL15Dropped 16, LocalLinkIntegrityErrors 4, ExcessiveBufferOverrunErrors 4, PortXmitData, PortRcvData, PortXmitPkts, PortRcvPkts, and PortXmitWait 32. | Narrow counters reach their cap quickly. | `libibmad/fields.c` (PortCounters fields) |
+| `perfquery.c` states that InfiniBand counter semantics cap a counter that exceeds its limit rather than wrap it. This is a source comment about the tool; the specification text was not reachable and no port was observed at its cap (*live*). | A capped counter stops changing; RRDtool stores it as a rate of 0, so the plugin must test for the width's all-ones value itself ([research](research/counters.md)). | `infiniband-diags/perfquery.c` (comment above `aggregate_4bit`) |
+| In basic PortCounters, PortXmitWait is used only when the capability mask indicates support (`IB_PM_PC_XMIT_WAIT_SUP`); otherwise `perfquery` sets it to zero and still prints `PortXmitWait:0`. The capability masks are printed in each counter's header line. | A zero PortXmitWait can mean "unsupported". It must not be treated as "no congestion"; the plugin reads the mask from the header line. | `perfquery.c` (`dump_perfcounters`) |
 | Extended counters give 64-bit PortXmitData, PortRcvData, PortXmitPkts, PortRcvPkts, and, when supported, unicast and multicast packet counts. 64-bit forms of the error counters, including PortXmitWait, are printed only when the second capability mask indicates additional extended counters (`IB_PM_IS_ADDL_PORT_CTRS_EXT_SUP`). | 64-bit data counters are widely available; 64-bit error and wait counters are not guaranteed. | `perfquery.c` (`dump_perfcounters_ext`); `libibmad/fields.c` (extended and "More PortCountersExtended" fields) |
 | `-r` resets after read; `-R` resets only. `ibqueryerrors` clears error counters with `-k` and data counters with `-K`, "regardless of if they are printed or not". | These options change fabric state seen by other tools and are never used. | `perfquery.8.in.rst`; `infiniband-diags/man/ibqueryerrors.8.in.rst` |
-| `-a` aggregates counters over ports, `-l` loops per port, and port 255 selects all ports. Several ports can be given as a list or range. | One command can read many ports of a node, but aggregate output loses per-port values. The plugin must use the per-port form. | `perfquery.8.in.rst` |
+| `-a` aggregates counters over ports, `-l` loops per port, and port 255 selects all ports. Several ports can be given as a list or range, and a list or range without `-a` prints each port separately. Every invocation first queries ClassPortInfo, and a failed query ends the whole process. | One command can read many ports of a node, but aggregate output loses per-port values. The plugin uses a port list without `-a`, and a dead port ends that invocation (about 3 seconds at the defaults), so it needs per-node time and failure budgets. | `perfquery.8.in.rst` |
 | `iblinkinfo` reports link information for each port of each node and has a one-line mode (`--line`), partial scans, `--switches-only`, and `--cas-only`. | One scan yields width, speed, and state for every port. | `infiniband-diags/man/iblinkinfo.8.in.rst` |
-| `iblinkinfo` prints `Could be <width>` for a port when its active width is not within the widest width supported at both ends. | This is the existing definition of a width downgrade and the basis of the plugin's rule. The speed side is checked in milestone 1. | `infiniband-diags/ibdiag_common.c` (`get_max_msg`); `infiniband-diags/iblinkinfo.c` |
+| `iblinkinfo` prints `Could be <width>` or `Could be <speed>` for a port when its active width or speed is not the best in the intersection of what both ends **support**, for extended speeds, FDR10, and legacy speeds alike. It never looks at what is enabled, and none of the three tools prints an enabled value. | This is the existing definition of a downgrade and the basis of the plugin's rule. An administrative limit cannot be recognized from these tools alone ([research](research/link-downgrade.md)). | `infiniband-diags/ibdiag_common.c` (`get_max_msg`); `infiniband-diags/iblinkinfo.c` |
 | Link width values decode as 1 to 1X, 2 to 4X, 4 to 8X, 8 to 12X, and 16 to 2X. | The plugin stores lane counts as numbers using this mapping. | `libibmad/dump.c` (`mad_dump_linkwidth`) |
-| `ibnetdiscover -p` prints one line per port: node type, LID, port number, port GUID, active width, and speed, followed by the remote node type, LID, port, GUID, and the two node descriptions. `--cache` saves a discovery for reuse. | Inventory and links come from one discovery run; LIDs appear but change. | `infiniband-diags/ibnetdiscover.c` (`dump_ports_report`); `infiniband-diags/man/ibnetdiscover.8.in.rst` |
+| `ibnetdiscover -p` prints one line per port: node type, LID, port number, port GUID, active width, and speed, followed by the remote node type, LID, port, GUID, and the two node descriptions. It prints no node GUID. The default topology output prints the node GUID (`switchguid=0x<node>(<port 0>)`, `caguid=0x<node>`), `--list` prints one line per node with its node GUID, and `--cache` saves a discovery for reuse. | Inventory comes from the default topology output, not `-p`; LIDs appear but change ([research](research/identity.md)). | `infiniband-diags/ibnetdiscover.c` (`dump_ports_report`); `infiniband-diags/man/ibnetdiscover.8.in.rst` |
 | The node information record carries SystemGuid, node Guid, and PortGuid. | A node GUID is available separately from a port GUID. | `libibmad/fields.c` (NodeInfo fields) |
 
 **Linux kernel, [v6.12](https://github.com/torvalds/linux/blob/v6.12/Documentation/ABI/stable/sysfs-class-infiniband).**
 
 | Fact | Consequence | Source |
 |---|---|---|
-| Host adapters expose `node_guid`, and per port `lid`, `rate` (active width times active speed), `state`, `phys_state`, and a `counters/` directory with files including `symbol_error`, `link_downed`, `port_xmit_data`, and `port_xmit_wait`. | A host's own counters can be read with no management datagrams. Whether to use this is a milestone 1 question. | `Documentation/ABI/stable/sysfs-class-infiniband` |
-| `port_xmit_wait` is described as ticks during which the port had data to transmit but did not send, for lack of credits or arbitration. | It indicates waiting, not a fault. The tick length is not given. | same file |
+| Host adapters expose `node_guid`, and per port `lid`, `rate` (active width times active speed), `state`, `phys_state`, and a `counters/` directory with files including `symbol_error`, `link_downed`, `port_xmit_data`, and `port_xmit_wait`. | A host's own counters can be read from world-readable files with no device grant. Each read of a `counters/` file is a PerfMgt query handled by the local device driver, not a send on the fabric. Sysfs has no peer or enabled-width data, so it cannot feed the degraded-link rule ([research](research/sysfs-hca.md)). | `Documentation/ABI/stable/sysfs-class-infiniband` |
+| `port_xmit_wait` is described as ticks during which the port had data to transmit but did not send, for lack of credits or arbitration. | It indicates waiting, not a fault. The tick length is not given there or in any public source found: an ibdiagnet manual says a tick is a multiple of the lane symbol time (4 ns at SDR), and an NVIDIA forum reply says one tick is one byte of lost bandwidth, which conflicts with the manual's per-ASIC table ([research](research/portxmitwait.md)). | same file |
 
 **NVIDIA UFM Enterprise REST API guide, release 6200 path.** Pages: [Ports](https://networking-docs.nvidia.com/ufmenterpriserestapi/6200/ports-rest-api), [Monitoring](https://networking-docs.nvidia.com/ufmenterpriserestapi/6200/monitoring-rest-api).
 
 | Fact | Consequence | Source |
 |---|---|---|
 | `GET /ufmRest/resources/ports` returns ports, with filters including `sys_type`, `system`, `active`, `external`, `high_ber_only`, and `cable_info`. Per-port fields include `guid`, `number`, `system_name`, `physical_state`, `logical_state`, `active_width`, `enabled_width`, `supported_width`, `active_speed`, `enabled_speed`, `supported_speed`, `lid`, and peer fields. | Inventory, link state, and the data for the downgrade rule are available from one resource. | Ports REST API page |
-| The monitoring API has `POST /ufmRest/monitoring/start` (create and start a session), `POST /ufmRest/monitoring/snapshot` (one-time session with data), and `GET /ufmRest/monitoring/attributes` (available counters). Counter attributes include `Infiniband_SymbolErrors`, `Infiniband_LinkDowned`, `Infiniband_XmitWait`, `Infiniband_RcvErrors`, `Infiniband_XmtDiscards`, and `_Delta` variants for several error counters. | A snapshot reads counters without leaving a session behind; milestone 1 confirms that. | Monitoring REST API page |
-| The guide documents certificate-based client authentication under `/ufmRest/app/client_authentication/...`, with user and password as the fallback. | Authentication has more than one mode. Basic and token modes are in the assumptions table. | Client authentication page |
+| The monitoring API has `POST /ufmRest/monitoring/start` (create and start a session), `POST /ufmRest/monitoring/snapshot` (one-time session with data), and `GET /ufmRest/monitoring/attributes` (available counters). Counter attributes include `Infiniband_SymbolErrors`, `Infiniband_LinkDowned`, `Infiniband_XmitWait`, `Infiniband_RcvErrors`, `Infiniband_XmtDiscards`, and `_Delta` variants for several error counters. | Whether a snapshot leaves server-side state is not documented (*live*). UFM's default session (ID 0) holds all port statistics collected every 30 seconds by default and is read with `GET /ufmRest/monitoring/session/0/data`, which creates no session. | Monitoring REST API page |
+| The guide documents certificate-based client authentication under `/ufmRest/app/client_authentication/...`, with user and password as the fallback; tokens come from `POST /ufmRest/app/tokens` with no documented renewal. UFM has no built-in read-only role; `Monitoring_Only` is the nearest, and custom roles with an allowed-URL list exist ([research](research/ufm-rest.md)). | Authentication has more than one mode. Least-privilege role names and route spellings are *live*. | Client authentication page |
 
-**ibdiagnet.** NVIDIA's [ibdiagnet dump file documentation](https://docs.nvidia.com/networking/display/ibdiagnetusermanualv219/ibdiagnet+dump+files) lists an `ibdiagnet2.db_csv` internal database and an `ibdiagnet2.net_dump` link dump among its output files; file sets differ by version. Whether and how the plugin uses it is a milestone 1 question.
+**ibdiagnet.** NVIDIA's [ibdiagnet dump file documentation](https://docs.nvidia.com/networking/display/ibdiagnetusermanualv219/ibdiagnet+dump+files) lists an `ibdiagnet2.db_csv` internal database and an `ibdiagnet2.net_dump` link dump among its output files; file sets differ by version. The research concludes it is out of scope for phases 1 to 3: it ships in the `ibutils2` package (DOCA-Host or UFM), not rdma-core; its default run takes two counter snapshots and writes files; it has options that reset counters; and the columns of its `db_csv` tables are not documented ([research](research/ibdiagnet.md)). Cable and PHY data may revisit it later.
 
-**RRDtool.** The [rrdcreate documentation](https://oss.oetiker.ch/rrdtool/doc/rrdcreate.en.html) states that on a COUNTER overflow RRDtool checks whether the overflow happened at the 32-bit or 64-bit border, that a `max` setting on a 64-bit counter eliminates the possibility of mistaking a reset for a wrap, and that a value outside `min` and `max` is regarded as unknown. A reset therefore produces a large false rate unless `max` is set.
+**RRDtool.** The [rrdcreate documentation](https://oss.oetiker.ch/rrdtool/doc/rrdcreate.en.html) states that on a COUNTER overflow RRDtool checks whether the overflow happened at the 32-bit or 64-bit border, that a `max` setting on a 64-bit counter eliminates the possibility of mistaking a reset for a wrap, and that a value outside `min` and `max` is regarded as unknown. A reset therefore produces a large false rate unless `max` is set. Run offline, `max` closes the gap only for counters of 16 bits or fewer and for 64-bit counters above 2^32; for 32-bit counters and 64-bit counters below 2^32 it does not ([research](research/counters.md)).
 
 **Cacti core 1.2.31** (`release/1.2.31`).
 
 | Fact | Consequence | Source |
 |---|---|---|
-| A script data query declares `script_path` with `arg_index`, `arg_query`, `arg_get`, and optionally `arg_num_indexes`; "Index Count Changed" detection depends on `arg_num_indexes` or on counting `arg_index` entries. | Ports can be indexes of a script query on the node's device. | `lib/data_query.php` (`query_script_host`) |
+| A script data query declares `script_path` with `arg_index`, `arg_query`, `arg_get`, and optionally `arg_num_indexes`. "Index Count Changed" detection depends on `arg_num_indexes`, or on counting `arg_index` entries for a plain script query; a script-server query with no `arg_num_indexes` gets no detection. Each query line is split at the first `output_delimiter`, so a `<GUID>:<port>` index needs a delimiter other than `:`. | Ports can be indexes of a script query on the node's device; the plugin's XML sets `arg_num_indexes` and a delimiter that cannot occur in an index ([research](research/cacti-core.md)). | `lib/data_query.php` (`query_script_host`) |
 | `api_device_remove()` and `api_device_remove_multi()` call the `device_remove` hook; `api_data_source_remove()` calls `data_source_remove`. | A plugin can clear mappings when Cacti objects are removed. | `lib/api_device.php`, `lib/api_data_source.php` |
 | `remote_agent.php` dispatches unknown actions to plugins through the `remote_agent` hook and authorizes callers with `remote_client_authorized()`. `call_remote_data_collector()` exists in `lib/functions.php`. | The main server can call plugin actions on a remote collector. | `remote_agent.php`, `lib/functions.php` |
 | `include/global.php` sets the connection mode to `recovery` or `offline` for remote collectors depending on the main database state and local backlog. | Remote jobs must work in both modes. | `include/global.php` |
 | Thold registers `poller_output` and `poller_bottom` hooks. | Only polled data sources reach Thold. | plugin_thold `setup.php` |
+| Maint exposes `plugin_maint_check_cacti_host($device_id): bool`, which Thold and core call directly (guarded by `api_plugin_is_enabled('maint')` and `function_exists()`) after loading Maint's functions file. Maint also registers a hook named `is_device_in_maintenance` that nothing calls. Maint declares `remote_collect:0`. | Maint suppresses Thold notifications for a device; it does not stop collection. The plugin checks maintenance with the same guarded call, and the check is unavailable on remote collectors. | plugin_maint `setup.php`, `includes/functions.php`; plugin_thold `includes/functions.php` |
+| A data source name is at most 19 characters of `[A-Za-z0-9_]`. A COUNTER `max` of 0 is created as 1; `max` can be a data query variable. | Data source names are short forms, and templates set `max` explicitly. | `cacti.sql`, `data_templates.php`, `lib/rrd.php` |
+| The PHP poller reads a script server reply with a blocking read and no timeout; `script_timeout` applies to Spine only. Polled values are stamped with the time of the database insert. | A blocked script stalls its poller process, and Cacti cannot be told when a value was measured. | `lib/poller.php`, `cmd.php`, `include/global_settings.php` |
+| Core has no secret-encryption function a plugin can call at 1.2.31; `cacti_encrypt_secret()` exists only on `1.2.x`, with its key in the same database. | UFM credential storage cannot rely on core ([research](research/ufm-rest.md)). | `lib/functions.php` at `1.2.x` |
 
 **Prior art.** The [infiniband_exporter README](https://github.com/treydock/infiniband_exporter#readme) records that `ibnetdiscover` and `perfquery` must be present, that a non-root user needs the UMAD device made accessible or `sudo` rules for exactly those two programs, and that collecting receive-error details costs one `perfquery` call per port.
 
 ### Assumptions to confirm
 
-Not checked, and therefore not stated as fact. Each has a milestone 1 issue.
+Each row had a milestone 1 issue. Status after the documentation and source research; *live* means it needs a fabric, a UFM instance, or a Cacti host.
 
-| Assumption | Why it matters |
-|---|---|
-| Switch external ports report a PortGUID that is distinct per port, or the switch's port 0 GUID. | Decides whether port identity is node GUID plus port number alone. |
-| The length of a PortXmitWait tick. | Decides whether a time ratio can be shown. |
-| Management datagram rates a fabric accepts from a monitoring node without disturbing the subnet manager or switch management CPUs. | Sets the minimum poll interval and the maximum fabric size per poller. |
-| Which device nodes the tools open, their default permissions, and how to grant access to a dedicated user. | Defines the least-privilege model. |
-| UFM token creation endpoint, token lifetime, read-only roles, response paging, and whether a snapshot creates server-side state. | Defines the UFM backend and its credential handling. |
-| The speed side of the downgrade rule, including extended speeds and FDR10. | Completes the degraded-link rule. |
-| `perfquery` on a node returns both basic and extended counters in two queries per port, and a port's capability mask is read once per sweep. | Sets the query count in the arithmetic below. |
-| Colons and `0x` text in data query index values are safe in RRD file names and Cacti filters. | Decides the port index format. |
-| Script server input suits a per-port value set at the required call rate. | Decides the poll path. |
-| Whether Cacti has a credential store plugins can use for secrets at 1.2.31. | Decides UFM credential storage. |
-| Counters behavior at the cap, after reset, and on reboot, on switch and HCA models. | Decides counter handling. |
-| Subnet discovery works without a running subnet manager and with which adapter port. | Defines failure behavior. |
-| The role of `ibdiagnet`. | Decides whether it is an input. |
+| Assumption | Why it matters | Status |
+|---|---|---|
+| Switch external ports report a PortGUID that is distinct per port, or the switch's port 0 GUID. | Decides whether port identity is node GUID plus port number alone. | Source: all external ports of a switch carry the one PortGUID from NodeInfo, so node GUID plus port number is required. Hardware confirmation *live* ([identity](research/identity.md)). |
+| The length of a PortXmitWait tick. | Decides whether a time ratio can be shown. | Not published. The plugin shows ticks per second only ([portxmitwait](research/portxmitwait.md)). *live*: read the device's `Tick` field. |
+| Management datagram rates a fabric accepts from a monitoring node without disturbing the subnet manager or switch management CPUs. | Sets the minimum poll interval and the maximum fabric size per poller. | Not measured; no vendor guidance found. Structure of the cost documented ([mad-budget](research/mad-budget.md)). *live* |
+| Which device nodes the tools open, their default permissions, and how to grant access to a dedicated user. | Defines the least-privilege model. | `/dev/infiniband/umad<N>`; root, mode 0600 by default; a udev rule with a group and mode 0660 grants it; the kernel checks nothing else ([privileges](research/privileges.md)). Per-distribution steps *live*. |
+| UFM token creation endpoint, token lifetime, read-only roles, response paging, and whether a snapshot creates server-side state. | Defines the UFM backend and its credential handling. | Token endpoint and paging documented; lifetime, renewal, snapshot state, and role route names not ([ufm-rest](research/ufm-rest.md)). *live* |
+| The speed side of the downgrade rule, including extended speeds and FDR10. | Completes the degraded-link rule. | Done: it mirrors the width side over supported speeds ([link-downgrade](research/link-downgrade.md)). |
+| `perfquery` on a node returns both basic and extended counters in two queries per port, and a port's capability mask is read once per sweep. | Sets the query count in the arithmetic below. | Corrected: basic and extended are separate invocations; each invocation reads the mask once and covers a list of ports. |
+| Colons and `0x` text in data query index values are safe in RRD file names and Cacti filters. | Decides the port index format. | RRD file names never contain the index; graph text escapes `:`; the query delimiter must not be `:` ([cacti-core](research/cacti-core.md)). |
+| Script server input suits a per-port value set at the required call rate. | Decides the poll path. | One call per polled item through one pipe; a PHP poller has no read timeout. Call cost *live*. |
+| Whether Cacti has a credential store plugins can use for secrets at 1.2.31. | Decides UFM credential storage. | No. |
+| Counters behavior at the cap, after reset, and on reboot, on switch and HCA models. | Decides counter handling. | *live*; the RRDtool half is done offline ([counters](research/counters.md)). |
+| Subnet discovery works without a running subnet manager and with which adapter port. | Defines failure behavior. | Not examined; *live*. Discovery sends directed-route SMPs from the chosen adapter port. |
+| The role of `ibdiagnet`. | Decides whether it is an input. | Excluded from phases 1 to 3 ([ibdiagnet](research/ibdiagnet.md)). |
 
 ## Architecture
 
@@ -225,9 +244,9 @@ Identity is the one decision everything else depends on ([ADR 0003](decisions/00
 
 Each node record has its type, GUID, display name, fabric, mapped Cacti device (if any), first and last seen times, and state. Each port record has its node, number, remote node and port, link state, and last sample.
 
-**Discovery** runs the discovery tool through the command runner. A parse failure leaves the previous inventory in place and raises a health error. Two nodes reporting one GUID are recorded as a conflict and excluded from sweeps until an operator resolves them.
+**Discovery** runs `ibnetdiscover` through the command runner and reads the default topology output for node GUIDs (`switchguid=0x<node>(<port 0>)`, `caguid=0x<node>`) and links; `-p` and `iblinkinfo --line` print port GUIDs only, so they are not identity sources. A switch's port 0 GUID, printed on the same `switchguid` line, joins `iblinkinfo` rows to node records. All external ports of a switch carry that one port GUID, so a port GUID is never a port key for a switch. A parse failure leaves the previous inventory in place and raises a health error. The tools do not diagnose two devices that claim one GUID: libibnetdisc merges them into one node and silently replaces links. The plugin therefore flags a GUID whose node type, port count, or neighbor set changes between sweeps, records it as a conflict, and excludes it from sweeps until an operator resolves it. The exact detection rule needs hardware (*live*; [research](research/identity.md)).
 
-**Replacement.** A replaced adapter or switch gets a new GUID. When a node disappears and a new node appears with the same neighbor and port, the plugin proposes a re-link of the Cacti device and leaves both records in place until an operator confirms. It never re-links automatically.
+**Replacement.** A replaced adapter or switch gets a new GUID. When a node disappears and a new node appears with the same neighbor node GUID and port number, the plugin proposes a re-link of the Cacti device and leaves both records in place until an operator confirms. It never re-links automatically.
 
 **Unmapped nodes** are visible only to administrators until mapped to a device.
 
@@ -237,9 +256,9 @@ Ports appear as indexes of a script data query on the node's Cacti device ([deci
 
 | Object | Created from | Notes |
 |---|---|---|
-| Device | "Fabric Node" device template, availability none unless an address exists, on the poller that sweeps the fabric | Existing devices can be mapped instead; created only on operator confirmation |
-| Data query | "Fabric Port", a script query reading the inventory cache | Index `<node GUID>:<port>`; ports down with no remote end are skipped by default |
-| Data sources | Data templates for traffic, errors, congestion, and link state per port | Layout chosen by milestone 1 measurements |
+| Device | "Fabric Node" device template; each created device is saved with `availability_method` 0 (none) unless an address exists and `poller_id` set to the poller that sweeps the fabric | Existing devices can be mapped instead; created only on operator confirmation. A device template has no availability field in Cacti 1.2; it is set per device through `api_device_save()` |
+| Data query | "Fabric Port", a script query reading the inventory cache | Index `<node GUID>:<port>`; the XML sets `arg_num_indexes` and an `output_delimiter` that is not `:`; ports down with no remote end are skipped by default |
+| Data sources | Four data templates per port: traffic (4 data sources), errors (12), congestion (4), link state (5) | Grouping measured in [research](research/rrd-layout.md): same disk as one file per counter (about 2.3 MB per port with the default profile), about one seventh of the files and update time. Data source names are at most 19 characters and `max` is set explicitly |
 | State data source | "Fabric Port State" using the script server input | Polled; reaches Thold through `poller_output` |
 | Graphs | Graph templates per group, plus a fabric overview | Placed in graph trees and protected by graph permissions like any Cacti graph |
 
@@ -253,12 +272,12 @@ Devices created by the plugin appear in device lists and in plugins such as moni
 
 - Basic counters are narrow and cap instead of wrapping (see the facts table). With no reset, a narrow counter eventually stops changing. The plugin uses the 64-bit forms where the port supports them, marks a capped basic counter as saturated and publishes unknown for it, and shows the reason on the port page. The alternative of resetting is rejected ([ADR 0004](decisions/0004-read-only-fabric-access.md)). A decision issue tracks the treatment and waits for hardware evidence.
 - Data counters are octets divided by 4. Stored values stay in the tools' unit; graph definitions multiply by 4.
-- Data sources are COUNTER type with a `max` chosen per width, so a reset or reboot becomes a gap instead of a spike. The plugin also compares each sample to the previous one and publishes unknown for one cycle after a decrease, and counts discontinuities on the port page.
+- Data sources are COUNTER type with an explicit `max` (a `max` of 0 would be created as 1). For counters of 16 bits or fewer, `max` equal to the cap per interval turns a reset into a gap; for data counters, `max` is the link's capacity in words per second and can be a per-port data query field. That is not enough for 32-bit counters, or for 64-bit counters reset from a value below 2^32, where the false rate stays below any useful `max`. The plugin therefore always compares each sample to the previous one, publishes unknown for one cycle after a decrease, and counts discontinuities on the port page ([research](research/counters.md)). Another tool can cause the decrease: OpenSM's optional performance manager resets counters at about three quarters of their range by its documentation.
 - A value the port does not support is unknown, never `0`. This applies in particular to PortXmitWait in basic counters, which the tools zero when unsupported.
 
-**Congestion.** PortXmitWait is graphed as ticks per second. It is converted to time or a ratio only if milestone 1 verifies the tick length. A high value shows that the port waited for credits or arbitration. It does not show a faulty port or cable. Transmit discards and constraint errors are graphed separately. The plugin ships no default congestion thresholds.
+**Congestion.** PortXmitWait is graphed as ticks per second. The tick length is not published for current link speeds, so it is not converted to time; an optional ratio of wait ticks to transmitted packets (the form UFM uses) needs no tick length. A high value shows that the port waited for credits or arbitration. It does not show a faulty port or cable. Transmit discards and constraint errors are graphed separately. The plugin ships no default congestion thresholds.
 
-**Link state.** For each port the plugin records active, enabled, and supported width and speed, physical state, and logical state. A port is **degraded** when its active width or speed is below the best value supported at both ends, the rule `iblinkinfo` uses to print `Could be <width>`. A link whose enabled value is deliberately below supported is not degraded for that reason. A port that is down, or has no remote end, is down, not degraded. Unknown stays unknown. Milestone 1 completes the speed side and the fixtures: 4X to 1X, 4X to 2X, speed-only, administrative limit, and down.
+**Link state.** For each port the plugin records active and supported width and speed, enabled width and speed when the source provides them, physical state, and logical state. A port is **below best** when its active width or speed is below the best value supported at both ends, with widths ordered by lane count and speeds by rate, the rule `iblinkinfo` uses to print `Could be <width>` or `Could be <speed>`. It is **degraded** when no enabled value at either end explains it. None of the three allowlisted tools prints enabled values, so with them alone a below-best port is reported as below best with the cause unknown; enabled values come from `smpquery portinfo` (an owner decision, see [Open decisions](#open-decisions)) or from UFM in phase 2. A port that is down, or has no remote end, is down, not degraded. Unknown stays unknown. The fixtures (4X to 1X, 4X to 2X, speed-only, administrative limit, down, XDR on older tools) need a fabric ([research](research/link-downgrade.md)).
 
 ## Measurement state
 
@@ -266,10 +285,10 @@ Devices created by the plugin appear in device lists and in plugins such as moni
 |---|---|---|
 | Freshness | Current, delayed, stale, never observed | Sample observation time against the cycle length |
 | Execution | Completed, partial, failed | Sweep result per port |
-| Link | Up, degraded, down, unknown | The link-state rule above |
+| Link | Up, below best, degraded, down, unknown | The link-state rule above |
 | Counter validity | Valid, discontinuity, saturated, unsupported | Comparison with the previous sample and the port's capability flags |
 | Administrative | Enabled, disabled | Plugin records |
-| Maintenance | In maintenance, not in maintenance | Maint's device maintenance hook |
+| Maintenance | In maintenance, not in maintenance | Maint's `plugin_maint_check_cacti_host()` (guarded function call); unavailable on remote collectors |
 
 Each cached sample carries observation time, ingestion time, backend, and the capability flags observed for the port. A recent page refresh never counts as a recent measurement.
 
@@ -281,7 +300,7 @@ The "Fabric Port State" data source returns values from the cache:
 |---|---|---|
 | `active_lanes` | Active width as a lane count | `U` |
 | `speed_rank` | Active speed as an ordered number, defined by milestone 1 | `U` |
-| `degraded` | 1 when the port is degraded, else 0 | `U` |
+| `degraded` | 1 when the port is below best and no enabled value explains it (with only the phase 1 tools, 1 when below best), else 0 | `U` |
 | `port_state` | Logical state as a number | `U` |
 | `age` | Seconds since the port's last sample | Always numeric once the port has been sampled |
 
@@ -293,26 +312,26 @@ Stated limits:
 - **Summary only.** The state data source shows the present port state. History of counters is in the RRD files.
 - **Overlap with other tools.** Operators may run UFM alarms or `ibqueryerrors` in cron. The plugin does not disable them.
 
-**Maintenance.** Device maintenance works through Maint's device type with no change. Measurements continue during maintenance; only notifications are suppressed.
+**Maintenance.** Device maintenance works through Maint's device type with no change to either plugin: Thold asks Maint through `plugin_maint_check_cacti_host()` (the `is_device_in_maintenance` hook Maint registers has no caller). Measurements continue during maintenance; only notifications are suppressed. Maint runs only on the main server (`remote_collect:0`).
 
 ## Collection and the sweep cache
 
 A sweep reads every watched port once per cycle and writes samples to a cache table. Nothing starts one process per port per poll ([ADR 0005](decisions/0005-collect-through-a-sweep-cache.md)). The sweep runs from `poller_bottom` through `exec_background()` as one `register_process_start()` process per fabric, with a time budget and bounded concurrency. Runs are idempotent: an interrupted run leaves the cache consistent and the next run continues.
 
-When the sweep runs relative to the poll that stores values is an open decision: a lazy per-device sweep on the first script server call, or a prefetch. The choice depends on measurements in milestone 1.
+When the sweep runs relative to the poll that stores values is an open decision: a lazy per-device sweep on the first script server call, or a prefetch. Evidence so far ([research](research/mad-budget.md)): the PHP poller stamps every value with its database insert time, so a prefetch with sample age `a` skews rates by about `a`, and core offers no way to store a value under a different time; under the PHP poller one process polls all of a device, but Spine can split a device across `device_threads`, so a lazy sweep needs a claim so only one caller sweeps; a slow sweep makes `cmd.php` end its host loop at the poll interval. A sweep started from `poller_bottom` fills the cache for the next cycle, which is a prefetch design. The decision stays open for the measurements.
 
 Command lines are built from fixed templates and validated values. The builder cannot produce any reset or clear option, and a test enumerates what it can produce ([ADR 0004](decisions/0004-read-only-fabric-access.md)).
 
 ## UFM backend (phase 2)
 
-The backend reads ports and counters from UFM with read-only requests and fills the same cache. Identity comes from the `guid` and `number` fields. It uses a monitoring snapshot rather than a persistent session if milestone 1 confirms that a snapshot leaves no server-side state. TLS verification is on by default. Credentials never appear on a command line, in a log, in an export, or on a page; their storage is a decision issue. Switching a fabric between backends keeps devices, indexes, and RRD files because identity is the same.
+The backend reads ports and counters from UFM with read-only requests and fills the same cache. Identity comes from the `guid` and `number` fields. It reads UFM's default monitoring session (`GET /ufmRest/monitoring/session/0/data`, collected by UFM every 30 seconds by default) rather than creating sessions; a snapshot is the alternative only if a live check shows it leaves no server-side state. The account is a custom GET-only role if the role routes allow it, otherwise `Monitoring_Only` with its session-creation right documented ([research](research/ufm-rest.md)). TLS verification is on by default. Credentials never appear on a command line, in a log, in an export, or on a page; their storage is a decision issue. Switching a fabric between backends keeps devices, indexes, and RRD files because identity is the same.
 
 ## Remote and scale (phase 3)
 
 When the fabric is reachable only from a remote data collector, that collector runs the sweep and script server input, following the servcheck and webseer pattern:
 
 - Plugin configuration tables replicate to collectors through the `replicate_out` hook.
-- The sweep on each poller handles only fabrics assigned to that poller.
+- The sweep on each poller handles only fabrics assigned to that poller. If the sweep starts from `poller_bottom`, `INFO` declares `remote_poller:1`, because core skips that hook on a collector otherwise.
 - The sweep writes the cache to the collector's local database; summary values reach the main server through the normal poller output path, which handles offline and recovery modes.
 - The main server fetches inventory and health on demand through plugin actions in the `remote_agent` hook, called with `call_remote_data_collector()`. Actions are read-only and take fabric identifiers only.
 
@@ -355,13 +374,13 @@ Disabling the plugin stops sweeps and leaves devices and RRD files in place. Uni
 
 ## Performance
 
-Capacity is stated in watched ports. Fixtures cover 100, 1,000, and 10,000 ports. The following is arithmetic from stated assumptions, not a measurement.
+Capacity is stated in watched ports. Fixtures cover 100, 1,000, and 10,000 ports. The following is arithmetic from stated assumptions, not a measurement, except where a line says it is measured.
 
-At 10,000 ports with a 300 second interval, two PerfMgt queries per port (basic and extended, an assumption above):
+At 10,000 ports with a 300 second interval, two PerfMgt queries per port (basic and extended; one invocation covers a list of ports and costs one extra ClassPortInfo query per invocation, so the datagram count is two per port plus two per node):
 
 - 20,000 counter queries per cycle, about 67 per second on average. At a 60 second interval, about 333 per second.
 - Topology and link state at the same cadence add at least one query per port, or are read less often; milestone 1 measures.
-- Four RRD files per port gives 40,000 updates per cycle: about 133 per second at 300 seconds, 667 per second at 60 seconds.
+- Four RRD files per port gives 40,000 file updates per cycle: about 133 per second at 300 seconds, 667 per second at 60 seconds. Measured with rrdtool alone on one development host (not Cacti): one cycle of 4,000 files took 0.27 seconds at 1,000 ports, against 1.92 seconds for 25,000 files (one file per data source) for the same data; disk is about 2.3 MB per port in both ([research](research/rrd-layout.md)). Sweep time and the fabric's datagram tolerance are not measured (*live*, [research](research/mad-budget.md)).
 - About 25 data source columns per port across those files, or about 250,000 `data_template_rrd` rows, and about 30,000 graphs if each port has three.
 
 Engineering targets, to be measured, not yet demonstrated:
@@ -379,12 +398,12 @@ The setup screen shows expected queries per cycle and RRD updates per second bef
 | Boundary | Control |
 |---|---|
 | Browser to Cacti | Cacti session, CSRF protection, realms, device and graph permissions, prepared queries, contextual escaping |
-| Cacti to the fabric (tools) | A dedicated user with access to the management device and nothing else; no `sudo` unless research concludes otherwise; allowlisted executables resolved from an absolute directory; argument arrays, never a shell; no operator text in command lines except validated values; time and output limits; reset and clear options impossible to compose; minimal environment |
+| Cacti to the fabric (tools) | A dedicated user with access to the management device and nothing else; no `sudo` (research recommends not documenting it, owner to confirm); allowlisted executables resolved from an absolute directory; argument arrays, never a shell; no operator text in command lines except validated values; time and output limits; reset and clear options impossible to compose; minimal environment |
 | Cacti to UFM (phase 2) | HTTPS with verification on by default; read-only account; credentials never on a command line, in logs, exports, or pages; no redirect to another host; timeouts |
 | Main server to remote collector (phase 3) | Cacti's `remote_agent` authorization and the configured https scheme; actions are read-only and accept identifiers only |
 | Discovered data to the UI | GUIDs, node names, and tool output are untrusted text from the fabric: escaped on output, length-limited, and never used in file paths or commands |
 
-Management access to a fabric is a privilege. A process that can open the management device can send more than counter reads, so granting it to the Cacti poller user is a real change in that host's exposure. Milestone 1 documents the exact grant per distribution and what a compromised poller user could do with it.
+Management access to a fabric is a privilege. The tools open `/dev/infiniband/umad<N>`, which the kernel creates `root`, mode 0600, with no mode of its own; neither rdma-core's udev rule nor systemd's default rules change that. The kernel's user MAD driver has no capability check, so anyone who can open the node can send any management datagram, and the same package's `ibportstate` can disable, enable, and reset switch ports and change link settings and the M_Key. The grant is a dedicated group with mode 0660 on `umad*` only; the main control on the fabric is M_Key protection, and when it is read-protected the tools need the key, which goes in the tool's config file, never on a command line. The plugin documents the group grant and does not document `sudo`. The residual risk and per-distribution steps are in [research](research/privileges.md); per-distribution verification is *live*.
 
 Phase 1 needs a review of the command runner and the argument builder before release. Phase 2 needs a security review covering credential storage and the UFM client. Phase 3 needs a review of the `remote_agent` actions.
 
@@ -405,33 +424,51 @@ Phase 1 needs a review of the command runner and the argument builder before rel
 
 | Milestone | Phase | Deliverables | Exit evidence |
 |---|---|---|---|
-| 1. Compatibility and upstream research | 0 | Version matrix; confirmation of every fact and assumption; counter behavior on hardware; downgrade rule; privilege model; MAD budget; UFM API; Cacti core confirmation; estimates | Every row confirmed or corrected; the timing and saturation decisions have evidence |
+| 1. Compatibility and upstream research | 0 | Version matrix; confirmation of every fact and assumption; counter behavior on hardware; downgrade rule; privilege model; MAD budget; UFM API; Cacti core confirmation; estimates | Every row confirmed or corrected (done for documentation and source; hardware and UFM rows are *live*); the timing and saturation decisions have evidence (partly: [Live checks](#live-checks)) |
 | 2. Foundation | 1 | PHP guard, lifecycle, realms, settings, class layout, fabric records, command boundary, inventory, sweep, link-state model, health, harness | Fresh install and upgrade at 1.2.31; install refused cleanly on PHP 8.1; unauthorized access rejected |
 | 3. Cacti objects and alerting | 1 | Templates, device mapping, data query, counter and state data sources, discontinuity handling, congestion graphs, permissions, scale measurements | Fixture downgrade fires and clears a Thold alert; Maint suppresses it; resets never spike |
 | 4. Phase 1 release | 1 | Documentation, packaging, restore test, failure qualification, pilots | Pilots on a small and a larger fabric |
 | 5. UFM backend | 2 | UFM client, credentials, identity continuity, security review | Same fixture, same objects from either backend |
 | 6. Remote and scale | 3 | Replication, `remote_agent` actions, sharded sweeps, security review | Offline, recovery, and sharding scenarios correct |
 
+## Estimates
+
+Sizes come from measured lines of plugin_cloudflare and plugin_smokeping; elapsed time is not estimated, because the evidence has no review latency and no hardware, and the owner's capacity is unknown ([research](research/estimates.md)). Production PHP, excluding tests:
+
+| Milestone | Production lines | Gates outside the code |
+|---|---|---|
+| 2. Foundation | 5,800 to 7,000 | Harness and repository decisions |
+| 3. Cacti objects and alerting | 2,000 to 2,900, plus template XML | Sweep timing and saturation evidence; device granularity |
+| 4. Phase 1 release | 500 to 900 | Security review; two pilots |
+| 5. UFM backend | 1,000 to 2,000 | A UFM instance; credential decision; security review |
+| 6. Remote and scale | at least 1,200, no upper bound | A remote collector test bed; security review |
+
+Phase 1 totals about 8,300 to 10,800 lines, through phase 2 about 9,300 to 12,800, through phase 3 about 10,500 to 14,000 or more. Tests ran at 0.8 to 1.9 times production lines in the two plugins.
+
 ## Open decisions
 
 | Decision | Options | Needed before | Decided by |
 |---|---|---|---|
-| Sweep timing | Lazy per-device sweep (proposed); prefetch; prefetch with sample time | Milestone 2 sweep work | Milestone 1 timing evidence |
-| Saturated basic counters | Prefer 64-bit and publish unknown on saturation (proposed); opt-in reset; events only | Milestone 3 | Milestone 1 counter evidence |
+| Sweep timing | Lazy per-device sweep with a claim (proposed); prefetch. Prefetch with sample time has no core mechanism for polled data sources | Milestone 2 sweep work | Live timing measurements ([research](research/mad-budget.md)) |
+| Saturated basic counters | Prefer 64-bit and publish unknown on saturation (proposed); opt-in reset; events only | Milestone 3 | Live counter evidence ([research](research/counters.md)) |
 | Device granularity | One device per node (proposed); one per fabric; switches only | Milestone 3 | Cacti maintainers |
-| UFM credential storage | Cacti storage if available; file outside web root; environment | Phase 2 | Milestone 1 UFM research and security review |
+| UFM credential storage | A key file outside the database (Cacti 1.2.31 has no core storage; `1.2.x` has one whose key is in the same database); file outside web root; environment | Phase 2 | Security review ([research](research/ufm-rest.md)) |
 | Repository and name | `Cacti/plugin_fabric`, `Cacti/plugin_infiniband`, or community plugin | Before any code is published | Cacti maintainers |
 | Test harness | Whatever maintained plugins use | Milestone 2 | Cacti maintainers |
+| Enabled link values in phase 1 | Add `smpquery portinfo` to the allowlist (one SMP per port per sweep); or report below best with cause unknown until the UFM backend | Milestone 2 command boundary | Plugin owner ([research](research/link-downgrade.md)) |
+| Sweep trigger | Start from the script server (lazy) or from `poller_bottom` (prefetch; needs `remote_poller:1` on collectors) | Milestone 2 | With the sweep timing decision |
+| `sudo` | Never document it (recommended); document exact command lines | Milestone 2 | Plugin owner ([research](research/privileges.md)) |
+| `ibdiagnet` | Exclude from phases 1 to 3 (recommended); optional cable and PHY input later | Milestone 4 documentation | Plugin owner ([research](research/ibdiagnet.md)) |
 
 ## Risks
 
 | Risk | Effect | Mitigation |
 |---|---|---|
-| Polling load disturbs the subnet manager or switch management CPUs | Fabric instability caused by monitoring | Measured MAD budget, documented minimum interval, bounded concurrency, per-fabric time budget |
+| Polling load disturbs the subnet manager or switch management CPUs | Fabric instability caused by monitoring | Measured MAD budget (not yet measured), documented minimum interval, bounded concurrency, per-fabric and per-node time and failure budgets |
 | Basic counters saturate with no reset | Flat graphs that look healthy | 64-bit counters where supported; saturation flagged and shown as unknown; documentation |
 | Management device access is broader than counter reads | A compromised poller user gains fabric management reach | Documented least-privilege grant, allowlisted executables, no shell, review before release |
 | PortXmitWait misread as a fault or as zero | Wrong conclusions or false comfort | Unit and unsupported state documented; no default thresholds; unsupported shown as unknown |
-| GUID reuse or duplicate GUIDs | Wrong history attached to a device | Conflict state, re-link proposals only |
+| GUID reuse or duplicate GUIDs | Wrong history attached to a device; the tools merge duplicates silently | Plugin-side conflict detection, conflict state, re-link proposals only |
 | Object counts slow Cacti at 10,000 ports | Poor experience for all Cacti users | Measure at milestone 3; document a supported port count |
 | UFM API differs between releases | Backend breaks on upgrade | Matrix of releases, fixture servers, version check in health |
 | Address-based `remote_agent` authorization | A host sharing a poller's address can call actions | https, restricted network, read-only actions |
@@ -447,7 +484,47 @@ Not scheduled; revisited after phase 1:
 - Topology change events.
 - Ethernet and RoCE fabrics.
 - A public API and CLI.
-- A host-side collector for sysfs counters.
+- A host-side collector for sysfs counters. Research concludes it is a possible later source for sites that cannot grant umad access, through `snmpd extend` ([research](research/sysfs-hca.md)).
+
+## Live checks
+
+Everything the documentation and source research could not settle, grouped by what it needs. Each row names the issue and the research document with the detail.
+
+| Needs | Issue | Check | What it settles |
+|---|---|---|---|
+| Any InfiniBand host | #13, #14 | Capture `-h`, `-V`, and output of `perfquery`, `perfquery -x`, `iblinkinfo --line`, `ibnetdiscover`, `-p`, and `-l` per matrix version | Fixtures and real option output ([versions](research/infiniband-diags-versions.md)) |
+| Any InfiniBand host | #19 | `stat /dev/infiniband/umad*` and udev rules per distribution; apply the group rule; run as member and non-member; try with OpenSM on the same port, with M_Key protection, in a container | The privilege model ([privileges](research/privileges.md)) |
+| Switch and HCA models | #15 | Drive counters to the cap; reset with `perfquery -R` from a second host; reboot and flap; record `CapMask` and `CapMask2` | Cap, reset, and reboot behavior; which hardware has 64-bit error counters ([counters](research/counters.md)) |
+| Switch and HCA models | #16 | Read the `Tick` field; fit bytes per tick under a known load; compare congested and idle links | The tick length ([portxmitwait](research/portxmitwait.md)) |
+| Lab fabric with a downgradable link | #17 | Force 4X to 1X, 4X to 2X, a speed-only downgrade, and an administrative limit; capture tool and UFM output | The degraded-link fixtures ([link-downgrade](research/link-downgrade.md)) |
+| Fabric with a switch and a dual-port HCA | #18 | Compare node, port, and switch port 0 GUIDs across tools; replace an HCA and a switch; present a duplicate GUID | Identity rules and re-link scenarios ([identity](research/identity.md)) |
+| Fabrics near 100, 1,000, 10,000 ports | #20, #7 | Time per-port and per-node `perfquery`; discovery with `-o` and `--cache`; watch SM and switch CPU; compare UFM session 0 | Sweep time, datagram budget, minimum interval, sweep trigger ([mad-budget](research/mad-budget.md)) |
+| A UFM instance | #21 | Custom GET-only role; snapshot state; paging at 10,000 ports; token lifetime; TLS defaults; field and state strings | The UFM recipe and fixtures ([ufm-rest](research/ufm-rest.md)) |
+| A lab fabric | #22 | One ibdiagnet run with `db_csv` kept; counters before and after | Whether it is read-only; real table columns ([ibdiagnet](research/ibdiagnet.md)) |
+| HCA hosts | #23 | List sysfs files; compare with `perfquery` on the same port | The sysfs source ([sysfs-hca](research/sysfs-hca.md)) |
+| A Cacti 1.2.31 host | #24 | Run a script query with a colon index; reindex with and without `arg_num_indexes`; COUNTER `max` 0; script server cost and blocking; remote hooks in each mode | The Cacti rows marked by reading only ([cacti-core](research/cacti-core.md)) |
+| A Cacti 1.2.31 host | #25 | Poll 1,000 and 10,000 fixture ports in both layouts | Poll time and row counts ([rrd-layout](research/rrd-layout.md)) |
+| The owner | #26 | Capacity per week and maintainer response times | Elapsed-time estimates ([estimates](research/estimates.md)) |
+
+## Research documents
+
+| Issue | Document |
+|---|---|
+| #13, #14 | [infiniband-diags-versions.md](research/infiniband-diags-versions.md) |
+| #15, #8 | [counters.md](research/counters.md) |
+| #16 | [portxmitwait.md](research/portxmitwait.md) |
+| #17 | [link-downgrade.md](research/link-downgrade.md) |
+| #18 | [identity.md](research/identity.md) |
+| #19 | [privileges.md](research/privileges.md) |
+| #20, #7 | [mad-budget.md](research/mad-budget.md) |
+| #21 | [ufm-rest.md](research/ufm-rest.md) |
+| #22 | [ibdiagnet.md](research/ibdiagnet.md) |
+| #23 | [sysfs-hca.md](research/sysfs-hca.md) |
+| #24 | [cacti-core.md](research/cacti-core.md) |
+| #25 | [rrd-layout.md](research/rrd-layout.md) |
+| #26 | [estimates.md](research/estimates.md) |
+
+Offline checks: [tests/rrd-counter](../tests/rrd-counter/run.sh) (counter reset and cap through an RRDtool COUNTER) and [tests/rrd-layout](../tests/rrd-layout/run.php) (RRD layout cost).
 
 ## Upstream process
 
