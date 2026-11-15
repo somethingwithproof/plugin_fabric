@@ -102,6 +102,14 @@ it('reads no node from a row without valid identity', function (array $row) {
 	'no fabric'   => [['id' => 1, 'fabric_id' => '', 'guid' => '0x0002c90300a00000', 'node_type' => 'ca']],
 ]);
 
+it('labels a node with its GUID, whatever its description says', function () {
+	$row = ['id' => 1, 'fabric_id' => 1, 'guid' => '0x0002c90300b00010', 'node_type' => 'ca', 'presence' => 'present', 'identity' => 'ok'];
+
+	expect(Node::fromRow(['description' => 'node0001 HCA-1'] + $row)?->label())->toBe('node0001 HCA-1 (0x0002c90300b00010)')
+		->and(Node::fromRow(['description' => 'trusted (0x0002c90300b99999)'] + $row)?->label())->toBe('trusted (0x0002c90300b99999) (0x0002c90300b00010)')
+		->and(Node::fromRow($row)?->label())->toBe('0x0002c90300b00010');
+});
+
 it('reads a damaged node row as not sweepable', function () {
 	$node = Node::fromRow(['id' => '7', 'fabric_id' => '2', 'guid' => '2c90300b00000', 'node_type' => 'ca', 'presence' => 'gone', 'identity' => '', 'conflict_seen' => '{bad', 'lid' => '', 'host_id' => null, 'sysimg_guid' => '0x0', 'port_count' => '-3']);
 

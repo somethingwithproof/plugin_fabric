@@ -101,7 +101,15 @@ final readonly class Node {
 		return $this->presence === Presence::Present && $this->identity === IdentityState::Ok;
 	}
 
+	/**
+	 * The description is fabric-supplied and any node can claim any text,
+	 * so a label always carries the GUID that identifies the node.
+	 */
 	public function label(): string {
-		return $this->description !== '' ? $this->description : $this->guid->text;
+		return self::labelOf($this->description, $this->guid->text);
+	}
+
+	public static function labelOf(string $description, string $guid): string {
+		return $description !== '' ? sprintf('%s (%s)', $description, $guid) : $guid;
 	}
 }

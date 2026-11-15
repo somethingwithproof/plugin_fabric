@@ -247,6 +247,12 @@ foreach (array('fabric_admin.php', 'fabric_admin.php?action=edit_node&id=' . $no
 	perm_expect(strpos($body, '<img src=x id="nodename') === false && strpos($body, '<b id="fabricprobe">') === false && preg_match('/(Fatal error|Parse error|Warning:|Uncaught)/', $body) !== 1, "$page loads and prints no stored markup");
 }
 
+// Descriptions are fabric-supplied, so every node label carries its GUID.
+list(, $inventory) = perm_http($base . 'fabric.php', $jar);
+list(, $list)      = perm_http($base . 'fabric_admin.php', $jar);
+perm_expect(strpos($inventory, 'nodenameopen&quot;&gt; (' . $guids['open'] . ')') !== false, 'the inventory labels a node with its description and GUID');
+perm_expect(strpos($list, 'nodenamenew&quot;&gt; (' . $guids['new'] . ')') !== false && strpos($list, 'nodenameunmapped&quot;&gt; (' . $guids['unmapped'] . ')') !== false, 'a re-link proposal labels both nodes with their description and GUID');
+
 // A fabric left on a remote poller is flagged on the health page, and a
 // save that keeps the remote poller is refused with a form error.
 db_execute("INSERT INTO plugin_fabric_fabric (name, backend, poller_id, sweep_interval, adapter, adapter_port, admin_state) VALUES ('remote', 'diags', 2, 300, 'mlx5_1', 1, 'enabled')");

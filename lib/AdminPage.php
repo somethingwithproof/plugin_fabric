@@ -236,8 +236,8 @@ final class AdminPage {
 			$id = Row::int($row, 'id');
 
 			print '<tr class="tableRow">'
-				. '<td>' . html_escape(Row::string($row, 'old_guid') . ' ' . Row::string($row, 'old_description')) . '</td>'
-				. '<td>' . html_escape(Row::string($row, 'new_guid') . ' ' . Row::string($row, 'new_description')) . '</td>'
+				. '<td>' . html_escape(Node::labelOf(Row::string($row, 'old_description'), Row::string($row, 'old_guid'))) . '</td>'
+				. '<td>' . html_escape(Node::labelOf(Row::string($row, 'new_description'), Row::string($row, 'new_guid'))) . '</td>'
 				. '<td>' . html_escape(Row::string($row, 'neighbor_guid') . ':' . Row::int($row, 'neighbor_port')) . '</td>'
 				. '<td>' . html_escape(Row::int($row, 'old_host_id') > 0 ? (string) Row::int($row, 'old_host_id') : __('Unmapped', 'fabric')) . '</td>'
 				. '<td>' . $this->actionForm('confirm_relink', $id, __('Confirm', 'fabric')) . ' ' . $this->actionForm('reject_relink', $id, __('Reject', 'fabric')) . '</td>'
