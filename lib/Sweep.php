@@ -20,15 +20,16 @@
 namespace Somethingwithproof\Fabric;
 
 /**
- * Starts sweeps lazily (ADR 0008). The M3 script server calls forDevice()
- * when the poller asks for a mapped device's values; fabric_sweep.php calls
+ * Starts sweeps lazily (ADR 0008). The Fabric Port data query calls
+ * forDevice() through the script server when the poller asks for a mapped
+ * device's first value; fabric_sweep.php calls
  * forFabric(). Either way a sweep runs only on the poller the fabric is
  * assigned to, only while the plugin and the fabric are enabled, and only
  * for what is due. Claims keep concurrent callers from sweeping the same
  * fabric topology or node twice; a caller that loses a claim does not
  * wait, it returns and reads what the winner stores.
  *
- * There is no poller_bottom prefetch in M2.
+ * There is no poller_bottom prefetch.
  */
 final class Sweep {
 	private readonly TopologySweep $topology;

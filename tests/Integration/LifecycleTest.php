@@ -29,7 +29,7 @@ const FABRIC_TABLES = ['plugin_fabric_claim', 'plugin_fabric_fabric', 'plugin_fa
 // What the seed action leaves: one fabric and one node.
 const FABRIC_SEEDED = ['plugin_fabric_claim' => 0, 'plugin_fabric_fabric' => 1, 'plugin_fabric_health' => 0, 'plugin_fabric_node' => 1, 'plugin_fabric_node_sweep' => 0, 'plugin_fabric_port' => 0, 'plugin_fabric_relink' => 0, 'plugin_fabric_sample' => 0];
 
-const FABRIC_HOOKS = ['config_arrays', 'config_settings', 'draw_navigation_text'];
+const FABRIC_HOOKS = ['config_arrays', 'config_settings', 'device_remove', 'draw_navigation_text'];
 
 beforeEach(function () {
 	lifecycle('reset');
@@ -44,7 +44,7 @@ it('installs fresh with tracked tables, hooks, and both realms, leaving the plug
 
 	expect($state['plugin']['status'])->toEqual('4')
 		->and($state['plugin']['version'])->toEqual(FABRIC_VERSION)
-		->and($state['schema'])->toEqual('1')
+		->and($state['schema'])->toEqual('2')
 		->and(array_keys($state['tables']))->toBe(FABRIC_TABLES)
 		->and($state['tracked'])->toBe(FABRIC_TABLES)
 		->and(array_keys($state['hooks']))->toBe(FABRIC_HOOKS)
@@ -129,7 +129,7 @@ it('finishes an upgrade that was interrupted after creating only some tables', f
 	expect($state['result'])->toBeTrue()
 		->and(array_keys($state['tables']))->toBe(FABRIC_TABLES)
 		->and($state['tables']['plugin_fabric_node'])->toBe(1)
-		->and($state['schema'])->toEqual('1')
+		->and($state['schema'])->toEqual('2')
 		->and($state['plugin']['version'])->toEqual(FABRIC_VERSION);
 });
 
@@ -142,7 +142,7 @@ it('does not advance past a migration that did not run', function () {
 		->and($stopped['schema'])->toEqual('0');
 
 	$finished = lifecycle('upgrade');
-	expect($finished['schema'])->toEqual('1');
+	expect($finished['schema'])->toEqual('2');
 });
 
 it('refuses a schema newer than the code and leaves the recorded version alone', function () {
@@ -265,4 +265,39 @@ it('sweeps a fake fabric into the real schema and keeps the last good inventory 
 		->and($r['steps']['hostile']['links_error'])->toBe('')
 		->and($r['steps']['hostile']['links_skipped'])->toBe(3)
 		->and($r['steps']['hostile']['kept'])->toBeTrue();
+});
+
+it('migrates a version 1 sample table to version 2 and keeps its rows', function () {
+	lifecycle('install');
+	lifecycle('seed');
+	lifecycle('drop_v2_columns');
+	lifecycle('set_schema', '1');
+
+	$state = lifecycle('upgrade');
+
+	expect($state['result'])->toBeTrue()
+		->and($state['schema'])->toEqual('2')
+		->and($state['columns'])->toContain('previous_at', 'rates', 'reset', 'discontinuities', 'discontinuity_at')
+		->and($state['tables']['plugin_fabric_node'])->toBe(1);
+});
+
+it('imports the Cacti objects once, keeps them on a reinstall, and keeps them but not its query file on uninstall', function () {
+	$installed = lifecycle('install')['objects'];
+
+	expect($installed)->toBe(['host_template' => 1, 'snmp_query' => 1, 'data_template' => 5, 'graph_template' => 5, 'rrd_items' => 27, 'query_file' => true, 'version' => '1']);
+
+	// A template version change imports again, over the same objects.
+	lifecycle('set_setting', 'fabric_templates_version=0');
+	$upgraded = lifecycle('upgrade');
+
+	expect($upgraded['result'])->toBeTrue()
+		->and($upgraded['objects'])->toBe($installed);
+
+	$removed = lifecycle('uninstall')['objects'];
+
+	expect($removed['query_file'])->toBeFalse()
+		->and($removed['host_template'])->toBe(1)
+		->and($removed['data_template'])->toBe(5);
+
+	expect(lifecycle('install')['objects'])->toBe($installed);
 });

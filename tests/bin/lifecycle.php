@@ -58,6 +58,12 @@ switch ($action) {
 		db_execute("DELETE FROM settings WHERE name LIKE 'fabric\\_%'");
 		db_execute("DELETE FROM plugin_db_changes WHERE plugin = 'fabric'");
 
+		// The settings that record the query file as the plugin's are gone,
+		// so the file goes too; the templates stay, as on a real site.
+		if (is_file($config['base_path'] . '/resource/script_server/fabric_ports.xml')) {
+			unlink($config['base_path'] . '/resource/script_server/fabric_ports.xml');
+		}
+
 		break;
 	case 'install':
 		api_plugin_install('fabric');
@@ -108,6 +114,13 @@ switch ($action) {
 		break;
 	case 'drop_hook':
 		db_execute_prepared("DELETE FROM plugin_hooks WHERE name = 'fabric' AND hook = ?", array($argument));
+
+		break;
+	case 'drop_v2_columns':
+		// A version 1 database: the sample table before migration 2.
+		foreach (array('previous_at', 'rates', 'reset', 'discontinuities', 'discontinuity_at') as $column) {
+			db_execute('ALTER TABLE plugin_fabric_sample DROP COLUMN `' . $column . '`');
+		}
 
 		break;
 	case 'drop_table':
@@ -335,4 +348,15 @@ print json_encode(array(
 	'admin'   => (int) db_fetch_cell("SELECT COUNT(*) FROM user_auth_realm AS uar INNER JOIN plugin_realms AS pr ON pr.id + 100 = uar.realm_id WHERE pr.plugin = 'fabric' AND uar.user_id = 1"),
 	'tracked' => array_column(db_fetch_assoc("SELECT `table` FROM plugin_db_changes WHERE plugin = 'fabric' AND method = 'create' ORDER BY `table`"), 'table'),
 	'tables'  => $tables,
+	'columns' => array_column(db_fetch_assoc("SELECT COLUMN_NAME AS c FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'plugin_fabric_sample' ORDER BY ORDINAL_POSITION"), 'c'),
+	// The shipped Cacti objects, counted by name, so a duplicate shows.
+	'objects' => array(
+		'host_template'  => (int) db_fetch_cell("SELECT COUNT(*) FROM host_template WHERE name = 'Fabric Node'"),
+		'snmp_query'     => (int) db_fetch_cell("SELECT COUNT(*) FROM snmp_query WHERE name = 'Fabric Port'"),
+		'data_template'  => (int) db_fetch_cell("SELECT COUNT(*) FROM data_template WHERE name LIKE 'Fabric Port %'"),
+		'graph_template' => (int) db_fetch_cell("SELECT COUNT(*) FROM graph_templates WHERE name LIKE 'Fabric Port %'"),
+		'rrd_items'      => (int) db_fetch_cell("SELECT COUNT(*) FROM data_template_rrd AS r INNER JOIN data_template AS t ON t.id = r.data_template_id WHERE t.name LIKE 'Fabric Port %' AND r.local_data_id = 0"),
+		'query_file'     => is_file($config['base_path'] . '/resource/script_server/fabric_ports.xml'),
+		'version'        => db_fetch_cell("SELECT value FROM settings WHERE name = 'fabric_templates_version'"),
+	),
 ), JSON_PRETTY_PRINT) . PHP_EOL;

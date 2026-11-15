@@ -72,5 +72,6 @@ it('registers no poller_bottom hook: sweeps start lazily (ADR 0008)', function (
 		'config_arrays'        => 'fabric_config_arrays',
 		'config_settings'      => 'fabric_config_settings',
 		'draw_navigation_text' => 'fabric_draw_navigation_text',
+		'device_remove'        => 'fabric_device_remove',
 	]);
 });
