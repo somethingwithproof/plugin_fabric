@@ -137,6 +137,30 @@ switch ($action) {
 		}
 
 		break;
+	case 'remote_poller':
+		// A fabric left on a remote poller, as an older row or a direct
+		// write could hold: the manual sweep refuses it and logs why.
+		db_execute("INSERT INTO plugin_fabric_fabric (name, backend, poller_id, sweep_interval, adapter, adapter_port, admin_state) VALUES ('remote', 'diags', 2, 300, 'mlx5_0', 1, 'enabled')");
+		$remote  = (int) db_fetch_insert_id();
+		$logfile = read_config_option('path_cactilog');
+		$logfile = $logfile !== '' ? $logfile : $config['base_path'] . '/log/cacti.log';
+		$before  = is_file($logfile) ? (int) filesize($logfile) : 0;
+		$process = proc_open(array(PHP_BINARY, $config['base_path'] . '/plugins/fabric/fabric_sweep.php', '--fabric=' . $remote, '--force'), array(1 => array('pipe', 'w'), 2 => array('pipe', 'w')), $pipes, $config['base_path']);
+		$stdout  = stream_get_contents($pipes[1]);
+		$stderr  = stream_get_contents($pipes[2]);
+		fclose($pipes[1]);
+		fclose($pipes[2]);
+		$status  = proc_close($process);
+		$logged  = is_file($logfile) ? (string) file_get_contents($logfile, false, null, $before) : '';
+		$result  = array(
+			'status' => $status,
+			'stderr' => trim((string) $stderr),
+			'stdout' => trim((string) $stdout),
+			'logged' => strpos($logged, 'Fabric ' . $remote . ' was not swept: only the main poller') !== false,
+			'health' => (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_health WHERE fabric_id = ?', array($remote)),
+		);
+
+		break;
 	case 'uninstall_unbooted':
 		// What core does on uninstall when fabric_boot() refuses: the PHP 8.0
 		// fallback, then core drops whatever is still tracked.

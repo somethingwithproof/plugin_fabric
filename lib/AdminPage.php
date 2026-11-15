@@ -115,7 +115,12 @@ final class AdminPage {
 
 		$this->text('name', __('Name', 'fabric'), $value('name', $fabric->name ?? ''), 64);
 		$this->select('backend', __('Backend', 'fabric'), $backends, $value('backend', $fabric->backend->value ?? Backend::Diags->value));
-		$this->select('poller_id', __('Poller', 'fabric'), $this->keepCurrent($this->pollers->names(), $fabric->pollerId ?? null, __('Deleted poller (ID %d)', $fabric->pollerId ?? 0, 'fabric')), $value('poller_id', (string) ($fabric->pollerId ?? 1)));
+		// Only the main poller is offered; a stored other one stays visible
+		// so the form shows what the record holds, and saving refuses it.
+		$pollers = $this->pollers->names();
+		$offered = array_intersect_key($pollers, [Fabric::MAIN_POLLER => true]);
+		$current = $fabric->pollerId ?? null;
+		$this->select('poller_id', __('Poller', 'fabric'), $this->keepCurrent($offered, $current, $pollers[$current ?? 0] ?? __('Deleted poller (ID %d)', $current ?? 0, 'fabric')), $value('poller_id', (string) ($current ?? Fabric::MAIN_POLLER)));
 		$this->text('sweep_interval', __('Sweep Interval (seconds)', 'fabric'), $value('sweep_interval', (string) ($fabric->interval ?? Fabric::DEFAULT_INTERVAL)), 5);
 		$this->text('adapter', __('Adapter', 'fabric'), $value('adapter', $fabric->adapter ?? 'mlx5_0'), 32);
 		$this->text('adapter_port', __('Adapter Port', 'fabric'), $value('adapter_port', (string) ($fabric->adapterPort ?? 1)), 3);

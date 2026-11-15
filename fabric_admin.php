@@ -123,14 +123,7 @@ switch ($fabric_action) {
 			fabric_require_fabric_access($fabric_access, $fabric_nodes, $fabric_existing->id);
 		}
 
-		$fabric_pollers_list = $fabric_pollers->names();
-
-		// A fabric whose poller was deleted may be saved unchanged.
-		if ($fabric_existing !== null && !isset($fabric_pollers_list[$fabric_existing->pollerId])) {
-			$fabric_pollers_list[$fabric_existing->pollerId] = '';
-		}
-
-		$fabric_parsed = \Somethingwithproof\Fabric\FabricInput::parse($fabric_input, $fabric_id, $fabric_pollers_list);
+		$fabric_parsed = \Somethingwithproof\Fabric\FabricInput::parse($fabric_input, $fabric_id, $fabric_pollers->names());
 		$fabric_errors = $fabric_parsed->errors;
 
 		if ($fabric_parsed->fabric !== null && $fabric_fabrics->nameTaken($fabric_parsed->fabric->name, $fabric_id)) {

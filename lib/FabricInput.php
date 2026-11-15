@@ -56,6 +56,8 @@ final readonly class FabricInput {
 
 		if (!isset($pollers[$poller])) {
 			$errors['poller_id'] = __('Poller: choose one of the listed pollers.', 'fabric');
+		} elseif ($poller !== Fabric::MAIN_POLLER) {
+			$errors['poller_id'] = __('Poller: only the main poller can sweep a fabric until remote poller support is added.', 'fabric');
 		}
 
 		if ($every < Fabric::MIN_INTERVAL || $every > Fabric::MAX_INTERVAL) {

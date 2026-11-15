@@ -12,7 +12,7 @@ A Cacti 1.2 plugin that brings InfiniBand port counters, link width and speed, a
 > - link state and the counter sweep cache
 > - inventory, admin, and health pages
 >
-> It creates no Cacti devices, data sources, graphs, or alerts yet; those are milestone 3. It has been tested only against fake tools, never on an InfiniBand fabric. Checks that need a fabric remain open in each research page's live-checks table. This project is not affiliated with the Cacti project.
+> It creates no Cacti devices, data sources, graphs, or alerts yet; those are milestone 3. A fabric can be swept only from the main poller until remote data collectors are supported in phase 3. It has been tested only against fake tools, never on an InfiniBand fabric. Checks that need a fabric remain open in each research page's live-checks table. This project is not affiliated with the Cacti project.
 
 ## Why
 

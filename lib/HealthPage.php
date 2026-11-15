@@ -94,6 +94,10 @@ final class HealthPage {
 				$warnings[] = __('Fabric %s: the inventory is %s; the last successful discovery was %s.', $fabric->name, $state->value, Format::age($success, $now), 'fabric');
 			}
 
+			if (!$fabric->onMainPoller()) {
+				$warnings[] = __('Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller.', $fabric->name, $fabric->pollerId, 'fabric');
+			}
+
 			foreach (array_filter(explode(',', Row::string($row, 'privilege'))) as $code) {
 				$warnings[] = __('Fabric %s: %s', $fabric->name, PrivilegeProbe::message($code), 'fabric');
 			}

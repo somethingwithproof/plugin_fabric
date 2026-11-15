@@ -30,6 +30,13 @@ final readonly class Fabric {
 	public const MIN_INTERVAL     = 60;
 	public const MAX_INTERVAL     = 3600;
 
+	/**
+	 * The only poller a fabric may be assigned to until remote poller
+	 * support lands (docs/PLAN.md, phase 3). A remote poller reads its own
+	 * database copy, which holds no fabric inventory or claims.
+	 */
+	public const MAIN_POLLER = 1;
+
 	/** An adapter name as the kernel names it (mlx5_0, hfi1_0); never starts with "-". */
 	public const ADAPTER_PATTERN = '/^[A-Za-z0-9][A-Za-z0-9_.]{0,31}$/D';
 	public const NAME_PATTERN    = '/^[A-Za-z0-9][A-Za-z0-9 ._-]{0,63}$/D';
@@ -44,6 +51,10 @@ final readonly class Fabric {
 		public int $adapterPort,
 		public AdminState $adminState,
 	) {
+	}
+
+	public function onMainPoller(): bool {
+		return $this->pollerId === self::MAIN_POLLER;
 	}
 
 	/**

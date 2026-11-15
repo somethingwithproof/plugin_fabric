@@ -203,6 +203,19 @@ it('grants realms on install but never on a repair a viewer triggers', function 
 		->and($repair['result'])->toBe(['viewer_realms' => 0]);
 });
 
+it('refuses to sweep a fabric assigned to a remote poller, with a logged reason', function () {
+	lifecycle('install');
+	lifecycle('enable');
+
+	$r = lifecycle('remote_poller')['result'];
+
+	expect($r['status'])->toBe(1)
+		->and($r['stderr'])->toContain('Only the main poller sweeps a fabric')
+		->and($r['stdout'])->toBe('')
+		->and($r['logged'])->toBeTrue()
+		->and($r['health'])->toBe(0);
+});
+
 it('sweeps a fake fabric into the real schema and keeps the last good inventory on broken output', function () {
 	lifecycle('install');
 

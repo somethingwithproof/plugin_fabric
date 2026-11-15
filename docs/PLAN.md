@@ -443,6 +443,7 @@ Milestone 2 is implemented on a local branch. Where it differs from the requirem
 - **Device deletion.** REQ-LIFE-003 does not apply yet: milestone 2 creates no Cacti devices. Deleting a fabric removes only plugin rows.
 - **Recorded fixtures.** REQ-TEST-001 asks for captures from real tools. The fixtures are generated from rdma-core v66.0's print formats and marked as such; captures stay with #14.
 - **Starting a sweep.** The script server call that starts a sweep arrives with the data query in milestone 3. Until then sweeps run from `fabric_sweep.php`.
+- **Main poller only.** A remote poller reads its own copy of the database, which holds no fabric inventory or claims, so until phase 3 a fabric may be assigned only to the main poller (ID 1). Saving any other poller is refused, the health page warns about a stored row that names one, and `fabric_sweep.php` refuses to run for such a fabric or on a remote poller and logs why.
 
 ## Estimates
 

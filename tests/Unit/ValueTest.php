@@ -20,6 +20,7 @@
 use Somethingwithproof\Fabric\AdminState;
 use Somethingwithproof\Fabric\Backend;
 use Somethingwithproof\Fabric\Counters;
+use Somethingwithproof\Fabric\FixedClock;
 use Somethingwithproof\Fabric\Fabric;
 use Somethingwithproof\Fabric\FabricInput;
 use Somethingwithproof\Fabric\Guid;
@@ -33,7 +34,9 @@ use Somethingwithproof\Fabric\NodeType;
 use Somethingwithproof\Fabric\Port;
 use Somethingwithproof\Fabric\PortRef;
 use Somethingwithproof\Fabric\Presence;
+use Somethingwithproof\Fabric\ProcRunner;
 use Somethingwithproof\Fabric\Settings;
+use Somethingwithproof\Fabric\Sweep;
 
 // REQ-CODE-010
 it('normalizes every GUID form to one canonical text', function (string $input) {
@@ -165,6 +168,17 @@ it('validates the fabric form against its backend', function () {
 	expect(FabricInput::parse($good, 0, [1 => 'Main'])->errors)->toBe([])
 		->and(array_keys(FabricInput::parse(['adapter' => '--node-name-map', 'adapter_port' => '999', 'poller_id' => '9', 'name' => '', 'sweep_interval' => '5'] + $good, 0, [1 => 'Main'])->errors))
 		->toBe(['name', 'poller_id', 'sweep_interval', 'adapter', 'adapter_port']);
+});
+
+it('refuses a remote poller until remote poller support is added', function () {
+	$good    = ['name' => 'Compute IB', 'backend' => 'diags', 'poller_id' => '2', 'sweep_interval' => '300', 'adapter' => 'mlx5_0', 'adapter_port' => '1', 'enabled' => 'on'];
+	$pollers = [1 => 'Main', 2 => 'Remote'];
+	$remote  = new Fabric(1, 'ib0', Backend::Diags, 2, 300, 'mlx5_0', 1, AdminState::Enabled);
+
+	expect(array_keys(FabricInput::parse($good, 0, $pollers)->errors))->toBe(['poller_id'])
+		->and(FabricInput::parse(['poller_id' => '1'] + $good, 0, $pollers)->errors)->toBe([])
+		->and($remote->onMainPoller())->toBeFalse()
+		->and((new Sweep(false, new FixedClock(0), new ProcRunner(), Settings::fromRow([]), 2, true))->allowed($remote))->toBeFalse();
 });
 
 it('reads settings with defaults, bounds, and safe paths', function () {

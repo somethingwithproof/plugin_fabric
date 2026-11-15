@@ -247,6 +247,20 @@ foreach (array('fabric_admin.php', 'fabric_admin.php?action=edit_node&id=' . $no
 	perm_expect(strpos($body, '<img src=x id="nodename') === false && strpos($body, '<b id="fabricprobe">') === false && preg_match('/(Fatal error|Parse error|Warning:|Uncaught)/', $body) !== 1, "$page loads and prints no stored markup");
 }
 
+// A fabric left on a remote poller is flagged on the health page, and a
+// save that keeps the remote poller is refused with a form error.
+db_execute("INSERT INTO plugin_fabric_fabric (name, backend, poller_id, sweep_interval, adapter, adapter_port, admin_state) VALUES ('remote', 'diags', 2, 300, 'mlx5_1', 1, 'enabled')");
+$remote = (int) db_fetch_insert_id();
+
+list(, $health) = perm_http($base . 'fabric_health.php', $jar);
+perm_expect(strpos($health, 'Fabric remote: it is assigned to poller 2') !== false, 'the health page warns about a fabric assigned to a remote poller');
+
+list(, $list) = perm_http($base . 'fabric_admin.php', $jar);
+list(, $saved) = perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($list), 'action' => 'save_fabric', 'id' => $remote, 'name' => 'remote2', 'backend' => 'diags', 'poller_id' => 2, 'sweep_interval' => 300, 'adapter' => 'mlx5_1', 'adapter_port' => 1, 'enabled' => 'on'));
+perm_expect(strpos($saved, 'only the main poller can sweep a fabric') !== false && (string) db_fetch_cell_prepared('SELECT name FROM plugin_fabric_fabric WHERE id = ?', array($remote)) === 'remote', 'saving a fabric on a remote poller is refused with a form error');
+
+db_execute_prepared('DELETE FROM plugin_fabric_fabric WHERE id = ?', array($remote));
+
 $state = function () use ($relink) {
 	return (string) db_fetch_cell_prepared('SELECT state FROM plugin_fabric_relink WHERE id = ?', array($relink));
 };

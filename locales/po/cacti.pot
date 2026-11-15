@@ -326,6 +326,10 @@ msgid "Poller: choose one of the listed pollers."
 msgstr ""
 
 #: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr ""
+
+#: lib/FabricInput.php
 #, php-format
 msgid "Sweep Interval: enter whole seconds from %d to %d."
 msgstr ""
@@ -410,6 +414,11 @@ msgstr ""
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr ""
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
 msgstr ""
 
 #: lib/HealthPage.php

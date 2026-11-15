@@ -107,7 +107,7 @@ final class Sweep {
 	}
 
 	public function allowed(Fabric $fabric): bool {
-		return $fabric->enabled() && $fabric->pollerId === $this->pollerId;
+		return $fabric->enabled() && $fabric->onMainPoller() && $fabric->pollerId === $this->pollerId;
 	}
 
 	/**
