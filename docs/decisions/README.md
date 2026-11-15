@@ -11,5 +11,7 @@ Each record captures one architecture decision: its context, the decision, its c
 | [0005](0005-collect-through-a-sweep-cache.md) | Collect through a sweep cache, not one command per port | Accepted, timing pending evidence |
 | [0006](0006-use-cacti-remote-collectors.md) | Reach remote fabrics through Cacti remote data collectors, not a custom bridge | Accepted |
 | [0007](0007-php-82-floor-with-80-parse-guard.md) | Require PHP 8.2, keep entry points parseable on PHP 8.0 | Accepted |
+| [0008](0008-lazy-per-device-sweep-with-a-claim.md) | Sweep lazily per device, under a claim, from the script server | Accepted, timing pending live measurements |
+| [0009](0009-command-allowlist-and-privileges.md) | Run three allowlisted tools with fixed arguments; no smpquery, no sudo, no ibdiagnet | Accepted |
 
 Open decisions are tracked as issues labelled `type: decision`.
