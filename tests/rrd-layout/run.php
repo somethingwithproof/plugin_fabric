@@ -17,6 +17,10 @@
  * more details.
  */
 
+if (PHP_SAPI !== 'cli') {
+	exit(1);
+}
+
 /*
  * Compares two RRD file layouts for research issue #25:
  *   php run.php [ports ...]       (default: 100 1000)

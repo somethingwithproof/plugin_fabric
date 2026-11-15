@@ -1,6 +1,6 @@
 # Cacti 1.2 InfiniBand Fabric Plugin Plan
 
-Status: in development, plan revision 2 (2026-11-15). Nothing described here as a plugin capability is published yet. Statements about infiniband-diags, UFM, the Linux kernel, RRDtool, Cacti core, and Thold describe upstream behavior and cite the file or page that was checked. Revision 2 incorporates the documentation and source research of milestone 1 ([docs/research](research/)); everything that needs a fabric, a UFM instance, or an account is marked *live* and listed in [Live checks](#live-checks), so milestone 1 is not complete until those run. Anything still unchecked is listed under [Assumptions to confirm](#assumptions-to-confirm). Owner is not assigned; estimates are in [Estimates](#estimates).
+Status: in development, plan revision 2 (2026-11-15). Milestone 2 (foundation) is merged on `main`: the lifecycle and PHP guard, realms and settings, fabric records with Cacti device permissions, the read-only command boundary, inventory by GUID, link state, the lazy counter sweep, and the inventory, admin, and health pages, tested only against fake tools; the section "Milestone 2 as built" lists where it differs from this plan. Milestone 3 and later are not done: no Cacti device, data source, graph, Thold or Maint integration exists, and there is no release. Statements about infiniband-diags, UFM, the Linux kernel, RRDtool, Cacti core, and Thold describe upstream behavior and cite the file or page that was checked. Revision 2 incorporates the documentation and source research of milestone 1 ([docs/research](research/)); everything that needs a fabric, a UFM instance, or an account is marked *live* and listed in [Live checks](#live-checks), so milestone 1 is not complete until those run. Anything still unchecked is listed under [Assumptions to confirm](#assumptions-to-confirm). Owner is not assigned; estimates are in [Estimates](#estimates).
 
 `plugin_fabric` brings InfiniBand port counters, link width and speed, and congestion indicators into Cacti 1.2 as ordinary devices, data sources, and graphs, so operators see fabric health next to the hosts and switches it belongs to, under Cacti's own permissions, and alert on it with Thold and Maint.
 
@@ -277,7 +277,7 @@ Devices created by the plugin appear in device lists and in plugins such as moni
 
 **Congestion.** PortXmitWait is graphed as ticks per second. The tick length is not published for current link speeds, so it is not converted to time; an optional ratio of wait ticks to transmitted packets (the form UFM uses) needs no tick length. A high value shows that the port waited for credits or arbitration. It does not show a faulty port or cable. Transmit discards and constraint errors are graphed separately. The plugin ships no default congestion thresholds.
 
-**Link state.** For each port the plugin records active and supported width and speed, enabled width and speed when the source provides them, physical state, and logical state. A port is **below best** when its active width or speed is below the best value supported at both ends, with widths ordered by lane count and speeds by rate, the rule `iblinkinfo` uses to print `Could be <width>` or `Could be <speed>`. It is **degraded** when no enabled value at either end explains it. None of the three allowlisted tools prints enabled values, so with them alone a below-best port is reported as below best with the cause unknown; enabled values come from `smpquery portinfo` (an owner decision, see [Open decisions](#open-decisions)) or from UFM in phase 2. A port is down only when its logical state is Down, and a down port is never degraded. An Active port whose peer discovery did not find is unknown for this rule, not down. Unknown stays unknown. The fixtures (4X to 1X, 4X to 2X, speed-only, administrative limit, down, XDR on older tools) need a fabric ([research](research/link-downgrade.md)).
+**Link state.** For each port the plugin records active and supported width and speed, enabled width and speed when the source provides them, physical state, and logical state. A port is **below best** when its active width or speed is below the best value supported at both ends, with widths ordered by lane count and speeds by rate, the rule `iblinkinfo` uses to print `Could be <width>` or `Could be <speed>`. It is **degraded** when no enabled value at either end explains it. None of the three allowlisted tools prints enabled values, so with them alone a below-best port is reported as below best with the cause unknown; enabled values come from UFM in phase 2; `smpquery` is not added ([ADR 0009](decisions/0009-command-allowlist-and-privileges.md)). Until then a below-best port's degraded value is unknown (`U`). When enabled values are present and explain the gap, the port is **limited**, which is not degraded. A port is down only when its logical state is Down, and a down port is never degraded. An Active port whose peer discovery did not find is unknown for this rule, not down. Unknown stays unknown. The fixtures (4X to 1X, 4X to 2X, speed-only, administrative limit, down, XDR on older tools) need a fabric ([research](research/link-downgrade.md)).
 
 ## Measurement state
 
@@ -316,9 +316,9 @@ Stated limits:
 
 ## Collection and the sweep cache
 
-A sweep reads every watched port once per cycle and writes samples to a cache table. Nothing starts one process per port per poll ([ADR 0005](decisions/0005-collect-through-a-sweep-cache.md)). The sweep runs from `poller_bottom` through `exec_background()` as one `register_process_start()` process per fabric, with a time budget and bounded concurrency. Runs are idempotent: an interrupted run leaves the cache consistent and the next run continues.
+A sweep reads every watched port once per cycle and writes samples to a cache table. Nothing starts one process per port per poll ([ADR 0005](decisions/0005-collect-through-a-sweep-cache.md)). A sweep runs lazily, on the first script server call for a mapped device in a cycle, under a claim row per fabric topology and per node, with a time budget and a failure budget per node; `fabric_sweep.php` runs the same code for an operator ([ADR 0008](decisions/0008-lazy-per-device-sweep-with-a-claim.md)). No page request starts a sweep, and there is no `poller_bottom` hook. Runs are idempotent: an interrupted run leaves the cache consistent and the next run continues. Milestone 2 ships the sweep and the CLI; the script server call that starts it is milestone 3.
 
-When the sweep runs relative to the poll that stores values is an open decision: a lazy per-device sweep on the first script server call, or a prefetch. Evidence so far ([research](research/mad-budget.md)): the PHP poller stamps every value with its database insert time, so a prefetch skews rates by the change in sample age between consecutive samples (nothing when the age is constant), and core offers no way to store a value under a different time; under the PHP poller one process polls all of a device, but Spine can split a device across `device_threads`, so a lazy sweep needs a claim so only one caller sweeps; a slow sweep makes `cmd.php` end its host loop at the poll interval. A sweep started from `poller_bottom` fills the cache for the next cycle, which is a prefetch design. The decision stays open for the measurements.
+The timing evidence behind that choice ([research](research/mad-budget.md)): the PHP poller stamps every value with its database insert time, so a prefetch skews rates by the change in sample age between consecutive samples (nothing when the age is constant), and core offers no way to store a value under a different time; under the PHP poller one process polls all of a device, but Spine can split a device across `device_threads`, so a lazy sweep needs a claim so only one caller sweeps; a slow sweep makes `cmd.php` end its host loop at the poll interval. A sweep started from `poller_bottom` fills the cache for the next cycle, which is a prefetch design. Live timing measurements remain to be taken; a prefetch can be added behind the same claim if they call for it.
 
 Command lines are built from fixed templates and validated values. The builder cannot produce any reset or clear option, and a test enumerates what it can produce ([ADR 0004](decisions/0004-read-only-fabric-access.md)).
 
@@ -344,12 +344,12 @@ A fabric too large for one poller's budget is split into shards of nodes, each a
 Plugin code is object-oriented wherever Cacti's plugin contract allows it. Cacti calls plugins by function name, so these entry points stay procedural. Each is a thin shim, parseable on PHP 8.0, that checks the PHP version, validates input, and hands off to a class:
 
 - `setup.php` lifecycle functions: `plugin_fabric_install()`, `plugin_fabric_uninstall()`, `plugin_fabric_version()`, `plugin_fabric_check_config()`, `plugin_fabric_upgrade()`.
-- Hook callbacks such as `config_arrays`, `config_settings`, `draw_navigation_text`, `poller_bottom`, `replicate_out`, `remote_agent`, `device_remove`, and `data_source_remove`.
+- Hook callbacks such as `config_arrays`, `config_settings`, `draw_navigation_text`, `replicate_out`, `remote_agent`, `device_remove`, and `data_source_remove`.
 - Page scripts, the script server input function, and the sweep CLI entry point.
 
 **Layout.**
 
-- Classes live in `lib/*.php` under the `Cacti\Fabric` namespace, one class per file, loaded by a small `spl_autoload_register()` loader registered only after the PHP version check. No Composer runtime dependency is added. Files stay at depth 2 or less because the translation tooling scans only that deep.
+- Classes live in `lib/*.php` under the `Somethingwithproof\Fabric` namespace (the plugin is not a Cacti project; the namespace follows the repository owner, as the sibling plugins do), one class per file, loaded by a small `spl_autoload_register()` loader registered only after the PHP version check. No Composer runtime dependency is added. Files stay at depth 2 or less because the translation tooling scans only that deep.
 - Settings use the `config_settings` hook. Logging uses `cacti_log()` with a `FABRIC` tag. Strings use the `fabric` text domain with a `locales/` directory and POT file.
 - Realms: two, "Fabric View" and "Fabric Admin".
 
@@ -398,7 +398,7 @@ The setup screen shows expected queries per cycle and RRD updates per second bef
 | Boundary | Control |
 |---|---|
 | Browser to Cacti | Cacti session, CSRF protection, realms, device and graph permissions, prepared queries, contextual escaping |
-| Cacti to the fabric (tools) | A dedicated user with access to the management device and nothing else; no `sudo` (research recommends not documenting it, owner to confirm); allowlisted executables resolved from an absolute directory; argument arrays, never a shell; no operator text in command lines except validated values; time and output limits; reset and clear options impossible to compose; minimal environment |
+| Cacti to the fabric (tools) | A dedicated user with access to the management device and nothing else; no `sudo`, never documented ([ADR 0009](decisions/0009-command-allowlist-and-privileges.md)); allowlisted executables resolved from an absolute directory; argument arrays, never a shell; no operator text in command lines except validated values; time and output limits; reset and clear options impossible to compose; minimal environment |
 | Cacti to UFM (phase 2) | HTTPS with verification on by default; read-only account; credentials never on a command line, in logs, exports, or pages; no redirect to another host; timeouts |
 | Main server to remote collector (phase 3) | Cacti's `remote_agent` authorization and the configured https scheme; actions are read-only and accept identifiers only |
 | Discovered data to the UI | GUIDs, node names, and tool output are untrusted text from the fabric: escaped on output, length-limited, and never used in file paths or commands |
@@ -431,6 +431,24 @@ Phase 1 needs a review of the command runner and the argument builder before rel
 | 5. UFM backend | 2 | UFM client, credentials, identity continuity, security review | Same fixture, same objects from either backend |
 | 6. Remote and scale | 3 | Replication, `remote_agent` actions, sharded sweeps, security review | Offline, recovery, and sharding scenarios correct |
 
+### Milestone 2 as built
+
+Milestone 2 is implemented on a local branch. Where it differs from the requirement texts:
+
+- **Namespace.** REQ-CODE-001 names `Cacti\Fabric`; the code uses `Somethingwithproof\Fabric`.
+- **Sweep claim.** REQ-SWEEP-001 names Cacti's process registration; the code uses its own claim table ([ADR 0008](decisions/0008-lazy-per-device-sweep-with-a-claim.md)).
+- **Supported and enabled values.** REQ-LINK-001 asks for supported and enabled width and speed. `iblinkinfo` prints only the best value both ends support, and only when the link runs below it. The plugin stores that hint as the best value, or the active value when no hint is printed. Enabled values stay empty until the UFM backend.
+- **Down.** REQ-LINK-005 is applied as logical state Down only. An Active port whose peer is not found is unknown.
+- **Limited.** A link state `limited` is added for a link that enabled values explain. No diags tool supplies those values, so phase 1 never reports it.
+- **Device deletion.** REQ-LIFE-003 does not apply yet: milestone 2 creates no Cacti devices. Deleting a fabric removes only plugin rows.
+- **Recorded fixtures.** REQ-TEST-001 asks for captures from real tools. The fixtures are generated from rdma-core v66.0's print formats and marked as such; captures stay with #14.
+- **Starting a sweep.** The script server call that starts a sweep arrives with the data query in milestone 3. Until then sweeps run from `fabric_sweep.php`.
+- **Unreadable iblinkinfo lines.** REQ-INV-004 keeps the inventory whole on a parse failure; no requirement asks the same of link states, and one node description should not hide every link in the fabric. A line that starts with a port GUID but reads in no way or in more than one, which a description imitating the tool's fields can cause, is skipped. The node keeps its last link states, the count is stored per fabric and shown on the health page with a warning, and the rest is applied. Any other unknown line, a repeated port, contradicting fields, or output without a final newline still fails the whole read.
+- **Accepted identities.** REQ-INV-005 is kept: a changed identity or a GUID printed more than once is a conflict, the node is not swept, and only an operator clears it. When the operator accepts the seen identity, the plugin records what that discovery saw under the GUID: each identity printed and whether the GUID was printed more than once. A later discovery that sees exactly that again raises no new conflict, so an accepted duplicate stays accepted. A sighting with any other identity, or a duplicate with other blocks, raises a new conflict. A GUID printed once again with the accepted identity is an ordinary match.
+- **One fabric per adapter port.** Two fabrics on one poller, adapter, and port would see the same nodes, and the second would import each again, unmapped. The form refuses it and a unique key backs the form. A backend without a local adapter (phase 2) needs its own key.
+- **Schema version 1 changed before release.** Columns and keys added in review went into the version 1 definition, not a migration, because no release has shipped it. A database created from an earlier branch build must be reinstalled.
+- **Main poller only.** A remote poller reads its own copy of the database, which holds no fabric inventory or claims, so until phase 3 a fabric may be assigned only to the main poller (ID 1). Saving any other poller is refused, the health page warns about a stored row that names one, and `fabric_sweep.php` refuses to run for such a fabric or on a remote poller and logs why.
+
 ## Estimates
 
 Sizes come from measured lines of plugin_cloudflare and plugin_smokeping; elapsed time is not estimated, because the evidence has no review latency and no hardware, and the owner's capacity is unknown ([research](research/estimates.md)). Production PHP, excluding tests:
@@ -449,16 +467,16 @@ Phase 1 totals about 8,300 to 10,800 lines, through phase 2 about 9,300 to 12,80
 
 | Decision | Options | Needed before | Decided by |
 |---|---|---|---|
-| Sweep timing | Lazy per-device sweep with a claim (proposed); prefetch. Prefetch with sample time has no core mechanism for polled data sources | Milestone 2 sweep work | Live timing measurements ([research](research/mad-budget.md)) |
+| Sweep timing | Decided for milestone 2: lazy per-device sweep with a claim ([ADR 0008](decisions/0008-lazy-per-device-sweep-with-a-claim.md)). Revisit only if live timing shows it is too slow | Milestone 3 measurements | Live timing measurements ([research](research/mad-budget.md)) |
 | Saturated basic counters | Prefer 64-bit and publish unknown on saturation (proposed); opt-in reset; events only | Milestone 3 | Live counter evidence ([research](research/counters.md)) |
 | Device granularity | One device per node (proposed); one per fabric; switches only | Milestone 3 | Cacti maintainers |
 | UFM credential storage | A key file outside the database (Cacti 1.2.31 has no core storage; `1.2.x` has one whose key is in the same database); file outside web root; environment | Phase 2 | Security review ([research](research/ufm-rest.md)) |
 | Repository and name | `Cacti/plugin_fabric`, `Cacti/plugin_infiniband`, or community plugin | Before any code is published | Cacti maintainers |
-| Test harness | Whatever maintained plugins use | Milestone 2 | Cacti maintainers |
-| Enabled link values in phase 1 | Add `smpquery portinfo` to the allowlist (one SMP per port per sweep); or report below best with cause unknown until the UFM backend | Milestone 2 command boundary | Plugin owner ([research](research/link-downgrade.md)) |
-| Sweep trigger | Start from the script server (lazy) or from `poller_bottom` (prefetch; needs `remote_poller:1` on collectors) | Milestone 2 | With the sweep timing decision |
-| `sudo` | Never document it (recommended); document exact command lines | Milestone 2 | Plugin owner ([research](research/privileges.md)) |
-| `ibdiagnet` | Exclude from phases 1 to 3 (recommended); optional cable and PHY input later | Milestone 4 documentation | Plugin owner ([research](research/ibdiagnet.md)) |
+| Test harness | Provisional: Pest from Cacti's locked shared plugin harness, as maintained plugins use | Before upstream proposal | Cacti maintainers |
+| Enabled link values in phase 1 | Decided: no `smpquery`; below best with cause unknown, degraded value `U`, until the UFM backend ([ADR 0009](decisions/0009-command-allowlist-and-privileges.md)) | Done | Plugin owner |
+| Sweep trigger | Decided: the script server (lazy); no `poller_bottom` hook ([ADR 0008](decisions/0008-lazy-per-device-sweep-with-a-claim.md)) | Done | Plugin owner |
+| `sudo` | Decided: never used or documented ([ADR 0009](decisions/0009-command-allowlist-and-privileges.md)) | Done | Plugin owner |
+| `ibdiagnet` | Decided: excluded from phases 1 to 3; optional cable and PHY input later ([ADR 0009](decisions/0009-command-allowlist-and-privileges.md)) | Done | Plugin owner |
 
 ## Risks
 
