@@ -213,7 +213,8 @@ function fabric_sweep_flow(string $dir): array {
 	db_execute_prepared('REPLACE INTO settings (name, value) VALUES (?, ?)', array('fabric_tool_dir', $dir));
 	$settings = (new \Somethingwithproof\Fabric\SettingsRepository(false))->load();
 	$id       = $fabrics->save(new \Somethingwithproof\Fabric\Fabric(0, 'flow', \Somethingwithproof\Fabric\Backend::Diags, 1, 300, 'mlx5_0', 1, \Somethingwithproof\Fabric\AdminState::Enabled));
-	$sweep    = new \Somethingwithproof\Fabric\Sweep(false, $clock, new \Somethingwithproof\Fabric\ProcRunner(), $settings, 1, true);
+	// The scratch tool directory belongs to the test account, not root.
+	$sweep    = new \Somethingwithproof\Fabric\Sweep(false, $clock, new \Somethingwithproof\Fabric\ProcRunner(), $settings, 1, true, posix_geteuid());
 
 	$gen = $G::forCas(4);
 	$gen->degrade($G::CA_BASE, 1, '1X', 'EDR', '4X', '');

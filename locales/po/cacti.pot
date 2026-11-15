@@ -635,7 +635,7 @@ msgstr ""
 msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
 msgstr ""
 
-#: lib/PrivilegeProbe.php
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
 msgid "Unknown warning"
 msgstr ""
 
@@ -715,6 +715,26 @@ msgstr ""
 msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
 msgstr ""
 
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr ""
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr ""
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr ""
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr ""
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr ""
+
 #: setup.php
 #, php-format
 msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
@@ -731,4 +751,9 @@ msgstr ""
 
 #: setup.php
 msgid "Management"
+msgstr ""
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
 msgstr ""

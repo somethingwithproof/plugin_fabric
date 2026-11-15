@@ -41,9 +41,10 @@ final class Sweep {
 		Settings $settings,
 		private readonly int $pollerId,
 		private readonly bool $pluginEnabled,
+		int $toolOwner = 0,
 	) {
-		$this->topology = new TopologySweep($connection, $clock, $runner, $settings);
-		$this->counters = new CounterSweep($connection, $clock, $runner, $settings);
+		$this->topology = new TopologySweep($connection, $clock, $runner, $settings, $toolOwner);
+		$this->counters = new CounterSweep($connection, $clock, $runner, $settings, $toolOwner);
 	}
 
 	/**

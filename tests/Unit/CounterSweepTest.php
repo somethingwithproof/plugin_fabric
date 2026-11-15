@@ -33,6 +33,7 @@ use Somethingwithproof\Fabric\ProcessRunner;
 use Somethingwithproof\Fabric\Settings;
 use Somethingwithproof\Fabric\SweepOutcome;
 use Somethingwithproof\Fabric\Tests\FabricGenerator;
+use Somethingwithproof\Fabric\Tests\Scratch;
 
 require_once dirname(__DIR__) . '/Support/FabricGenerator.php';
 
@@ -97,8 +98,15 @@ function fabric_node(string $type, int $lid): Node {
 	return $node;
 }
 
+/**
+ * A sweeper whose tool directory is a private scratch directory that passes
+ * ToolDirectory's checks for the test account. The scripted runner never
+ * runs anything from it.
+ */
 function fabric_sweeper(ProcessRunner $runner, array $settings = []): CounterSweep {
-	return new CounterSweep(false, new FixedClock(1_800_000_000), $runner, Settings::fromRow($settings));
+	$dir = (string) realpath($GLOBALS['__fabric_scratch']->dir);
+
+	return new CounterSweep(false, new FixedClock(1_800_000_000), $runner, Settings::fromRow($settings + ['fabric_tool_dir' => $dir]), (int) fileowner($dir));
 }
 
 /**
@@ -109,12 +117,31 @@ function fabric_writes(string $needle): array {
 }
 
 beforeEach(function () {
+	$GLOBALS['__fabric_scratch'] = new Scratch();
 	$GLOBALS['__fabric_db_exec'] = [];
 	$GLOBALS['__fabric_db_rows'] = [];
 	$GLOBALS['__fabric_log']     = [];
 });
 
 // REQ-SWEEP-003: one command per counter group, switch ports in chunks.
+afterEach(function () {
+	$GLOBALS['__fabric_scratch']->remove();
+});
+
+it('runs no tool from a tool directory that fails the checks', function () {
+	fabric_queue_ports([1 => 0]);
+	$runner = new ScriptedRunner(FabricGenerator::forCas(1));
+	$dir    = (string) realpath($GLOBALS['__fabric_scratch']->dir);
+	chmod($dir, 0770);
+
+	$result = fabric_sweeper($runner)->run(fabric_sweep_fabric(), fabric_node('switch', 1), 'test');
+
+	expect($result?->error)->toBe(CommandError::Config)
+		->and($result?->skipped)->toBe(1)
+		->and($runner->argv)->toBe([])
+		->and(implode("\n", array_column($GLOBALS['__fabric_log'], 'message')))->toContain('can be written by its group');
+});
+
 it('reads a switch in one command per group per 64 ports', function () {
 	fabric_queue_ports(array_fill_keys(range(1, 70), 0));
 	$runner = new ScriptedRunner(FabricGenerator::forCas(1));

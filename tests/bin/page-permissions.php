@@ -257,6 +257,16 @@ list(, $list)      = perm_http($base . 'fabric_admin.php', $jar);
 perm_expect(strpos($inventory, 'nodenameopen&quot;&gt; (' . $guids['open'] . ')') !== false, 'the inventory labels a node with its description and GUID');
 perm_expect(strpos($list, 'nodenamenew&quot;&gt; (' . $guids['new'] . ')') !== false && strpos($list, 'nodenameunmapped&quot;&gt; (' . $guids['unmapped'] . ')') !== false, 'a re-link proposal labels both nodes with their description and GUID');
 
+// A tool directory that fails the checks is not saved; a sound one is.
+$tool_dir = function () {
+	return (string) db_fetch_cell("SELECT value FROM settings WHERE name = 'fabric_tool_dir'");
+};
+list(, $form)  = perm_http($root . 'settings.php?tab=fabric', $jar);
+list(, $saved) = perm_http($root . 'settings.php', $jar, array('__csrf_magic' => perm_token($form), 'action' => 'save', 'tab' => 'fabric', 'fabric_tool_dir' => '/tmp'));
+perm_expect(strpos($saved, 'The Tool Directory was not saved') !== false && $tool_dir() !== '/tmp', 'a group- or world-writable tool directory is refused on save');
+list(, $saved) = perm_http($root . 'settings.php', $jar, array('__csrf_magic' => perm_token($form), 'action' => 'save', 'tab' => 'fabric', 'fabric_tool_dir' => '/usr/sbin'));
+perm_expect(strpos($saved, 'The Tool Directory was not saved') === false && $tool_dir() === '/usr/sbin', 'a root-owned tool directory closed to group and others is saved');
+
 // A fabric left on a remote poller is flagged on the health page, and a
 // save that keeps the remote poller is refused with a form error.
 db_execute("INSERT INTO plugin_fabric_fabric (name, backend, poller_id, sweep_interval, adapter, adapter_port, admin_state) VALUES ('remote', 'diags', 2, 300, 'mlx5_1', 1, 'enabled')");

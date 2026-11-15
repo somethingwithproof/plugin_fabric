@@ -299,6 +299,18 @@ function fabric_config_settings(): void {
 
 	$tabs['fabric']     = __('Fabrics', 'fabric');
 	$settings['fabric'] = \Somethingwithproof\Fabric\Settings::form();
+
+	// Core saves a text setting as given. This hook runs before the save,
+	// so a tool directory that fails the checks is taken out of the form
+	// being saved; the stored value stays as it was.
+	if (get_current_page() === 'settings.php' && get_nfilter_request_var('action') === 'save' && get_nfilter_request_var('tab') === 'fabric' && isset_request_var('fabric_tool_dir')) {
+		$fabric_problem = \Somethingwithproof\Fabric\ToolDirectory::problem((string) get_nfilter_request_var('fabric_tool_dir'));
+
+		if ($fabric_problem !== null) {
+			unset($settings['fabric']['fabric_tool_dir']);
+			raise_message('fabric_tool_dir', __('The Tool Directory was not saved. %s', \Somethingwithproof\Fabric\ToolDirectory::message($fabric_problem), 'fabric'), MESSAGE_LEVEL_ERROR);
+		}
+	}
 }
 
 /**

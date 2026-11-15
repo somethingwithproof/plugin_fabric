@@ -32,6 +32,7 @@ final class TopologySweep {
 		private readonly Clock $clock,
 		private readonly ProcessRunner $runner,
 		private readonly Settings $settings,
+		private readonly int $toolOwner = 0,
 	) {
 	}
 
@@ -98,7 +99,16 @@ final class TopologySweep {
 		$tools  = new ToolRunner($this->runner, $this->settings);
 		$now    = $this->clock->now();
 
-		$health->privilege($fabric->id, (new PrivilegeProbe($this->settings->toolDir))->warnings());
+		$probe = new PrivilegeProbe($this->settings->toolDir, toolOwner: $this->toolOwner);
+		$health->privilege($fabric->id, $probe->warnings());
+		$refusal = $probe->refusal();
+
+		if ($refusal !== null) {
+			Log::error(sprintf('Fabric %d: not swept: %s', $fabric->id, ToolDirectory::message($refusal)));
+			$health->discovery($fabric->id, $now, CommandError::Config, 0.0, 0, 0, null);
+
+			return;
+		}
 
 		try {
 			$builder   = new CommandBuilder($this->settings, $fabric);

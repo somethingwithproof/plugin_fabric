@@ -41,6 +41,7 @@ final class CounterSweep {
 		private readonly Clock $clock,
 		private readonly ProcessRunner $runner,
 		private readonly Settings $settings,
+		private readonly int $toolOwner = 0,
 	) {
 	}
 
@@ -96,6 +97,17 @@ final class CounterSweep {
 
 		if ($ports === null) {
 			$result->error = CommandError::Storage;
+
+			return;
+		}
+
+		$refusal = (new PrivilegeProbe($this->settings->toolDir, toolOwner: $this->toolOwner))->refusal();
+
+		if ($refusal !== null) {
+			Log::error(sprintf('Fabric %d: node %s not swept: %s', $fabric->id, $node->guid->text, ToolDirectory::message($refusal)));
+			$result->error   = CommandError::Config;
+			$result->total   = count($ports);
+			$result->skipped = $result->total;
 
 			return;
 		}

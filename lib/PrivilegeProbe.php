@@ -35,7 +35,16 @@ namespace Somethingwithproof\Fabric;
 final class PrivilegeProbe {
 	public const CODES = ['root', 'setid', 'tool_writable', 'umad_world'];
 
-	public function __construct(private readonly string $toolDir, private readonly string $deviceDir = '/dev/infiniband') {
+	public function __construct(private readonly string $toolDir, private readonly string $deviceDir = '/dev/infiniband', private readonly int $toolOwner = 0) {
+	}
+
+	/**
+	 * Why no tool may run from the directory, checked again before every
+	 * sweep because the directory can change after the setting was saved.
+	 * Null when it passes ToolDirectory's checks.
+	 */
+	public function refusal(): ?string {
+		return ToolDirectory::problem($this->toolDir, $this->toolOwner);
 	}
 
 	/**

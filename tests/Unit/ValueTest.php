@@ -37,6 +37,7 @@ use Somethingwithproof\Fabric\Presence;
 use Somethingwithproof\Fabric\ProcRunner;
 use Somethingwithproof\Fabric\Settings;
 use Somethingwithproof\Fabric\Sweep;
+use Somethingwithproof\Fabric\ToolDirectory;
 
 // REQ-CODE-010
 it('normalizes every GUID form to one canonical text', function (string $input) {
@@ -187,6 +188,31 @@ it('refuses a remote poller until remote poller support is added', function () {
 		->and(FabricInput::parse(['poller_id' => '1'] + $good, 0, $pollers)->errors)->toBe([])
 		->and($remote->onMainPoller())->toBeFalse()
 		->and((new Sweep(false, new FixedClock(0), new ProcRunner(), Settings::fromRow([]), 2, true))->allowed($remote))->toBeFalse();
+});
+
+it('accepts only a canonical tool directory owned by the required account and closed to group and others', function () {
+	$scratch = new Somethingwithproof\Fabric\Tests\Scratch();
+
+	try {
+		$dir   = (string) realpath($scratch->dir);
+		$owner = (int) fileowner($dir);
+		mkdir($dir . '/sbin', 0755);
+		symlink($dir . '/sbin', $dir . '/link');
+
+		expect(ToolDirectory::problem($dir . '/sbin', $owner))->toBeNull()
+			->and(ToolDirectory::problem('sbin', $owner))->toBe('path')
+			->and(ToolDirectory::problem($dir . '/sbin/', $owner))->toBe('path')
+			->and(ToolDirectory::problem($dir . '/none', $owner))->toBe('missing')
+			->and(ToolDirectory::problem($dir . '/link', $owner))->toBe('symlink')
+			->and(ToolDirectory::problem($dir . '/sbin', $owner + 1))->toBe('owner');
+
+		chmod($dir . '/sbin', 0775);
+		expect(ToolDirectory::problem($dir . '/sbin', $owner))->toBe('writable');
+		chmod($dir . '/sbin', 0757);
+		expect(ToolDirectory::problem($dir . '/sbin', $owner))->toBe('writable');
+	} finally {
+		$scratch->remove();
+	}
 });
 
 it('reads settings with defaults, bounds, and safe paths', function () {
