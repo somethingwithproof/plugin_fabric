@@ -70,7 +70,9 @@ final class TopologySweep {
 		}
 
 		try {
-			if ($ifDue && $this->due($fabric) !== true) {
+			// The fabric may have been deleted, or the work done by another
+			// sweep, between the caller's checks and the claim.
+			if ((new FabricRepository($this->connection, $this->clock))->find($fabric->id) === null || ($ifDue && $this->due($fabric) !== true)) {
 				return false;
 			}
 
@@ -90,7 +92,8 @@ final class TopologySweep {
 	}
 
 	private function sweep(Fabric $fabric, ClaimRepository $claims, string $holder): void {
-		$owned  = static fn (): bool => $claims->holdsForCommit(ClaimRepository::TOPOLOGY, $fabric->id, $holder);
+		$fabrics = new FabricRepository($this->connection, $this->clock);
+		$owned   = static fn (): bool => $claims->holdsForCommit(ClaimRepository::TOPOLOGY, $fabric->id, $holder) && $fabrics->existsForCommit($fabric->id);
 		$health = new FabricHealthRepository($this->connection);
 		$tools  = new ToolRunner($this->runner, $this->settings);
 		$now    = $this->clock->now();

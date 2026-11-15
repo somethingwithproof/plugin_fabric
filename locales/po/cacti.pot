@@ -41,6 +41,10 @@ msgid "The fabric was saved."
 msgstr ""
 
 #: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr ""
+
+#: fabric_admin.php
 msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
 msgstr ""
 

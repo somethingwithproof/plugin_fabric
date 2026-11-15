@@ -87,13 +87,39 @@ final class FabricRepository {
 	}
 
 	/**
+	 * Whether a topology or node sweep of the fabric holds an unexpired
+	 * claim. A delete is refused meanwhile.
+	 */
+	public function sweeping(int $id): bool {
+		return $this->heldClaims($id, '') > 0;
+	}
+
+	/**
+	 * Whether the fabric still exists, read with a shared lock just before
+	 * an import commits, so a delete waits for the import or the import
+	 * sees the fabric gone and rolls back.
+	 */
+	public function existsForCommit(int $id): bool {
+		return (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_fabric WHERE id = ? LOCK IN SHARE MODE', [$id], '', true, $this->connection) === 1;
+	}
+
+	/**
 	 * Remove a fabric with its inventory, samples, proposals, claims, and
-	 * health. Rows go children first, so an interrupted delete leaves a
-	 * fabric that can be deleted again. No Cacti device is touched and the
-	 * fabric is not contacted.
+	 * health, in one transaction: all of it or none. Refused while a sweep
+	 * of the fabric holds a claim; the claim rows are read with a lock, so
+	 * no sweep takes one until the delete ends. No Cacti device is touched
+	 * and the fabric is not contacted.
 	 */
 	public function delete(int $id): bool {
-		if ($this->find($id) === null) {
+		$tx = new TransactionRepository($this->connection);
+
+		if (!$tx->begin()) {
+			return false;
+		}
+
+		if ((int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_fabric WHERE id = ? FOR UPDATE', [$id], '', true, $this->connection) !== 1 || $this->heldClaims($id, ' FOR UPDATE') !== 0) {
+			$tx->rollback();
+
 			return false;
 		}
 
@@ -110,12 +136,30 @@ final class FabricRepository {
 		];
 
 		foreach ($statements as $sql) {
-			if (db_execute_prepared($sql, [$id], true, $this->connection) === false) {
+			if (!$tx->write($sql, [$id])) {
+				$tx->rollback();
+
 				return false;
 			}
 		}
 
-		return true;
+		return $tx->commit();
+	}
+
+	/**
+	 * Unexpired claims on the fabric's topology or any of its nodes. -1 when
+	 * the count could not be read, so a caller refuses rather than guesses.
+	 */
+	private function heldClaims(int $id, string $lock): int {
+		$count = db_fetch_cell_prepared(
+			"SELECT COUNT(*) FROM plugin_fabric_claim c WHERE c.expires_at >= ? AND ((c.scope = 'topology' AND c.claim_key = ?) OR (c.scope = 'node' AND c.claim_key IN (SELECT n.id FROM plugin_fabric_node n WHERE n.fabric_id = ?)))$lock",
+			[$this->clock->now(), $id, $id],
+			'',
+			true,
+			$this->connection,
+		);
+
+		return is_numeric($count) ? (int) $count : -1;
 	}
 
 	/**

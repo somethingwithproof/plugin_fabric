@@ -158,6 +158,11 @@ switch ($fabric_action) {
 		exit;
 	case 'delete_fabric_confirm':
 		fabric_require_fabric_access($fabric_access, $fabric_nodes, (int) get_filter_request_var('id'));
+
+		if ($fabric_fabrics->sweeping((int) get_filter_request_var('id'))) {
+			fabric_done(false, '', __('A sweep of this fabric is running, so nothing was deleted. Try again when it finishes.', 'fabric'));
+		}
+
 		fabric_done($fabric_fabrics->delete((int) get_filter_request_var('id')), __('The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted.', 'fabric'), __('The fabric could not be deleted.', 'fabric'));
 	case 'accept_conflict':
 		$fabric_node = fabric_posted_node($fabric_nodes);

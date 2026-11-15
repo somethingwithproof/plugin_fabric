@@ -63,7 +63,8 @@ final class CounterSweep {
 			return null;
 		}
 
-		if ($ifDue && $this->due($fabric, $node) !== true) {
+		// A deleted fabric takes its nodes with it.
+		if ((new NodeRepository($this->connection))->find($node->id) === null || ($ifDue && $this->due($fabric, $node) !== true)) {
 			$claims->release(ClaimRepository::NODE, $node->id, $holder);
 
 			return null;

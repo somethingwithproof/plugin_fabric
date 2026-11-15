@@ -301,6 +301,12 @@ list($code, $export) = perm_http($base . 'fabric_admin.php?action=export', $jar)
 $document = json_decode($export, true);
 perm_expect($code === 200 && is_array($document) && count($document['fabrics']) === 1 && count($document['nodes']) === 4 && strpos($export, '<img') === false, 'Fabric Admin downloads every fabric and node record, with markup encoded');
 
+// A running sweep's claim holds the delete off.
+db_execute_prepared("REPLACE INTO plugin_fabric_claim (scope, claim_key, holder, expires_at) VALUES ('topology', ?, 'perm-check', ?)", array($fabric, time() + 600));
+list(, $busy) = perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($confirm), 'action' => 'delete_fabric_confirm', 'id' => $fabric));
+perm_expect($exists() && strpos($busy, 'A sweep of this fabric is running') !== false && (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_node WHERE fabric_id = ?', array($fabric)) === 4, 'a fabric delete is refused while a sweep of it holds a claim, and nothing is removed');
+db_execute_prepared("UPDATE plugin_fabric_claim SET expires_at = 0 WHERE scope = 'topology' AND claim_key = ?", array($fabric));
+
 perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($confirm), 'action' => 'delete_fabric_confirm', 'id' => $fabric));
 perm_expect(!$exists() && (int) db_fetch_cell('SELECT COUNT(*) FROM plugin_fabric_node') === 0 && (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM host WHERE id IN (?, ?)', array($devices['open'], $devices['hidden'])) === 2, 'a confirmed delete removes the fabric and its nodes, and keeps the devices');
 

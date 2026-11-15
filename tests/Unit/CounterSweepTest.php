@@ -23,6 +23,7 @@ use Somethingwithproof\Fabric\Command;
 use Somethingwithproof\Fabric\CommandError;
 use Somethingwithproof\Fabric\CounterSweep;
 use Somethingwithproof\Fabric\Fabric;
+use Somethingwithproof\Fabric\FabricRepository;
 use Somethingwithproof\Fabric\FixedClock;
 use Somethingwithproof\Fabric\IblinkinfoParser;
 use Somethingwithproof\Fabric\LinkStateRepository;
@@ -70,7 +71,8 @@ function fabric_sweep_fabric(): Fabric {
 }
 
 /**
- * Queue the node's ports for NodeRepository::ports() and a held claim.
+ * Queue the node's ports for NodeRepository::ports(), the node row, and a
+ * held claim.
  *
  * @param array<int, int> $ports port number => LID (0 for a switch port)
  */
@@ -82,8 +84,9 @@ function fabric_queue_ports(array $ports): void {
 	}
 
 	$GLOBALS['__fabric_db_rows'] = [
-		'FROM plugin_fabric_port'  => $rows,
-		'FROM plugin_fabric_claim' => [['n' => 1]],
+		'FROM plugin_fabric_port'             => $rows,
+		'FROM plugin_fabric_claim'            => [['n' => 1]],
+		'FROM plugin_fabric_node WHERE id = ' => [['id' => 9, 'fabric_id' => 1, 'guid' => '0x0002c90300a00000', 'node_type' => 'switch', 'presence' => 'present', 'identity' => 'ok']],
 	];
 }
 
@@ -234,6 +237,35 @@ it('sweeps nothing when another sweep finished the node between the due check an
 	expect(fabric_sweeper($runner)->run(fabric_sweep_fabric(), fabric_node('switch', 1), 'test', true))->toBeNull()
 		->and($runner->argv)->toBe([])
 		->and(fabric_writes('UPDATE plugin_fabric_claim SET expires_at = 0'))->toHaveCount(1);
+});
+
+it('sweeps nothing for a node deleted with its fabric after the caller read it', function () {
+	fabric_queue_ports([1 => 0]);
+	unset($GLOBALS['__fabric_db_rows']['FROM plugin_fabric_node WHERE id = ']);
+	$runner = new ScriptedRunner(FabricGenerator::forCas(1));
+
+	expect(fabric_sweeper($runner)->run(fabric_sweep_fabric(), fabric_node('switch', 1), 'test'))->toBeNull()
+		->and($runner->argv)->toBe([])
+		->and(fabric_writes('plugin_fabric_node_sweep'))->toBe([]);
+});
+
+it('deletes a fabric in one transaction, and not at all while a sweep holds a claim', function () {
+	$fabrics = new FabricRepository(false, new FixedClock(1_800_000_000));
+
+	$GLOBALS['__fabric_db_rows'] = ['FROM plugin_fabric_fabric' => [['n' => 1]], 'FROM plugin_fabric_claim' => [['n' => 1]]];
+
+	expect($fabrics->sweeping(1))->toBeTrue()
+		->and($fabrics->delete(1))->toBeFalse()
+		->and(fabric_writes('DELETE'))->toBe([])
+		->and(fabric_writes('ROLLBACK'))->toHaveCount(1);
+
+	$GLOBALS['__fabric_db_exec'] = [];
+	$GLOBALS['__fabric_db_rows'] = ['FROM plugin_fabric_fabric' => [['n' => 1]], 'FROM plugin_fabric_claim' => [['n' => 0]]];
+
+	expect($fabrics->delete(1))->toBeTrue()
+		->and(array_column($GLOBALS['__fabric_db_exec'], 'sql')[0])->toBe('BEGIN')
+		->and(fabric_writes('DELETE'))->toHaveCount(9)
+		->and(end($GLOBALS['__fabric_db_exec'])['sql'])->toBe('COMMIT');
 });
 
 it('rolls link states back when the sweep no longer holds its claim at commit', function () {
