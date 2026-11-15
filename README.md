@@ -31,7 +31,7 @@ Out of scope: changing fabric state, replacing a fabric manager or subnet manage
 |---|---|
 | Cacti | 1.2.31 or later, no core patches |
 | PHP | 8.2 or later; `setup.php` stays parseable on 8.0 so an unsupported runtime gets a refusal instead of a broken Cacti UI |
-| InfiniBand tools | infiniband-diags from rdma-core; design checked against v65.1, version matrix is a milestone 1 deliverable |
+| InfiniBand tools | infiniband-diags from rdma-core; design checked against rdma-core v66.0 (the plan's earlier pin, v65.1, has identical source files); see [the version research](docs/research/infiniband-diags-versions.md) |
 | UFM | UFM Enterprise REST API, phase 2; release matrix is a milestone 1 deliverable |
 | Thold, Maint | No changes required |
 
