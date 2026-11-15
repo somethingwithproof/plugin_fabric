@@ -42,6 +42,9 @@ final class AdminPage {
 		private readonly PollerRepository $pollers,
 		private readonly HostRepository $hosts,
 		private readonly DeviceAccess $access,
+		private readonly ?DeviceProvisioner $provisioner = null,
+		private readonly ?CactiObjectRepository $objects = null,
+		private readonly bool $canCreateDevices = false,
 	) {
 	}
 
@@ -154,13 +157,55 @@ final class AdminPage {
 		$options = [0 => __('Unmapped', 'fabric')] + $hosts;
 		$options = $this->keepCurrent($options, $node->hostId > 0 ? $node->hostId : null, __('Deleted device (ID %d)', $node->hostId, 'fabric'));
 
+		// Evidence for a mapping (REQ-MAP-003): devices whose host name or
+		// description starts with the node description's first word.
+		$evidence = array_filter($this->objects?->suggestions($node->description) ?? [], fn (int $id): bool => $this->access->host($id), ARRAY_FILTER_USE_KEY);
+
 		print '<form method="post" action="' . html_escape(self::FILE) . '">';
 		html_start_box(html_escape(__('Fabric Node: %s', $node->label(), 'fabric')), '100%', '', '3', 'center', '');
 		print '<tr><td>' . html_escape(__('GUID', 'fabric')) . '</td><td>' . html_escape($node->guid->text) . '</td></tr>';
+		print '<tr><td>' . html_escape(__('Devices Matching the Node Name', 'fabric')) . '</td><td>'
+			. ($evidence === [] ? html_escape(__('None', 'fabric')) : implode(', ', array_map(static fn (int $id, string $name): string => html_escape(__('%s (device %d)', $name, $id, 'fabric')), array_keys($evidence), $evidence)))
+			. '</td></tr>';
 		$this->select('host_id', __('Cacti Device', 'fabric'), $options, (string) $node->hostId);
+		print '<tr><td colspan="2"><em>' . html_escape(__('Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node\'s ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric.', 'fabric')) . '</em></td></tr>';
 		print '<input type="hidden" name="revision" value="' . $node->revision . '">';
 		html_end_box();
 		$this->submit('save_node', $node->id, __('Save', 'fabric'));
+
+		if ($node->hostId === 0 && $this->canCreateDevices && $this->provisioner !== null) {
+			print '<form method="get" action="' . html_escape(self::FILE) . '">';
+			$this->submit('create_device', $node->id, __('Create a Device for This Node', 'fabric'));
+		}
+	}
+
+	/**
+	 * The confirmation before a device is created (REQ-MAP-002): what is
+	 * added, and nothing until the operator posts the form.
+	 */
+	public function renderCreateConfirm(Node $node): void {
+		$refusal = $this->provisioner === null ? __('Devices cannot be created here.', 'fabric') : $this->provisioner->createRefusal($node);
+
+		print '<form method="post" action="' . html_escape(self::FILE) . '">';
+		html_start_box(html_escape(__('Create a Device for %s', $node->label(), 'fabric')), '100%', '', '3', 'center', '');
+
+		if ($refusal !== null || $this->provisioner === null) {
+			print '<tr><td class="textError">' . html_escape($refusal ?? '') . '</td></tr>';
+			html_end_box();
+			print '</form>';
+
+			return;
+		}
+
+		print '<tr><td>' . html_escape(__('Creating the device adds:', 'fabric')) . '</td></tr>';
+
+		foreach ($this->provisioner->plan($node) as $line) {
+			print '<tr><td>' . html_escape($line) . '</td></tr>';
+		}
+
+		print '<input type="hidden" name="revision" value="' . $node->revision . '">';
+		html_end_box();
+		$this->submit('create_device_confirm', $node->id, __('Create', 'fabric'));
 	}
 
 	/**
