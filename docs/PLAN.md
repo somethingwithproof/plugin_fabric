@@ -252,13 +252,13 @@ Each node record has its type, GUID, display name, fabric, mapped Cacti device (
 
 ## Cacti objects
 
-Ports appear as indexes of a script data query on the node's Cacti device ([decision pending](#open-decisions) on device granularity):
+Ports appear as indexes of a script data query on the node's Cacti device, one device per node ([ADR 0010](decisions/0010-one-device-per-node.md)):
 
 | Object | Created from | Notes |
 |---|---|---|
 | Device | "Fabric Node" device template; each created device is saved with `availability_method` 0 (none) unless an address exists and `poller_id` set to the poller that sweeps the fabric | Existing devices can be mapped instead; created only on operator confirmation. A device template has no availability field in Cacti 1.2; it is set per device through `api_device_save()` |
 | Data query | "Fabric Port", a script query reading the inventory cache | Index `<node GUID>:<port>`; the XML sets `arg_num_indexes` and an `output_delimiter` that is not `:`; ports down with no remote end are skipped by default |
-| Data sources | Four data templates per port: traffic (4 data sources), errors (12), congestion (4), link state (5) | Grouping measured in [research](research/rrd-layout.md): same disk as one file per counter (about 2.3 MB per port with the default profile), about one sixth of the files and update time. Data source names are at most 19 characters and `max` is set explicitly |
+| Data sources | Four data templates per port: traffic (4 data sources), errors (12), congestion (4), link state (5). As built, five: traffic (4), errors (9), congestion (4), link state (5), alert rates (5); see [Milestone 3 as built](#milestone-3-as-built) | Grouping measured in [research](research/rrd-layout.md): same disk as one file per counter (about 2.3 MB per port with the default profile), about one sixth of the files and update time. Data source names are at most 19 characters and `max` is set explicitly |
 | State data source | "Fabric Port State" using the script server input | Polled; reaches Thold through `poller_output` |
 | Graphs | Graph templates per group, plus a fabric overview | Placed in graph trees and protected by graph permissions like any Cacti graph |
 
@@ -270,7 +270,7 @@ Devices created by the plugin appear in device lists and in plugins such as moni
 
 **Counters** are stored as received from the port.
 
-- Basic counters are narrow and cap instead of wrapping (see the facts table). With no reset, a narrow counter eventually stops changing. The plugin uses the 64-bit forms where the port supports them, marks a capped basic counter as saturated and publishes unknown for it, and shows the reason on the port page. The alternative of resetting is rejected ([ADR 0004](decisions/0004-read-only-fabric-access.md)). A decision issue tracks the treatment and waits for hardware evidence.
+- Basic counters are narrow and cap instead of wrapping (see the facts table). With no reset, a narrow counter eventually stops changing. The plugin uses the 64-bit forms where the port supports them, marks a capped basic counter as saturated and publishes unknown for it, and shows the reason on the port page. The alternative of resetting is rejected ([ADR 0004](decisions/0004-read-only-fabric-access.md)). The treatment is decided ([ADR 0012](decisions/0012-saturated-basic-counters-read-as-unknown.md)); confirming it needs hardware evidence.
 - Data counters are octets divided by 4. Stored values stay in the tools' unit; graph definitions multiply by 4.
 - Data sources are COUNTER type with an explicit `max` (a `max` of 0 would be created as 1). For counters of 16 bits or fewer, `max` equal to the cap per interval turns a reset into a gap; for data counters, `max` is the link's capacity in words per second and can be a per-port data query field. That is not enough for 32-bit counters, or for 64-bit counters reset from a value below 2^32, where the false rate stays below any useful `max`. The plugin therefore always compares each sample to the previous one, publishes unknown for one cycle after a decrease, and counts discontinuities on the port page ([research](research/counters.md)). Another tool can cause the decrease: OpenSM's optional performance manager resets counters at about three-quarters of their range by its documentation. The `max` is set once, when the RRD file is created, so it uses a bound that does not depend on the current speed: the capacity of the best width and speed the port supports at both ends. A later speed change within that bound needs no action; if a port's supported speed rises (a firmware or cable change), the plugin runs an `rrdtool tune` step for that port's files.
 - A value the port does not support is unknown, never `0`. This applies in particular to PortXmitWait in basic counters, which the tools zero when unsupported.
@@ -449,6 +449,24 @@ Milestone 2 is implemented on a local branch. Where it differs from the requirem
 - **Schema version 1 changed before release.** Columns and keys added in review went into the version 1 definition, not a migration, because no release has shipped it. A database created from an earlier branch build must be reinstalled.
 - **Main poller only.** A remote poller reads its own copy of the database, which holds no fabric inventory or claims, so until phase 3 a fabric may be assigned only to the main poller (ID 1). Saving any other poller is refused, the health page warns about a stored row that names one, and `fabric_sweep.php` refuses to run for such a fabric or on a remote poller and logs why.
 
+### Milestone 3 as built
+
+Milestone 3 is implemented on a branch. Where it differs from the requirement texts or from the sections above:
+
+- **Device granularity.** One device per node, mapped by an operator or created on confirmation ([ADR 0010](decisions/0010-one-device-per-node.md)), decided in #9. The code keeps the mapping in one column, so a change the Cacti maintainers ask for later is a migration.
+- **Saturated counters.** Decided in #8 ([ADR 0012](decisions/0012-saturated-basic-counters-read-as-unknown.md)): 64-bit counters where supported, `U` for a saturated basic counter, never a reset. Confirming it needs captures from real hardware.
+- **Data source types.** The [Counters](#counters-and-link-state) section above names COUNTER with a per-port `max`. As built, counters are DERIVE with minimum 0 and a fixed plausibility `max`, for graphs only, and thresholds use GAUGE values: the link state values and five rates the plugin computes from its own samples ([ADR 0011](decisions/0011-derive-counters-and-gauge-alert-values.md)). Thold 1.8.2 fails with a TypeError on a COUNTER or DERIVE threshold that reads `U`, and disables itself site-wide. No `rrdtool tune` step is needed, since `max` does not depend on the port speed.
+- **Data source layout.** Five data templates of 4, 9, 4, 5, and 5 data sources, 27 per port, against four templates and 25 in [research](research/rrd-layout.md): the alert rates are added, and the error group leaves out QP1Dropped and the unicast and multicast packet counters.
+- **Degraded.** With the diags backend `degraded` is `U` for every below-best port (ADR 0009), so REQ-ALERT-010's 4X to 1X alert is proven with a low threshold of 4 on `active_lanes`, not with `degraded`.
+- **Sweep trigger.** REQ-ALERT-003 expected the state values to be fetched by a sweep before the poll. As built, the first script server `get` for a device in a cycle starts that device's due sweep ([ADR 0008](decisions/0008-lazy-per-device-sweep-with-a-claim.md)); a reindex (index, query) only reads the cache.
+- **Sampling alignment.** Rates are over the plugin's sampling interval. Set the fabric's sweep interval equal to the poller interval; otherwise a repeated sample reads as a rate of 0.
+- **Created devices outlive the plugin.** REQ-LIFE-003 expected the plugin's devices to go with the fabric or the plugin. They stay, with their data sources and RRD files, because removing them removes history; the delete confirmation says so. Deleting a device in Cacti clears its node mapping through the `device_remove` hook.
+- **Template repair.** The upgrade check installs the templates when the template version changes. A template or the query file removed afterwards is shown on the health page, where a user with Cacti's template import permission can reinstall; a page load never imports.
+- **Query file outside the plugin.** Cacti reads data query XML only from `<path_cacti>/resource`, so the plugin copies `fabric_ports.xml` to `resource/script_server/`. It writes there only where no file is or over its own unchanged copy, refuses a symbolic link, and removes only its own unchanged copy on uninstall. An uninstall on an unsupported PHP version, which cannot load the plugin's classes, leaves the file.
+- **Thold duration and congestion.** Thold's own repeat and time-based settings give the duration of a breach (REQ-ALERT-013); the plugin ships no thresholds. Transmit wait is published as ticks per second, with the meaning on the congestion ranking (REQ-CONG-004); the tick length is not published, so it is never converted to time.
+- **Recorded fixtures.** REQ-TEST-001 now has captures from the real infiniband-diags 50.0 tools against the ibsim simulator (`tests/fixtures/ibsim/`), next to the generated ones. They are simulator output, not hardware output; #14 stays open for that, and #39 (test harness and CI matrix) stays open until hardware captures exist.
+- **Scale.** Measured with fake tools on one development machine ([research](research/scale.md)): the plugin's own steps stay small at 10,000 ports, but each port is 27 Cacti poller items with all graphs, and the overview page reaches 1.5 MB without paging. Sweep time on a fabric and the MAD budget remain *live* checks.
+
 ## Estimates
 
 Sizes come from measured lines of plugin_cloudflare and plugin_smokeping; elapsed time is not estimated, because the evidence has no review latency and no hardware, and the owner's capacity is unknown ([research](research/estimates.md)). Production PHP, excluding tests:
@@ -468,8 +486,8 @@ Phase 1 totals about 8,300 to 10,800 lines, through phase 2 about 9,300 to 12,80
 | Decision | Options | Needed before | Decided by |
 |---|---|---|---|
 | Sweep timing | Decided for milestone 2: lazy per-device sweep with a claim ([ADR 0008](decisions/0008-lazy-per-device-sweep-with-a-claim.md)). Revisit only if live timing shows it is too slow | Milestone 3 measurements | Live timing measurements ([research](research/mad-budget.md)) |
-| Saturated basic counters | Prefer 64-bit and publish unknown on saturation (proposed); opt-in reset; events only | Milestone 3 | Live counter evidence ([research](research/counters.md)) |
-| Device granularity | One device per node (proposed); one per fabric; switches only | Milestone 3 | Cacti maintainers |
+| Saturated basic counters | Decided: prefer 64-bit, publish unknown on saturation, never reset ([ADR 0012](decisions/0012-saturated-basic-counters-read-as-unknown.md)). Confirmation needs hardware evidence | Release | Live counter evidence ([research](research/counters.md)) |
+| Device granularity | Decided: one device per node, mapped or created on confirmation ([ADR 0010](decisions/0010-one-device-per-node.md)). The maintainers may revisit it before an upstream proposal | Upstream proposal | Cacti maintainers |
 | UFM credential storage | A key file outside the database (Cacti 1.2.31 has no core storage; `1.2.x` has one whose key is in the same database); file outside web root; environment | Phase 2 | Security review ([research](research/ufm-rest.md)) |
 | Repository and name | `Cacti/plugin_fabric`, `Cacti/plugin_infiniband`, or community plugin | Before any code is published | Cacti maintainers |
 | Test harness | Provisional: Pest from Cacti's locked shared plugin harness, as maintained plugins use | Before upstream proposal | Cacti maintainers |
