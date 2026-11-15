@@ -39,10 +39,16 @@ if (PHP_SAPI !== 'cli') {
  */
 final class FakeTools {
 	/**
+	 * Write the tools into $dir. Their fabric, scenario, and call log live
+	 * in $stateDir, by default $dir; a separate one lets the tools sit in a
+	 * root-owned directory, as the plugin requires outside unit tests,
+	 * while the test changes the fabric with state().
+	 *
 	 * @param array<string, mixed> $scenario
 	 */
-	public static function install(string $dir, FabricGenerator $fabric, array $scenario = []): void {
-		file_put_contents($dir . '/fabric.state', serialize(['fabric' => $fabric, 'scenario' => $scenario]));
+	public static function install(string $dir, FabricGenerator $fabric, array $scenario = [], ?string $stateDir = null): void {
+		$stateDir ??= $dir;
+		self::state($stateDir, $fabric, $scenario);
 
 		$support = __DIR__;
 		$plugin  = dirname(__DIR__, 2);
@@ -52,11 +58,20 @@ final class FakeTools {
 				. 'require ' . var_export($plugin . '/include/autoload.php', true) . ";\n"
 				. 'require ' . var_export($support . '/FabricGenerator.php', true) . ";\n"
 				. 'require ' . var_export($support . '/FakeTools.php', true) . ";\n"
-				. 'exit(\\Somethingwithproof\\Fabric\\Tests\\FakeTools::main(' . var_export($tool, true) . ', __DIR__, array_slice($argv, 1)));' . "\n";
+				. 'exit(\\Somethingwithproof\\Fabric\\Tests\\FakeTools::main(' . var_export($tool, true) . ', ' . var_export($stateDir, true) . ', array_slice($argv, 1)));' . "\n";
 
 			file_put_contents($dir . '/' . $tool, $script);
 			chmod($dir . '/' . $tool, 0750);
 		}
+	}
+
+	/**
+	 * Replace the fabric and scenario the installed tools play.
+	 *
+	 * @param array<string, mixed> $scenario
+	 */
+	public static function state(string $stateDir, FabricGenerator $fabric, array $scenario = []): void {
+		file_put_contents($stateDir . '/fabric.state', serialize(['fabric' => $fabric, 'scenario' => $scenario]));
 	}
 
 	/**

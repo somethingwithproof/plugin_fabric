@@ -1,0 +1,67 @@
+#!/bin/sh
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# End to end with Cacti's poller, Thold, and Maint (tests/bin/e2e.php).
+# Run from the Cacti directory, with Thold and Maint unpacked, unchanged,
+# in plugins/thold and plugins/maint, and the Fabric plugin enabled.
+# Disposable databases only.
+#
+#   sh plugins/fabric/tests/bin/e2e.sh <root-owned tool dir> <state dir>
+#
+# The plugin runs tools only from a root-owned directory closed to group
+# and others, so the fake tools are installed there with install(1), as
+# root or through sudo when not root.
+set -u
+TOOLS=$1
+STATE=$2
+export FABRIC_TEST_DATABASE=disposable FABRIC_E2E_TOOLS="$TOOLS"
+fail=0
+as_root=""
+[ "$(id -u)" -eq 0 ] || as_root="sudo"
+
+php cli/plugin_manage.php --plugin=thold --plugin=maint --install --enable | tail -2
+
+phase() {
+	php plugins/fabric/tests/bin/e2e.php "$1" "$STATE" || fail=1
+}
+
+poll() {
+	# Rates need at least a second between samples.
+	sleep 2
+	php poller.php --poller=1 --force > /dev/null 2>&1 || { echo "FAIL the poller exited non-zero"; fail=1; }
+	# Thold checks thresholds in poller_thold.php, which its poller_bottom
+	# hook starts in the background. Run it in the foreground as well, so
+	# the check below sees its result; a run refused because the background
+	# one holds Thold's process lock leaves that one to finish.
+	sleep 3
+	php plugins/thold/poller_thold.php --force > /dev/null 2>&1
+	sleep 1
+}
+
+phase tools
+$as_root install -d -o root -g root -m 0755 "$TOOLS"
+for tool in ibnetdiscover iblinkinfo perfquery; do
+	$as_root install -o root -g root -m 0755 "$STATE/tools/$tool" "$TOOLS/$tool"
+done
+
+phase setup
+poll
+phase check_setup
+
+for step in degrade restore burst steady reset maint stale; do
+	phase "$step"
+	poll
+	phase "check_$step"
+done
+
+phase graph
+
+# The discontinuity is logged as a warning on purpose; anything else at
+# warning level or above is a failure.
+if grep -E "FATAL:|ERROR:|WARNING:" log/cacti.log | grep -v "counters went down"; then
+	echo "FAIL the Cacti log has errors"
+	fail=1
+fi
+
+exit $fail

@@ -57,6 +57,15 @@ final class FabricGenerator {
 	/** @var array<int, array<int, int>> adapter GUID => port => LID */
 	public array $portLids = [];
 
+	/**
+	 * Counter values that replace the generated ones, in both counter
+	 * groups where the group has the counter, so a test can play a burst,
+	 * a steady count, or a reset.
+	 *
+	 * @var array<string, array<string, string>> "LID:port" => counter => decimal value
+	 */
+	public array $counters = [];
+
 	public static function forCas(int $cas, int $perSwitch = 32): self {
 		$fabric   = new self();
 		$switches = max(1, (int) ceil($cas / $perSwitch));
@@ -236,6 +245,8 @@ final class FabricGenerator {
 
 				$out .= sprintf("# Port extended counters: Lid %d port %d (CapMask: 0x%02X CapMask2: 0x%07X)\n", $lid, $port, $capMask, $capMask2);
 			}
+
+			$fields = array_replace($fields, array_intersect_key($this->counters[$lid . ':' . $port] ?? [], $fields));
 
 			foreach ($fields as $name => $value) {
 				$out .= $name . ':' . str_repeat('.', 32 - strlen($name)) . $value . "\n";
