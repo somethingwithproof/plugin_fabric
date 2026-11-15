@@ -269,6 +269,9 @@ perm_expect(strpos($saved, 'The Tool Directory was not saved') === false && $too
 
 // A fabric left on a remote poller is flagged on the health page, and a
 // save that keeps the remote poller is refused with a form error.
+// A disabled remote poller, so the form refuses it for being remote rather
+// than for being unknown.
+db_execute("REPLACE INTO poller (id, name, hostname, disabled) VALUES (2, 'fabric-remote', 'remote.invalid', 'on')");
 db_execute("INSERT INTO plugin_fabric_fabric (name, backend, poller_id, sweep_interval, adapter, adapter_port, admin_state) VALUES ('remote', 'diags', 2, 300, 'mlx5_1', 1, 'enabled')");
 $remote = (int) db_fetch_insert_id();
 
@@ -280,6 +283,7 @@ list(, $saved) = perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic
 perm_expect(strpos($saved, 'only the main poller can sweep a fabric') !== false && (string) db_fetch_cell_prepared('SELECT name FROM plugin_fabric_fabric WHERE id = ?', array($remote)) === 'remote', 'saving a fabric on a remote poller is refused with a form error');
 
 db_execute_prepared('DELETE FROM plugin_fabric_fabric WHERE id = ?', array($remote));
+db_execute('DELETE FROM poller WHERE id = 2');
 
 // A second fabric on the adapter port another fabric sweeps is refused by
 // the form, and the table holds a unique key behind it.

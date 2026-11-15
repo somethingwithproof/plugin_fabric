@@ -185,9 +185,10 @@ it('reads node descriptions that hold quotes, link markers, and GUIDs without ta
 		->and($byPort['0x0002c90300a00000:3']->remotePort)->toBe(1)
 		->and($byPort['0x0002c90300a00000:3']->link->bestWidth)->toBe(LinkWidth::X4)
 		->and($byPort['0x0002c90300a00000:5']->remotePortGuid?->text)->toBe('0x0002c90300b00041')
-		// The line whose description imitates a whole port line reads two
-		// ways, so it is skipped, never read as the imitated port.
-		->and(array_map(static fn (Guid $g): string => $g->text, $report->skipped))->toBe(['0x0002c90300b00031']);
+		// A line whose local or remote description imitates a whole port
+		// line reads two ways, so it is skipped, never read as the
+		// imitated port.
+		->and(array_map(static fn (Guid $g): string => $g->text, $report->skipped))->toBe(['0x0002c90300b00031', '0x0002c90300a00000']);
 });
 
 it('skips only a line that starts like a port line and cannot be read in one way', function () {

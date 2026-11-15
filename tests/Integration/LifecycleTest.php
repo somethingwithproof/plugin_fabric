@@ -259,9 +259,10 @@ it('sweeps a fake fabric into the real schema and keeps the last good inventory 
 			->and($r['steps'][$mode]['proposals'])->toBe(1, $mode);
 	}
 
-	// A description that imitates the tool output skips only its own lines.
+	// A description that imitates the tool output skips only the lines it
+	// appears in: the adapter's two ports, and the switch port facing it.
 	expect($r['steps']['hostile']['error'])->toBe('')
 		->and($r['steps']['hostile']['links_error'])->toBe('')
-		->and($r['steps']['hostile']['links_skipped'])->toBe(2)
+		->and($r['steps']['hostile']['links_skipped'])->toBe(3)
 		->and($r['steps']['hostile']['kept'])->toBeTrue();
 });
