@@ -43,6 +43,8 @@ final readonly class Node {
 		public int $firstSeen,
 		public int $lastSeen,
 		public int $revision,
+		public string $conflictSignature = '',
+		public string $acceptedSignature = '',
 	) {
 	}
 
@@ -82,6 +84,8 @@ final readonly class Node {
 			firstSeen: Row::int($row, 'first_seen', 0, 0),
 			lastSeen: Row::int($row, 'last_seen', 0, 0),
 			revision: Row::int($row, 'revision', 0, 0),
+			conflictSignature: Row::string($row, 'conflict_signature'),
+			acceptedSignature: Row::string($row, 'accepted_signature'),
 		);
 	}
 

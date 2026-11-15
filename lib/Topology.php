@@ -25,10 +25,30 @@ namespace Somethingwithproof\Fabric;
  */
 final readonly class Topology {
 	/**
-	 * @param array<string, TopologyNode> $nodes      GUID text => node
-	 * @param list<string>                $duplicates GUID texts printed in more than one node block
+	 * @param array<string, TopologyNode> $nodes               GUID text => node
+	 * @param list<string>                $duplicates          GUID texts printed in more than one node block
+	 * @param array<string, list<string>> $duplicateIdentities GUID text => identity JSON of each block after the first
 	 */
-	public function __construct(public array $nodes, public ?Guid $local, public array $duplicates) {
+	public function __construct(public array $nodes, public ?Guid $local, public array $duplicates, public array $duplicateIdentities = []) {
+	}
+
+	/**
+	 * What this discovery saw under one GUID: every identity printed for it,
+	 * in no particular order, and whether it was printed more than once. An
+	 * operator who accepts a conflict accepts this sighting, so the same
+	 * sighting does not raise the conflict again (REQ-INV-005).
+	 */
+	public function signature(string $guid): string {
+		$node = $this->nodes[$guid] ?? null;
+
+		if ($node === null) {
+			return '';
+		}
+
+		$identities = array_values(array_unique([$node->identity()->toJson(), ...($this->duplicateIdentities[$guid] ?? [])]));
+		sort($identities);
+
+		return hash('sha256', (in_array($guid, $this->duplicates, true) ? "duplicate\n" : "single\n") . implode("\n", $identities));
 	}
 
 	public function portCount(): int {

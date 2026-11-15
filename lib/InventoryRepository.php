@@ -104,7 +104,7 @@ final class InventoryRepository {
 				$duplicate = in_array($guid, $topology->duplicates, true);
 
 				if ($stored === null) {
-					$id = $this->insertNode($fabric, $seen, $duplicate, $now);
+					$id = $this->insertNode($fabric, $seen, $duplicate, $topology->signature($guid), $now);
 					$this->writePorts($id, $seen, $now);
 					$result->added++;
 
@@ -116,9 +116,12 @@ final class InventoryRepository {
 				}
 
 				$differences = $stored->identity()->differences($seen->identity());
+				$signature   = $topology->signature($guid);
+				// The operator already accepted exactly this sighting.
+				$accepted    = $stored->acceptedSignature !== '' && hash_equals($stored->acceptedSignature, $signature);
 
-				if ($differences !== [] || $duplicate) {
-					$this->markConflict($stored, $seen, $now);
+				if (!$accepted && ($differences !== [] || $duplicate)) {
+					$this->markConflict($stored, $seen, $signature, $now);
 					$result->conflicts++;
 
 					continue;
@@ -159,10 +162,10 @@ final class InventoryRepository {
 		return $result;
 	}
 
-	private function insertNode(Fabric $fabric, TopologyNode $seen, bool $duplicate, int $now): int {
+	private function insertNode(Fabric $fabric, TopologyNode $seen, bool $duplicate, string $signature, int $now): int {
 		$this->write(
-			'INSERT INTO plugin_fabric_node (fabric_id, guid, node_type, port_count, device_id, vendor_id, sysimg_guid, port0_guid, description, lid, host_id, presence, identity, conflict_seen, first_seen, last_seen, revision) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, ?, ?, 0)',
-			[$fabric->id, $seen->guid->text, $seen->type->value, $seen->portCount, $seen->deviceId, $seen->vendorId, $seen->sysimgGuid->text ?? '', $seen->port0Guid->text ?? '', $seen->description, $seen->lid, Presence::Present->value, ($duplicate ? IdentityState::Conflict : IdentityState::Ok)->value, $duplicate ? $seen->identity()->toJson() : '', $now, $now],
+			'INSERT INTO plugin_fabric_node (fabric_id, guid, node_type, port_count, device_id, vendor_id, sysimg_guid, port0_guid, description, lid, host_id, presence, identity, conflict_seen, conflict_signature, first_seen, last_seen, revision) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?, 0)',
+			[$fabric->id, $seen->guid->text, $seen->type->value, $seen->portCount, $seen->deviceId, $seen->vendorId, $seen->sysimgGuid->text ?? '', $seen->port0Guid->text ?? '', $seen->description, $seen->lid, Presence::Present->value, ($duplicate ? IdentityState::Conflict : IdentityState::Ok)->value, $duplicate ? $seen->identity()->toJson() : '', $duplicate ? $signature : '', $now, $now],
 		);
 
 		$id = $this->tx->insertId();
@@ -183,12 +186,14 @@ final class InventoryRepository {
 
 	/**
 	 * The stored identity stays; the conflicting sighting is kept beside it
-	 * for the operator. A conflict is never cleared by a later discovery.
+	 * for the operator. A conflict is never cleared by a later discovery,
+	 * only by an operator, and a sighting the operator accepted does not
+	 * raise it again until the discovery sees something else.
 	 */
-	private function markConflict(Node $stored, TopologyNode $seen, int $now): void {
+	private function markConflict(Node $stored, TopologyNode $seen, string $signature, int $now): void {
 		$this->write(
-			'UPDATE plugin_fabric_node SET identity = ?, conflict_seen = ?, presence = ?, last_seen = ?, revision = revision + 1 WHERE id = ?',
-			[IdentityState::Conflict->value, $seen->identity()->toJson(), Presence::Present->value, $now, $stored->id],
+			'UPDATE plugin_fabric_node SET identity = ?, conflict_seen = ?, conflict_signature = ?, presence = ?, last_seen = ?, revision = revision + 1 WHERE id = ?',
+			[IdentityState::Conflict->value, $seen->identity()->toJson(), $signature, Presence::Present->value, $now, $stored->id],
 		);
 
 		if ($stored->identity === IdentityState::Ok) {

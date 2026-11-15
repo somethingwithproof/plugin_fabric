@@ -84,7 +84,9 @@ final class NodeRepository {
 	/**
 	 * Accept the conflicting sighting as the node's identity: the operator
 	 * confirmed the device behind the GUID changed (REQ-INV-005). The node
-	 * is swept again from the next cycle.
+	 * is swept again from the next cycle. The sighting is recorded as
+	 * accepted, so a later discovery that sees the same thing again,
+	 * such as the same GUID printed twice, raises no new conflict.
 	 */
 	public function acceptConflict(Node $node): bool {
 		$seen = $node->conflictSeen;
@@ -93,8 +95,8 @@ final class NodeRepository {
 			return false;
 		}
 
-		return $this->guarded($node, 'node_type = ?, port_count = ?, device_id = ?, vendor_id = ?, sysimg_guid = ?, identity = ?, conflict_seen = ?', [
-			$seen->type->value, $seen->portCount, $seen->deviceId, $seen->vendorId, $seen->sysimgGuid->text ?? '', IdentityState::Ok->value, '',
+		return $this->guarded($node, 'node_type = ?, port_count = ?, device_id = ?, vendor_id = ?, sysimg_guid = ?, identity = ?, conflict_seen = ?, accepted_signature = ?', [
+			$seen->type->value, $seen->portCount, $seen->deviceId, $seen->vendorId, $seen->sysimgGuid->text ?? '', IdentityState::Ok->value, '', $node->conflictSignature,
 		]);
 	}
 

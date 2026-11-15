@@ -245,6 +245,10 @@ final class Schema {
 					$text('presence', 16, 'present'),
 					$text('identity', 16, 'ok'),
 					$text('conflict_seen', 255),
+					// What the discovery that raised the conflict saw, and what
+					// an operator last accepted (Topology::signature()).
+					$text('conflict_signature', 64),
+					$text('accepted_signature', 64),
 					$time('first_seen'),
 					$time('last_seen'),
 					$count('revision'),

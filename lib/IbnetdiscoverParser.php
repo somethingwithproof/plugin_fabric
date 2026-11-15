@@ -45,6 +45,9 @@ final class IbnetdiscoverParser {
 	/** @var list<string> */
 	private array $duplicates = [];
 
+	/** @var array<string, list<string>> GUID text => identity JSON of each later block */
+	private array $duplicateIdentities = [];
+
 	/** @var array{type: NodeType, guid: Guid, port0: ?Guid, vendid: int, devid: int, sysimg: ?Guid, count: int, desc: string, lid: int}|null */
 	private ?array $current = null;
 
@@ -52,10 +55,11 @@ final class IbnetdiscoverParser {
 	private array $ports = [];
 
 	public function parse(string $output): Topology {
-		$this->nodes      = [];
-		$this->duplicates = [];
-		$this->current    = null;
-		$this->ports      = [];
+		$this->nodes               = [];
+		$this->duplicates          = [];
+		$this->duplicateIdentities = [];
+		$this->current             = null;
+		$this->ports               = [];
 
 		$local   = null;
 		$ids     = [];
@@ -182,7 +186,7 @@ final class IbnetdiscoverParser {
 
 		self::checkLinks($this->nodes, $this->duplicates, $types);
 
-		return new Topology($this->nodes, $local, array_values(array_unique($this->duplicates)));
+		return new Topology($this->nodes, $local, array_values(array_unique($this->duplicates)), $this->duplicateIdentities);
 	}
 
 	private function finish(): void {
@@ -195,7 +199,8 @@ final class IbnetdiscoverParser {
 		$node = new TopologyNode($current['guid'], $current['type'], $current['count'], $current['devid'], $current['vendid'], $current['sysimg'], $current['port0'], $current['desc'], $current['lid'], $this->ports);
 
 		if (isset($this->nodes[$node->guid->text])) {
-			$this->duplicates[] = $node->guid->text;
+			$this->duplicates[]                              = $node->guid->text;
+			$this->duplicateIdentities[$node->guid->text][] = $node->identity()->toJson();
 		} else {
 			$this->nodes[$node->guid->text] = $node;
 		}
