@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# 2 spines, 2 leaves, 4 HCAs (node01, node02 dual-port; node03, node04 single-port).
+# First record is the SM/attachment point (node01), as on a real compute node.
+# Switch ports all report the switch GUID as PortGUID (ibsim hard-wires this).
+vendid=0x2c9
+devid=0xd2f2
+speed=4
+switchguid=0x0002c90300aa0000
+caguid=0x0002c90300bb0000
+
+Hca	2 "node01"	# "node01 mlx5_0"
+[1]	"leaf1"[1]
+[2]	"leaf2"[1]
+
+Hca	2 "node02"	# "node02 mlx5_0"
+[1]	"leaf1"[2]
+[2]	"leaf2"[2]
+
+Hca	1 "node03"	# "node03 mlx5_0"
+[1]	"leaf1"[3]
+
+Hca	1 "node04"	# "node04 mlx5_0"
+[1]	"leaf2"[3]
+
+Switch	8 "spine1"	# "spine1 MQM8700" base port 0 lid 1 lmc 0
+[1]	"leaf1"[5]
+[2]	"leaf2"[5]
+
+Switch	8 "spine2"	# "spine2 MQM8700" base port 0 lid 2 lmc 0
+[1]	"leaf1"[6]
+[2]	"leaf2"[6]
+
+Switch	8 "leaf1"	# "leaf1 MQM8700" base port 0 lid 3 lmc 0
+[1]	"node01"[1]
+[2]	"node02"[1]
+[3]	"node03"[1]
+[5]	"spine1"[1]
+[6]	"spine2"[1]
+
+Switch	8 "leaf2"	# "leaf2 MQM8700" base port 0 lid 4 lmc 0
+[1]	"node01"[2]
+[2]	"node02"[2]
+[3]	"node04"[1]
+[5]	"spine1"[2]
+[6]	"spine2"[2]

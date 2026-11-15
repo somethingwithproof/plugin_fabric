@@ -63,7 +63,7 @@ jobs:
       run: |
         set -euo pipefail
         php -v
-        for f in *.php include/*.php locales/*.php tests/bin/*.php; do
+        for f in *.php include/*.php locales/*.php scripts/*.php tests/bin/*.php; do
           php -l "$f"
         done
 
@@ -230,6 +230,34 @@ jobs:
           exit 1
         fi
 
+    # Thold v1.8.2 and Maint v1.3 at pinned commits, unchanged, against the
+    # Fabric data sources through Cacti's own poller (tests/bin/e2e.sh). On
+    # PHP 8.2, the oldest PHP the plugin supports, for both Cacti refs.
+    - name: Checkout Thold v1.8.2
+      if: matrix.php == '8.2'
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+        repository: Cacti/plugin_thold
+        ref: 1eb406bd0f81f3204358cce7bd43c8bb5adc8e4a
+        path: cacti/plugins/thold
+
+    - name: Checkout Maint v1.3
+      if: matrix.php == '8.2'
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+        repository: Cacti/plugin_maint
+        ref: cd62de9cc323a4f5a8ac80a8d9dda3c7fa16c470
+        path: cacti/plugins/maint
+
+    - name: Run Thold and Maint end to end
+      if: matrix.php == '8.2'
+      working-directory: cacti
+      run: |
+        mkdir -p "$RUNNER_TEMP/fabric-e2e"
+        sh plugins/fabric/tests/bin/e2e.sh /opt/fabric-e2e-tools "$RUNNER_TEMP/fabric-e2e"
+
     - name: Check Cacti log for errors
       if: always()
       run: |
@@ -240,7 +268,8 @@ jobs:
         if [ -f cacti/log/cacti.log ]; then
           echo "== install and poller run"
           cat cacti/log/cacti.log
-          if grep -E "FATAL:|ERROR:|WARNING:" cacti/log/cacti.log; then
+          # The end to end run logs a counter reset as a warning on purpose.
+          if grep -E "FATAL:|ERROR:|WARNING:" cacti/log/cacti.log | grep -v "counters went down"; then
             exit 1
           fi
         fi
@@ -398,6 +427,58 @@ jobs:
     - name: Lint licensing metadata
       run: pipx run --spec 'reuse[charset-normalizer]==6.3.0' reuse lint
 
+  # The real ibnetdiscover, iblinkinfo, and perfquery of rdma-core 50.0
+  # (Ubuntu 24.04's infiniband-diags) against a simulated fabric: linux-rdma
+  # ibsim and OpenSM under the libumad2sim LD_PRELOAD shim, in an
+  # unprivileged container with no /dev/infiniband and no added capability.
+  # The plugin's parsers then read the output. It proves the parsers on real
+  # tool output; it does not show counter behavior, congestion, or vendor
+  # hardware output (the plan's live checks).
+  #
+  # The image is pinned by digest and the packages by version in
+  # tests/ibsim/run.sh. Ubuntu drops superseded security builds from its
+  # archive, so a pinned version can start failing to install: bump the
+  # digest and the versions together, then compare the new output with
+  # tests/fixtures/ibsim/.
+  ibsim-fabric:
+    name: ibsim fabric tools (rdma-core 50.0)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # ubuntu:24.04 index digest (multi-arch).
+      IBSIM_IMAGE: ubuntu@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5
+    steps:
+    - name: Checkout plugin
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Install PHP 8.2
+      uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+      with:
+        php-version: '8.2'
+        coverage: none
+
+    - name: Check the parsers against the committed captures
+      run: php tests/bin/check-ibsim-fixtures.php tests/fixtures/ibsim
+
+    - name: Run the tools against the simulated fabric
+      run: |
+        set -euo pipefail
+        out="$RUNNER_TEMP/ibsim-out"
+        mkdir -p "$out"
+        timeout 600 docker run --rm \
+          --volume "$GITHUB_WORKSPACE:/repo:ro" \
+          --volume "$out:/out" \
+          "$IBSIM_IMAGE" \
+          sh /repo/tests/ibsim/run.sh /repo /out
+        echo "IBSIM_OUT=$out" >> "$GITHUB_ENV"
+
+    # LIDs and line order come from OpenSM and change between runs, so the
+    # check is structural, never a byte comparison with the captures.
+    - name: Check the parsers against this run's output
+      run: php tests/bin/check-ibsim-fixtures.php "$IBSIM_OUT"
+
   ci-ok:
     name: ci-ok
     if: ${{ always() }}
@@ -407,6 +488,7 @@ jobs:
       - php-guard
       - workflow-lint
       - reuse
+      - ibsim-fabric
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions: {}
