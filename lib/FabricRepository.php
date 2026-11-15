@@ -57,8 +57,19 @@ final class FabricRepository {
 	}
 
 	/**
+	 * Whether another fabric already sweeps from this adapter port on this
+	 * poller. Two fabrics there would see the same nodes, and the second
+	 * would import each one again, unmapped, under its own records.
+	 */
+	public function portTaken(Fabric $fabric): bool {
+		return (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_fabric WHERE poller_id = ? AND adapter = ? AND adapter_port = ? AND id != ?', [$fabric->pollerId, $fabric->adapter, $fabric->adapterPort, $fabric->id], '', true, $this->connection) > 0;
+	}
+
+	/**
 	 * Insert or update, returning the id, or 0 when the write failed or the
-	 * fabric no longer exists.
+	 * fabric no longer exists. The unique key on poller, adapter, and port
+	 * refuses a write that portTaken() would have caught, if another save
+	 * raced this one.
 	 */
 	public function save(Fabric $fabric): int {
 		$now    = $this->clock->now();

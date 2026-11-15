@@ -219,7 +219,9 @@ final class Schema {
 					$time('updated_at'),
 				],
 				'primary'     => 'id',
-				'unique_keys' => [['name' => 'name', 'columns' => ['name']]],
+				// One fabric per local adapter port and poller: a second one
+				// would import the same nodes again under its own records.
+				'unique_keys' => [['name' => 'name', 'columns' => ['name']], ['name' => 'poller_adapter_port', 'columns' => ['poller_id', 'adapter', 'adapter_port']]],
 			],
 			// One row per node GUID and fabric (ADR 0003). Type, port count,
 			// device, vendor, and system image GUID are the attributes whose

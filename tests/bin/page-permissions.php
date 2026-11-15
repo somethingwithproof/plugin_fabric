@@ -261,6 +261,13 @@ perm_expect(strpos($saved, 'only the main poller can sweep a fabric') !== false 
 
 db_execute_prepared('DELETE FROM plugin_fabric_fabric WHERE id = ?', array($remote));
 
+// A second fabric on the adapter port another fabric sweeps is refused by
+// the form, and the table holds a unique key behind it.
+list(, $list)  = perm_http($base . 'fabric_admin.php', $jar);
+list(, $saved) = perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($list), 'action' => 'save_fabric', 'id' => 0, 'name' => 'twin', 'backend' => 'diags', 'poller_id' => 1, 'sweep_interval' => 300, 'adapter' => 'mlx5_0', 'adapter_port' => 1, 'enabled' => 'on'));
+perm_expect(strpos($saved, 'another fabric already sweeps this adapter port') !== false && (int) db_fetch_cell("SELECT COUNT(*) FROM plugin_fabric_fabric WHERE name = 'twin'") === 0, 'a second fabric on the same adapter port is refused with a form error');
+perm_expect((int) db_fetch_cell("SELECT COUNT(DISTINCT COLUMN_NAME) FROM information_schema.STATISTICS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'plugin_fabric_fabric' AND INDEX_NAME = 'poller_adapter_port' AND NON_UNIQUE = 0") === 3, 'the fabric table has a unique key on poller, adapter, and adapter port');
+
 $state = function () use ($relink) {
 	return (string) db_fetch_cell_prepared('SELECT state FROM plugin_fabric_relink WHERE id = ?', array($relink));
 };

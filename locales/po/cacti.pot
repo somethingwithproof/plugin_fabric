@@ -29,6 +29,10 @@ msgid "Name: another fabric already uses this name."
 msgstr ""
 
 #: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr ""
+
+#: fabric_admin.php
 msgid "The fabric could not be saved."
 msgstr ""
 

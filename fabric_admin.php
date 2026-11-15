@@ -130,6 +130,10 @@ switch ($fabric_action) {
 			$fabric_errors['name'] = __('Name: another fabric already uses this name.', 'fabric');
 		}
 
+		if ($fabric_parsed->fabric !== null && $fabric_fabrics->portTaken($fabric_parsed->fabric)) {
+			$fabric_errors['adapter'] = __('Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port.', 'fabric');
+		}
+
 		if ($fabric_errors !== array() || $fabric_parsed->fabric === null) {
 			top_header();
 			$fabric_page->renderFabricEdit($fabric_existing, $fabric_input, $fabric_errors);
