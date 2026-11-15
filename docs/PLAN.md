@@ -1,6 +1,6 @@
 # Cacti 1.2 InfiniBand Fabric Plugin Plan
 
-Status: proposal, revision 2 (2026-11-15). Nothing described here as a plugin capability exists yet. Statements about infiniband-diags, UFM, the Linux kernel, RRDtool, Cacti core, and Thold describe upstream behavior and cite the file or page that was checked. Revision 2 incorporates the documentation and source research of milestone 1 ([docs/research](research/)); everything that needs a fabric, a UFM instance, or an account is marked *live* and listed in [Live checks](#live-checks), so milestone 1 is not complete until those run. Anything still unchecked is listed under [Assumptions to confirm](#assumptions-to-confirm). Owner is not assigned; estimates are in [Estimates](#estimates).
+Status: in development, plan revision 2 (2026-11-15). Nothing described here as a plugin capability is published yet. Statements about infiniband-diags, UFM, the Linux kernel, RRDtool, Cacti core, and Thold describe upstream behavior and cite the file or page that was checked. Revision 2 incorporates the documentation and source research of milestone 1 ([docs/research](research/)); everything that needs a fabric, a UFM instance, or an account is marked *live* and listed in [Live checks](#live-checks), so milestone 1 is not complete until those run. Anything still unchecked is listed under [Assumptions to confirm](#assumptions-to-confirm). Owner is not assigned; estimates are in [Estimates](#estimates).
 
 `plugin_fabric` brings InfiniBand port counters, link width and speed, and congestion indicators into Cacti 1.2 as ordinary devices, data sources, and graphs, so operators see fabric health next to the hosts and switches it belongs to, under Cacti's own permissions, and alert on it with Thold and Maint.
 
@@ -528,4 +528,4 @@ Offline checks: [tests/rrd-counter](../tests/rrd-counter/run.sh) (counter reset 
 
 ## Upstream process
 
-This repository holds the proposal and tracks its requirements as GitHub issues and milestones. Before code is proposed for the Cacti organization, open an issue there describing the problem, the phase plan, and the open decisions, and ask maintainers about the repository, name, device handling, and test harness. Maint changes are proposed as issues on the Maint repository first. No Thold change is needed.
+This repository holds the plan and tracks its requirements as GitHub issues and milestones. Before code is proposed for the Cacti organization, open an issue there describing the problem, the phase plan, and the open decisions, and ask maintainers about the repository, name, device handling, and test harness. Maint changes are proposed as issues on the Maint repository first. No Thold change is needed.

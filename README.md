@@ -1,8 +1,8 @@
 # plugin_fabric
 
-A proposed Cacti 1.2 plugin that brings InfiniBand port counters, link width and speed, and congestion indicators into Cacti as ordinary devices, data sources, and graphs. A link that trained at 1X instead of 4X then shows up as a graph and a Thold alert next to the host it serves, under Cacti's permissions, with Maint able to suppress it.
+A Cacti 1.2 plugin that brings InfiniBand port counters, link width and speed, and congestion indicators into Cacti as ordinary devices, data sources, and graphs. A link that trained at 1X instead of 4X then shows up as a graph and a Thold alert next to the host it serves, under Cacti's permissions, with Maint able to suppress it.
 
-> **Status: proposal, milestone 1 research merged.** This repository contains no plugin code yet. Milestone 1 confirmed the design against documentation and upstream source (PR #71); the results, with sources, are in [docs/research/](docs/research/), and [docs/PLAN.md](docs/PLAN.md) is at revision 2. Checks that need an InfiniBand fabric remain open in each research page's live-checks table. Nothing below describes shipped behavior.
+> **Status: in development.** Milestone 1 research is merged; milestone 2 (foundation) is in progress. Plugin code is not published here yet. Milestone 1 confirmed the design against documentation and upstream source (PR #71); the results, with sources, are in [docs/research/](docs/research/), and [docs/PLAN.md](docs/PLAN.md) is at revision 2. Checks that need an InfiniBand fabric remain open in each research page's live-checks table. Nothing below describes shipped behavior.
 
 ## Why
 
