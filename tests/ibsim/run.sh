@@ -115,7 +115,8 @@ run_scenario() {
       ls -l "/proc/$pid/fd" 2>/dev/null || true
     done
     OSM_TMP_DIR=$d/osm OSM_CACHE_DIR=$d/osm timeout -k 2 20 gdb --batch \
-      -ex "set environment LD_PRELOAD=$SO" -ex run -ex 'thread apply all bt' \
+      -ex "set environment LD_PRELOAD=$SO" -ex 'catch syscall exit' \
+      -ex 'catch syscall exit_group' -ex run -ex 'thread apply all bt' \
       --args opensm -V -f "$d/osm-debug.log" >"$d/backtrace.log" 2>&1 || true
     tail -n 100 "$d/backtrace.log"
     stop
