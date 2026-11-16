@@ -32,7 +32,7 @@ APT_LIMIT=150
 OSM_LIMIT=60
 PORT_LIMIT=30
 TOOL_LIMIT=20
-DOG_LIMIT=240
+DOG_LIMIT=$((3 + OSM_LIMIT + PORT_LIMIT + 7 + 13 * (TOOL_LIMIT + 2) + 30))
 
 T0=$(date +%s)
 log() { echo "[$(( $(date +%s) - T0 ))s] $*"; }

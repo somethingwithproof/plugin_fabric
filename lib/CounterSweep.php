@@ -140,7 +140,22 @@ final class CounterSweep {
 			return;
 		}
 
+		// Existing attempt timestamps are the resume position. A capped run
+		// starts with the least recently attempted ports and counter group.
+		$extended = [];
+		foreach ($targets as $port => $lid) {
+			$mask = Row::int($previous[$port . ':basic'] ?? [], 'cap_mask');
+			if (($mask & (Counters::CAP_EXT_WIDTH | Counters::CAP_EXT_WIDTH_NOIETF)) !== 0) {
+				$extended[$port] = $lid;
+			}
+		}
+		$extendedFirst = $extended !== [] && $this->oldest($extended, $previous, CounterGroup::Extended) < $this->oldest($targets, $previous, CounterGroup::Basic);
+		$extendedResult = null;
+
 		try {
+			if ($extendedFirst) {
+				$extendedResult = $this->group($builder, $fabric, $node, $extended, CounterGroup::Extended, $budget, $samples, $previous);
+			}
 			$basic = $this->group($builder, $fabric, $node, $targets, CounterGroup::Basic, $budget, $samples, $previous);
 		} catch (\InvalidArgumentException $e) {
 			// Only the settings or the fabric record can make the first
@@ -151,8 +166,6 @@ final class CounterSweep {
 
 			return;
 		}
-
-		$extended = [];
 
 		foreach ($basic['read'] as $port => $counters) {
 			if ($counters->extendedSupported()) {
@@ -165,9 +178,21 @@ final class CounterSweep {
 		$result->skipped = $result->total - $result->read - $result->failed;
 		$result->error   = $basic['error'];
 
-		if ($extended !== [] && $this->group($builder, $fabric, $node, $extended, CounterGroup::Extended, $budget, $samples, $previous)['error'] === CommandError::Storage) {
+		if (!$extendedFirst && $extended !== []) {
+			$extendedResult = $this->group($builder, $fabric, $node, $extended, CounterGroup::Extended, $budget, $samples, $previous);
+		}
+
+		if (($extendedResult['error'] ?? null) === CommandError::Storage) {
 			$result->error = CommandError::Storage;
 		}
+	}
+
+	/**
+	 * @param non-empty-array<int, int> $targets
+	 * @param array<string, array<array-key, mixed>> $previous
+	 */
+	private function oldest(array $targets, array $previous, CounterGroup $group): int {
+		return min(array_map(static fn (int $port): int => Row::int($previous[$port . ':' . $group->value] ?? [], 'attempted_at'), array_keys($targets)));
 	}
 
 	/**
@@ -185,6 +210,9 @@ final class CounterSweep {
 		$failed  = [];
 		$last    = null;
 		$pending = array_keys($targets);
+		usort($pending, static fn (int $a, int $b): int =>
+			Row::int($previous[$a . ':' . $group->value] ?? [], 'attempted_at')
+			<=> Row::int($previous[$b . ':' . $group->value] ?? [], 'attempted_at'));
 
 		while ($pending !== [] && !$budget->spent()) {
 			$lid   = $targets[$pending[0]];

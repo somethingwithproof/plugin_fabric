@@ -50,7 +50,10 @@ final class Sweep {
 		int $toolOwner = 0,
 		?float $deadline = null,
 	) {
-		$this->topology = new TopologySweep($connection, $clock, $runner, $settings, $toolOwner, $deadline);
+		// Leave most of a script-server call for counters even when
+		// topology discovery runs up to its limit every polling cycle.
+		$topologyDeadline = $deadline === null ? null : microtime(true) + max(0.0, $deadline - microtime(true)) / 3;
+		$this->topology = new TopologySweep($connection, $clock, $runner, $settings, $toolOwner, $topologyDeadline);
 		$this->counters = new CounterSweep($connection, $clock, $runner, $settings, $toolOwner, $deadline);
 	}
 

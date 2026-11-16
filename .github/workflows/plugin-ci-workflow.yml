@@ -451,7 +451,7 @@ jobs:
   ibsim-fabric:
     name: ibsim fabric tools (rdma-core 50.0)
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     env:
       # ubuntu:24.04 index digest (multi-arch).
       IBSIM_IMAGE: ubuntu@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5
@@ -472,10 +472,10 @@ jobs:
 
     # Detached, then bounded with docker wait: `timeout docker run` stops
     # only the client, and the container's shell, as PID 1, ignores the
-    # SIGTERM it forwards. run.sh bounds each stage (about 8 minutes in the
-    # worst case); 540 s here leaves the job well inside its timeout.
+    # SIGTERM it forwards. Two APT stages plus two scenario watchdogs
+    # take at most 1,142 s; the outer wait also allows cleanup time.
     - name: Run the tools against the simulated fabric
-      timeout-minutes: 11
+      timeout-minutes: 23
       run: |
         set -euo pipefail
         out="$RUNNER_TEMP/ibsim-out"
@@ -486,11 +486,11 @@ jobs:
           --volume "$out:/out" \
           "$IBSIM_IMAGE" \
           sh /repo/tests/ibsim/run.sh /repo /out > /dev/null
-        rc=$(timeout 540 docker wait ibsim-fabric) || rc=timeout
+        rc=$(timeout 1200 docker wait ibsim-fabric) || rc=timeout
         docker logs ibsim-fabric 2>&1
         docker rm --force ibsim-fabric > /dev/null
         if [ "$rc" = timeout ]; then
-          echo "::error::the ibsim run did not finish within 540 s; the last stage logged above is the one that stalled"
+          echo "::error::the ibsim run did not finish within 1200 s; the last stage logged above is the one that stalled"
           exit 1
         fi
         [ "$rc" = 0 ] || { echo "::error::the ibsim run exited $rc"; exit 1; }
