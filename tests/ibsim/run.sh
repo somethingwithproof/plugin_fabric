@@ -67,7 +67,7 @@ timeout -k 5 "$APT_LIMIT" apt-get install -y -qq --no-install-recommends \
   ibsim-utils=0.10-2build1 \
   infiniband-diags=50.0-2ubuntu0.2 \
   libibumad3=50.0-2ubuntu0.2 \
-  opensm=3.3.23-2 strace >/tmp/apt.log 2>&1 ||
+  opensm=3.3.23-2 >/tmp/apt.log 2>&1 ||
   die "apt-get install of the pinned packages failed or took over ${APT_LIMIT}s" /tmp/apt.log
 
 SO=$(find /usr/lib -name libumad2sim.so | head -n 1)
@@ -86,8 +86,11 @@ run_scenario() {
   rm -rf "$d"; mkdir -p "$d/osm"
   # Attach at node01, as the plugin's poller attaches at a compute node.
   export SIM_HOST=node01
+  # Use ibsim's loopback UDP transport. On hosted runners the first write
+  # to its abstract Unix datagram socket can stall before OpenSM attaches.
+  export IBSIM_SERVER_NAME=127.0.0.1
   log "$sc: starting ibsim"
-  ibsim -s "$TOPO_DIR/$sc.net" --no-console >"$d/ibsim.log" 2>&1 &
+  ibsim -r -s "$TOPO_DIR/$sc.net" --no-console >"$d/ibsim.log" 2>&1 &
   sim_pid=$!
   (sleep "$DOG_LIMIT"; kill -9 "$sim_pid" 2>/dev/null) &
   sim_dog=$!
@@ -109,16 +112,8 @@ run_scenario() {
     grep -q 'Entering MASTER state' "$d/opensm.out" "$d/osm.log" 2>/dev/null
   }
   wait_for "$OSM_LIMIT" osm_master || {
-    for pid in "$osm_pid" "$sim_pid"; do
-      echo "process $pid wait channel and syscall:"
-      cat "/proc/$pid/wchan" "/proc/$pid/syscall" 2>/dev/null || true
-      ls -l "/proc/$pid/fd" 2>/dev/null || true
-    done
-    OSM_TMP_DIR=$d/osm OSM_CACHE_DIR=$d/osm timeout -k 2 10 strace -ff \
-      -o "$d/trace" -E "LD_PRELOAD=$SO" opensm -V -f "$d/osm-debug.log" || true
-    for trace in "$d"/trace.*; do tail -n 35 "$trace"; done
-    stop
     kill -0 "$osm_pid" 2>/dev/null && why="did not reach MASTER within ${OSM_LIMIT}s" || why="exited before reaching MASTER"
+    stop
     die "$sc: OpenSM $why" "$d/opensm.out" "$d/osm.log" "$d/ibsim.log"
   }
   log "$sc: OpenSM is MASTER"
