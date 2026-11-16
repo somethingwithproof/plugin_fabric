@@ -98,7 +98,7 @@ run_scenario() {
 
   log "$sc: starting OpenSM under the shim"
   OSM_TMP_DIR=$d/osm OSM_CACHE_DIR=$d/osm LD_PRELOAD=$SO \
-    opensm -f "$d/osm.log" >"$d/opensm.out" 2>&1 &
+    opensm -V -f "$d/osm.log" >"$d/opensm.out" 2>&1 &
   osm_pid=$!
   (sleep "$DOG_LIMIT"; kill -9 "$osm_pid" 2>/dev/null) &
   osm_dog=$!
@@ -109,6 +109,11 @@ run_scenario() {
     grep -q 'Entering MASTER state' "$d/opensm.out" "$d/osm.log" 2>/dev/null
   }
   wait_for "$OSM_LIMIT" osm_master || {
+    for pid in "$osm_pid" "$sim_pid"; do
+      echo "process $pid wait channel and syscall:"
+      cat "/proc/$pid/wchan" "/proc/$pid/syscall" 2>/dev/null || true
+      ls -l "/proc/$pid/fd" 2>/dev/null || true
+    done
     stop
     kill -0 "$osm_pid" 2>/dev/null && why="did not reach MASTER within ${OSM_LIMIT}s" || why="exited before reaching MASTER"
     die "$sc: OpenSM $why" "$d/opensm.out" "$d/osm.log" "$d/ibsim.log"
