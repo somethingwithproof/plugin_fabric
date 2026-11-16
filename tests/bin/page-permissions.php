@@ -102,7 +102,8 @@ foreach ($guids as $key => $guid) {
 	// port. "fresh" is present and unmapped, for device creation.
 	db_execute_prepared("INSERT INTO plugin_fabric_node (fabric_id, guid, node_type, port_count, description, host_id, presence, identity) VALUES (?, ?, 'ca', 1, ?, ?, ?, 'ok')", array($fabric, $guid, '<img src=x id="nodename' . $key . '">', $host, $key === 'unmapped' ? 'missing' : 'present'));
 	$nodes[$key] = (int) db_fetch_insert_id();
-	db_execute_prepared("INSERT INTO plugin_fabric_port (node_id, port_number, presence) VALUES (?, 1, 'present')", array($nodes[$key]));
+	// Active ports with a remote end, so a mapped device has indexes.
+	db_execute_prepared("INSERT INTO plugin_fabric_port (node_id, port_number, presence, logical_state, remote_guid, remote_port) VALUES (?, 1, 'present', 'active', '0x0002c90300a00000', 1)", array($nodes[$key]));
 }
 
 // A Fabric Port Traffic graph on the open device's port 1, as the New
@@ -317,6 +318,18 @@ db_execute_prepared('DELETE FROM graph_local WHERE id = ?', array($errorsGraph))
 // what will be added and changes nothing; the POST creates the device on
 // the fabric's poller, maps the node, and adds the data query.
 $jar             = perm_login('admin');
+
+// The template reinstall needs template import, which the admin holds.
+list(, $health) = perm_http($base . 'fabric_health.php', $jar);
+perm_expect(strpos($health, 'reinstall_templates') !== false && strpos($health, 'Cacti Objects') !== false, 'admin: the health page offers the reinstall while the query file is missing');
+perm_http($base . 'fabric_health.php?action=reinstall_templates', $jar);
+clearstatcache();
+perm_expect(!is_file($queryFile), 'admin: a reinstall sent as GET has no effect');
+perm_http($base . 'fabric_health.php', $jar, array('__csrf_magic' => perm_token($health), 'action' => 'reinstall_templates'));
+clearstatcache();
+perm_expect(is_file($queryFile) && (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM graph_templates WHERE hash = ?', array(md5('plugin_fabric:graph_template:Fabric Port Traffic'))) === 1, 'admin: a reinstall POST restores the query file without duplicating the templates');
+
+
 $before          = $hostCount();
 list(, $confirm) = perm_http($base . 'fabric_admin.php?action=create_device&id=' . $nodes['fresh'], $jar);
 perm_expect(strpos($confirm, 'Creating the device adds') !== false && $hostCount() === $before, 'admin: the creation page shows the plan and creates nothing');
@@ -326,7 +339,11 @@ perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($
 $created = $host_of($nodes['fresh']);
 $row     = db_fetch_row_prepared('SELECT hostname, poller_id, availability_method, snmp_version FROM host WHERE id = ?', array($created));
 perm_expect($created > 0 && $hostCount() === $before + 1 && is_array($row) && $row['hostname'] === '0002c90300b00050.fabric.invalid' && (int) $row['poller_id'] === 1 && (int) $row['availability_method'] === 0 && (int) $row['snmp_version'] === 0, 'admin: a creation POST makes one device with a reserved host name, no checks, and the fabric poller');
-perm_expect((int) db_fetch_cell_prepared('SELECT COUNT(*) FROM host_snmp_query WHERE host_id = ? AND snmp_query_id = ?', array($created, $query)) === 1, 'admin: the created device has the Fabric Port data query');
+perm_expect((int) db_fetch_cell_prepared('SELECT COUNT(*) FROM host_snmp_query WHERE host_id = ? AND snmp_query_id = ? AND reindex_method = 2', array($created, $query)) === 1, 'admin: the created device has the Fabric Port data query with Index Count Changed, whatever the site default');
+$cached = function () use ($created, $query) {
+	return (int) db_fetch_cell_prepared('SELECT COUNT(DISTINCT snmp_index) FROM host_snmp_cache WHERE host_id = ? AND snmp_query_id = ?', array($created, $query));
+};
+perm_expect($cached() === 1, 'admin: the created device lists the node\'s port (' . $cached() . ' indexes)');
 list(, $again) = perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($confirm), 'action' => 'create_device_confirm', 'id' => $nodes['fresh'], 'revision' => $node_row($nodes['fresh'])['revision']));
 perm_expect($hostCount() === $before + 1, 'admin: a second creation for a mapped node creates nothing');
 
@@ -340,20 +357,20 @@ perm_expect($host_of($nodes['fresh']) === $created, 'admin: mapping a node to a 
 db_execute_prepared('DELETE FROM host WHERE id = ?', array($other));
 db_execute('DELETE FROM poller WHERE id = 3');
 
+// Unmapping the last node empties the device's port list, which an empty
+// script query would not do on Cacti 1.2.31; the device itself stays.
+list(, $list) = perm_http($base . 'fabric_admin.php', $jar);
+perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($list), 'action' => 'save_node', 'id' => $nodes['fresh'], 'revision' => $node_row($nodes['fresh'])['revision'], 'host_id' => 0));
+perm_expect($host_of($nodes['fresh']) === 0 && $cached() === 0 && $hostCount() === $before + 1, 'admin: unmapping the last node of a device clears its port list and keeps the device (' . $cached() . ' indexes)');
+list(, $list) = perm_http($base . 'fabric_admin.php', $jar);
+perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($list), 'action' => 'save_node', 'id' => $nodes['fresh'], 'revision' => $node_row($nodes['fresh'])['revision'], 'host_id' => $created));
+perm_expect($host_of($nodes['fresh']) === $created && $cached() === 1, 'admin: mapping the node again lists its port again');
+
 // Deleting the device in Cacti clears the mapping through the device_remove hook.
 include_once('./lib/api_device.php');
 api_device_remove($created);
 perm_expect($host_of($nodes['fresh']) === 0, 'deleting a mapped device in Cacti unmaps its node');
 
-// The template reinstall needs template import, which the admin holds.
-list(, $health) = perm_http($base . 'fabric_health.php', $jar);
-perm_expect(strpos($health, 'reinstall_templates') !== false && strpos($health, 'Cacti Objects') !== false, 'admin: the health page offers the reinstall while the query file is missing');
-perm_http($base . 'fabric_health.php?action=reinstall_templates', $jar);
-clearstatcache();
-perm_expect(!is_file($queryFile), 'admin: a reinstall sent as GET has no effect');
-perm_http($base . 'fabric_health.php', $jar, array('__csrf_magic' => perm_token($health), 'action' => 'reinstall_templates'));
-clearstatcache();
-perm_expect(is_file($queryFile) && (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM graph_templates WHERE hash = ?', array(md5('plugin_fabric:graph_template:Fabric Port Traffic'))) === 1, 'admin: a reinstall POST restores the query file without duplicating the templates');
 
 unlink($jar);
 

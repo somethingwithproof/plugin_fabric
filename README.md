@@ -53,6 +53,8 @@ Out of scope: changing fabric state, replacing a fabric manager or subnet manage
 | UFM | UFM Enterprise REST API, phase 2; release matrix is a milestone 1 deliverable |
 | Thold, Maint | No changes required |
 
+Keep Cacti's script timeout at its default 25 seconds or higher. A sweep started by a data-query read limits tool execution to that timeout minus five seconds, reserving time to read the cache and reply. When the budget expires, the query serves the last current sample or unknown; the next cycle retries the sweep. This limit also applies to the PHP poller. A timeout of five seconds or less leaves no time to start a tool.
+
 ## Design
 
 - [docs/PLAN.md](docs/PLAN.md) is the full plan: architecture, upstream facts it depends on (with sources) and assumptions still to confirm, identity model, counter and link-state rules, security boundaries, performance arithmetic, testing, and risks.

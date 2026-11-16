@@ -346,6 +346,24 @@ switch ($phase) {
 		e2e_thold_alive();
 
 		break;
+	case 'thold_idle':
+		// Thold registers its worker as process thold/master. Wait, bounded,
+		// until no worker is registered at two checks a second apart, so a
+		// check phase never reads alert state from before the run.
+		$idle = 0;
+
+		for ($waited = 0; $waited < 60 && $idle < 2; $waited++) {
+			$busy = (int) db_fetch_cell("SELECT COUNT(*) FROM processes WHERE tasktype = 'thold' AND taskname = 'master'");
+			$idle = $busy === 0 ? $idle + 1 : 0;
+
+			if ($idle < 2) {
+				sleep(1);
+			}
+		}
+
+		e2e_expect($idle >= 2, 'the Thold worker finished within 60 seconds');
+
+		break;
 	case 'leftover':
 		// Rows Cacti's poller left in poller_output, next to the poller items
 		// of their data sources, for a log check that fails.
@@ -406,10 +424,21 @@ switch ($phase) {
 			}
 		}
 
-		$rows = array();
+		$rows  = array();
+		$reset = null;
 
-		foreach ($xport['data'] ?? array() as $row) {
-			$rows[] = $column !== null && isset($row[$column]) ? $row[$column] : null;
+		foreach (array_values($xport['data'] ?? array()) as $rowNumber => $row) {
+			$value  = $column !== null && isset($row[$column]) ? $row[$column] : null;
+			$rows[] = $value;
+
+			// The step that ends at the decrease (update 6).
+			// Recent RRDtool omits per-row timestamps; its metadata gives
+			// the first row's time and the constant step.
+			$timestamp = (int) ($row['timestamp'] ?? ((int) ($xport['meta']['start'] ?? 0) + $rowNumber * (int) ($xport['meta']['step'] ?? 0)));
+
+			if ($timestamp === $t0 + 6 * 300) {
+				$reset = $value;
+			}
 		}
 
 		$numbers = array_values(array_filter($rows, 'is_numeric'));
@@ -418,6 +447,7 @@ switch ($phase) {
 		});
 
 		e2e_expect($column !== null && count($numbers) >= 5, 'the Traffic graph exports a Received column (' . count($numbers) . ' values, legend ' . json_encode($xport['meta']['legend'] ?? null) . ')');
+		e2e_expect($reset !== null && !is_numeric($reset) && count($rows) - count($numbers) === 1, 'the step that ends at the reset is unknown, and it is the only unknown step (' . json_encode($reset) . ')');
 		e2e_expect($numbers !== array() && $spikes === array(), 'every Received value is 4000 bytes per second, the counter times 4 octets, and the reset leaves a gap, not a spike (' . implode(', ', array_slice($rows, 0, 12)) . ')');
 
 		break;

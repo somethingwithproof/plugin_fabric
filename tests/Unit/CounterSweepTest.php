@@ -121,11 +121,49 @@ beforeEach(function () {
 	$GLOBALS['__fabric_db_exec'] = [];
 	$GLOBALS['__fabric_db_rows'] = [];
 	$GLOBALS['__fabric_log']     = [];
+	$GLOBALS['__fabric_db_fail'] = [];
 });
 
 // REQ-SWEEP-003: one command per counter group, switch ports in chunks.
 afterEach(function () {
 	$GLOBALS['__fabric_scratch']->remove();
+});
+
+it('fails a port whose sample write is lost as storage, not as read', function () {
+	fabric_queue_ports([1 => 0, 2 => 0]);
+	$GLOBALS['__fabric_db_fail'] = ["counters = VALUES(counters), error = ''"];
+
+	$result = fabric_sweeper(new ScriptedRunner(FabricGenerator::forCas(1)))->run(fabric_sweep_fabric(), fabric_node('switch', 1), 'test');
+
+	expect($result?->error)->toBe(CommandError::Storage)
+		->and($result?->read)->toBe(0)
+		->and($result?->failed)->toBe(2);
+});
+
+it('starts no tool once the sweep deadline is spent, and caps each run at the time left', function () {
+	fabric_queue_ports([1 => 0]);
+	$dir    = (string) realpath($GLOBALS['__fabric_scratch']->dir);
+	$runner = new ScriptedRunner(FabricGenerator::forCas(1));
+	$late   = new CounterSweep(false, new FixedClock(1_800_000_000), $runner, Settings::fromRow(['fabric_tool_dir' => $dir]), (int) fileowner($dir), microtime(true) - 1);
+
+	expect($late->run(fabric_sweep_fabric(), fabric_node('switch', 1), 'test')?->read)->toBe(0)
+		->and($runner->argv)->toBe([]);
+
+	$limits = new class () implements ProcessRunner {
+		/** @var list<float> */
+		public array $timeouts = [];
+
+		public function run(Command $command, float $timeout, int $maxBytes): ProcessResult {
+			$this->timeouts[] = $timeout;
+
+			return new ProcessResult(0, '', '', false, false, true, 0.0);
+		}
+	};
+	$settings = Settings::fromRow(['fabric_command_timeout' => 60, 'fabric_tool_dir' => $dir]);
+	$tools    = new \Somethingwithproof\Fabric\ToolRunner($limits, $settings, microtime(true) + 8);
+	$tools->run((new \Somethingwithproof\Fabric\CommandBuilder($settings, fabric_sweep_fabric()))->counters(1, [1], false));
+
+	expect($limits->timeouts[0])->toBeLessThanOrEqual(8.0)->toBeGreaterThan(6.0);
 });
 
 it('runs no tool from a tool directory that fails the checks', function () {

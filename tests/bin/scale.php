@@ -100,6 +100,17 @@ foreach ($sizes as $adapters) {
 	$sampled = array_slice(array_values(array_filter($all, static function ($n) {
 		return $n->type === \Somethingwithproof\Fabric\NodeType::Adapter;
 	})), 0, $sample);
+	$health = (new \Somethingwithproof\Fabric\FabricHealthRepository(false))->find($fabricId);
+	// Link discovery adds every switch port. Only each adapter's linked
+	// port has a GUID in ibnetdiscover and can be joined to link discovery.
+	$expectedPorts = $adapters + 36 * (count($gen->nodes) - $adapters);
+
+	if ($health === null || ($health['discovery_error'] ?? 'missing') !== '' || ($health['links_error'] ?? 'missing') !== ''
+		|| (int) ($health['discovery_success'] ?? 0) === 0 || (int) ($health['links_success'] ?? 0) === 0
+		|| count($all) !== count($gen->nodes) || $ports !== $expectedPorts
+		|| count($sampled) !== min($sample, $adapters)) {
+		throw new RuntimeException('Scale measurement refused: topology import is incomplete: ' . json_encode(array('health' => $health, 'nodes' => count($all), 'ports' => $ports, 'expected_ports' => $expectedPorts, 'sampled' => count($sampled))));
+	}
 
 	$t = microtime(true);
 
@@ -109,6 +120,21 @@ foreach ($sizes as $adapters) {
 	}
 
 	$perNode = $sampled === array() ? 0.0 : (microtime(true) - $t) / count($sampled);
+	$sweeps = (new \Somethingwithproof\Fabric\NodeSweepRepository(false))->all();
+	$measured = array_filter($all, static function ($n) use ($switch, $sampled) {
+		return $n->guid->equals($switch) || in_array($n, $sampled, true);
+	});
+
+	foreach ($measured as $node) {
+		$result = $sweeps[$node->id] ?? array();
+
+		if (($result['outcome'] ?? '') !== 'completed' || ($result['error'] ?? 'missing') !== ''
+			|| (int) ($result['ports_total'] ?? 0) === 0
+			|| (int) $result['ports_read'] !== (int) $result['ports_total']
+			|| (int) $result['ports_failed'] !== 0 || (int) $result['ports_skipped'] !== 0) {
+			throw new RuntimeException('Scale measurement refused: incomplete counter sweep for node ' . $node->id);
+		}
+	}
 
 	// One switch mapped to a device: the data query answers from the cache.
 	db_execute("INSERT INTO host (description, hostname, poller_id, availability_method, snmp_version, status) VALUES ('scale switch', 'scale.invalid', 1, 0, 0, 3)");
@@ -166,8 +192,14 @@ foreach ($sizes as $adapters) {
 		// polls every item instead of skipping a host it reads as down.
 		db_execute('UPDATE plugin_fabric_node_sweep SET last_attempt = 0');
 		$log = $config['base_path'] . '/log/cacti.log';
+		clearstatcache(true, $log);
 		$at  = is_file($log) ? (int) filesize($log) : 0;
-		exec(escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg($config['base_path'] . '/poller.php') . ' --poller=1 --force 2>&1', $ignored);
+		exec(escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg($config['base_path'] . '/poller.php') . ' --poller=1 --force 2>&1', $output, $status);
+
+		if ($status !== 0) {
+			throw new RuntimeException('Scale poller failed: ' . implode("\n", $output));
+		}
+
 		$stats = '';
 
 		foreach (array_reverse(explode("\n", (string) file_get_contents($log, false, null, $at))) as $line) {
@@ -176,6 +208,10 @@ foreach ($sizes as $adapters) {
 
 				break;
 			}
+		}
+
+		if ($stats === '') {
+			throw new RuntimeException('Scale poller did not append SYSTEM STATS to the log');
 		}
 
 		$objects = array(

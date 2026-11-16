@@ -42,6 +42,7 @@ final class CounterSweep {
 		private readonly ProcessRunner $runner,
 		private readonly Settings $settings,
 		private readonly int $toolOwner = 0,
+		private readonly ?float $deadline = null,
 	) {
 	}
 
@@ -128,7 +129,7 @@ final class CounterSweep {
 		}
 
 		$builder  = new CommandBuilder($this->settings, $fabric);
-		$budget   = new SweepBudget($start + $this->settings->nodeBudget, $this->settings->failureBudget);
+		$budget   = new SweepBudget(min($start + $this->settings->nodeBudget, $this->deadline ?? INF), $this->settings->failureBudget);
 		$samples  = new SampleRepository($this->connection);
 		$previous = $samples->keyed($node->id);
 
@@ -164,8 +165,8 @@ final class CounterSweep {
 		$result->skipped = $result->total - $result->read - $result->failed;
 		$result->error   = $basic['error'];
 
-		if ($extended !== []) {
-			$this->group($builder, $fabric, $node, $extended, CounterGroup::Extended, $budget, $samples, $previous);
+		if ($extended !== [] && $this->group($builder, $fabric, $node, $extended, CounterGroup::Extended, $budget, $samples, $previous)['error'] === CommandError::Storage) {
+			$result->error = CommandError::Storage;
 		}
 	}
 
@@ -178,7 +179,7 @@ final class CounterSweep {
 	 * @return array{read: array<int, Counters>, failed: array<int, CommandError>, error: ?CommandError}
 	 */
 	private function group(CommandBuilder $builder, Fabric $fabric, Node $node, array $targets, CounterGroup $group, SweepBudget $budget, SampleRepository $samples, array $previous): array {
-		$tools   = new ToolRunner($this->runner, $this->settings);
+		$tools   = new ToolRunner($this->runner, $this->settings, $this->deadline);
 		$parser  = new PerfqueryParser();
 		$read    = [];
 		$failed  = [];
@@ -225,12 +226,22 @@ final class CounterSweep {
 			$now = $this->clock->now();
 
 			foreach ($got as $port => $counters) {
+				$delta = $samples->record($node->id, $counters, $fabric->backend, $now, $previous[$port . ':' . $group->value] ?? null);
+
+				// A sample the database did not take was not read: the
+				// port fails as storage, and so does the node sweep.
+				if ($delta === null) {
+					$failed[$port] = CommandError::Storage;
+					$last          = CommandError::Storage;
+
+					continue;
+				}
+
 				$read[$port] = $counters;
-				$delta       = $samples->record($node->id, $counters, $fabric->backend, $now, $previous[$port . ':' . $group->value] ?? null);
 
 				// A counter that went down is published as unknown until
 				// the next sample (REQ-DISC-002).
-				if ($delta !== null && $delta->reset !== []) {
+				if ($delta->reset !== []) {
 					Log::warning(sprintf('Fabric %d: node %s port %d: %s counters went down (%s); their values are unknown until the next sample', $fabric->id, $node->guid->text, $port, $group->value, implode(', ', $delta->reset)));
 				}
 			}
@@ -265,6 +276,11 @@ final class CounterSweep {
 
 		if ($pending !== []) {
 			$last ??= CommandError::Budget;
+		}
+
+		// A lost write outranks any later tool error in the node's result.
+		if (in_array(CommandError::Storage, $failed, true)) {
+			$last = CommandError::Storage;
 		}
 
 		return ['read' => $read, 'failed' => $failed, 'error' => $last];

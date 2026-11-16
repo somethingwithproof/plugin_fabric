@@ -20,7 +20,7 @@ fail=0
 as_root=""
 [ "$(id -u)" -eq 0 ] || as_root="sudo"
 
-php cli/plugin_manage.php --plugin=thold --plugin=maint --install --enable | tail -2
+php cli/plugin_manage.php --plugin=thold --plugin=maint --install --enable || exit 1
 
 phase() {
 	php plugins/fabric/tests/bin/e2e.php "$1" "$STATE" || fail=1
@@ -31,18 +31,19 @@ poll() {
 	sleep 2
 	php poller.php --poller=1 --force > /dev/null 2>&1 || { echo "FAIL the poller exited non-zero"; fail=1; }
 	# Thold checks thresholds in poller_thold.php, which its poller_bottom
-	# hook starts in the background. Run it in the foreground as well, so
-	# the check below sees its result; a run refused because the background
-	# one holds Thold's process lock leaves that one to finish.
-	sleep 3
-	php plugins/thold/poller_thold.php --force > /dev/null 2>&1
-	sleep 1
+	# hook starts in the background. Run it in the foreground as well; a
+	# run refused because the background one holds Thold's process lock
+	# exits at once, so wait, bounded, until no Thold worker is registered.
+	php plugins/thold/poller_thold.php --force > /dev/null 2>&1 || { echo "FAIL the Thold worker exited non-zero"; fail=1; }
+	phase thold_idle
 }
 
 phase tools
-$as_root install -d -o root -g root -m 0755 "$TOOLS"
+# A tool that is not installed could leave an older executable in place,
+# which the sweep would then run: stop before setup.
+$as_root install -d -o root -g root -m 0755 "$TOOLS" || { echo "FAIL could not create $TOOLS"; exit 1; }
 for tool in ibnetdiscover iblinkinfo perfquery; do
-	$as_root install -o root -g root -m 0755 "$STATE/tools/$tool" "$TOOLS/$tool"
+	$as_root install -o root -g root -m 0755 "$STATE/tools/$tool" "$TOOLS/$tool" || { echo "FAIL could not install the fake $tool"; exit 1; }
 done
 
 phase setup

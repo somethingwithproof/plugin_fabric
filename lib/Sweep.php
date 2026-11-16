@@ -30,6 +30,11 @@ namespace Somethingwithproof\Fabric;
  * wait, it returns and reads what the winner stores.
  *
  * There is no poller_bottom prefetch.
+ *
+ * A deadline (microtime(true)) bounds every tool run of this object's
+ * sweeps, the command timeout included; the script server passes one below
+ * Cacti's script timeout, so a get call returns in time with the last
+ * stored values or U (fabric_port_query()).
  */
 final class Sweep {
 	private readonly TopologySweep $topology;
@@ -43,9 +48,10 @@ final class Sweep {
 		private readonly int $pollerId,
 		private readonly bool $pluginEnabled,
 		int $toolOwner = 0,
+		?float $deadline = null,
 	) {
-		$this->topology = new TopologySweep($connection, $clock, $runner, $settings, $toolOwner);
-		$this->counters = new CounterSweep($connection, $clock, $runner, $settings, $toolOwner);
+		$this->topology = new TopologySweep($connection, $clock, $runner, $settings, $toolOwner, $deadline);
+		$this->counters = new CounterSweep($connection, $clock, $runner, $settings, $toolOwner, $deadline);
 	}
 
 	/**

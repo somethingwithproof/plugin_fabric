@@ -10,11 +10,15 @@
 #   sh run.sh <repo dir> <output dir>
 #
 # Needs root only for apt-get; no extra Linux capabilities, no /dev/infiniband.
-# Every tool runs under timeout, and the simulator and OpenSM under a
-# watchdog that kills them after 300 s, so a hung process fails the job
-# instead of holding the runner. (timeout cannot wrap those two: they are
-# stopped with SIGKILL, which timeout cannot pass on to its child.) tests/bin/check-ibsim-fixtures.php
-# then reads the output through the plugin's own parsers.
+# Every stage has its own bound and prints its elapsed time, so a stall names
+# the stage and shows the simulator and OpenSM logs: package install
+# (APT_LIMIT each step), the simulator start, OpenSM reaching
+# MASTER (OSM_LIMIT), the local port going Active (PORT_LIMIT), and each tool
+# (TOOL_LIMIT; a tool that times out stops the run). The worst case stays
+# under the job's docker wait. The simulator and OpenSM also run under a
+# watchdog: they are stopped with SIGKILL, which timeout cannot pass on to its
+# child. tests/bin/check-ibsim-fixtures.php then reads the output through the
+# plugin's own parsers.
 set -eu
 export DEBIAN_FRONTEND=noninteractive
 REPO=$1
@@ -24,15 +28,51 @@ TOPO_DIR=$REPO/tests/ibsim/topo
 # Exact archive versions, so a fixture change is a deliberate bump. Ubuntu
 # removes superseded security builds from the archive; bump these together
 # with the image digest when `apt-get install` reports a missing version.
-apt-get update -qq
-apt-get install -y -qq --no-install-recommends \
+APT_LIMIT=150
+OSM_LIMIT=60
+PORT_LIMIT=30
+TOOL_LIMIT=20
+DOG_LIMIT=240
+
+T0=$(date +%s)
+log() { echo "[$(( $(date +%s) - T0 ))s] $*"; }
+
+# die <message> [log file...]: stop with the stage named and the logs shown.
+die() {
+  msg=$1; shift
+  echo "FAIL $msg after $(( $(date +%s) - T0 ))s" >&2
+  for f in "$@"; do
+    [ -f "$f" ] || continue
+    echo "--- last lines of $f" >&2
+    tail -n 25 "$f" >&2
+  done
+  exit 1
+}
+
+# wait_for <seconds> <command...>: poll once a second until the command
+# succeeds; non-zero when the limit passes first.
+wait_for() {
+  end=$(( $(date +%s) + $1 )); shift
+  until "$@"; do
+    [ "$(date +%s)" -lt "$end" ] || return 1
+    sleep 1
+  done
+}
+
+log "apt-get update"
+timeout -k 5 "$APT_LIMIT" apt-get update -qq >/tmp/apt.log 2>&1 ||
+  die "apt-get update did not finish within ${APT_LIMIT}s" /tmp/apt.log
+log "apt-get install"
+timeout -k 5 "$APT_LIMIT" apt-get install -y -qq --no-install-recommends \
   ibsim-utils=0.10-2build1 \
   infiniband-diags=50.0-2ubuntu0.2 \
   libibumad3=50.0-2ubuntu0.2 \
-  opensm=3.3.23-2 >/dev/null
+  opensm=3.3.23-2 >/tmp/apt.log 2>&1 ||
+  die "apt-get install of the pinned packages failed or took over ${APT_LIMIT}s" /tmp/apt.log
 
 SO=$(find /usr/lib -name libumad2sim.so | head -n 1)
-[ -n "$SO" ] || { echo "libumad2sim.so not found" >&2; exit 1; }
+[ -n "$SO" ] || die "libumad2sim.so not found"
+log "packages installed; shim $SO"
 
 fail=0
 check() { # check <description> <command...>
@@ -46,33 +86,53 @@ run_scenario() {
   rm -rf "$d"; mkdir -p "$d/osm"
   # Attach at node01, as the plugin's poller attaches at a compute node.
   export SIM_HOST=node01
+  log "$sc: starting ibsim"
   ibsim -s "$TOPO_DIR/$sc.net" --no-console >"$d/ibsim.log" 2>&1 &
   sim_pid=$!
-  (sleep 300; kill -9 "$sim_pid" 2>/dev/null) &
+  (sleep "$DOG_LIMIT"; kill -9 "$sim_pid" 2>/dev/null) &
   sim_dog=$!
+  # ibsim prints no ready line; give it a moment, then require it to still
+  # be running. OpenSM reaching MASTER below proves it answers.
   sleep 3
-  kill -0 "$sim_pid" 2>/dev/null || { echo "ibsim exited; see $d/ibsim.log" >&2; exit 1; }
+  kill -0 "$sim_pid" 2>/dev/null || die "$sc: ibsim exited at start" "$d/ibsim.log"
+
+  log "$sc: starting OpenSM under the shim"
   OSM_TMP_DIR=$d/osm OSM_CACHE_DIR=$d/osm LD_PRELOAD=$SO \
     opensm -f "$d/osm.log" >"$d/opensm.out" 2>&1 &
   osm_pid=$!
-  (sleep 300; kill -9 "$osm_pid" 2>/dev/null) &
+  (sleep "$DOG_LIMIT"; kill -9 "$osm_pid" 2>/dev/null) &
   osm_dog=$!
+  stop() { kill -9 "$osm_pid" "$sim_pid" "$osm_dog" "$sim_dog" 2>/dev/null || true; }
+
+  osm_master() {
+    kill -0 "$osm_pid" 2>/dev/null || return 2
+    grep -q 'Entering MASTER state' "$d/opensm.out" "$d/osm.log" 2>/dev/null
+  }
+  wait_for "$OSM_LIMIT" osm_master || {
+    stop
+    kill -0 "$osm_pid" 2>/dev/null && why="did not reach MASTER within ${OSM_LIMIT}s" || why="exited before reaching MASTER"
+    die "$sc: OpenSM $why" "$d/opensm.out" "$d/osm.log" "$d/ibsim.log"
+  }
+  log "$sc: OpenSM is MASTER"
 
   export LD_PRELOAD=$SO
-  # Wait until OpenSM has swept the fabric and the local port is Active.
-  i=0
-  until timeout 10 ibstat 2>/dev/null | grep -q 'State: Active'; do
-    i=$((i + 1))
-    [ "$i" -le 60 ] || { echo "SM never brought the port Active" >&2; exit 1; }
-    sleep 1
-  done
+  port_active() { timeout -k 2 5 ibstat 2>/dev/null | grep -q 'State: Active'; }
+  wait_for "$PORT_LIMIT" port_active || {
+    stop
+    die "$sc: the local port did not go Active within ${PORT_LIMIT}s of MASTER" "$d/osm.log" "$d/ibsim.log"
+  }
+  log "$sc: local port Active"
 
   tool() { # tool <name> <command...>  (stdout, stderr, command and rc kept)
     n=$1; shift
     echo "$*" >"$d/$n.cmd"
     rc=0
-    timeout 60 "$@" >"$d/$n.out" 2>"$d/$n.err" || rc=$?
+    timeout -k 2 "$TOOL_LIMIT" "$@" >"$d/$n.out" 2>"$d/$n.err" || rc=$?
     echo "rc=$rc" >>"$d/$n.cmd"
+    if [ "$rc" -eq 124 ] || [ "$rc" -eq 137 ]; then
+      stop
+      die "$sc: '$*' did not finish within ${TOOL_LIMIT}s" "$d/$n.err" "$d/osm.log" "$d/ibsim.log"
+    fi
     return 0
   }
   tool ibstat ibstat
@@ -93,9 +153,10 @@ run_scenario() {
 
   # OpenSM does not exit on SIGTERM under the shim (it logs "exiting" and
   # lingers), so a `wait` here hangs. SIGKILL both; nothing is left to flush.
-  kill -9 "$osm_pid" "$sim_pid" "$osm_dog" "$sim_dog" 2>/dev/null || true
+  stop
   sleep 1
   unset LD_PRELOAD
+  log "$sc: tools done"
 
   # Smoke assertions on the raw output, so the job proves the simulation is
   # real before any plugin parser is involved. Counts are structural (node

@@ -215,6 +215,14 @@ it('answers never-sampled ports with U for every value, age included', function 
 	}
 });
 
+it('answers U and no indexes when the fabric record cannot be read, never a default interval', function () {
+	fabric_queue_host([fabric_port_row(2)], []);
+	unset($GLOBALS['__fabric_db_rows']['FROM plugin_fabric_fabric WHERE id']);
+
+	expect(fabric_query()->answer(5, 'get', 'age', FABRIC_NODE . ':2'))->toBe('U')
+		->and(fabric_query()->answer(5, 'index'))->toBe('');
+});
+
 it('starts the sweep once per device, only for get', function () {
 	fabric_queue_host([fabric_port_row(2)], []);
 	$swept = [];

@@ -193,7 +193,10 @@ final class DeviceProvisioner {
 		include_once($this->cactiPath . '/lib/data_query.php');
 
 		if ($this->objects->hasQuery($hostId)) {
-			run_data_query($hostId, $queryId);
+			// The device template attaches the query with the site's
+			// default reindex method; set Index Count Changed, which also
+			// reindexes the device.
+			api_device_dq_change($hostId, $queryId, DATA_QUERY_AUTOINDEX_INDEX_NUM_CHANGE);
 		} else {
 			api_device_dq_add($hostId, $queryId, DATA_QUERY_AUTOINDEX_INDEX_NUM_CHANGE);
 		}
@@ -203,12 +206,30 @@ final class DeviceProvisioner {
 	 * Reindex a device that has the data query, as after a node left it.
 	 * Data sources of ports that are gone stay until an operator removes
 	 * them (REQ-IDX-004).
+	 *
+	 * With no node left on the device the query lists no ports, and Cacti
+	 * 1.2.31 treats an empty script query as a failed reindex and keeps the
+	 * old cache. The device's Fabric Port cache is then emptied directly
+	 * through Cacti's own cache writer; graphs, data sources, and RRD files
+	 * stay.
 	 */
 	public function reindex(int $hostId): void {
-		if ($this->objects->device($hostId) !== null && $this->objects->hasQuery($hostId)) {
-			include_once($this->cactiPath . '/lib/data_query.php');
-			run_data_query($hostId, $this->objects->queryId());
+		if ($this->objects->device($hostId) === null || !$this->objects->hasQuery($hostId)) {
+			return;
 		}
+
+		include_once($this->cactiPath . '/lib/data_query.php');
+		$queryId = $this->objects->queryId();
+
+		if ($this->nodes->forHost($hostId) === []) {
+			$none  = [];
+			$empty = [];
+			data_query_update_host_cache_from_buffer($hostId, $queryId, $none, $empty);
+
+			return;
+		}
+
+		run_data_query($hostId, $queryId);
 	}
 
 	/**

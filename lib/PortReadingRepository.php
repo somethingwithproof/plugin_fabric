@@ -56,8 +56,16 @@ final class PortReadingRepository {
 		usort($nodes, static fn (Node $a, Node $b): int => [$a->guid->text, $a->fabricId] <=> [$b->guid->text, $b->fabricId]);
 
 		foreach ($nodes as $node) {
+			// Freshness depends on the fabric's own interval; without it no
+			// sample can be called current, so nothing is answered.
 			if (!isset($intervals[$node->fabricId])) {
-				$intervals[$node->fabricId] = $fabrics->find($node->fabricId)->interval ?? Fabric::DEFAULT_INTERVAL;
+				$fabric = $fabrics->find($node->fabricId);
+
+				if ($fabric === null) {
+					return null;
+				}
+
+				$intervals[$node->fabricId] = $fabric->interval;
 			}
 
 			$ports = $repository->ports($node->id);

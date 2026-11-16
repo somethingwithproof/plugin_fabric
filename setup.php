@@ -385,7 +385,7 @@ function fabric_port_query(bool $sweep): \Somethingwithproof\Fabric\PortQuery {
 	if ($sweep) {
 		$sweeper = static function (int $hostId): void {
 			try {
-				fabric_sweep()->forDevice($hostId);
+				fabric_sweep(null, microtime(true) + fabric_script_sweep_seconds())->forDevice($hostId);
 			} catch (\Throwable $e) {
 				\Somethingwithproof\Fabric\Log::error(sprintf('Sweep for device %d failed: %s', $hostId, \Somethingwithproof\Fabric\Log::excerpt($e->getMessage())));
 			}
@@ -401,7 +401,7 @@ function fabric_port_query(bool $sweep): \Somethingwithproof\Fabric\PortQuery {
  * disabled: core keeps plugin files reachable from the CLI after a disable,
  * so the enabled state is checked here, not assumed from hooks.
  */
-function fabric_sweep(?\Somethingwithproof\Fabric\ProcessRunner $runner = null): \Somethingwithproof\Fabric\Sweep {
+function fabric_sweep(?\Somethingwithproof\Fabric\ProcessRunner $runner = null, ?float $deadline = null): \Somethingwithproof\Fabric\Sweep {
 	global $config;
 
 	return new \Somethingwithproof\Fabric\Sweep(
@@ -410,6 +410,22 @@ function fabric_sweep(?\Somethingwithproof\Fabric\ProcessRunner $runner = null):
 		$runner ?? new \Somethingwithproof\Fabric\ProcRunner(),
 		fabric_settings(),
 		(int) ($config['poller_id'] ?? 1),
-		(new \Somethingwithproof\Fabric\Schema(false))->pluginEnabled()
+		(new \Somethingwithproof\Fabric\Schema(false))->pluginEnabled(),
+		deadline: $deadline
 	);
+}
+
+/**
+ * Seconds a sweep started by a script server get may take: Cacti's script
+ * timeout (Spine's limit for one script server call, default 25) less 5
+ * seconds for the cache read and the answer. Spine records NaN for a call
+ * past its timeout; the PHP
+ * poller has no such limit and would stall instead, so the bound applies
+ * to both. A sweep cut short is retried in the next cycle, and the get
+ * answers from the last stored sample, or U.
+ */
+function fabric_script_sweep_seconds(): float {
+	$timeout = (int) read_config_option('script_timeout');
+
+	return (float) max(0, ($timeout > 0 ? $timeout : 25) - 5);
 }

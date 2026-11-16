@@ -33,6 +33,7 @@ final class TopologySweep {
 		private readonly ProcessRunner $runner,
 		private readonly Settings $settings,
 		private readonly int $toolOwner = 0,
+		private readonly ?float $deadline = null,
 	) {
 	}
 
@@ -96,7 +97,7 @@ final class TopologySweep {
 		$fabrics = new FabricRepository($this->connection, $this->clock);
 		$owned   = static fn (): bool => $claims->holdsForCommit(ClaimRepository::TOPOLOGY, $fabric->id, $holder) && $fabrics->existsForCommit($fabric->id);
 		$health = new FabricHealthRepository($this->connection);
-		$tools  = new ToolRunner($this->runner, $this->settings);
+		$tools  = new ToolRunner($this->runner, $this->settings, $this->deadline);
 		$now    = $this->clock->now();
 
 		$probe = new PrivilegeProbe($this->settings->toolDir, toolOwner: $this->toolOwner);

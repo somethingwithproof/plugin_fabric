@@ -178,16 +178,15 @@ switch ($fabric_action) {
 
 		fabric_done($fabric_node !== null && $fabric_nodes->acceptConflict($fabric_node), __('The node identity was updated. It is swept again from the next cycle.', 'fabric'), __('The node identity was not changed.', 'fabric'));
 	case 'confirm_relink':
-		$fabric_relink = $fabric_relinks->find((int) get_filter_request_var('id'));
-		$fabric_ok     = $fabric_relinks->confirm((int) get_filter_request_var('id'), $fabric_access);
+		$fabric_moved = $fabric_relinks->confirm((int) get_filter_request_var('id'), $fabric_access);
 
-		// The device now lists the new node's ports; the old node's data
-		// sources stay with their history (REQ-MAP-005).
-		if ($fabric_ok && $fabric_relink !== null) {
-			$fabric_devices->reindex(\Somethingwithproof\Fabric\Row::int($fabric_relink, 'old_host_id'));
+		// The device that moved now lists the new node's ports; the old
+		// node's data sources stay with their history (REQ-MAP-005).
+		if ($fabric_moved !== null) {
+			$fabric_devices->reindex($fabric_moved);
 		}
 
-		fabric_done($fabric_ok, __('The device mapping moved to the new node.', 'fabric'), __('The proposal could not be confirmed. The nodes may have changed since it was made.', 'fabric'));
+		fabric_done($fabric_moved !== null, __('The device mapping moved to the new node.', 'fabric'), __('The proposal could not be confirmed. The nodes may have changed since it was made.', 'fabric'));
 	case 'reject_relink':
 		$fabric_relink = $fabric_relinks->find((int) get_filter_request_var('id'));
 

@@ -268,8 +268,16 @@ jobs:
         if [ -f cacti/log/cacti.log ]; then
           echo "== install and poller run"
           cat cacti/log/cacti.log
+          # Cacti 1.2.31 leaves incomplete rows after the replay serves U.
+          # Keep these core diagnostics visible; the replay still asserts
+          # the values and alerts. Do not allow them on newer core versions.
+          core_warnings='^$'
+          if [ "$(cat cacti/include/cacti_version)" = '1.2.31' ]; then
+            core_warnings="^[^ ]+ [0-9:]+ - POLLER: Poller\[1\] PID\[[0-9]+\] WARNING: (Poller Output Table not Empty\.  Issues: [0-9]+, DS\[[0-9, ]+\]|There are [0-9]+ Data Sources not returning all data leaving rows in the poller output table\.  Details to follow\.|Data Template 'Fabric Port [^']+' is impacted by lack of complete information)\$"
+            grep -E "$core_warnings" cacti/log/cacti.log || true
+          fi
           # The end to end run logs a counter reset as a warning on purpose.
-          if grep -E "FATAL:|ERROR:|WARNING:" cacti/log/cacti.log | grep -v "counters went down"; then
+          if grep -E "FATAL:|ERROR:|WARNING:" cacti/log/cacti.log | grep -v "counters went down" | grep -vE "$core_warnings" | grep -vE '^[^ ]+ [0-9:]+ - SYSTEM WARNING: Primary Admin account notifications disabled!  Unable to send administrative Email\.$'; then
             exit 1
           fi
         fi
@@ -462,16 +470,30 @@ jobs:
     - name: Check the parsers against the committed captures
       run: php tests/bin/check-ibsim-fixtures.php tests/fixtures/ibsim
 
+    # Detached, then bounded with docker wait: `timeout docker run` stops
+    # only the client, and the container's shell, as PID 1, ignores the
+    # SIGTERM it forwards. run.sh bounds each stage (about 8 minutes in the
+    # worst case); 540 s here leaves the job well inside its timeout.
     - name: Run the tools against the simulated fabric
+      timeout-minutes: 11
       run: |
         set -euo pipefail
         out="$RUNNER_TEMP/ibsim-out"
         mkdir -p "$out"
-        timeout 600 docker run --rm \
+        docker pull --quiet "$IBSIM_IMAGE" > /dev/null
+        docker run --detach --name ibsim-fabric \
           --volume "$GITHUB_WORKSPACE:/repo:ro" \
           --volume "$out:/out" \
           "$IBSIM_IMAGE" \
-          sh /repo/tests/ibsim/run.sh /repo /out
+          sh /repo/tests/ibsim/run.sh /repo /out > /dev/null
+        rc=$(timeout 540 docker wait ibsim-fabric) || rc=timeout
+        docker logs ibsim-fabric 2>&1
+        docker rm --force ibsim-fabric > /dev/null
+        if [ "$rc" = timeout ]; then
+          echo "::error::the ibsim run did not finish within 540 s; the last stage logged above is the one that stalled"
+          exit 1
+        fi
+        [ "$rc" = 0 ] || { echo "::error::the ibsim run exited $rc"; exit 1; }
         echo "IBSIM_OUT=$out" >> "$GITHUB_ENV"
 
     # LIDs and line order come from OpenSM and change between runs, so the
