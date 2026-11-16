@@ -221,7 +221,8 @@ final class CounterSweep {
 			if ($lid < 1 || $lid > CommandBuilder::MAX_LID) {
 				// A port without a unicast LID cannot be addressed.
 				foreach ($batch as $port) {
-					$failed[$port] = CommandError::Config;
+					$failed[$port] = $samples->recordFailure($node->id, $port, $group, CommandError::Config, $this->clock->now())
+						? CommandError::Config : CommandError::Storage;
 				}
 
 				$last    = CommandError::Config;

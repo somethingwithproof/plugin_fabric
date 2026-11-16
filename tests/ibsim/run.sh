@@ -67,7 +67,7 @@ timeout -k 5 "$APT_LIMIT" apt-get install -y -qq --no-install-recommends \
   ibsim-utils=0.10-2build1 \
   infiniband-diags=50.0-2ubuntu0.2 \
   libibumad3=50.0-2ubuntu0.2 \
-  opensm=3.3.23-2 gdb >/tmp/apt.log 2>&1 ||
+  opensm=3.3.23-2 strace >/tmp/apt.log 2>&1 ||
   die "apt-get install of the pinned packages failed or took over ${APT_LIMIT}s" /tmp/apt.log
 
 SO=$(find /usr/lib -name libumad2sim.so | head -n 1)
@@ -114,11 +114,9 @@ run_scenario() {
       cat "/proc/$pid/wchan" "/proc/$pid/syscall" 2>/dev/null || true
       ls -l "/proc/$pid/fd" 2>/dev/null || true
     done
-    OSM_TMP_DIR=$d/osm OSM_CACHE_DIR=$d/osm timeout -k 2 20 gdb --batch \
-      -ex "set environment LD_PRELOAD=$SO" -ex 'catch syscall exit' \
-      -ex 'catch syscall exit_group' -ex run -ex 'thread apply all bt' \
-      --args opensm -V -f "$d/osm-debug.log" >"$d/backtrace.log" 2>&1 || true
-    tail -n 100 "$d/backtrace.log"
+    OSM_TMP_DIR=$d/osm OSM_CACHE_DIR=$d/osm timeout -k 2 10 strace -ff \
+      -o "$d/trace" -E "LD_PRELOAD=$SO" opensm -V -f "$d/osm-debug.log" || true
+    for trace in "$d"/trace.*; do tail -n 35 "$trace"; done
     stop
     kill -0 "$osm_pid" 2>/dev/null && why="did not reach MASTER within ${OSM_LIMIT}s" || why="exited before reaching MASTER"
     die "$sc: OpenSM $why" "$d/opensm.out" "$d/osm.log" "$d/ibsim.log"

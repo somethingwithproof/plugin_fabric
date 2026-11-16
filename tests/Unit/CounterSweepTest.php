@@ -280,6 +280,27 @@ it('does nothing when another sweep holds the node', function () {
 		->and($runner->argv)->toBe([]);
 });
 
+it('keeps reading an addressable sibling across sweeps with a port without a LID', function () {
+	fabric_queue_ports([1 => 3, 2 => 0]);
+	$rows = [];
+	$dir = (string) realpath($GLOBALS['__fabric_scratch']->dir);
+	for ($cycle = 1; $cycle <= 4; $cycle++) {
+		$GLOBALS['__fabric_db_rows']['FROM plugin_fabric_sample'] = array_values($rows);
+		$GLOBALS['__fabric_db_exec'] = [];
+		$runner = new ScriptedRunner(FabricGenerator::forCas(1), capMask: 0);
+		$sweep = new CounterSweep(false, new FixedClock(1_800_000_000 + $cycle * 300), $runner, Settings::fromRow(['fabric_tool_dir' => $dir, 'fabric_failure_budget' => '1']), (int) fileowner($dir));
+		$result = $sweep->run(fabric_sweep_fabric(), fabric_node('ca', 0), 'cycle-' . $cycle);
+		expect($result?->read)->toBe(1)
+			->and($result->failed)->toBe(1)
+			->and($runner->argv)->toHaveCount(1);
+		foreach (fabric_writes('INSERT INTO plugin_fabric_sample') as $write) {
+			$p = $write['params'];
+			$rows[$p[1]] = ['port_number' => $p[1], 'counter_group' => $p[2], 'attempted_at' => $p[3]];
+		}
+		expect($rows[2]['attempted_at'])->toBe(1_800_000_000 + $cycle * 300);
+	}
+});
+
 it('logs the failure with a cleaned stderr excerpt and never the output', function () {
 	fabric_queue_ports([1 => 0, 2 => 0]);
 	$runner = new ScriptedRunner(FabricGenerator::forCas(1), failAt: [1 => 2]);
