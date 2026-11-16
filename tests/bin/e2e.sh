@@ -58,10 +58,29 @@ done
 phase graph
 
 # The discontinuity is logged as a warning on purpose; anything else at
-# warning level or above is a failure.
-if grep -E "FATAL:|ERROR:|WARNING:" log/cacti.log | grep -v "counters went down"; then
+# warning level or above is a failure. Cacti 1.2.31's poller leaves some of
+# these data sources' rows in poller_output each cycle, warns about it, and
+# tries to email the primary admin; the 1.2.x branch rewrote that deletion
+# and does not. On 1.2.31 only, those warnings are printed as notes, not
+# failures, and the rows are listed. The Thold and Maint checks above still
+# run in full.
+known='counters went down'
+if [ "$(cat include/cacti_version)" = '1.2.31' ]; then
+	known="$known|Poller Output Table not Empty|Data Sources not returning all data|is impacted by lack of complete information|Primary Admin account notifications disabled"
+	if grep -E "Poller Output Table not Empty|Data Sources not returning all data" log/cacti.log > /dev/null; then
+		echo "NOTE Cacti 1.2.31 left Fabric rows in poller_output:"
+		phase leftover
+	fi
+fi
+# Cacti 1.2.31 checks RRD file ownership right after an asynchronous create
+# when the poller runs as root, as the local replay does; CI does not.
+if [ "$(id -u)" = 0 ] && [ "$(cat include/cacti_version)" = '1.2.31' ]; then
+	known="$known|does not exist for ownership assignment"
+fi
+if grep -E "FATAL:|ERROR:|WARNING:" log/cacti.log | grep -Ev "$known"; then
 	echo "FAIL the Cacti log has errors"
 	fail=1
+	phase leftover
 fi
 
 exit $fail

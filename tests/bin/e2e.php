@@ -346,6 +346,14 @@ switch ($phase) {
 		e2e_thold_alive();
 
 		break;
+	case 'leftover':
+		// Rows Cacti's poller left in poller_output, next to the poller items
+		// of their data sources, for a log check that fails.
+		foreach (db_fetch_assoc('SELECT po.local_data_id, po.rrd_name, po.time, po.output, pi.rrd_num, pi.rrd_name AS item FROM poller_output AS po LEFT JOIN poller_item AS pi ON pi.local_data_id = po.local_data_id AND pi.rrd_name = po.rrd_name ORDER BY po.local_data_id, po.time') as $row) {
+			print 'leftover ' . json_encode($row) . PHP_EOL;
+		}
+
+		break;
 	case 'graph':
 		// The Traffic graph against hand-computed values: rebuild its RRD
 		// file with the data source definitions Cacti created, play known
