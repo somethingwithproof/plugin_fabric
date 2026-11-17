@@ -38,7 +38,7 @@ if (!fabric_page_start()) {
 	exit;
 }
 
-fabric_require_post('fabric_admin.php', array('save_fabric', 'delete_fabric_confirm', 'accept_conflict', 'confirm_relink', 'reject_relink', 'save_node'));
+fabric_require_post('fabric_admin.php', array('save_fabric', 'delete_fabric_confirm', 'accept_conflict', 'confirm_relink', 'reject_relink', 'save_node', 'create_device_confirm'));
 
 $fabric_clock   = new \Somethingwithproof\Fabric\SystemClock();
 $fabric_fabrics = new \Somethingwithproof\Fabric\FabricRepository(false, $fabric_clock);
@@ -52,7 +52,12 @@ $fabric_hosts   = new \Somethingwithproof\Fabric\HostRepository(false);
 $fabric_access  = new \Somethingwithproof\Fabric\DeviceAccess(static function (int $host) use ($fabric_hosts): bool {
 	return fabric_device_allowed($host) || $fabric_hosts->gone($host);
 });
-$fabric_page    = new \Somethingwithproof\Fabric\AdminPage($fabric_fabrics, $fabric_nodes, $fabric_relinks, $fabric_pollers, $fabric_hosts, $fabric_access);
+$fabric_objects = new \Somethingwithproof\Fabric\CactiObjectRepository(false);
+$fabric_devices = new \Somethingwithproof\Fabric\DeviceProvisioner($fabric_nodes, $fabric_fabrics, $fabric_objects, $fabric_access, $config['base_path']);
+// Creating a device needs Cacti's own device management permission, not
+// only Fabric Admin: the realm grants plugin records, not core objects.
+$fabric_create  = (bool) api_user_realm_auth('host.php');
+$fabric_page    = new \Somethingwithproof\Fabric\AdminPage($fabric_fabrics, $fabric_nodes, $fabric_relinks, $fabric_pollers, $fabric_hosts, $fabric_access, $fabric_devices, $fabric_objects, $fabric_create);
 $fabric_action  = (string) get_nfilter_request_var('action');
 
 /**
@@ -173,7 +178,15 @@ switch ($fabric_action) {
 
 		fabric_done($fabric_node !== null && $fabric_nodes->acceptConflict($fabric_node), __('The node identity was updated. It is swept again from the next cycle.', 'fabric'), __('The node identity was not changed.', 'fabric'));
 	case 'confirm_relink':
-		fabric_done($fabric_relinks->confirm((int) get_filter_request_var('id'), $fabric_access), __('The device mapping moved to the new node.', 'fabric'), __('The proposal could not be confirmed. The nodes may have changed since it was made.', 'fabric'));
+		$fabric_moved = $fabric_relinks->confirm((int) get_filter_request_var('id'), $fabric_access);
+
+		// The device that moved now lists the new node's ports; the old
+		// node's data sources stay with their history (REQ-MAP-005).
+		if ($fabric_moved !== null) {
+			$fabric_devices->reindex($fabric_moved);
+		}
+
+		fabric_done($fabric_moved !== null, __('The device mapping moved to the new node.', 'fabric'), __('The proposal could not be confirmed. The nodes may have changed since it was made.', 'fabric'));
 	case 'reject_relink':
 		$fabric_relink = $fabric_relinks->find((int) get_filter_request_var('id'));
 
@@ -191,9 +204,41 @@ switch ($fabric_action) {
 			fabric_denied();
 		}
 
-		$fabric_ok   = $fabric_node !== null && ($fabric_host === 0 || $fabric_host === $fabric_node->hostId || $fabric_hosts->exists($fabric_host));
+		$fabric_ok = $fabric_node !== null && ($fabric_host === 0 || $fabric_host === $fabric_node->hostId || $fabric_hosts->exists($fabric_host));
 
-		fabric_done($fabric_ok && $fabric_node !== null && $fabric_nodes->setHost($fabric_node, $fabric_host), __('The node mapping was saved.', 'fabric'), __('The node mapping was not changed.', 'fabric'));
+		if ($fabric_ok && $fabric_node !== null && $fabric_host !== 0) {
+			$fabric_refusal = $fabric_devices->mapRefusal($fabric_node, $fabric_host);
+
+			if ($fabric_refusal !== null) {
+				fabric_done(false, '', __('The node mapping was not changed. %s', $fabric_refusal, 'fabric'));
+			}
+		}
+
+		fabric_done($fabric_ok && $fabric_node !== null && $fabric_devices->map($fabric_node, $fabric_host), __('The node mapping was saved.', 'fabric'), __('The node mapping was not changed.', 'fabric'));
+	case 'create_device':
+		$fabric_node = $fabric_nodes->find((int) get_filter_request_var('id'));
+
+		if ($fabric_node === null) {
+			header('Location: fabric_admin.php');
+			exit;
+		}
+
+		if (!$fabric_create || !$fabric_access->node($fabric_node)) {
+			fabric_denied();
+		}
+
+		top_header();
+		$fabric_page->renderCreateConfirm($fabric_node);
+		bottom_footer();
+		exit;
+	case 'create_device_confirm':
+		$fabric_node = fabric_posted_node($fabric_nodes);
+
+		if ($fabric_node !== null && (!$fabric_create || !$fabric_access->node($fabric_node))) {
+			fabric_denied();
+		}
+
+		fabric_done($fabric_node !== null && $fabric_devices->create($fabric_node) > 0, __('The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page.', 'fabric'), __('No device was created. See the Cacti log.', 'fabric'));
 	case 'edit_fabric':
 		$fabric_id = (int) get_filter_request_var('id');
 

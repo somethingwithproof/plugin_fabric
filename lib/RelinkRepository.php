@@ -74,12 +74,14 @@ final class RelinkRepository {
 	 * other open proposal for either node is rejected with it. The device
 	 * check uses the same node rows whose revisions the writes require, so
 	 * a mapping changed in between makes the confirmation fail.
+	 *
+	 * @return int|null the device that moved (0 when the old node had none), or null when nothing changed
 	 */
-	public function confirm(int $id, DeviceAccess $access): bool {
+	public function confirm(int $id, DeviceAccess $access): ?int {
 		$row = db_fetch_row_prepared('SELECT * FROM plugin_fabric_relink WHERE id = ? AND state = ?', [$id, RelinkState::Proposed->value], true, $this->connection);
 
 		if (!is_array($row)) {
-			return false;
+			return null;
 		}
 
 		$nodes = new NodeRepository($this->connection);
@@ -87,7 +89,7 @@ final class RelinkRepository {
 		$new   = $nodes->find(Row::int($row, 'new_node_id'));
 
 		if ($old === null || $new === null || !$access->node($old) || !$access->node($new) || $old->presence !== Presence::Missing || $new->presence !== Presence::Present || $new->hostId !== 0) {
-			return false;
+			return null;
 		}
 
 		$now = $this->clock->now();
@@ -95,7 +97,7 @@ final class RelinkRepository {
 		$tx = new TransactionRepository($this->connection);
 
 		if (!$tx->begin()) {
-			return false;
+			return null;
 		}
 
 		$steps = [
@@ -109,7 +111,8 @@ final class RelinkRepository {
 			$tx->write($step[0], $step[1], $step[2] ?? null);
 		}
 
-		return $tx->commit();
+		// The revision guards make $old->hostId the device that moved.
+		return $tx->commit() ? $old->hostId : null;
 	}
 
 	public function reject(int $id): bool {

@@ -23,8 +23,8 @@ namespace Somethingwithproof\Fabric;
  * A port's identity: its node's GUID and its port number (REQ-CODE-011,
  * ADR 0003). Parsers work with tool text; everything after them uses this.
  *
- * The key form "<GUID>:<port>" is the planned data query index. It contains
- * a colon, so the milestone 3 query XML must use another output delimiter
+ * The key form "<GUID>:<port>" is the Fabric Port data query index. It
+ * contains a colon, so the query XML uses "!" as its output delimiter
  * (docs/research/cacti-core.md); nothing here or in Cacti's RRD file names
  * depends on the colon.
  */

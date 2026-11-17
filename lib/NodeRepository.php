@@ -43,7 +43,7 @@ final class NodeRepository {
 	}
 
 	/**
-	 * Nodes mapped to a Cacti device, for the script server path in M3.
+	 * Nodes mapped to a Cacti device, for the data query.
 	 *
 	 * @return list<Node>|null
 	 */
@@ -106,6 +106,24 @@ final class NodeRepository {
 	 */
 	public function setHost(Node $node, int $hostId): bool {
 		return $this->guarded($node, 'host_id = ?', [max(0, $hostId)]);
+	}
+
+	/**
+	 * Unmap every node of the given devices, which Cacti is deleting. Not
+	 * guarded by revision: the device is gone whatever a page showed.
+	 *
+	 * @param list<int> $hostIds
+	 */
+	public function unmapHosts(array $hostIds): bool {
+		$hostIds = array_values(array_filter($hostIds, static fn (int $id): bool => $id > 0));
+
+		if ($hostIds === []) {
+			return true;
+		}
+
+		$placeholders = implode(', ', array_fill(0, count($hostIds), '?'));
+
+		return db_execute_prepared("UPDATE plugin_fabric_node SET host_id = 0, revision = revision + 1 WHERE host_id IN ($placeholders)", $hostIds, true, $this->connection) !== false;
 	}
 
 	/**

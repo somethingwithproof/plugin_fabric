@@ -121,11 +121,49 @@ beforeEach(function () {
 	$GLOBALS['__fabric_db_exec'] = [];
 	$GLOBALS['__fabric_db_rows'] = [];
 	$GLOBALS['__fabric_log']     = [];
+	$GLOBALS['__fabric_db_fail'] = [];
 });
 
 // REQ-SWEEP-003: one command per counter group, switch ports in chunks.
 afterEach(function () {
 	$GLOBALS['__fabric_scratch']->remove();
+});
+
+it('fails a port whose sample write is lost as storage, not as read', function () {
+	fabric_queue_ports([1 => 0, 2 => 0]);
+	$GLOBALS['__fabric_db_fail'] = ["counters = VALUES(counters), error = ''"];
+
+	$result = fabric_sweeper(new ScriptedRunner(FabricGenerator::forCas(1)))->run(fabric_sweep_fabric(), fabric_node('switch', 1), 'test');
+
+	expect($result?->error)->toBe(CommandError::Storage)
+		->and($result?->read)->toBe(0)
+		->and($result?->failed)->toBe(2);
+});
+
+it('starts no tool once the sweep deadline is spent, and caps each run at the time left', function () {
+	fabric_queue_ports([1 => 0]);
+	$dir    = (string) realpath($GLOBALS['__fabric_scratch']->dir);
+	$runner = new ScriptedRunner(FabricGenerator::forCas(1));
+	$late   = new CounterSweep(false, new FixedClock(1_800_000_000), $runner, Settings::fromRow(['fabric_tool_dir' => $dir]), (int) fileowner($dir), microtime(true) - 1);
+
+	expect($late->run(fabric_sweep_fabric(), fabric_node('switch', 1), 'test')?->read)->toBe(0)
+		->and($runner->argv)->toBe([]);
+
+	$limits = new class () implements ProcessRunner {
+		/** @var list<float> */
+		public array $timeouts = [];
+
+		public function run(Command $command, float $timeout, int $maxBytes): ProcessResult {
+			$this->timeouts[] = $timeout;
+
+			return new ProcessResult(0, '', '', false, false, true, 0.0);
+		}
+	};
+	$settings = Settings::fromRow(['fabric_command_timeout' => 60, 'fabric_tool_dir' => $dir]);
+	$tools    = new \Somethingwithproof\Fabric\ToolRunner($limits, $settings, microtime(true) + 8);
+	$tools->run((new \Somethingwithproof\Fabric\CommandBuilder($settings, fabric_sweep_fabric()))->counters(1, [1], false));
+
+	expect($limits->timeouts[0])->toBeLessThanOrEqual(8.0)->toBeGreaterThan(6.0);
 });
 
 it('runs no tool from a tool directory that fails the checks', function () {
@@ -242,6 +280,27 @@ it('does nothing when another sweep holds the node', function () {
 		->and($runner->argv)->toBe([]);
 });
 
+it('keeps reading an addressable sibling across sweeps with a port without a LID', function () {
+	fabric_queue_ports([1 => 3, 2 => 0]);
+	$rows = [];
+	$dir = (string) realpath($GLOBALS['__fabric_scratch']->dir);
+	for ($cycle = 1; $cycle <= 4; $cycle++) {
+		$GLOBALS['__fabric_db_rows']['FROM plugin_fabric_sample'] = array_values($rows);
+		$GLOBALS['__fabric_db_exec'] = [];
+		$runner = new ScriptedRunner(FabricGenerator::forCas(1), capMask: 0);
+		$sweep = new CounterSweep(false, new FixedClock(1_800_000_000 + $cycle * 300), $runner, Settings::fromRow(['fabric_tool_dir' => $dir, 'fabric_failure_budget' => '1']), (int) fileowner($dir));
+		$result = $sweep->run(fabric_sweep_fabric(), fabric_node('ca', 0), 'cycle-' . $cycle);
+		expect($result?->read)->toBe(1)
+			->and($result->failed)->toBe(1)
+			->and($runner->argv)->toHaveCount(1);
+		foreach (fabric_writes('INSERT INTO plugin_fabric_sample') as $write) {
+			$p = $write['params'];
+			$rows[$p[1]] = ['port_number' => $p[1], 'counter_group' => $p[2], 'attempted_at' => $p[3]];
+		}
+		expect($rows[2]['attempted_at'])->toBe(1_800_000_000 + $cycle * 300);
+	}
+});
+
 it('logs the failure with a cleaned stderr excerpt and never the output', function () {
 	fabric_queue_ports([1 => 0, 2 => 0]);
 	$runner = new ScriptedRunner(FabricGenerator::forCas(1), failAt: [1 => 2]);
@@ -304,4 +363,56 @@ it('rolls link states back when the sweep no longer holds its claim at commit', 
 	expect($applied)->toBeNull()
 		->and(fabric_writes('ROLLBACK'))->toHaveCount(1)
 		->and(fabric_writes('COMMIT'))->toBe([]);
+});
+
+it('resumes with ports left unread by a previous capped sweep', function () {
+	fabric_queue_ports([1 => 3, 2 => 4]);
+	$runner = new ScriptedRunner(FabricGenerator::forCas(1), modes: [3 => 'timeout', 4 => 'timeout']);
+	fabric_sweeper($runner, ['fabric_failure_budget' => '1'])->run(fabric_sweep_fabric(), fabric_node('ca', 0), 'test');
+	$attempt = fabric_writes('INSERT INTO plugin_fabric_sample')[0]['params'];
+	$GLOBALS['__fabric_db_rows']['FROM plugin_fabric_sample'] = [[
+		'port_number' => $attempt[1], 'counter_group' => $attempt[2], 'attempted_at' => $attempt[3],
+	]];
+	$next = new ScriptedRunner(FabricGenerator::forCas(1));
+	fabric_sweeper($next)->run(fabric_sweep_fabric(), fabric_node('ca', 0), 'next');
+	expect(array_slice($runner->argv[0], -2))->toBe(['3', '1'])
+		->and(array_slice($next->argv[0], -2))->toBe(['4', '2']);
+});
+
+it('reads extended counters before repeating a newer basic sweep', function () {
+	fabric_queue_ports([1 => 0, 2 => 0]);
+	$GLOBALS['__fabric_db_rows']['FROM plugin_fabric_sample'] = [
+		['port_number' => 1, 'counter_group' => 'basic', 'attempted_at' => 100, 'cap_mask' => 0x1600],
+		['port_number' => 2, 'counter_group' => 'basic', 'attempted_at' => 100, 'cap_mask' => 0x1600],
+		['port_number' => 1, 'counter_group' => 'extended', 'attempted_at' => 50],
+	];
+	$runner = new ScriptedRunner(FabricGenerator::forCas(1));
+	fabric_sweeper($runner)->run(fabric_sweep_fabric(), fabric_node('switch', 1), 'test');
+	expect($runner->argv[0])->toContain('-x')
+		->and(end($runner->argv[0]))->toBe('2,1')
+		->and($runner->argv[1])->not->toContain('-x');
+});
+
+it('reserves counter time when topology is due on every script-server call', function () {
+	fabric_queue_ports([1 => 0]);
+	$node = ['id' => 9, 'fabric_id' => 1, 'guid' => '0x0002c90300a00000', 'node_type' => 'switch', 'lid' => 1, 'presence' => 'present', 'identity' => 'ok'];
+	$GLOBALS['__fabric_db_rows']['FROM plugin_fabric_node WHERE host_id'] = [$node];
+	$GLOBALS['__fabric_db_rows']['FROM plugin_fabric_node WHERE id = '] = [$node];
+	$GLOBALS['__fabric_db_rows']['FROM plugin_fabric_fabric'] = [['id' => 1, 'name' => 'ib0', 'backend' => 'diags', 'poller_id' => 1, 'sweep_interval' => 300, 'adapter' => 'mlx5_0', 'adapter_port' => 1, 'admin_state' => 'enabled']];
+	$runner = new class () implements ProcessRunner {
+		public array $limits = [];
+		public function run(Command $command, float $timeout, int $maxBytes): ProcessResult {
+			$this->limits[$command->tool->value][] = $timeout;
+			return new ProcessResult(null, '', '', true, false, true, $timeout);
+		}
+	};
+	$dir = (string) realpath($GLOBALS['__fabric_scratch']->dir);
+	foreach (['ibnetdiscover', 'iblinkinfo', 'perfquery'] as $tool) {
+		file_put_contents($dir . '/' . $tool, '');
+		chmod($dir . '/' . $tool, 0755);
+	}
+	$sweep = new \Somethingwithproof\Fabric\Sweep(false, new FixedClock(1_800_000_000), $runner, Settings::fromRow(['fabric_tool_dir' => $dir, 'fabric_command_timeout' => 60]), 1, true, (int) fileowner($dir), microtime(true) + 12);
+	$sweep->forDevice(7);
+	expect($runner->limits['ibnetdiscover'][0])->toBeLessThanOrEqual(4.0)
+		->and($runner->limits['perfquery'][0])->toBeGreaterThan(8.0);
 });

@@ -96,6 +96,13 @@ if (!function_exists('db_execute_prepared')) {
 		$GLOBALS['__fabric_db_exec'][] = ['sql' => $sql, 'params' => $params];
 		$GLOBALS['__fabric_insert_id']  = str_starts_with(ltrim($sql), 'INSERT') ? count($GLOBALS['__fabric_db_exec']) : 0;
 
+		// A test makes writes containing a needle fail, as a lost database would.
+		foreach ($GLOBALS['__fabric_db_fail'] ?? [] as $needle) {
+			if (str_contains($sql, $needle)) {
+				return false;
+			}
+		}
+
 		return true;
 	}
 }

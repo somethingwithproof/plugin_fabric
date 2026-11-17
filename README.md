@@ -2,7 +2,7 @@
 
 A Cacti 1.2 plugin that brings InfiniBand port counters, link width and speed, and congestion indicators into Cacti as ordinary devices, data sources, and graphs. A link that trained at 1X instead of 4X then shows up as a graph and a Thold alert next to the host it serves, under Cacti's permissions, with Maint able to suppress it.
 
-> **Status: in development, no release yet.** Milestone 2 (foundation) is merged on `main`. Milestone 1 confirmed the design against documentation and upstream source (PR #71); the results, with sources, are in [docs/research/](docs/research/). Milestone 2 adds the plugin foundation:
+> **Status: in development, no release yet.** Milestone 2 (foundation) is merged on `main`, and milestone 3 (Cacti objects and alerting) is in review. Milestone 1 confirmed the design against documentation and upstream source (PR #71); the results, with sources, are in [docs/research/](docs/research/). Milestone 2 adds the plugin foundation:
 >
 > - install, upgrade, uninstall, and the PHP 8.2 guard
 > - two realms and the settings
@@ -12,7 +12,15 @@ A Cacti 1.2 plugin that brings InfiniBand port counters, link width and speed, a
 > - link state and the counter sweep cache
 > - inventory, admin, and health pages
 >
-> It creates no Cacti devices, data sources, graphs, or alerts yet; those are milestone 3. A fabric can be swept only from the main poller until remote data collectors are supported in phase 3. It has been tested only against fake tools, never on an InfiniBand fabric. Checks that need a fabric remain open in each research page's live-checks table. This project is not affiliated with the Cacti project.
+> Milestone 3 adds the Cacti objects:
+>
+> - device, data, and graph templates shipped as Cacti template XML, and the "Fabric Port" data query
+> - mapping a node to a Cacti device, or creating one on confirmation ([ADR 0010](docs/decisions/0010-one-device-per-node.md))
+> - counter data sources for graphs, and GAUGE link state and rate data sources for Thold ([ADR 0011](docs/decisions/0011-derive-counters-and-gauge-alert-values.md))
+> - discontinuity handling and saturated basic counters read as unknown ([ADR 0012](docs/decisions/0012-saturated-basic-counters-read-as-unknown.md)), counter validity and graph links on the port page, and a congestion ranking
+> - an end-to-end test with unchanged Thold v1.8.2 and Maint v1.3, and a CI job that runs the real diagnostic tools against a simulated fabric
+>
+> A fabric can be swept only from the main poller until remote data collectors are supported in phase 3. It has been tested against fake tools and the ibsim fabric simulator, never on an InfiniBand fabric. Checks that need a fabric remain open in each research page's live-checks table. This project is not affiliated with the Cacti project.
 
 ## Why
 
@@ -44,6 +52,8 @@ Out of scope: changing fabric state, replacing a fabric manager or subnet manage
 | InfiniBand tools | infiniband-diags from rdma-core; output formats checked against v66.0 source |
 | UFM | UFM Enterprise REST API, phase 2; release matrix is a milestone 1 deliverable |
 | Thold, Maint | No changes required |
+
+Keep Cacti's script timeout at its default 25 seconds or higher. A sweep started by a data-query read limits tool execution to that timeout minus five seconds, reserving time to read the cache and reply. When the budget expires, the query serves the last current sample or unknown; the next cycle retries the sweep. This limit also applies to the PHP poller. A timeout of five seconds or less leaves no time to start a tool.
 
 ## Design
 

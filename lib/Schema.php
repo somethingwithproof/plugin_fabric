@@ -39,13 +39,17 @@ namespace Somethingwithproof\Fabric;
  * hooks, and the enabled check in fabric_sweep_allowed() stop them.
  */
 final class Schema {
-	public const VERSION = 1;
+	public const VERSION = 2;
 
 	public const HOOKS = [
 		'config_arrays'        => 'fabric_config_arrays',
 		'config_settings'      => 'fabric_config_settings',
 		'draw_navigation_text' => 'fabric_draw_navigation_text',
+		'device_remove'        => 'fabric_device_remove',
 	];
+
+	/** Columns version 2 adds to plugin_fabric_sample, for rates and discontinuities. */
+	private const SAMPLE_V2 = ['previous_at', 'rates', 'reset', 'discontinuities', 'discontinuity_at'];
 
 	private const PLUGIN  = 'fabric';
 	private const SETTING = 'fabric_schema_version';
@@ -142,6 +146,7 @@ final class Schema {
 	private function migrations(): array {
 		return [
 			1 => fn (): bool => $this->createTables(self::tables()),
+			2 => fn (): bool => $this->addColumns('plugin_fabric_sample', self::SAMPLE_V2),
 		];
 	}
 
@@ -170,6 +175,47 @@ final class Schema {
 
 			if (!$this->tableExists($table)) {
 				Log::error(sprintf('Unable to create table %s', $table));
+
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Add columns of a table definition that an older version created
+	 * without them. Plain ALTER TABLE, not api_plugin_db_add_column(): core
+	 * records that one for uninstall and would drop the column from a table
+	 * an administrator chose to keep.
+	 *
+	 * @param list<string> $names
+	 */
+	private function addColumns(string $table, array $names): bool {
+		$columns = self::tables()[$table]['columns'] ?? [];
+
+		foreach (is_array($columns) ? $columns : [] as $column) {
+			$name = is_array($column) ? Row::string($column, 'name') : '';
+
+			if (!is_array($column) || !in_array($name, $names, true)) {
+				continue;
+			}
+
+			$exists = db_fetch_cell_prepared('SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND COLUMN_NAME = ?', [$table, $name], '', true, $this->connection);
+
+			if ($exists === false) {
+				return false;
+			}
+
+			if ((int) $exists > 0) {
+				continue;
+			}
+
+			// The names, types, and defaults are this class's constants.
+			$sql = sprintf("ALTER TABLE `%s` ADD COLUMN `%s` %s%s NOT NULL DEFAULT '%s'", $table, $name, Row::string($column, 'type'), !empty($column['unsigned']) ? ' unsigned' : '', Row::string($column, 'default'));
+
+			if (db_execute_prepared($sql, [], true, $this->connection) === false) {
+				Log::error(sprintf('Unable to add column %s to %s', $name, $table));
 
 				return false;
 			}
@@ -302,6 +348,16 @@ final class Schema {
 					$count('cap_mask2'),
 					$text('counters', 2048),
 					$text('error', 16),
+					// Version 2: the observation time of the sample the
+					// rates were computed against, the rates (JSON counter
+					// => per second or null), the counters that went down
+					// at this sample, and the count and time of the last
+					// discontinuity (CounterDelta).
+					$time('previous_at'),
+					$text('rates', 2048),
+					$text('reset', 1024),
+					$count('discontinuities'),
+					$time('discontinuity_at'),
 				],
 				'primary' => 'node_id`,`port_number`,`counter_group',
 			],

@@ -38,6 +38,15 @@ it('boots and loads plugin classes on a supported runtime', function () {
 		->and(class_exists(Log::class))->toBeTrue();
 });
 
+it('reserves reply time even when the configured script timeout is short', function (string $timeout, float $budget) {
+	$GLOBALS['__fabric_options']['script_timeout'] = $timeout;
+	try {
+		expect(fabric_script_sweep_seconds())->toBe($budget);
+	} finally {
+		unset($GLOBALS['__fabric_options']['script_timeout']);
+	}
+})->with([['', 20.0], ['25', 20.0], ['10', 5.0], ['5', 0.0], ['1', 0.0]]);
+
 it('does not refuse or log on a supported runtime', function () {
 	expect(fabric_refuse_unsupported())->toBeFalse()
 		->and($GLOBALS['__fabric_log'])->toBe([]);
@@ -72,5 +81,6 @@ it('registers no poller_bottom hook: sweeps start lazily (ADR 0008)', function (
 		'config_arrays'        => 'fabric_config_arrays',
 		'config_settings'      => 'fabric_config_settings',
 		'draw_navigation_text' => 'fabric_draw_navigation_text',
+		'device_remove'        => 'fabric_device_remove',
 	]);
 });

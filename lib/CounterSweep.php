@@ -42,6 +42,7 @@ final class CounterSweep {
 		private readonly ProcessRunner $runner,
 		private readonly Settings $settings,
 		private readonly int $toolOwner = 0,
+		private readonly ?float $deadline = null,
 	) {
 	}
 
@@ -127,12 +128,35 @@ final class CounterSweep {
 			return;
 		}
 
-		$builder = new CommandBuilder($this->settings, $fabric);
-		$budget  = new SweepBudget($start + $this->settings->nodeBudget, $this->settings->failureBudget);
-		$samples = new SampleRepository($this->connection);
+		$builder  = new CommandBuilder($this->settings, $fabric);
+		$budget   = new SweepBudget(min($start + $this->settings->nodeBudget, $this->deadline ?? INF), $this->settings->failureBudget);
+		$samples  = new SampleRepository($this->connection);
+		$previous = $samples->keyed($node->id);
+
+		if ($previous === null) {
+			$result->error   = CommandError::Storage;
+			$result->skipped = $result->total;
+
+			return;
+		}
+
+		// Existing attempt timestamps are the resume position. A capped run
+		// starts with the least recently attempted ports and counter group.
+		$extended = [];
+		foreach ($targets as $port => $lid) {
+			$mask = Row::int($previous[$port . ':basic'] ?? [], 'cap_mask');
+			if (($mask & (Counters::CAP_EXT_WIDTH | Counters::CAP_EXT_WIDTH_NOIETF)) !== 0) {
+				$extended[$port] = $lid;
+			}
+		}
+		$extendedFirst = $extended !== [] && $this->oldest($extended, $previous, CounterGroup::Extended) < $this->oldest($targets, $previous, CounterGroup::Basic);
+		$extendedResult = null;
 
 		try {
-			$basic = $this->group($builder, $fabric, $node, $targets, CounterGroup::Basic, $budget, $samples);
+			if ($extendedFirst) {
+				$extendedResult = $this->group($builder, $fabric, $node, $extended, CounterGroup::Extended, $budget, $samples, $previous);
+			}
+			$basic = $this->group($builder, $fabric, $node, $targets, CounterGroup::Basic, $budget, $samples, $previous);
 		} catch (\InvalidArgumentException $e) {
 			// Only the settings or the fabric record can make the first
 			// command invalid; nothing was run.
@@ -142,8 +166,6 @@ final class CounterSweep {
 
 			return;
 		}
-
-		$extended = [];
 
 		foreach ($basic['read'] as $port => $counters) {
 			if ($counters->extendedSupported()) {
@@ -156,25 +178,41 @@ final class CounterSweep {
 		$result->skipped = $result->total - $result->read - $result->failed;
 		$result->error   = $basic['error'];
 
-		if ($extended !== []) {
-			$this->group($builder, $fabric, $node, $extended, CounterGroup::Extended, $budget, $samples);
+		if (!$extendedFirst && $extended !== []) {
+			$extendedResult = $this->group($builder, $fabric, $node, $extended, CounterGroup::Extended, $budget, $samples, $previous);
 		}
+
+		if (($extendedResult['error'] ?? null) === CommandError::Storage) {
+			$result->error = CommandError::Storage;
+		}
+	}
+
+	/**
+	 * @param non-empty-array<int, int> $targets
+	 * @param array<string, array<array-key, mixed>> $previous
+	 */
+	private function oldest(array $targets, array $previous, CounterGroup $group): int {
+		return min(array_map(static fn (int $port): int => Row::int($previous[$port . ':' . $group->value] ?? [], 'attempted_at'), array_keys($targets)));
 	}
 
 	/**
 	 * Read one counter group for the given ports and record every result.
 	 *
-	 * @param array<int, int> $targets port number => LID
+	 * @param array<int, int>                         $targets  port number => LID
+	 * @param array<string, array<array-key, mixed>> $previous stored rows, "port:group" => row
 	 *
 	 * @return array{read: array<int, Counters>, failed: array<int, CommandError>, error: ?CommandError}
 	 */
-	private function group(CommandBuilder $builder, Fabric $fabric, Node $node, array $targets, CounterGroup $group, SweepBudget $budget, SampleRepository $samples): array {
-		$tools   = new ToolRunner($this->runner, $this->settings);
+	private function group(CommandBuilder $builder, Fabric $fabric, Node $node, array $targets, CounterGroup $group, SweepBudget $budget, SampleRepository $samples, array $previous): array {
+		$tools   = new ToolRunner($this->runner, $this->settings, $this->deadline);
 		$parser  = new PerfqueryParser();
 		$read    = [];
 		$failed  = [];
 		$last    = null;
 		$pending = array_keys($targets);
+		usort($pending, static fn (int $a, int $b): int =>
+			Row::int($previous[$a . ':' . $group->value] ?? [], 'attempted_at')
+			<=> Row::int($previous[$b . ':' . $group->value] ?? [], 'attempted_at'));
 
 		while ($pending !== [] && !$budget->spent()) {
 			$lid   = $targets[$pending[0]];
@@ -183,7 +221,8 @@ final class CounterSweep {
 			if ($lid < 1 || $lid > CommandBuilder::MAX_LID) {
 				// A port without a unicast LID cannot be addressed.
 				foreach ($batch as $port) {
-					$failed[$port] = CommandError::Config;
+					$failed[$port] = $samples->recordFailure($node->id, $port, $group, CommandError::Config, $this->clock->now())
+						? CommandError::Config : CommandError::Storage;
 				}
 
 				$last    = CommandError::Config;
@@ -216,8 +255,24 @@ final class CounterSweep {
 			$now = $this->clock->now();
 
 			foreach ($got as $port => $counters) {
+				$delta = $samples->record($node->id, $counters, $fabric->backend, $now, $previous[$port . ':' . $group->value] ?? null);
+
+				// A sample the database did not take was not read: the
+				// port fails as storage, and so does the node sweep.
+				if ($delta === null) {
+					$failed[$port] = CommandError::Storage;
+					$last          = CommandError::Storage;
+
+					continue;
+				}
+
 				$read[$port] = $counters;
-				$samples->record($node->id, $counters, $fabric->backend, $now);
+
+				// A counter that went down is published as unknown until
+				// the next sample (REQ-DISC-002).
+				if ($delta->reset !== []) {
+					Log::warning(sprintf('Fabric %d: node %s port %d: %s counters went down (%s); their values are unknown until the next sample', $fabric->id, $node->guid->text, $port, $group->value, implode(', ', $delta->reset)));
+				}
 			}
 
 			$tried = $batch;
@@ -250,6 +305,11 @@ final class CounterSweep {
 
 		if ($pending !== []) {
 			$last ??= CommandError::Budget;
+		}
+
+		// A lost write outranks any later tool error in the node's result.
+		if (in_array(CommandError::Storage, $failed, true)) {
+			$last = CommandError::Storage;
 		}
 
 		return ['read' => $read, 'failed' => $failed, 'error' => $last];

@@ -15,7 +15,7 @@ Status: Accepted (2026-11-14)
 
 ## Consequences
 
-- Narrow basic counters can reach their cap and stay there. The plugin prefers 64-bit counters where supported and shows capped counters as unknown (see the saturated-counter decision).
+- Narrow basic counters can reach their cap and stay there. The plugin prefers 64-bit counters where supported and shows capped counters as unknown ([ADR 0012](0012-saturated-basic-counters-read-as-unknown.md)).
 - A reset by another tool shows as a gap.
 - The plugin cannot repair a fabric; it only reports.
 

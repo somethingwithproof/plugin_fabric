@@ -160,11 +160,28 @@ function fabric_device_allowed(int $hostId): bool {
 	return $hostId > 0 && (bool) is_device_allowed($hostId);
 }
 
+/**
+ * Whether the current user may see a graph, by core's graph permissions.
+ */
+function fabric_graph_allowed(int $localGraphId): bool {
+	global $config;
+
+	if (!function_exists('is_graph_allowed')) {
+		include_once($config['library_path'] . '/auth.php');
+	}
+
+	return $localGraphId > 0 && (bool) is_graph_allowed($localGraphId);
+}
+
 function fabric_settings(): \Somethingwithproof\Fabric\Settings {
 	return (new \Somethingwithproof\Fabric\SettingsRepository(false))->load();
 }
 
+function fabric_templates(): \Somethingwithproof\Fabric\TemplateInstaller {
+	global $config;
 
+	return new \Somethingwithproof\Fabric\TemplateInstaller(__DIR__, (string) $config['base_path'], new \Somethingwithproof\Fabric\CactiObjectRepository(false));
+}
 
 /**
  * Bring the schema, hooks, and realms up to the code's version.
@@ -187,7 +204,9 @@ function plugin_fabric_upgrade(bool $grant = false): bool {
 	$info   = plugin_fabric_version();
 	$schema = new \Somethingwithproof\Fabric\Schema(false);
 
-	if ($schema->isCurrent() && $schema->recordedPluginVersion() === $info['version'] && $schema->hooksRegistered()) {
+	$templates = fabric_templates();
+
+	if ($schema->isCurrent() && $schema->recordedPluginVersion() === $info['version'] && $schema->hooksRegistered() && $templates->installed()) {
 		return true;
 	}
 
@@ -198,6 +217,13 @@ function plugin_fabric_upgrade(bool $grant = false): bool {
 	$schema->trackTables();
 
 	fabric_setup_hooks($grant);
+
+	// A failed template install is logged and shown on the health page,
+	// and retried by the next upgrade check; the plugin itself works
+	// without the templates, so it does not fail the upgrade.
+	if (!$templates->installed()) {
+		$templates->install();
+	}
 
 	$schema->recordPluginVersion($info['version'], $info['author'], $info['homepage']);
 
@@ -250,8 +276,9 @@ function fabric_uninstall_stop(): void {
  * and never runs a fabric tool (REQ-LIFE-005). Core drops the tracked
  * plugin tables afterwards unless the administrator left "Keep Plugin
  * Tables on Uninstall" checked, which is the default; the export on the
- * Fabric Admin page is the copy to take first (REQ-LIFE-003). M2 creates no
- * devices, so there is none to offer to delete.
+ * Fabric Admin page is the copy to take first (REQ-LIFE-003). Devices the
+ * plugin created stay, like every Cacti object: an administrator deletes
+ * them in Cacti, where the Fabric Node device template finds them.
  */
 function plugin_fabric_uninstall(): void {
 	if (!fabric_boot()) {
@@ -262,6 +289,10 @@ function plugin_fabric_uninstall(): void {
 	}
 
 	$schema = new \Somethingwithproof\Fabric\Schema(false);
+
+	// Only the query file the plugin wrote and nobody changed; templates
+	// and devices stay.
+	fabric_templates()->uninstall();
 
 	if (fabric_settings()->keepTablesOnUninstall) {
 		if (!$schema->untrackTables()) {
@@ -326,12 +357,51 @@ function fabric_draw_navigation_text($nav) {
 }
 
 /**
- * The sweep entry point for this poller (ADR 0008). fabric_sweep.php uses
- * it now and the M3 script server will. It runs nothing while the plugin is
+ * Clear the mappings of deleted devices (REQ-MAP-004). The nodes and their
+ * history stay; core passes the device ids and expects them back.
+ *
+ * @param mixed $device_ids
+ * @return mixed
+ */
+function fabric_device_remove($device_ids) {
+	if (fabric_boot() && is_array($device_ids)) {
+		$ids = array_filter(array_map(static fn ($id): int => is_numeric($id) ? (int) $id : 0, $device_ids), static fn (int $id): bool => $id > 0);
+
+		(new \Somethingwithproof\Fabric\NodeRepository(false))->unmapHosts(array_values($ids));
+	}
+
+	return $device_ids;
+}
+
+/**
+ * The Fabric Port data query (scripts/ss_fabric_ports.php). With $sweep,
+ * as the script server passes, the first value asked for a device starts
+ * its due sweep; a sweep that fails is logged and the values are answered
+ * from what the cache holds.
+ */
+function fabric_port_query(bool $sweep): \Somethingwithproof\Fabric\PortQuery {
+	$sweeper = null;
+
+	if ($sweep) {
+		$sweeper = static function (int $hostId): void {
+			try {
+				fabric_sweep(null, microtime(true) + fabric_script_sweep_seconds())->forDevice($hostId);
+			} catch (\Throwable $e) {
+				\Somethingwithproof\Fabric\Log::error(sprintf('Sweep for device %d failed: %s', $hostId, \Somethingwithproof\Fabric\Log::excerpt($e->getMessage())));
+			}
+		};
+	}
+
+	return new \Somethingwithproof\Fabric\PortQuery(false, new \Somethingwithproof\Fabric\SystemClock(), fabric_settings()->indexDownPorts, $sweeper);
+}
+
+/**
+ * The sweep entry point for this poller (ADR 0008), used by the script
+ * server through fabric_port_query() and by fabric_sweep.php. It runs nothing while the plugin is
  * disabled: core keeps plugin files reachable from the CLI after a disable,
  * so the enabled state is checked here, not assumed from hooks.
  */
-function fabric_sweep(?\Somethingwithproof\Fabric\ProcessRunner $runner = null): \Somethingwithproof\Fabric\Sweep {
+function fabric_sweep(?\Somethingwithproof\Fabric\ProcessRunner $runner = null, ?float $deadline = null): \Somethingwithproof\Fabric\Sweep {
 	global $config;
 
 	return new \Somethingwithproof\Fabric\Sweep(
@@ -340,6 +410,22 @@ function fabric_sweep(?\Somethingwithproof\Fabric\ProcessRunner $runner = null):
 		$runner ?? new \Somethingwithproof\Fabric\ProcRunner(),
 		fabric_settings(),
 		(int) ($config['poller_id'] ?? 1),
-		(new \Somethingwithproof\Fabric\Schema(false))->pluginEnabled()
+		(new \Somethingwithproof\Fabric\Schema(false))->pluginEnabled(),
+		deadline: $deadline
 	);
+}
+
+/**
+ * Seconds a sweep started by a script server get may take: Cacti's script
+ * timeout (Spine's limit for one script server call, default 25) less 5
+ * seconds for the cache read and the answer. Spine records NaN for a call
+ * past its timeout; the PHP
+ * poller has no such limit and would stall instead, so the bound applies
+ * to both. A sweep cut short is retried in the next cycle, and the get
+ * answers from the last stored sample, or U.
+ */
+function fabric_script_sweep_seconds(): float {
+	$timeout = (int) read_config_option('script_timeout');
+
+	return (float) max(0, ($timeout > 0 ? $timeout : 25) - 5);
 }

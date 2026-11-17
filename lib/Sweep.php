@@ -20,15 +20,21 @@
 namespace Somethingwithproof\Fabric;
 
 /**
- * Starts sweeps lazily (ADR 0008). The M3 script server calls forDevice()
- * when the poller asks for a mapped device's values; fabric_sweep.php calls
+ * Starts sweeps lazily (ADR 0008). The Fabric Port data query calls
+ * forDevice() through the script server when the poller asks for a mapped
+ * device's first value; fabric_sweep.php calls
  * forFabric(). Either way a sweep runs only on the poller the fabric is
  * assigned to, only while the plugin and the fabric are enabled, and only
  * for what is due. Claims keep concurrent callers from sweeping the same
  * fabric topology or node twice; a caller that loses a claim does not
  * wait, it returns and reads what the winner stores.
  *
- * There is no poller_bottom prefetch in M2.
+ * There is no poller_bottom prefetch.
+ *
+ * A deadline (microtime(true)) bounds every tool run of this object's
+ * sweeps, the command timeout included; the script server passes one below
+ * Cacti's script timeout, so a get call returns in time with the last
+ * stored values or U (fabric_port_query()).
  */
 final class Sweep {
 	private readonly TopologySweep $topology;
@@ -42,9 +48,13 @@ final class Sweep {
 		private readonly int $pollerId,
 		private readonly bool $pluginEnabled,
 		int $toolOwner = 0,
+		?float $deadline = null,
 	) {
-		$this->topology = new TopologySweep($connection, $clock, $runner, $settings, $toolOwner);
-		$this->counters = new CounterSweep($connection, $clock, $runner, $settings, $toolOwner);
+		// Leave most of a script-server call for counters even when
+		// topology discovery runs up to its limit every polling cycle.
+		$topologyDeadline = $deadline === null ? null : microtime(true) + max(0.0, $deadline - microtime(true)) / 3;
+		$this->topology = new TopologySweep($connection, $clock, $runner, $settings, $toolOwner, $topologyDeadline);
+		$this->counters = new CounterSweep($connection, $clock, $runner, $settings, $toolOwner, $deadline);
 	}
 
 	/**

@@ -1,0 +1,72 @@
+#
+# Topology file: generated on Sun Nov 15 15:17:41 2026
+#
+# Initiated from node 0002c90300bb0000 port 0002c90300bb0001
+
+vendid=0x0
+devid=0xd2f2
+sysimgguid=0x2c90300aa0003
+switchguid=0x2c90300aa0003(2c90300aa0003)
+Switch	8 "S-0002c90300aa0003"		# "leaf2 MQM8700" base port 0 lid 4 lmc 0
+[1]	"H-0002c90300bb0000"[2](2c90300bb0002) 		# "node01 mlx5_0" lid 6 4xQDR
+[2]	"H-0002c90300bb0003"[2](2c90300bb0005) 		# "node02 mlx5_0" lid 8 4xQDR
+[3]	"H-0002c90300bb0008"[1](2c90300bb0009) 		# "node04 mlx5_0" lid 10 4xSDR
+[5]	"S-0002c90300aa0000"[2]		# "spine1 MQM8700" lid 1 4xQDR
+[6]	"S-0002c90300aa0001"[2]		# "spine2 MQM8700" lid 2 4xQDR
+
+vendid=0x0
+devid=0xd2f2
+sysimgguid=0x2c90300aa0001
+switchguid=0x2c90300aa0001(2c90300aa0001)
+Switch	8 "S-0002c90300aa0001"		# "spine2 MQM8700" base port 0 lid 2 lmc 0
+[1]	"S-0002c90300aa0002"[6]		# "leaf1 MQM8700" lid 3 4xQDR
+[2]	"S-0002c90300aa0003"[6]		# "leaf2 MQM8700" lid 4 4xQDR
+
+vendid=0x0
+devid=0xd2f2
+sysimgguid=0x2c90300aa0000
+switchguid=0x2c90300aa0000(2c90300aa0000)
+Switch	8 "S-0002c90300aa0000"		# "spine1 MQM8700" base port 0 lid 1 lmc 0
+[1]	"S-0002c90300aa0002"[5]		# "leaf1 MQM8700" lid 3 4xQDR
+[2]	"S-0002c90300aa0003"[5]		# "leaf2 MQM8700" lid 4 4xQDR
+
+vendid=0x0
+devid=0xd2f2
+sysimgguid=0x2c90300aa0002
+switchguid=0x2c90300aa0002(2c90300aa0002)
+Switch	8 "S-0002c90300aa0002"		# "leaf1 MQM8700" base port 0 lid 3 lmc 0
+[1]	"H-0002c90300bb0000"[1](2c90300bb0001) 		# "node01 mlx5_0" lid 5 4xQDR
+[2]	"H-0002c90300bb0003"[1](2c90300bb0004) 		# "node02 mlx5_0" lid 7 4xQDR
+[3]	"H-0002c90300bb0006"[1](2c90300bb0007) 		# "node03 mlx5_0" lid 9 1xQDR
+[5]	"S-0002c90300aa0000"[1]		# "spine1 MQM8700" lid 1 4xQDR
+[6]	"S-0002c90300aa0001"[1]		# "spine2 MQM8700" lid 2 4xQDR
+
+vendid=0x0
+devid=0xd2f2
+sysimgguid=0x2c90300bb0008
+caguid=0x2c90300bb0008
+Ca	1 "H-0002c90300bb0008"		# "node04 mlx5_0"
+[1](2c90300bb0009) 	"S-0002c90300aa0003"[3]		# lid 10 lmc 0 "leaf2 MQM8700" lid 4 4xSDR
+
+vendid=0x0
+devid=0xd2f2
+sysimgguid=0x2c90300bb0006
+caguid=0x2c90300bb0006
+Ca	1 "H-0002c90300bb0006"		# "node03 mlx5_0"
+[1](2c90300bb0007) 	"S-0002c90300aa0002"[3]		# lid 9 lmc 0 "leaf1 MQM8700" lid 3 1xQDR
+
+vendid=0x0
+devid=0xd2f2
+sysimgguid=0x2c90300bb0003
+caguid=0x2c90300bb0003
+Ca	2 "H-0002c90300bb0003"		# "node02 mlx5_0"
+[1](2c90300bb0004) 	"S-0002c90300aa0002"[2]		# lid 7 lmc 0 "leaf1 MQM8700" lid 3 4xQDR
+[2](2c90300bb0005) 	"S-0002c90300aa0003"[2]		# lid 8 lmc 0 "leaf2 MQM8700" lid 4 4xQDR
+
+vendid=0x2c9
+devid=0xd2f2
+sysimgguid=0x2c90300bb0000
+caguid=0x2c90300bb0000
+Ca	2 "H-0002c90300bb0000"		# "node01 mlx5_0"
+[1](2c90300bb0001) 	"S-0002c90300aa0002"[1]		# lid 5 lmc 0 "leaf1 MQM8700" lid 3 4xQDR
+[2](2c90300bb0002) 	"S-0002c90300aa0003"[1]		# lid 6 lmc 0 "leaf2 MQM8700" lid 4 4xQDR

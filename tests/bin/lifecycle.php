@@ -58,6 +58,12 @@ switch ($action) {
 		db_execute("DELETE FROM settings WHERE name LIKE 'fabric\\_%'");
 		db_execute("DELETE FROM plugin_db_changes WHERE plugin = 'fabric'");
 
+		// The settings that record the query file as the plugin's are gone,
+		// so the file goes too; the templates stay, as on a real site.
+		if (is_file($config['base_path'] . '/resource/script_server/fabric_ports.xml')) {
+			unlink($config['base_path'] . '/resource/script_server/fabric_ports.xml');
+		}
+
 		break;
 	case 'install':
 		api_plugin_install('fabric');
@@ -110,6 +116,13 @@ switch ($action) {
 		db_execute_prepared("DELETE FROM plugin_hooks WHERE name = 'fabric' AND hook = ?", array($argument));
 
 		break;
+	case 'drop_v2_columns':
+		// A version 1 database: the sample table before migration 2.
+		foreach (array('previous_at', 'rates', 'reset', 'discontinuities', 'discontinuity_at') as $column) {
+			db_execute('ALTER TABLE plugin_fabric_sample DROP COLUMN `' . $column . '`');
+		}
+
+		break;
 	case 'drop_table':
 		db_execute('DROP TABLE IF EXISTS `' . preg_replace('/[^a-z_]/', '', $argument) . '`');
 
@@ -118,6 +131,15 @@ switch ($action) {
 		// A fabric and a node, so table drops and keeps are visible.
 		db_execute("INSERT INTO plugin_fabric_fabric (name, backend, poller_id, sweep_interval, adapter, adapter_port, admin_state) VALUES ('seed', 'diags', 1, 300, 'mlx5_0', 1, 'enabled')");
 		db_execute_prepared("INSERT INTO plugin_fabric_node (fabric_id, guid, node_type, presence, identity) VALUES (?, '0x0002c90300a00000', 'switch', 'present', 'ok')", array(db_fetch_insert_id()));
+
+		break;
+	case 'seed_sample':
+		$nodeId = (int) db_fetch_cell_prepared("SELECT id FROM plugin_fabric_node WHERE guid = ?", array('0x0002c90300a00000'));
+		db_execute_prepared("INSERT INTO plugin_fabric_sample (node_id, port_number, counter_group, observed_at, attempted_at, backend, cap_mask, cap_mask2, counters, error) VALUES (?, 1, 'basic', 100, 110, 'diags', 7, 8, ?, '')", array($nodeId, '{"PortXmitData":"123","PortRcvData":"456"}'));
+
+		break;
+	case 'sample':
+		$result = db_fetch_row_prepared("SELECT node_id, port_number, counter_group, observed_at, attempted_at, backend, cap_mask, cap_mask2, counters, error, previous_at, rates, reset, discontinuities, discontinuity_at FROM plugin_fabric_sample WHERE port_number = 1 LIMIT 1", array());
 
 		break;
 	case 'sweep_flow':
@@ -335,4 +357,15 @@ print json_encode(array(
 	'admin'   => (int) db_fetch_cell("SELECT COUNT(*) FROM user_auth_realm AS uar INNER JOIN plugin_realms AS pr ON pr.id + 100 = uar.realm_id WHERE pr.plugin = 'fabric' AND uar.user_id = 1"),
 	'tracked' => array_column(db_fetch_assoc("SELECT `table` FROM plugin_db_changes WHERE plugin = 'fabric' AND method = 'create' ORDER BY `table`"), 'table'),
 	'tables'  => $tables,
+	'columns' => array_column(db_fetch_assoc("SELECT COLUMN_NAME AS c FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'plugin_fabric_sample' ORDER BY ORDINAL_POSITION"), 'c'),
+	// The shipped Cacti objects, counted by name, so a duplicate shows.
+	'objects' => array(
+		'host_template'  => (int) db_fetch_cell("SELECT COUNT(*) FROM host_template WHERE name = 'Fabric Node'"),
+		'snmp_query'     => (int) db_fetch_cell("SELECT COUNT(*) FROM snmp_query WHERE name = 'Fabric Port'"),
+		'data_template'  => (int) db_fetch_cell("SELECT COUNT(*) FROM data_template WHERE name LIKE 'Fabric Port %'"),
+		'graph_template' => (int) db_fetch_cell("SELECT COUNT(*) FROM graph_templates WHERE name LIKE 'Fabric Port %'"),
+		'rrd_items'      => (int) db_fetch_cell("SELECT COUNT(*) FROM data_template_rrd AS r INNER JOIN data_template AS t ON t.id = r.data_template_id WHERE t.name LIKE 'Fabric Port %' AND r.local_data_id = 0"),
+		'query_file'     => is_file($config['base_path'] . '/resource/script_server/fabric_ports.xml'),
+		'version'        => db_fetch_cell("SELECT value FROM settings WHERE name = 'fabric_templates_version'"),
+	),
 ), JSON_PRETTY_PRINT) . PHP_EOL;

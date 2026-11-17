@@ -35,6 +35,7 @@ final readonly class Settings {
 		'fabric_node_budget',
 		'fabric_failure_budget',
 		'fabric_uninstall_keep_tables',
+		'fabric_index_down_ports',
 	];
 
 	public const DEFAULT_TOOL_DIR = '/usr/sbin';
@@ -53,6 +54,7 @@ final readonly class Settings {
 		public int $nodeBudget,
 		public int $failureBudget,
 		public bool $keepTablesOnUninstall,
+		public bool $indexDownPorts = false,
 	) {
 	}
 
@@ -75,6 +77,7 @@ final readonly class Settings {
 			nodeBudget: min(Row::int($row, 'fabric_node_budget', self::DEFAULT_BUDGET, 5), 300),
 			failureBudget: min(Row::int($row, 'fabric_failure_budget', self::DEFAULT_FAILURES, 1), 64),
 			keepTablesOnUninstall: array_key_exists('fabric_uninstall_keep_tables', $row) ? Row::bool($row, 'fabric_uninstall_keep_tables') : true,
+			indexDownPorts: Row::bool($row, 'fabric_index_down_ports'),
 		);
 	}
 
@@ -152,6 +155,16 @@ final readonly class Settings {
 			],
 			'fabric_node_budget'    => $number(__('Node Time Budget', 'fabric'), __('Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle.', 'fabric'), self::DEFAULT_BUDGET, 5, 300),
 			'fabric_failure_budget' => $number(__('Node Failure Budget', 'fabric'), __('Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds.', 'fabric'), self::DEFAULT_FAILURES, 1, 64),
+			'fabric_header_objects' => [
+				'friendly_name' => __('Cacti Objects', 'fabric'),
+				'method'        => 'spacer',
+			],
+			'fabric_index_down_ports' => [
+				'friendly_name' => __('Index Down Ports', 'fabric'),
+				'description'   => __('When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up.', 'fabric'),
+				'method'        => 'checkbox',
+				'default'       => '',
+			],
 			'fabric_header_uninstall' => [
 				'friendly_name' => __('Uninstall', 'fabric'),
 				'method'        => 'spacer',

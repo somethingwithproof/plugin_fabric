@@ -31,6 +31,21 @@ if (!fabric_page_start()) {
 	exit;
 }
 
+fabric_require_post('fabric_health.php', array('reinstall_templates'));
+
+// Reinstalling imports templates into Cacti, so it needs Cacti's own
+// template import permission as well as Fabric Admin.
+$fabric_import    = (bool) api_user_realm_auth('templates_import.php');
+$fabric_templates = fabric_templates();
+
+if (get_nfilter_request_var('action') === 'reinstall_templates') {
+	$fabric_ok = $fabric_import && $fabric_templates->install();
+
+	raise_message('fabric_result', $fabric_ok ? __('The Fabric templates and data query file were installed.', 'fabric') : __('The Fabric templates were not installed. See the Cacti Objects table and the Cacti log.', 'fabric'), $fabric_ok ? MESSAGE_LEVEL_INFO : MESSAGE_LEVEL_ERROR);
+	header('Location: fabric_health.php');
+	exit;
+}
+
 $fabric_clock = new \Somethingwithproof\Fabric\SystemClock();
 $fabric_hosts = new \Somethingwithproof\Fabric\HostRepository(false);
 $fabric_page  = new \Somethingwithproof\Fabric\HealthPage(
@@ -43,7 +58,9 @@ $fabric_page  = new \Somethingwithproof\Fabric\HealthPage(
 	new \Somethingwithproof\Fabric\DeviceAccess(static function (int $host) use ($fabric_hosts): bool {
 		// As on the admin page: a deleted device protects nothing.
 		return fabric_device_allowed($host) || $fabric_hosts->gone($host);
-	})
+	}),
+	$fabric_templates,
+	$fabric_import
 );
 
 top_header();

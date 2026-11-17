@@ -1,0 +1,179 @@
+<interface>
+	<name>Fabric Port</name>
+	<description>InfiniBand ports of the fabric nodes mapped to a device, answered from the plugin cache</description>
+	<script_path>|path_cacti|/plugins/fabric/scripts/ss_fabric_ports.php</script_path>
+	<script_function>ss_fabric_ports</script_function>
+	<script_server>php</script_server>
+	<arg_prepend>|host_id|</arg_prepend>
+	<arg_index>index</arg_index>
+	<arg_query>query</arg_query>
+	<arg_get>get</arg_get>
+	<arg_num_indexes>num_indexes</arg_num_indexes>
+	<output_delimiter>!</output_delimiter>
+	<index_order>fabricPort</index_order>
+	<index_order_type>alphabetic</index_order_type>
+	<index_title_format>|chosen_order_field|</index_title_format>
+
+	<fields>
+		<fabricPort>
+			<name>Port (node GUID:port)</name>
+			<direction>input</direction>
+			<query_name>fabricPort</query_name>
+		</fabricPort>
+		<fabricGuid>
+			<name>Node GUID</name>
+			<direction>input</direction>
+			<query_name>fabricGuid</query_name>
+		</fabricGuid>
+		<fabricPortNum>
+			<name>Port Number</name>
+			<direction>input</direction>
+			<query_name>fabricPortNum</query_name>
+		</fabricPortNum>
+		<fabricNode>
+			<name>Node</name>
+			<direction>input</direction>
+			<query_name>fabricNode</query_name>
+		</fabricNode>
+		<fabricRemote>
+			<name>Remote Port</name>
+			<direction>input</direction>
+			<query_name>fabricRemote</query_name>
+		</fabricRemote>
+		<xmit_data>
+			<name>Data Transmitted (4-octet words)</name>
+			<direction>output</direction>
+			<query_name>xmit_data</query_name>
+		</xmit_data>
+		<rcv_data>
+			<name>Data Received (4-octet words)</name>
+			<direction>output</direction>
+			<query_name>rcv_data</query_name>
+		</rcv_data>
+		<xmit_pkts>
+			<name>Packets Transmitted</name>
+			<direction>output</direction>
+			<query_name>xmit_pkts</query_name>
+		</xmit_pkts>
+		<rcv_pkts>
+			<name>Packets Received</name>
+			<direction>output</direction>
+			<query_name>rcv_pkts</query_name>
+		</rcv_pkts>
+		<symbol_err>
+			<name>Symbol Errors</name>
+			<direction>output</direction>
+			<query_name>symbol_err</query_name>
+		</symbol_err>
+		<link_err_recov>
+			<name>Link Error Recoveries</name>
+			<direction>output</direction>
+			<query_name>link_err_recov</query_name>
+		</link_err_recov>
+		<link_downed>
+			<name>Link Downed Events</name>
+			<direction>output</direction>
+			<query_name>link_downed</query_name>
+		</link_downed>
+		<rcv_err>
+			<name>Receive Errors</name>
+			<direction>output</direction>
+			<query_name>rcv_err</query_name>
+		</rcv_err>
+		<rcv_remote_phys>
+			<name>Receive Remote Physical Errors</name>
+			<direction>output</direction>
+			<query_name>rcv_remote_phys</query_name>
+		</rcv_remote_phys>
+		<rcv_switch_relay>
+			<name>Receive Switch Relay Errors</name>
+			<direction>output</direction>
+			<query_name>rcv_switch_relay</query_name>
+		</rcv_switch_relay>
+		<local_link_integ>
+			<name>Local Link Integrity Errors</name>
+			<direction>output</direction>
+			<query_name>local_link_integ</query_name>
+		</local_link_integ>
+		<buffer_overrun>
+			<name>Excessive Buffer Overruns</name>
+			<direction>output</direction>
+			<query_name>buffer_overrun</query_name>
+		</buffer_overrun>
+		<vl15_dropped>
+			<name>VL15 Packets Dropped</name>
+			<direction>output</direction>
+			<query_name>vl15_dropped</query_name>
+		</vl15_dropped>
+		<xmit_wait>
+			<name>Transmit Wait (ticks)</name>
+			<direction>output</direction>
+			<query_name>xmit_wait</query_name>
+		</xmit_wait>
+		<xmit_discards>
+			<name>Transmit Discards</name>
+			<direction>output</direction>
+			<query_name>xmit_discards</query_name>
+		</xmit_discards>
+		<xmit_constraint>
+			<name>Transmit Constraint Errors</name>
+			<direction>output</direction>
+			<query_name>xmit_constraint</query_name>
+		</xmit_constraint>
+		<rcv_constraint>
+			<name>Receive Constraint Errors</name>
+			<direction>output</direction>
+			<query_name>rcv_constraint</query_name>
+		</rcv_constraint>
+		<active_lanes>
+			<name>Active Lanes</name>
+			<direction>output</direction>
+			<query_name>active_lanes</query_name>
+		</active_lanes>
+		<speed_rank>
+			<name>Active Speed Rank</name>
+			<direction>output</direction>
+			<query_name>speed_rank</query_name>
+		</speed_rank>
+		<degraded>
+			<name>Degraded (0 or 1)</name>
+			<direction>output</direction>
+			<query_name>degraded</query_name>
+		</degraded>
+		<port_state>
+			<name>Logical Port State</name>
+			<direction>output</direction>
+			<query_name>port_state</query_name>
+		</port_state>
+		<age>
+			<name>Sample Age (seconds)</name>
+			<direction>output</direction>
+			<query_name>age</query_name>
+		</age>
+		<symbol_err_rate>
+			<name>Symbol Errors per Second</name>
+			<direction>output</direction>
+			<query_name>symbol_err_rate</query_name>
+		</symbol_err_rate>
+		<rcv_err_rate>
+			<name>Receive Errors per Second</name>
+			<direction>output</direction>
+			<query_name>rcv_err_rate</query_name>
+		</rcv_err_rate>
+		<link_downed_rate>
+			<name>Link Downed Events per Second</name>
+			<direction>output</direction>
+			<query_name>link_downed_rate</query_name>
+		</link_downed_rate>
+		<xmit_discard_rate>
+			<name>Transmit Discards per Second</name>
+			<direction>output</direction>
+			<query_name>xmit_discard_rate</query_name>
+		</xmit_discard_rate>
+		<xmit_wait_rate>
+			<name>Transmit Wait Ticks per Second</name>
+			<direction>output</direction>
+			<query_name>xmit_wait_rate</query_name>
+		</xmit_wait_rate>
+	</fields>
+</interface>
