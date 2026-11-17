@@ -133,6 +133,15 @@ switch ($action) {
 		db_execute_prepared("INSERT INTO plugin_fabric_node (fabric_id, guid, node_type, presence, identity) VALUES (?, '0x0002c90300a00000', 'switch', 'present', 'ok')", array(db_fetch_insert_id()));
 
 		break;
+	case 'seed_sample':
+		$nodeId = (int) db_fetch_cell_prepared("SELECT id FROM plugin_fabric_node WHERE guid = ?", array('0x0002c90300a00000'));
+		db_execute_prepared("INSERT INTO plugin_fabric_sample (node_id, port_number, counter_group, observed_at, attempted_at, backend, cap_mask, cap_mask2, counters, error) VALUES (?, 1, 'basic', 100, 110, 'diags', 7, 8, ?, '')", array($nodeId, '{"PortXmitData":"123","PortRcvData":"456"}'));
+
+		break;
+	case 'sample':
+		$result = db_fetch_row_prepared("SELECT node_id, port_number, counter_group, observed_at, attempted_at, backend, cap_mask, cap_mask2, counters, error, previous_at, rates, reset, discontinuities, discontinuity_at FROM plugin_fabric_sample WHERE port_number = 1 LIMIT 1", array());
+
+		break;
 	case 'sweep_flow':
 		// A whole sweep against MariaDB through the real repositories and
 		// the production process runner, with fake tools in a scratch

@@ -271,14 +271,32 @@ it('migrates a version 1 sample table to version 2 and keeps its rows', function
 	lifecycle('install');
 	lifecycle('seed');
 	lifecycle('drop_v2_columns');
+	lifecycle('seed_sample');
 	lifecycle('set_schema', '1');
 
 	$state = lifecycle('upgrade');
+	$sample = lifecycle('sample')['result'];
 
 	expect($state['result'])->toBeTrue()
 		->and($state['schema'])->toEqual('2')
 		->and($state['columns'])->toContain('previous_at', 'rates', 'reset', 'discontinuities', 'discontinuity_at')
-		->and($state['tables']['plugin_fabric_node'])->toBe(1);
+		->and($state['tables']['plugin_fabric_node'])->toBe(1)
+		->and($sample)->toMatchArray([
+			'port_number'       => '1',
+			'counter_group'     => 'basic',
+			'observed_at'       => '100',
+			'attempted_at'      => '110',
+			'backend'           => 'diags',
+			'cap_mask'          => '7',
+			'cap_mask2'         => '8',
+			'counters'          => '{"PortXmitData":"123","PortRcvData":"456"}',
+			'error'             => '',
+			'previous_at'       => '0',
+			'rates'             => '',
+			'reset'             => '',
+			'discontinuities'   => '0',
+			'discontinuity_at'  => '0',
+		]);
 });
 
 it('imports the Cacti objects once, keeps them on a reinstall, and keeps them but not its query file on uninstall', function () {
