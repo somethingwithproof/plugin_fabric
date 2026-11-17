@@ -76,3 +76,36 @@ it('ignores malformed session acknowledgments without hiding current health', fu
 	expect(OperatorPage::acknowledge($session, $row, OperatorPage::fingerprint($row), 2, 1000))->toBeTrue()
 		->and($row['state'])->toBe('failed');
 });
+
+if (!function_exists('is_device_allowed')) {
+	function is_device_allowed($hostId, $userId = 0) {
+		return in_array($hostId, $GLOBALS['__fabric_operator_hosts'] ?? [], true);
+	}
+}
+
+it('uses discovery evidence and cadence for missing nodes without exposing hidden devices', function () {
+	require_once dirname(__DIR__, 2) . '/include/operator.php';
+	$original = $GLOBALS['__fabric_db_rows'];
+	$options = $GLOBALS['__fabric_options'];
+	$node = ['id' => 7, 'fabric_id' => 1, 'guid' => '0000000000000007', 'node_type' => 'switch', 'host_id' => 42, 'presence' => 'missing', 'identity' => 'ok', 'last_seen' => 1000, 'sweep_interval' => 600, 'discovery_success' => 1900];
+	$GLOBALS['__fabric_operator_hosts'] = [42];
+	$GLOBALS['__fabric_options']['poller_interval'] = '60';
+	$GLOBALS['__fabric_db_rows'] = ['FROM plugin_fabric_node' => [$node, array_replace($node, ['id' => 8, 'host_id' => 43])]];
+
+	try {
+		$rows = fabric_operator_rows();
+		expect($rows)->toHaveCount(1)
+			->and($rows[0]['observed'])->toBe(1900)
+			->and($rows[0]['interval'])->toBe(300)
+			->and(OperatorPage::fresh($rows[0], 2200))->toBeTrue()
+			->and(OperatorPage::fresh($rows[0], 2501))->toBeFalse();
+		$GLOBALS['__fabric_db_rows'] = ['FROM plugin_fabric_node' => [array_replace($node, ['presence' => 'present'])]];
+		expect(fabric_operator_rows()[0]['observed'])->toBe(1000);
+		$GLOBALS['__fabric_db_rows'] = ['FROM plugin_fabric_node' => [array_replace($node, ['discovery_success' => null])]];
+		expect(OperatorPage::fresh(fabric_operator_rows()[0], 2000))->toBeFalse();
+	} finally {
+		$GLOBALS['__fabric_db_rows'] = $original;
+		$GLOBALS['__fabric_options'] = $options;
+		unset($GLOBALS['__fabric_operator_hosts']);
+	}
+});

@@ -358,8 +358,15 @@ function fabric_config_settings(): void {
  * @return array<string, mixed>
  */
 function fabric_draw_navigation_text($nav) {
+	global $current_user;
+
 	if (!fabric_boot()) {
 		return $nav;
+	}
+
+	// Refresh settings after core restores cookie or Basic authentication.
+	if (get_current_page() === 'settings.php' && (PHP_SAPI === 'cli' || ($current_user['enabled'] ?? '') === 'on')) {
+		fabric_config_settings();
 	}
 
 	return array_merge($nav, \Somethingwithproof\Fabric\Pages::navigation());
