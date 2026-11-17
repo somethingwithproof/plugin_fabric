@@ -351,7 +351,7 @@ Plugin code is object-oriented wherever Cacti's plugin contract allows it. Cacti
 
 - Classes live in `lib/*.php` under the `Somethingwithproof\Fabric` namespace (the plugin is not a Cacti project; the namespace follows the repository owner, as the sibling plugins do), one class per file, loaded by a small `spl_autoload_register()` loader registered only after the PHP version check. No Composer runtime dependency is added. Files stay at depth 2 or less because the translation tooling scans only that deep.
 - Settings use the `config_settings` hook. Logging uses `cacti_log()` with a `FABRIC` tag. Strings use the `fabric` text domain with a `locales/` directory and POT file.
-- Realms: two, "Fabric View" and "Fabric Admin".
+- Realms: three, "Fabric View", "Fabric Operator" and "Fabric Admin".
 
 **Planned classes.** Names are illustrative; milestone 2 settles the set.
 

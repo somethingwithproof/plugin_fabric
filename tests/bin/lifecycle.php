@@ -213,6 +213,10 @@ switch ($action) {
 		db_execute("REPLACE INTO settings (name, value) VALUES ('admin_user', '1')");
 
 		break;
+	case 'operator_roles':
+		include(__DIR__ . '/operator-roles.php');
+
+		break;
 	case 'state':
 		break;
 	default:

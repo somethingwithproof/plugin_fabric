@@ -30,6 +30,7 @@ namespace Somethingwithproof\Fabric;
  * The view realm sees the inventory of devices it may see.
  */
 final class Pages {
+	public const OPERATOR = ['fabric_operator.php'];
 	public const VIEW  = ['fabric.php'];
 	public const ADMIN = ['fabric_admin.php', 'fabric_health.php'];
 
@@ -38,6 +39,7 @@ final class Pages {
 	 */
 	public static function realms(): array {
 		return [
+			['name' => __('Fabric Operator', 'fabric'), 'files' => self::OPERATOR],
 			['name' => __('Fabric View', 'fabric'), 'files' => self::VIEW],
 			['name' => __('Fabric Admin', 'fabric'), 'files' => self::ADMIN],
 		];
@@ -47,7 +49,7 @@ final class Pages {
 	 * @return list<string>
 	 */
 	public static function files(): array {
-		return array_merge(self::VIEW, self::ADMIN);
+		return array_merge(self::VIEW, self::ADMIN, self::OPERATOR);
 	}
 
 	/**
@@ -58,6 +60,7 @@ final class Pages {
 	 */
 	public static function menu(): array {
 		return [
+			'fabric_operator.php' => __('Fabric Operations', 'fabric'),
 			'fabric.php'        => __('Fabrics', 'fabric'),
 			'fabric_admin.php'  => __('Fabric Admin', 'fabric'),
 			'fabric_health.php' => __('Fabric Health', 'fabric'),

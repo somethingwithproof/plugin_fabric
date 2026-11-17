@@ -109,6 +109,18 @@ msgstr ""
 msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
 msgstr ""
 
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr ""
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr ""
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr ""
+
 #: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
 msgid "Fabric Admin"
 msgstr ""
@@ -122,7 +134,7 @@ msgstr ""
 msgid "Fabrics"
 msgstr ""
 
-#: lib/AdminPage.php
+#: lib/AdminPage.php lib/OperatorPage.php
 msgid "Actions"
 msgstr ""
 
@@ -146,7 +158,7 @@ msgstr ""
 msgid "Poller"
 msgstr ""
 
-#: lib/AdminPage.php lib/InventoryPage.php
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
 msgid "State"
 msgstr ""
 
@@ -445,7 +457,7 @@ msgstr ""
 msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
 msgstr ""
 
-#: lib/Format.php lib/InventoryPage.php
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
 msgid "Never"
 msgstr ""
 
@@ -777,6 +789,46 @@ msgstr ""
 
 #: lib/NodeType.php
 msgid "Router"
+msgstr ""
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr ""
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr ""
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr ""
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr ""
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr ""
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr ""
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr ""
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr ""
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr ""
+
+#: lib/Pages.php
+msgid "Fabric Operator"
 msgstr ""
 
 #: lib/Pages.php
