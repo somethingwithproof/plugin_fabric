@@ -58,6 +58,11 @@ final class NodeRepository {
 		return $this->nodes(Row::rows(db_fetch_assoc_prepared('SELECT * FROM plugin_fabric_node ORDER BY fabric_id, guid', [], true, $this->connection)));
 	}
 
+	/** @return list<array<array-key, mixed>>|null */
+	public function observations(): ?array {
+		return Row::rows(db_fetch_assoc_prepared('SELECT n.*, f.sweep_interval, h.discovery_success FROM plugin_fabric_node n INNER JOIN plugin_fabric_fabric f ON f.id = n.fabric_id LEFT JOIN plugin_fabric_health h ON h.fabric_id = n.fabric_id ORDER BY n.fabric_id, n.guid', [], true, $this->connection));
+	}
+
 	/**
 	 * @return array<int, Port>|null port number => port
 	 */

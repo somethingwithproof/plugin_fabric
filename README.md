@@ -1,3 +1,7 @@
+<!-- translations:start -->
+[English](README.md) | [简体中文](docs/i18n/zh-CN/README.md) | [हिन्दी](docs/i18n/hi-IN/README.md) | [Español (España)](docs/i18n/es-ES/README.md) | [Español (Latinoamérica)](docs/i18n/es-419/README.md) | [العربية](docs/i18n/ar-SA/README.md)
+<!-- translations:end -->
+
 # plugin_fabric
 
 A Cacti 1.2 plugin that brings InfiniBand port counters, link width and speed, and congestion indicators into Cacti as ordinary devices, data sources, and graphs. A link that trained at 1X instead of 4X then shows up as a graph and a Thold alert next to the host it serves, under Cacti's permissions, with Maint able to suppress it.
@@ -5,7 +9,7 @@ A Cacti 1.2 plugin that brings InfiniBand port counters, link width and speed, a
 > **Status: in development, no release yet.** Milestone 2 (foundation) is merged on `main`, and milestone 3 (Cacti objects and alerting) is in review. Milestone 1 confirmed the design against documentation and upstream source (PR #71); the results, with sources, are in [docs/research/](docs/research/). Milestone 2 adds the plugin foundation:
 >
 > - install, upgrade, uninstall, and the PHP 8.2 guard
-> - two realms and the settings
+> - View, Operator and Admin realms, and settings
 > - fabric records
 > - the read-only command boundary for `perfquery`, `ibnetdiscover`, and `iblinkinfo`
 > - inventory by GUID, with identity conflicts and re-link proposals
@@ -21,6 +25,28 @@ A Cacti 1.2 plugin that brings InfiniBand port counters, link width and speed, a
 > - an end-to-end test with unchanged Thold v1.8.2 and Maint v1.3, and a CI job that runs the real diagnostic tools against a simulated fabric
 >
 > A fabric can be swept only from the main poller until remote data collectors are supported in phase 3. It has been tested against fake tools and the ibsim fabric simulator, never on an InfiniBand fabric. Checks that need a fabric remain open in each research page's live-checks table. This project is not affiliated with the Cacti project.
+
+## Access roles
+
+| Realm | Access |
+| --- | --- |
+| Fabric View | Existing monitoring pages. |
+| Fabric Operator | Monitoring plus the Operations page and personal triage acknowledgments. |
+| Fabric Admin | Operator access plus the existing configuration and administrative actions. |
+
+After copying upgrade files, open the Plugins page as an administrator to register
+the new realm. Assign the Operator realm explicitly under **Configuration > Users** or user groups.
+Upgrades retain the existing View and Admin realm IDs and grants. Admin access
+inherits Operator access, and Operator access inherits View access on each request;
+this does not add stored grants to users or groups. Plugin settings also require
+Fabric Admin access in addition to Cacti's Settings permission.
+
+Cacti device permissions still limit the rows and actions available to each user; unmapped objects require an administrator.
+Credentials, configuration, mapping, deletion and other administrative changes
+remain in the administrative pages. Acknowledgments last only in the current
+user's session, for at most one hour and only while the same observation remains
+fresh. New or changed observations invalidate them. They never mark a failed
+measurement healthy or suppress alerts.
 
 ## Why
 

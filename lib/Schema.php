@@ -42,6 +42,7 @@ final class Schema {
 	public const VERSION = 2;
 
 	public const HOOKS = [
+		'auth_alternate_realms' => 'fabric_auth_alternate_realms',
 		'config_arrays'        => 'fabric_config_arrays',
 		'config_settings'      => 'fabric_config_settings',
 		'draw_navigation_text' => 'fabric_draw_navigation_text',

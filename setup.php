@@ -100,13 +100,18 @@ function plugin_fabric_check_config(): bool {
 }
 
 /**
- * Common start of every page script, after include/auth.php has authorized
- * the realm. Refuses on an unsupported runtime or a disabled plugin, because
- * Cacti keeps plugin realms registered while a plugin is disabled.
+ * Common start after include/auth.php establishes the user. Recheck the
+ * realm here because cookie and Basic login restore the user after the
+ * alternate-realms hook. Disabled plugins and unsupported runtimes refuse.
  */
 function fabric_page_start(): bool {
 	if (fabric_boot() && api_plugin_is_enabled('fabric')) {
-		return true;
+		if (fabric_page_allowed()) {
+			return true;
+		}
+		http_response_code(403);
+
+		return false;
 	}
 
 	top_header();
@@ -254,7 +259,7 @@ function fabric_setup_hooks(bool $grant = false): void {
 	}
 
 	foreach (\Somethingwithproof\Fabric\Pages::realms() as $realm) {
-		api_plugin_register_realm('fabric', implode(',', $realm['files']), $realm['name'], $grant);
+		api_plugin_register_realm('fabric', implode(',', $realm['files']), $realm['name'], $grant && $realm['files'] !== \Somethingwithproof\Fabric\Pages::OPERATOR);
 	}
 }
 
@@ -324,6 +329,10 @@ function fabric_config_arrays(): void {
 function fabric_config_settings(): void {
 	global $tabs, $settings;
 
+	if (PHP_SAPI !== 'cli' && !api_plugin_user_realm_auth('fabric_admin.php')) {
+		return;
+	}
+
 	if (!fabric_boot()) {
 		return;
 	}
@@ -349,8 +358,15 @@ function fabric_config_settings(): void {
  * @return array<string, mixed>
  */
 function fabric_draw_navigation_text($nav) {
+	global $current_user;
+
 	if (!fabric_boot()) {
 		return $nav;
+	}
+
+	// Refresh settings after core restores cookie or Basic authentication.
+	if (get_current_page() === 'settings.php' && (PHP_SAPI === 'cli' || ($current_user['enabled'] ?? '') === 'on')) {
+		fabric_config_settings();
 	}
 
 	return array_merge($nav, \Somethingwithproof\Fabric\Pages::navigation());
@@ -428,4 +444,64 @@ function fabric_script_sweep_seconds(): float {
 	$timeout = (int) read_config_option('script_timeout');
 
 	return (float) max(0, ($timeout > 0 ? $timeout : 25) - 5);
+}
+
+/** Resolve role inheritance against Cacti's current user and group grants. */
+function fabric_auth_alternate_realms(): void {
+	global $user_auth_realm_filenames;
+
+	static $deferred = array();
+
+	foreach ($deferred as $file => $realm) {
+		$user_auth_realm_filenames[$file] = $realm;
+	}
+	$deferred = array();
+
+	if (!api_plugin_is_enabled('fabric')) {
+		return;
+	}
+
+	if (empty($_SESSION['sess_user_id'])) {
+		// Core restores cookie and Basic authentication after this hook. Only
+		// these entrypoints defer the realm check to their post-auth guard.
+		$page = get_current_page();
+
+		if (in_array($page, array('fabric.php', 'fabric_operator.php'), true) && isset($user_auth_realm_filenames[$page])) {
+			$deferred[$page]                  = $user_auth_realm_filenames[$page];
+			$user_auth_realm_filenames[$page] = -1;
+		}
+
+		return;
+	}
+	$operator = 'fabric_operator.php';
+	$admin = 'fabric_admin.php';
+	$files = array('fabric.php');
+	$realm = $user_auth_realm_filenames[$admin] ?? 0;
+	if ($realm > 0 && is_realm_allowed($realm)) {
+		$files[] = $operator;
+	} else {
+		$realm = $user_auth_realm_filenames[$operator] ?? 0;
+		if ($realm <= 0 || !is_realm_allowed($realm)) {
+			return;
+		}
+	}
+	foreach ($files as $file) {
+		$user_auth_realm_filenames[$file] = $realm;
+	}
+}
+
+/** Recheck the authenticated user before a plugin page reads data or acts. */
+function fabric_page_allowed(): bool {
+	global $current_user;
+
+	fabric_auth_alternate_realms();
+	$userId    = $current_user['id'] ?? null;
+	$sessionId = $_SESSION['sess_user_id'] ?? null;
+
+	return (is_int($userId) || (is_string($userId) && ctype_digit($userId)))
+		&& (is_int($sessionId) || (is_string($sessionId) && ctype_digit($sessionId)))
+		&& (int) $userId > 0 && (int) $userId === (int) $sessionId
+		&& api_plugin_is_enabled('fabric')
+		&& ($current_user['enabled'] ?? '') === 'on'
+		&& api_plugin_user_realm_auth(get_current_page());
 }
