@@ -1,4 +1,4 @@
-<!-- Source: README.md; SHA256: 19164b87c715ee79192e7772b7cd0029dc6c5e3c07d8ddc7dc44ebabb34ece2b -->
+<!-- Source: README.md; SHA256: ce5af61a1bc993ec2aae6d4f22c3885694632f2b1d5eb94e2ce88b8390e96f1e -->
 
 <!-- translations:start -->
 [English](../../../README.md) | [简体中文](../zh-CN/README.md) | [हिन्दी](../hi-IN/README.md) | [Español (España)](README.md) | [Español (Latinoamérica)](../es-419/README.md) | [العربية](../ar-SA/README.md)
@@ -52,6 +52,16 @@ Un enlace InfiniBand degradado sigue transportando tráfico. Un enlace 4X que re
 - **Sin integración con las alertas de Cacti.** Thold y Maint trabajan con fuentes de datos y dispositivos Cacti.
 
 El complemento cubre esas carencias leyendo la red mediante sus herramientas de diagnóstico (y posteriormente mediante UFM), identificando nodos y puertos por GUID y publicando contadores y estados de enlaces como fuentes de datos Cacti. Solo lee: nunca reinicia contadores ni cambia el estado de los puertos.
+
+## Primer descubrimiento
+
+Un fabric nuevo no tiene nodos, y las consultas que inicia el servidor de scripts parten solo de un nodo asignado a un dispositivo de Cacti. Por eso el primer descubrimiento es un paso manual. Después de guardar un fabric habilitado, ejecute esto una vez en el sondeador al que está asignado, con la cuenta del sondeador y sustituyendo `/path/to/cacti` por su directorio de Cacti (la ruta absoluta también funciona desde cron):
+
+```
+php /path/to/cacti/plugins/fabric/fabric_sweep.php --fabric=ID --force
+```
+
+Después se llena el inventario. Asigne los nodos a dispositivos de Cacti en la página Fabric Admin; las consultas posteriores parten de la consulta de datos. Mientras ningún nodo de un fabric esté asignado, nada actualiza su inventario; ejecute de nuevo el mismo comando, desde cron si lo desea, para registrar nodos nuevos o ausentes. La página de estado muestra este comando para un fabric habilitado que no se ha descubierto o que no tiene ningún nodo asignado.
 
 <a id="planned-scope"></a>
 ## Alcance previsto

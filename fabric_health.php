@@ -60,7 +60,8 @@ $fabric_page  = new \Somethingwithproof\Fabric\HealthPage(
 		return fabric_device_allowed($host) || $fabric_hosts->gone($host);
 	}),
 	$fabric_templates,
-	$fabric_import
+	$fabric_import,
+	(string) $config['base_path']
 );
 
 top_header();
