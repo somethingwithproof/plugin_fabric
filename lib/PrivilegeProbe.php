@@ -40,11 +40,12 @@ final class PrivilegeProbe {
 
 	/**
 	 * Why no tool may run from the directory, checked again before every
-	 * sweep because the directory can change after the setting was saved.
-	 * Null when it passes ToolDirectory's checks.
+	 * sweep because the directory or a tool can change after the setting was
+	 * saved. Null when the directory and every allowlisted tool in it pass
+	 * ToolDirectory's checks.
 	 */
 	public function refusal(): ?string {
-		return ToolDirectory::problem($this->toolDir, $this->toolOwner);
+		return ToolDirectory::problem($this->toolDir, $this->toolOwner) ?? ToolDirectory::toolProblem($this->toolDir, $this->toolOwner);
 	}
 
 	/**

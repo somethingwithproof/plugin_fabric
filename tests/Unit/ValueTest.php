@@ -215,6 +215,38 @@ it('accepts only a canonical tool directory owned by the required account and cl
 	}
 });
 
+it('refuses a tool that is not root-owned, is writable by group or others, or is set-ID', function () {
+	$scratch = new Somethingwithproof\Fabric\Tests\Scratch();
+
+	try {
+		$dir   = (string) realpath($scratch->dir);
+		$owner = (int) fileowner($dir);
+		chmod($dir, 0755);
+		$tool = $scratch->file('perfquery', '#!/bin/sh', 0755);
+
+		$probe = new Somethingwithproof\Fabric\PrivilegeProbe($dir, toolOwner: $owner);
+
+		// An absent tool is not a refusal; running it fails and is recorded.
+		expect($probe->refusal())->toBeNull();
+
+		foreach ([0775 => 'tool_writable', 0757 => 'tool_writable', 04755 => 'tool_setid', 02755 => 'tool_setid', 0755 => null] as $mode => $code) {
+			chmod($tool, $mode);
+			expect($probe->refusal())->toBe($code);
+		}
+
+		expect((new Somethingwithproof\Fabric\PrivilegeProbe($dir, toolOwner: $owner + 1))->refusal())->toBe('owner');
+
+		// The directory passes for its owner; the tool is judged on its own owner.
+		expect(ToolDirectory::toolProblem($dir, $owner + 1))->toBe('tool_owner');
+
+		$scratch->file('iblinkinfo', '#!/bin/sh', 0777);
+		chmod($tool, 0755);
+		expect($probe->refusal())->toBe('tool_writable');
+	} finally {
+		$scratch->remove();
+	}
+});
+
 it('reads settings with defaults, bounds, and safe paths', function () {
 	$defaults = Settings::fromRow([]);
 

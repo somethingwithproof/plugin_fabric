@@ -28,7 +28,7 @@ namespace Somethingwithproof\Fabric;
  * writable by neither its group nor others.
  */
 final class ToolDirectory {
-	public const CODES = ['path', 'missing', 'symlink', 'owner', 'writable'];
+	public const CODES = ['path', 'missing', 'symlink', 'owner', 'writable', 'tool_owner', 'tool_writable', 'tool_setid'];
 
 	/**
 	 * @param int $owner the required owner; root except in tests, which
@@ -64,14 +64,50 @@ final class ToolDirectory {
 		return ($stat['mode'] & 0o022) !== 0 ? 'writable' : null;
 	}
 
+	/**
+	 * The first check an allowlisted tool inside the directory fails, or
+	 * null. A directory that passes still lets a tool be replaced in place
+	 * by whoever can write the file, and a set-ID tool runs as someone else.
+	 * A tool that does not exist is not a problem here; running it fails
+	 * and is recorded as such. A symbolic link is judged by its target.
+	 */
+	public static function toolProblem(string $dir, int $owner = 0): ?string {
+		foreach (Tool::cases() as $tool) {
+			$path = $dir . '/' . $tool->value;
+
+			clearstatcache(true, $path);
+
+			if (!is_file($path) || ($stat = stat($path)) === false) {
+				continue;
+			}
+
+			if ($stat['uid'] !== $owner) {
+				return 'tool_owner';
+			}
+
+			if (($stat['mode'] & 0o022) !== 0) {
+				return 'tool_writable';
+			}
+
+			if (($stat['mode'] & 0o6000) !== 0) {
+				return 'tool_setid';
+			}
+		}
+
+		return null;
+	}
+
 	public static function message(string $code): string {
 		return match ($code) {
-			'path'     => __('The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash.', 'fabric'),
-			'missing'  => __('The tool directory does not exist or is not a directory.', 'fabric'),
-			'symlink'  => __('The tool directory path contains a symbolic link. Enter the real path.', 'fabric'),
-			'owner'    => __('The tool directory is not owned by root.', 'fabric'),
-			'writable' => __('The tool directory can be written by its group or by others.', 'fabric'),
-			default    => __('Unknown warning', 'fabric'),
+			'path'          => __('The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash.', 'fabric'),
+			'missing'       => __('The tool directory does not exist or is not a directory.', 'fabric'),
+			'symlink'       => __('The tool directory path contains a symbolic link. Enter the real path.', 'fabric'),
+			'owner'         => __('The tool directory is not owned by root.', 'fabric'),
+			'writable'      => __('The tool directory can be written by its group or by others.', 'fabric'),
+			'tool_owner'    => __('A diagnostics tool is not owned by root.', 'fabric'),
+			'tool_writable' => __('A diagnostics tool can be written by its group or by others.', 'fabric'),
+			'tool_setid'    => __('A diagnostics tool has the setuid or setgid bit. The plugin never needs it.', 'fabric'),
+			default         => __('Unknown warning', 'fabric'),
 		};
 	}
 }

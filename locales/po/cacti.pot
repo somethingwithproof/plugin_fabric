@@ -839,7 +839,7 @@ msgstr ""
 msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
 msgstr ""
 
-#: lib/PrivilegeProbe.php
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
 msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
 msgstr ""
 
@@ -957,6 +957,14 @@ msgstr ""
 
 #: lib/ToolDirectory.php
 msgid "The tool directory can be written by its group or by others."
+msgstr ""
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr ""
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
 msgstr ""
 
 #: setup.php

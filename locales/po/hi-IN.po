@@ -837,7 +837,7 @@ msgstr "Fabric दृश्य"
 msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
 msgstr "सर्वेक्षण root के रूप में चलता है। पोलर को ऐसे गैर-विशेषाधिकार खाते से चलाएँ जिसे समूह के माध्यम से umad डिवाइस पढ़ने की अनुमति हो।"
 
-#: lib/PrivilegeProbe.php
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
 msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
 msgstr "किसी निदान उपकरण पर setuid या setgid बिट सेट है। प्लगइन को इसकी कभी आवश्यकता नहीं होती।"
 
@@ -956,6 +956,14 @@ msgstr "उपकरण निर्देशिका का स्वामी
 #: lib/ToolDirectory.php
 msgid "The tool directory can be written by its group or by others."
 msgstr "उपकरण निर्देशिका को उसका समूह या अन्य उपयोगकर्ता लिख सकते हैं।"
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "कोई निदान उपकरण root के स्वामित्व में नहीं है।"
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "किसी निदान उपकरण को उसका समूह या अन्य उपयोगकर्ता लिख सकते हैं।"
 
 #: setup.php
 #, php-format
