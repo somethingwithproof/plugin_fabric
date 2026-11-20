@@ -55,13 +55,13 @@ El complemento cubre esas carencias leyendo la red mediante sus herramientas de 
 
 ## Primer descubrimiento
 
-Un fabric nuevo no tiene nodos, y las consultas que inicia el servidor de scripts parten solo de un nodo asignado a un dispositivo de Cacti. Por eso el primer descubrimiento es un paso manual. Después de guardar un fabric habilitado, ejecute esto una vez en el sondeador al que está asignado, con la cuenta del sondeador y sustituyendo `/path/to/cacti` por su directorio de Cacti (la ruta absoluta también funciona desde cron):
+Una red nueva no tiene nodos, y las consultas que inicia el servidor de scripts parten solo de un nodo asociado a un dispositivo de Cacti. Por eso el primer descubrimiento es un paso manual. Después de guardar una red habilitada, ejecute esto una vez en el sondeador al que está asignada, con la cuenta del sondeador y sustituyendo `/path/to/cacti` por su directorio de Cacti (la ruta absoluta también funciona desde cron):
 
 ```
 php /path/to/cacti/plugins/fabric/fabric_sweep.php --fabric=ID --force
 ```
 
-Después se llena el inventario. Asigne los nodos a dispositivos de Cacti en la página Fabric Admin; las consultas posteriores parten de la consulta de datos. Mientras ningún nodo de un fabric esté asignado, nada actualiza su inventario; ejecute de nuevo el mismo comando, desde cron si lo desea, para registrar nodos nuevos o ausentes. La página de estado muestra este comando para un fabric habilitado que no se ha descubierto o que no tiene ningún nodo asignado.
+Después se llena el inventario. Asocie los nodos a dispositivos de Cacti en la página Fabric Admin; las consultas posteriores parten de la consulta de datos. Mientras ningún nodo de una red esté asociado, nada actualiza su inventario; ejecute de nuevo el mismo comando, desde cron si lo desea, para registrar nodos nuevos o ausentes. La página de estado muestra este comando para una red habilitada que no se ha descubierto o que no tiene ningún nodo asociado.
 
 <a id="planned-scope"></a>
 ## Alcance previsto

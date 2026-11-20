@@ -573,12 +573,12 @@ msgstr "फ़ैब्रिक %s: इसका स्वास्थ्य �
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
-msgstr "फ़ैब्रिक %s: इसकी खोज नहीं हुई है। सर्वेक्षण केवल Cacti डिवाइस से जुड़े नोड से शुरू होता है, इसलिए मुख्य पोलर पर एक बार \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" चलाएँ।"
+msgstr "फ़ैब्रिक %s: इसकी खोज नहीं हुई है। सर्वेक्षण केवल Cacti डिवाइस से मैप किए गए नोड से शुरू होता है, इसलिए मुख्य पोलर पर एक बार \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" चलाएँ।"
 
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
-msgstr "फ़ैब्रिक %s: कोई नोड Cacti डिवाइस से नहीं जुड़ा है, इसलिए कोई सर्वेक्षण शुरू नहीं होता और सूची ताज़ा नहीं होती। Fabric Admin पृष्ठ पर नोड जोड़ें, या मुख्य पोलर पर \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" चलाएँ।"
+msgstr "फ़ैब्रिक %s: कोई नोड Cacti डिवाइस से मैप नहीं है, इसलिए कोई सर्वेक्षण शुरू नहीं होता और सूची ताज़ा नहीं होती। Fabric Admin पृष्ठ पर नोड मैप करें, या मुख्य पोलर पर \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" चलाएँ।"
 
 #: lib/HealthPage.php
 #, php-format
