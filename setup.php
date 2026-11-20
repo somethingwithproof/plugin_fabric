@@ -321,9 +321,20 @@ function fabric_config_arrays(): void {
 		$menu[__('Management')]['plugins/fabric/' . $file] = $title;
 	}
 
-	if (in_array(get_current_page(), \Somethingwithproof\Fabric\Pages::upgradeTriggers(), true)) {
+	if (fabric_repair_on_page(get_current_page())) {
 		plugin_fabric_upgrade();
 	}
+}
+
+/**
+ * Whether config_arrays may repair the install on this page. Core fires
+ * config_arrays before include/auth.php checks the session, so a request
+ * that is about to be redirected to the login page gets here too. Only a
+ * request that already carries a user may start the migrations and the
+ * template import; an anonymous one leaves them to the next page load.
+ */
+function fabric_repair_on_page(string $page): bool {
+	return !empty($_SESSION['sess_user_id']) && in_array($page, \Somethingwithproof\Fabric\Pages::upgradeTriggers(), true);
 }
 
 function fabric_config_settings(): void {
