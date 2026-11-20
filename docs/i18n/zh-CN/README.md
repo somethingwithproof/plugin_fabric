@@ -1,4 +1,4 @@
-<!-- Source: README.md; SHA256: 2251a64e2a702da9f547288c0150ed43b5cdb8d0dccd7fa9d2b5c2ce85de344e -->
+<!-- Source: README.md; SHA256: ce5af61a1bc993ec2aae6d4f22c3885694632f2b1d5eb94e2ce88b8390e96f1e -->
 
 <!-- translations:start -->
 [English](../../../README.md) | [简体中文](README.md) | [हिन्दी](../hi-IN/README.md) | [Español (España)](../es-ES/README.md) | [Español (Latinoamérica)](../es-419/README.md) | [العربية](../ar-SA/README.md)
@@ -55,10 +55,10 @@ Cacti 设备权限仍限制每位用户可访问的行和操作；未映射对�
 
 ## 首次发现
 
-新的互连网络没有节点，而脚本服务器发起的扫描只会从已分配给 Cacti 设备的节点开始，因此首次发现需要手动完成。保存已启用的互连网络后，请在其所分配的采集器上，以采集器账户运行一次：
+新的互连网络没有节点，而脚本服务器发起的扫描只会从已分配给 Cacti 设备的节点开始，因此首次发现需要手动完成。保存已启用的互连网络后，请在其所分配的采集器上，以采集器账户运行一次（请将 `/path/to/cacti` 替换为您的 Cacti 目录；绝对路径同样适用于 cron）：
 
 ```
-php plugins/fabric/fabric_sweep.php --fabric=ID --force
+php /path/to/cacti/plugins/fabric/fabric_sweep.php --fabric=ID --force
 ```
 
 之后清单会被填充。在 Fabric Admin 页面将节点分配给 Cacti 设备；后续扫描由数据查询发起。互连网络中没有任何节点被分配时，其清单不会刷新，请再次运行同一命令（可通过 cron）以记录新增或缺失的节点。对于尚未发现或没有已分配节点的已启用互连网络，健康页面会显示此命令。

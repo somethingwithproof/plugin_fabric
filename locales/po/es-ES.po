@@ -567,13 +567,18 @@ msgstr "Red %s: está asignada al sondeador %d, pero solo el principal puede con
 
 #: lib/HealthPage.php
 #, php-format
-msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
-msgstr "Red %s: no se ha descubierto. Las consultas solo parten de un nodo asignado a un dispositivo de Cacti, así que ejecute \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" una vez en el sondeador principal."
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Red %s: no se pudo leer su registro de estado, por lo que se desconoce su estado de descubrimiento. Consulte el registro de Cacti."
 
 #: lib/HealthPage.php
 #, php-format
-msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
-msgstr "Red %s: ningún nodo está asignado a un dispositivo de Cacti, por lo que no se inicia ninguna consulta y el inventario no se actualiza. Asigne un nodo en la página Fabric Admin o ejecute \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" en el sondeador principal."
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Red %s: no se ha descubierto. Las consultas solo parten de un nodo asignado a un dispositivo de Cacti, así que ejecute \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" una vez en el sondeador principal."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Red %s: ningún nodo está asignado a un dispositivo de Cacti, por lo que no se inicia ninguna consulta y el inventario no se actualiza. Asigne un nodo en la página Fabric Admin o ejecute \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" en el sondeador principal."
 
 #: lib/HealthPage.php
 #, php-format

@@ -117,8 +117,13 @@ final class HealthPage {
 
 		$warnings = [];
 
+		// The command is shown with an absolute path so it also works from cron.
+		global $config;
+		$base = rtrim((string) ($config['base_path'] ?? '/path/to/cacti'), '/');
+
 		foreach ($fabrics as $fabric) {
-			$row = $this->health->find($fabric->id) ?? [];
+			$found = $this->health->find($fabric->id);
+			$row   = $found ?? [];
 
 			$fabricNodes = array_filter($nodes, static fn (Node $n): bool => $n->fabricId === $fabric->id);
 			$outcomes    = [];
@@ -144,11 +149,13 @@ final class HealthPage {
 
 			// Sweeps start from a mapped node (ADR 0008), so a fabric with no
 			// discovery or no mapped node waits for the command line.
-			if ($fabric->enabled() && $fabric->onMainPoller()) {
+			if ($found === null) {
+				$warnings[] = __('Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log.', $fabric->name, 'fabric');
+			} elseif ($fabric->enabled() && $fabric->onMainPoller()) {
 				if (Row::int($row, 'discovery_attempt') === 0) {
-					$warnings[] = __('Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run "php plugins/fabric/fabric_sweep.php --fabric=%d --force" on the main poller once.', $fabric->name, $fabric->id, 'fabric');
+					$warnings[] = __('Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run "php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force" on the main poller once.', $fabric->name, $base, $fabric->id, 'fabric');
 				} elseif (!isset($mapped[$fabric->id])) {
-					$warnings[] = __('Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run "php plugins/fabric/fabric_sweep.php --fabric=%d --force" on the main poller.', $fabric->name, $fabric->id, 'fabric');
+					$warnings[] = __('Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run "php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force" on the main poller.', $fabric->name, $base, $fabric->id, 'fabric');
 				}
 			}
 

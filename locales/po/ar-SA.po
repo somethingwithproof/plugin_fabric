@@ -567,13 +567,18 @@ msgstr "شبكة الربط %s: أُسندت إلى المُستطلِع %d، ل
 
 #: lib/HealthPage.php
 #, php-format
-msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
-msgstr "شبكة الربط %s: لم يُكتشف بعد. لا يبدأ الفحص إلا من عقدة مرتبطة بجهاز Cacti، لذا شغّل \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" مرة واحدة على المُستطلِع الرئيسي."
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "شبكة الربط %s: تعذّرت قراءة سجل حالتها الصحية، لذا حالة اكتشافها غير معروفة. راجع سجل Cacti."
 
 #: lib/HealthPage.php
 #, php-format
-msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
-msgstr "شبكة الربط %s: لا توجد عقدة مرتبطة بجهاز Cacti، لذلك لا يبدأ أي فحص ولا يُحدَّث المخزون. اربط عقدة في صفحة Fabric Admin، أو شغّل \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" على المُستطلِع الرئيسي."
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "شبكة الربط %s: لم يُكتشف بعد. لا يبدأ الفحص إلا من عقدة مرتبطة بجهاز Cacti، لذا شغّل \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" مرة واحدة على المُستطلِع الرئيسي."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "شبكة الربط %s: لا توجد عقدة مرتبطة بجهاز Cacti، لذلك لا يبدأ أي فحص ولا يُحدَّث المخزون. اربط عقدة في صفحة Fabric Admin، أو شغّل \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" على المُستطلِع الرئيسي."
 
 #: lib/HealthPage.php
 #, php-format

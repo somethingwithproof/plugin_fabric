@@ -60,10 +60,10 @@ The plugin closes these gaps by reading the fabric through its own diagnostic to
 
 ## First discovery
 
-A new fabric has no nodes, and sweeps start from the script server only for a node that is mapped to a Cacti device. The first discovery is therefore a manual step. After saving an enabled fabric, run this once on the poller the fabric is assigned to, as the poller's account:
+A new fabric has no nodes, and sweeps start from the script server only for a node that is mapped to a Cacti device. The first discovery is therefore a manual step. After saving an enabled fabric, run this once on the poller the fabric is assigned to, as the poller's account, with `/path/to/cacti` replaced by your Cacti directory (the absolute path also works from cron):
 
 ```
-php plugins/fabric/fabric_sweep.php --fabric=ID --force
+php /path/to/cacti/plugins/fabric/fabric_sweep.php --fabric=ID --force
 ```
 
 The inventory then fills in. Map nodes to Cacti devices on the Fabric Admin page; later sweeps start from the data query. While no node of a fabric is mapped, nothing refreshes its inventory, so run the same command again, from cron if you like, to record new or missing nodes. The health page shows this command for an enabled fabric that has not been discovered or has no mapped node.
