@@ -44,6 +44,7 @@ final class HealthPage {
 		private readonly DeviceAccess $access,
 		private readonly ?TemplateInstaller $templates = null,
 		private readonly bool $canImport = false,
+		private readonly string $basePath = '/path/to/cacti',
 	) {
 	}
 
@@ -118,8 +119,7 @@ final class HealthPage {
 		$warnings = [];
 
 		// The command is shown with an absolute path so it also works from cron.
-		global $config;
-		$base = rtrim((string) ($config['base_path'] ?? '/path/to/cacti'), '/');
+		$base = rtrim($this->basePath, '/');
 
 		foreach ($fabrics as $fabric) {
 			$found = $this->health->find($fabric->id);
