@@ -573,7 +573,7 @@ msgstr "شبكة الربط %s: تعذّرت قراءة سجل حالتها ال
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
-msgstr "شبكة الربط %s: لم يُكتشف بعد. لا يبدأ الفحص إلا من عقدة مرتبطة بجهاز Cacti، لذا شغّل \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" مرة واحدة على المُستطلِع الرئيسي."
+msgstr "شبكة الربط %s: لم تُكتشف بعد. لا يبدأ الفحص إلا من عقدة مرتبطة بجهاز Cacti، لذا شغّل \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" مرة واحدة على المُستطلِع الرئيسي."
 
 #: lib/HealthPage.php
 #, php-format

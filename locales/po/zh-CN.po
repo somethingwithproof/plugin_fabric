@@ -573,12 +573,12 @@ msgstr "互连网络 %s：无法读取其健康状态记录，因此其发现状
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
-msgstr "互连网络 %s：尚未发现。扫描只会从已分配给 Cacti 设备的节点开始，因此请在主采集器上运行一次 \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\"。"
+msgstr "互连网络 %s：尚未发现。扫描只会从已映射到 Cacti 设备的节点开始，因此请在主采集器上运行一次 \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\"。"
 
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
-msgstr "互连网络 %s：没有节点分配给 Cacti 设备，因此不会启动任何扫描，清单也不会刷新。请在 Fabric Admin 页面分配节点，或在主采集器上运行 \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\"。"
+msgstr "互连网络 %s：没有节点映射到 Cacti 设备，因此不会启动任何扫描，清单也不会刷新。请在 Fabric Admin 页面映射节点，或在主采集器上运行 \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\"。"
 
 #: lib/HealthPage.php
 #, php-format
