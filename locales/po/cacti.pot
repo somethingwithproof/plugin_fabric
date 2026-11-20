@@ -569,6 +569,16 @@ msgstr ""
 
 #: lib/HealthPage.php
 #, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr ""
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr ""
+
+#: lib/HealthPage.php
+#, php-format
 msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
 msgstr ""
 

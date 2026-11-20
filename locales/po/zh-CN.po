@@ -567,6 +567,16 @@ msgstr "互连网络 %s：已分配给采集器 %d，但在添加远程采集器
 
 #: lib/HealthPage.php
 #, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "互连网络 %s：尚未发现。扫描只会从已分配给 Cacti 设备的节点开始，因此请在主采集器上运行一次 \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\"。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "互连网络 %s：没有节点分配给 Cacti 设备，因此不会启动任何扫描，清单也不会刷新。请在 Fabric Admin 页面分配节点，或在主采集器上运行 \"php plugins/fabric/fabric_sweep.php --fabric=%d --force\"。"
+
+#: lib/HealthPage.php
+#, php-format
 msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
 msgstr "互连网络 %s：无法读取 %d 行 iblinkinfo 输出，很可能是某个节点描述模仿了工具输出。这些节点将保留上次链路状态。"
 

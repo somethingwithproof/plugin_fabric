@@ -1,4 +1,4 @@
-<!-- Source: README.md; SHA256: 19164b87c715ee79192e7772b7cd0029dc6c5e3c07d8ddc7dc44ebabb34ece2b -->
+<!-- Source: README.md; SHA256: 2251a64e2a702da9f547288c0150ed43b5cdb8d0dccd7fa9d2b5c2ce85de344e -->
 
 <!-- translations:start -->
 [English](../../../README.md) | [简体中文](README.md) | [हिन्दी](../hi-IN/README.md) | [Español (España)](../es-ES/README.md) | [Español (Latinoamérica)](../es-419/README.md) | [العربية](../ar-SA/README.md)
@@ -52,6 +52,16 @@ Cacti 设备权限仍限制每位用户可访问的行和操作；未映射对�
 - **无法接入 Cacti 告警。** Thold 和 Maint 作用于 Cacti 数据源和设备。
 
 插件通过网络自身的诊断工具（以后也通过 UFM）读取互连网络，按 GUID 标识节点和端口，并将计数器和链路状态发布为 Cacti 数据源，补足这些缺口。它只读取：绝不重置计数器或改变端口状态。
+
+## 首次发现
+
+新的互连网络没有节点，而脚本服务器发起的扫描只会从已分配给 Cacti 设备的节点开始，因此首次发现需要手动完成。保存已启用的互连网络后，请在其所分配的采集器上，以采集器账户运行一次：
+
+```
+php plugins/fabric/fabric_sweep.php --fabric=ID --force
+```
+
+之后清单会被填充。在 Fabric Admin 页面将节点分配给 Cacti 设备；后续扫描由数据查询发起。互连网络中没有任何节点被分配时，其清单不会刷新，请再次运行同一命令（可通过 cron）以记录新增或缺失的节点。对于尚未发现或没有已分配节点的已启用互连网络，健康页面会显示此命令。
 
 <a id="planned-scope"></a>
 ## 计划范围
