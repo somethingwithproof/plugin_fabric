@@ -1,6 +1,6 @@
 # 0009. Run three allowlisted tools with fixed arguments; no smpquery, no sudo, no ibdiagnet
 
-Status: Accepted (2026-11-15)
+Status: Accepted (2026-11-15); allowlisted tool files added to the sweep check (2026-11-19)
 
 ## Context
 
@@ -19,7 +19,7 @@ Status: Accepted (2026-11-15)
   - A test enumerates every vector the builder produces.
 - Commands run without a shell. They run with `PATH` and `LC_ALL` only, from `/`, with standard input from `/dev/null`, and with a time and output limit. Output that is cut short is never parsed. A failure is recorded as an error, never as a zero.
 - No `smpquery`. A link below best is reported as below best with the cause unknown, and its degraded value is unknown (`U`) until the UFM backend supplies enabled values.
-- `sudo` is never used and never documented. The documented grant is a dedicated group with mode 0660 on `umad*`. The plugin records on its health page when it runs as root, set-ID, from a tool directory others can write to, or with a world-accessible UMAD node. The tool directory itself must be an absolute, canonical path to a real directory with no symbolic link in it, owned by root, and writable by neither group nor others. The settings form refuses any other directory, and each sweep checks it again and runs nothing when it fails.
+- `sudo` is never used and never documented. The documented grant is a dedicated group with mode 0660 on `umad*`. The plugin records on its health page when it runs as root, set-ID, from a tool directory others can write to, or with a world-accessible UMAD node. The tool directory itself must be an absolute, canonical path to a real directory with no symbolic link in it, owned by root, and writable by neither group nor others. The settings form refuses any other directory, and each sweep checks it again and runs nothing when it fails. Each allowlisted tool present in it must also be owned by root, writable by neither group nor others, and not set-ID; a sweep that finds one that is not runs nothing, because whoever can write the file chooses what the poller runs. The health page still records these conditions as warnings.
 - `ibdiagnet` is excluded from phases 1 to 3.
 
 ## Consequences

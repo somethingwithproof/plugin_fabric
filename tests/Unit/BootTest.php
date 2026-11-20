@@ -85,3 +85,25 @@ it('registers no poller_bottom hook: sweeps start lazily (ADR 0008)', function (
 		'device_remove'        => 'fabric_device_remove',
 	]);
 });
+
+// core fires config_arrays before auth.php checks the session
+it('repairs the install from config_arrays only for a request that carries a user', function () {
+	$saved = $_SESSION ?? null;
+
+	try {
+		$_SESSION = [];
+		expect(fabric_repair_on_page('plugins.php'))->toBeFalse()
+			->and(fabric_repair_on_page('fabric.php'))->toBeFalse();
+
+		$_SESSION = ['sess_user_id' => 3];
+		expect(fabric_repair_on_page('plugins.php'))->toBeTrue()
+			->and(fabric_repair_on_page('fabric.php'))->toBeTrue()
+			->and(fabric_repair_on_page('graphs.php'))->toBeFalse();
+	} finally {
+		if ($saved === null) {
+			unset($_SESSION);
+		} else {
+			$_SESSION = $saved;
+		}
+	}
+});

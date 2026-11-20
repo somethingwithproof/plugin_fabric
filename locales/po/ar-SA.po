@@ -837,7 +837,7 @@ msgstr "عرض Fabric"
 msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
 msgstr "يعمل الفحص بصلاحيات root. شغّل المُستطلِع بحساب غير ذي امتيازات يملك حق قراءة أجهزة umad عبر مجموعة."
 
-#: lib/PrivilegeProbe.php
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
 msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
 msgstr "تحتوي إحدى أدوات التشخيص على بت setuid أو setgid. لا تحتاج الإضافة إليهما مطلقًا."
 
@@ -956,6 +956,14 @@ msgstr "دليل الأدوات غير مملوك لـ root."
 #: lib/ToolDirectory.php
 msgid "The tool directory can be written by its group or by others."
 msgstr "يمكن للمجموعة أو للآخرين الكتابة إلى دليل الأدوات."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "إحدى أدوات التشخيص غير مملوكة لـ root."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "يمكن للمجموعة أو للآخرين الكتابة إلى إحدى أدوات التشخيص."
 
 #: setup.php
 #, php-format
