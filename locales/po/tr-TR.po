@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: tr-TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "Sayfa oluşturulduktan sonra düğüm değiştiğinden hiçbir işlem yapılmadı. Gözden geçirip yeniden deneyin."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "Cihaz yetkileriniz bu kaydı değiştirmenize izin vermiyor."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "Ad: Başka bir fabric zaten bu adı kullanıyor."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "Bağdaştırıcı: Bu yoklayıcıdaki bu bağdaştırıcı bağlantı noktasını başka bir fabric zaten tarıyor. Her bağdaştırıcı bağlantı noktası için yalnızca bir fabric kullanılabilir."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "Fabric kaydedilemedi."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "Fabric kaydedildi."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "Bu fabric için bir tarama çalışıyor, bu nedenle hiçbir şey silinmedi. Tamamlandığında yeniden deneyin."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "Fabric ve envanteri silindi. Hiçbir Cacti cihazı değiştirilmedi ve fabric ile iletişim kurulmadı."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "Fabric silinemedi."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "Düğüm kimliği değiştirilmedi."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "Düğüm kimliği güncellendi. Bir sonraki döngüden itibaren yeniden taranacaktır."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "Cihaz eşlemesi yeni düğüme taşındı."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "Öneri onaylanamadı. Öneri oluşturulduğundan bu yana düğümler değişmiş olabilir."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "Öneri reddedilemedi."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "Öneri reddedildi."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "Düğüm eşlemesi değiştirilmedi. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "Düğüm eşlemesi değiştirilmedi."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "Düğüm eşlemesi kaydedildi."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "Hiçbir cihaz oluşturulmadı. Cacti günlüğüne bakın."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "Cihaz oluşturuldu ve düğüm bu cihaza eşlendi. Yeni Grafikler sayfasından grafiği çizilecek bağlantı noktalarını seçin."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "Envanter dışa aktarım için okunamadı."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "Fabric şablonları ve veri sorgu dosyası kuruldu."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Fabric şablonları kurulmadı. Cacti Nesneleri tablosuna ve Cacti günlüğüne bakın."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "İzleme görünümü"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "Gözlemler okunamadı. Bir yöneticiden eklenti günlüğünü kontrol etmesini isteyin."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "Bağlantı noktası geçerliliğini, bağlantı genişliği ile hızını ve tıkanıklık görünümünü inceleyin. Kimlik çakışmalarını ve cihaz yeniden bağlama işlemlerini bir yöneticiye iletin; sayaçları sıfırlamayın."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Fabric Yönetimi"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "Fabric kayıtları okunamadı. Cacti günlüğüne bakın."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "Fabric'ler"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "Eylemler"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "Bağdaştırıcı"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "Arka Uç"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "Ad"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "Düğümler"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Poller"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "Durum"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "Tarama Aralığı"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "Henüz tanımlanmış bir fabric yok."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "Silinmiş yoklayıcı (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "bağlantı noktası %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d saniye"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "Sil"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "Görmenize izin verilmeyen cihazları içerir"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "Dışa Aktar"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "Eklenti tablolarını kaldıran bir kaldırma işleminden önce fabric'leri, düğüm envanterini ve cihaz eşlemelerini JSON olarak indirin. Kimlik bilgisi içermez."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Fabric: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "Yeni Fabric"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "Tarama Aralığı (saniye)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "Bağdaştırıcı Bağlantı Noktası"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "Etkin"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "Kaydet"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "Fabric'i Sil: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "Bu fabric, %d düğümü, bağlantı noktaları, örnekleri ve önerileriyle birlikte silinsin mi? %d düğüm Cacti cihazlarına eşlenmiş durumda; bu cihazlar, veri kaynakları ve RRD dosyaları korunacaktır. Fabric ile iletişim kurulmaz."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "Eşlenmemiş"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "Silinmiş cihaz (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "Fabric Düğümü: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "Düğüm Adıyla Eşleşen Cihazlar"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (cihaz %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "Yok"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Cacti Cihazı"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "Kaydetmek düğümü cihaza eşler ve düğümün bağlantı noktalarını listeleyen Fabric Port veri sorgusunu cihaza ekler. Hiçbir grafik, veri kaynağı veya cihaz ayarı değiştirilmez. Cihaz, fabric'i tarayan yoklayıcı tarafından yoklanmalıdır."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "Bu Düğüm İçin Bir Cihaz Oluştur"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "Burada cihaz oluşturulamaz."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "%s İçin Bir Cihaz Oluştur"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "Cihazı oluşturmak şunları ekler:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "Oluştur"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "Kimlik Çakışmaları"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "Düğüm"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "Görülen"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "Kayıtlı"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "Çakışma yok."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "Tek bir keşifte iki kez yazdırıldı"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "Görülen Kimliği Kabul Et"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "Yeniden Bağlama Önerileri"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "Cihaz"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "Eksik Düğüm"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "Yeni Düğüm"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "Paylaşılan Komşu Bağlantı Noktası"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "Açık öneri yok."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "Onayla"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "Reddet"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "Tanılama araçları (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "Fabric veya eklenti ayarları eksik ya da geçersiz"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "Araç yapılandırılan dizinde eksik veya çalıştırılabilir değil"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "Araç süre sınırını aştı ve durduruldu"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "Araç çıktısı boyut sınırını aştı ve atıldı"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "Araç başarısız oldu"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "Araç çıktısı beklenen biçimde değildi"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "Denenmedi: süre veya hata bütçesi tükendi"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "Eklenti tabloları okunamadı veya yazılamadı"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Fabric şablonları kurulu değil. Sağlık sayfasından yeniden kurun."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "Düğüm zaten bir cihaza eşlenmiş."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "Düğümün fabric'i ana yoklayıcı tarafından taranmadığı için cihazı yoklanamadı."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "Cihaz mevcut değil."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "Cihaz bu fabric'i tarayan yoklayıcıdan farklı bir yoklayıcı tarafından yoklandığı için fabric önbelleğini okuyamadı."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "Bir \"%s\" cihazı (%s cihaz şablonundan, ana bilgisayar adı %s, yoklayıcı %d tarafından yoklanan, erişilebilirlik denetimleri ve SNMP kapalı)."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "Üzerinde düğümün bağlantı noktalarını listeleyen %s veri sorgusu. Tek başına hiçbir grafik ve veri kaynağı oluşturmaz."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "%s düğümü için Fabric eklentisi tarafından oluşturuldu. Değerleri eklenti önbelleğinden gelir; ana bilgisayar adı hiçbir zaman iletişim kurulmayan ayrılmış bir addır."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "Ad: Bir harf veya rakamla başlayan 1 ila 64 adet harf, rakam, boşluk, nokta, tire veya alt çizgi kullanın."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "Arka Uç: Listelenen arka uçlardan birini seçin."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "Yoklayıcı: Listelenen yoklayıcılardan birini seçin."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "Yoklayıcı: Uzak yoklayıcı desteği eklenene kadar bir fabric'i yalnızca ana yoklayıcı tarayabilir."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "Tarama Aralığı: %d ile %d arasında tam saniye değeri girin."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "Bağdaştırıcı: Yerel bağdaştırıcı adını çekirdeğin adlandırdığı biçimde girin, örneğin mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "Bağdaştırıcı Bağlantı Noktası: Yerel bağdaştırıcının 1 ile %d arasındaki bağlantı noktası numarasını girin."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "Hiçbir zaman"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "%d saniye önce"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "%d dakika önce"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "%d saat önce"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "%d gün önce"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Cacti Nesneleri"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "Kurulu"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "Eksik"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "Şablonlar"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "Veri Sorgu Dosyası"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "Son Kurulum"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "Şablonları Yeniden Kur"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Fabric Sağlığı"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "Sağlık kayıtları okunamadı. Cacti günlüğüne bakın."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "Sayaç Taramaları"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "Keşif"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Fabric"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "Son Keşif"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "Son Bağlantı Okuması"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "Son Başarılı Keşif"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "Bağlantı Okuması"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "Görülen Düğümler / Bağlantı Noktaları"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "Atlanan Bağlantı Satırları"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "Eşleşmeyen Bağlantı Kayıtları"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Fabric %s: envanter %s; son başarılı keşif: %s."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Fabric %s: %d numaralı yoklayıcıya atanmış, ancak uzak yoklayıcı desteği eklenene kadar bir fabric'i yalnızca ana yoklayıcı tarayabilir. Şu anda taranmıyor; ana yoklayıcıya atayın."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Fabric %s: sağlık kaydı okunamadığı için keşif durumu bilinmiyor. Cacti günlüğüne bakın."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Fabric %s: henüz keşfedilmedi. Taramalar yalnızca bir Cacti cihazına eşlenmiş bir düğümden başlar; bu nedenle ana yoklayıcıda bir kez \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" komutunu çalıştırın."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Fabric %s: hiçbir düğüm bir Cacti cihazına eşlenmemiş, bu nedenle tarama başlamaz ve envanter yenilenmez. Fabric Yönetimi sayfasında bir düğüm eşleyin veya ana yoklayıcıda \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" komutunu çalıştırın."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Fabric %s: %d iblinkinfo satırı okunamadı; bunun en olası nedeni bir düğüm açıklamasının araç çıktısını taklit etmesidir. Bu düğümler son bağlantı durumlarını korur."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Fabric %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "devre dışı"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "Uyarılar"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "Uyarı yok."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "Kimlik"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "%d kimlik çakışması ve %d açık yeniden bağlama önerisi var. Bunları Fabric Yönetimi sayfasında çözün."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "İlgi Gerektiren Sayaç Taramaları"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "Süre"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "Hata"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "Son Başarı"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "Son Tarama"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "Sonuç"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "Okunan / Başarısız / Atlanan Bağlantı Noktaları"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s sn"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "Taranan her düğüm son taramasını tamamladı."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "Tamam, %s sn"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "Son Görülme"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "Varlık Durumu"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "Tür"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "Gösterilecek düğüm yok."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "Henüz tanımlanmış bir fabric yok."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "En yüksek iletim beklemesine sahip bağlantı noktaları"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "En Yüksek İletim Beklemesine Sahip Bağlantı Noktaları"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "Fabric envanteri okunamadı. Cacti günlüğüne bakın."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "İletim beklemesi, bir bağlantı noktasının gönderilecek verisi olduğu halde kredi veya tahkim yetersizliği nedeniyle gönderemediği saat darbelerini (tick) sayar. Yüksek bir değer uzak uca doğru tıkanıklık olduğunu gösterir; bağlantı noktasının veya kablosunun arızalı olduğu anlamına gelmez. Mevcut bağlantı hızları için darbe süresi yayımlanmadığından değerler süre değil saniyedeki darbe sayısıdır."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "Bağlantı Noktası"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "Uzak Uç"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "İletim Atmaları (saniye başına)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "İletim Beklemesi (saniye başına tık)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "Güncel iletim bekleme oranına sahip port yok."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "Bilinmiyor"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "Fabric Düğümü"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "Düğüm mevcut değil veya görme izniniz yok."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "Etkin"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "Her İki Ucun Desteklediği En İyi Değer"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "Sayaç Geçerliliği"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "Sayaçlar"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "Grafikler"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "Bağlantı"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "Henüz kaydedilmiş port yok."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "Cihaz %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "%s sayaçları doyuma ulaştı, bilinmiyor olarak yayımlandı: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "%s sayaçları: %d kesinti, sonuncusu %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "Geçerli"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "Açık"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "En iyinin altında, etkin değerlerle sınırlı"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "En iyinin altında, nedeni bilinmiyor"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "Bozulmuş"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "Çalışmıyor"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "Anahtar"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "Kanal bağdaştırıcısı"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "Yönlendirici"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "Aşağıdaki kayıtlı gözlemleri inceleyin. Onaylar bu oturuma özeldir, gözlemler değiştiğinde sona erer ve hiçbir zaman uyarıları bastırmaz veya sağlık durumunu değiştirmez."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "Fabric İşlemleri"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "İnceleme"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "Nesne"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "Gözlemlenen (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "Bilinmiyor veya güncel değil"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "Onaylandı; sağlık durumu değişmedi."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "Onayla"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "Erişebileceğiniz cihazlar için kullanılabilir gözlem yok."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "Fabric Operatörü"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "Fabric Görünümü"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "Tarama root olarak çalışıyor. Yoklayıcıyı, umad cihazlarına bir grup aracılığıyla okuma erişimi olan yetkisiz bir hesapla çalıştırın."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "Bir tanılama aracında setuid veya setgid biti var. Eklentinin buna hiçbir zaman ihtiyacı yoktur."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "Bir tanılama aracı veya dizini, sahibi dışındaki bir hesap ya da yoklayıcı hesabı tarafından yazılabilir durumda. Oraya yazabilen kişi, yoklayıcının ne çalıştıracağını belirleyebilir."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "Bir umad cihazı her hesap tarafından okunabilir veya yazılabilir durumda; dolayısıyla herhangi bir yerel kullanıcı fabric yapısını sorgulayabilir. Erişimi bir grupla kısıtlayın."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "Bilinmeyen uyarı"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "Tanılama Araçları"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "Bir fabric taraması yapan her yoklayıcıda perfquery, ibnetdiscover ve iblinkinfo araçlarını barındıran mutlak dizin yolu. Debian ve Ubuntu paketleri bunları /usr/sbin içine kurar. Bu dizinden başka hiçbir program çalıştırılmaz."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "Araç Dizini"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "Düğüm Adı Haritası"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "Bir infiniband-diags düğüm adı haritası dosyasının isteğe bağlı mutlak yolu. Sağladığı adlar yalnızca görüntüleme amaçlıdır; kimlik her zaman düğüm GUID değeridir."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "Datagram Zaman Aşımı"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "Araçların yeniden denemeden önce her yönetim datagramının alabileceği milisaniye süresi (-t seçeneği)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "Komut Zaman Aşımı"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "Tek bir araç çalıştırmasının durdurulup başarısız olarak kaydedilmeden önce alabileceği saniye süresi."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "Tek bir araç çalıştırmasının yazdırabileceği KiB miktarı. Daha büyük çıktılar atılır ve başarısız olarak kaydedilir."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "Azami Çıktı"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "Tarama"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "Düğüm Süre Bütçesi"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "Tek bir düğüm taramasının sayaçları okumak için harcayabileceği saniye süresi. Ulaşılamayan portlar bir sonraki döngüde okunur."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "Bu döngüde düğüm taramasının durdurulacağı başarısız port sayısı. Yanıt vermeyen bir port birkaç saniyeye mal olur."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "Düğüm Hata Bütçesi"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "Kapalı Portları Dizinle"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "İşaretlendiğinde, Fabric Port veri sorgusu kullanılmayan bağdaştırıcı portları gibi kapalı olan ve uzak ucu bulunmayan portları da listeler. İşareti kaldırıldığında, açılana kadar kapsam dışında bırakılırlar."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "Kaldır"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "Kaldırırken Eklenti Tablolarını Koru"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "İşaretlendiğinde, eklentiyi kaldırmak fabric kayıtlarını, envanteri ve örnekleri korur. Kaldırma sırasında bunların silinmesi için işareti kaldırın; önce Fabric Yönetimi sayfasından envanteri dışa aktarın. Her iki durumda da fabric ile hiçbir şekilde iletişim kurulmaz."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "Araç dizini; harfler, rakamlar, noktalar, tireler, alt çizgiler ve eğik çizgilerden oluşan, sonunda eğik çizgi bulunmayan mutlak bir yol olmalıdır."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "Araç dizini mevcut değil veya bir dizin değil."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "Araç dizini yolu sembolik bağlantı içeriyor. Gerçek yolu girin."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "Araç dizininin sahibi root değil."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "Araç dizini, grubu veya diğer kullanıcılar tarafından yazılabilir durumda."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "Bir tanılama aracının sahibi root değil."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "Bir tanılama aracı, grubu veya diğer kullanıcılar tarafından yazılabilir durumda."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Fabric eklentisi PHP %s veya sonraki bir sürümü gerektirir. Bu sunucuda PHP %s çalıştığından eklenti kurulmadı veya etkinleştirilmedi."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Fabric eklentisi etkin değil."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Fabric eklentisi PHP %s veya sonraki bir sürümü gerektirir."
+
+#: setup.php
+msgid "Management"
+msgstr "Yönetim"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "Araç Dizini kaydedilmedi. %s"

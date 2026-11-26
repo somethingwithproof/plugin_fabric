@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: zh-TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "節點在頁面繪製後已變更，因此未執行任何操作。請檢視後再試一次。"
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "您的裝置權限不允許變更此記錄。"
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "名稱：已有其他 Fabric 使用此名稱。"
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "介面卡：已有其他 Fabric 在此輪詢器上掃描此介面卡連接埠。每個介面卡連接埠僅限一個 Fabric。"
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "無法儲存此 Fabric。"
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "已儲存此 Fabric。"
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "正在掃描此 Fabric，因此未刪除任何項目。請於完成後再試。"
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "已刪除此 Fabric 及其清冊。未變更任何 Cacti 裝置，也未連線至 Fabric。"
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "無法刪除此 Fabric。"
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "節點識別資訊未變更。"
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "已更新節點識別資訊。系統將自下一個週期起重新掃描。"
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "裝置對應已移至新節點。"
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "無法確認此提案。自提案建立後，節點可能已發生變更。"
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "無法拒絕此提案。"
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "已拒絕此提案。"
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "節點對應未變更。%s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "節點對應未變更。"
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "已儲存節點對應。"
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "未建立任何裝置。請參閱 Cacti 日誌。"
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "已建立裝置並將節點對應至此裝置。請在「新增圖表」頁面選擇要繪製圖表的連接埠。"
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "無法讀取清冊以進行匯出。"
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "已安裝 Fabric 範本與資料查詢檔案。"
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "未安裝 Fabric 範本。請參閱 Cacti 物件表格與 Cacti 日誌。"
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "監控檢視"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "無法讀取觀測紀錄。請聯繫管理員檢查外掛程式日誌。"
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "請檢查連接埠有效性、鏈路寬度與速度，以及壅塞檢視。請將識別衝突與裝置重新連結呈報給管理員；請勿重設計數器。"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Fabric 管理"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "無法讀取 Fabric 記錄。請參閱 Cacti 日誌。"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "Fabric"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "動作"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "介面卡"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "後端"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "名稱"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "節點"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "輪詢器"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "狀態"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "掃描間隔"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "尚未定義任何 Fabric。"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "已刪除的輪詢器（ID %d）"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "連接埠 %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d 秒"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "刪除"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "包含您無權檢視的裝置"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "匯出"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "在解除安裝並卸除外掛程式資料表之前，先將 Fabric、節點清冊及裝置對應下載為 JSON。其中不包含任何憑證。"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Fabric：%s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "新增 Fabric"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "掃描間隔（秒）"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "介面卡連接埠"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "已啟用"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "儲存"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "刪除 Fabric：%s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "確定要刪除此 Fabric 及其 %d 個節點、連接埠、取樣資料與提案嗎？有 %d 個節點已對應至 Cacti 裝置；這些裝置、其資料來源與 RRD 檔案將會保留，且不會連線至 Fabric。"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "未對應"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "已刪除的裝置（ID %d）"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "Fabric 節點：%s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "符合節點名稱的裝置"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s（裝置 %d）"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "無"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Cacti 裝置"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "儲存後會將節點對應至該裝置，並將 Fabric Port 資料查詢新增至裝置以列出節點的連接埠。不會變更任何圖表、資料來源或裝置設定。該裝置必須由掃描此 Fabric 的輪詢器進行輪詢。"
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "為此節點建立裝置"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "無法在此處建立裝置。"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "為 %s 建立裝置"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "建立裝置將會新增："
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "建立"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "識別衝突"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "節點"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "目前偵測"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "已儲存"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "無衝突。"
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "在單次探索中重複輸出"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "接受偵測到的識別資訊"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "重新連結提案"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "裝置"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "遺失的節點"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "新節點"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "共用的相鄰連接埠"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "無待處理的提案。"
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "確認"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "拒絕"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "診斷工具（infiniband-diags）"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "Fabric 或外掛程式設定不完整或無效"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "設定的目錄中缺少該工具或該工具無法執行"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "工具超過時間限制並已停止"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "工具輸出超過大小限制並已捨棄"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "工具執行失敗"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "工具輸出格式不符合預期"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "未嘗試：已用盡時間或失敗配額"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "無法讀取或寫入外掛程式資料表"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "尚未安裝 Fabric 範本。請從健康狀態頁面重新安裝。"
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "此節點已對應至裝置。"
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "此節點的 Fabric 不是由主輪詢器掃描，因此無法輪詢其裝置。"
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "此裝置不存在。"
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "此裝置由與掃描此 Fabric 不同的輪詢器進行輪詢，因此無法讀取 Fabric 快取。"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "一個名為「%s」的裝置，套用 %s 裝置範本，主機名稱為 %s，由輪詢器 %d 輪詢，且關閉可用性檢查與 SNMP。"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "於其上套用 %s 資料查詢，列出節點的連接埠。此動作本身不會建立圖表或資料來源。"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "由 Fabric 外掛程式為節點 %s 所建立。其數值來自外掛程式快取；主機名稱為保留名稱，永遠不會進行連線。"
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "名稱：請使用 1 到 64 個英文字母、數字、空格、點、連字號或底線，並以英文字母或數字開頭。"
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "後端：請選擇列出的其中一個後端。"
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "輪詢器：請選擇列出的其中一個輪詢器。"
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "輪詢器：在新增遠端輪詢器支援之前，僅主輪詢器可以掃描 Fabric。"
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "掃描間隔：請輸入 %d 到 %d 之間的整數秒數。"
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "介面卡：請輸入核心命名的本機介面卡名稱，例如 mlx5_0。"
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "介面卡連接埠：請輸入本機介面卡的連接埠編號，範圍為 1 到 %d。"
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "從未"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "%d 秒前"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "%d 分鐘前"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "%d 小時前"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "%d 天前"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Cacti 物件"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "已安裝"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "缺少"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "範本"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "資料查詢檔案"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "上次安裝"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "重新安裝範本"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Fabric 健康狀態"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "無法讀取健康狀態記錄。請參閱 Cacti 日誌。"
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "計數器掃描"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "探索"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Fabric"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "上次探索"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "上次鏈路讀取"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "上次成功探索時間"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "鏈路讀取"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "偵測到的節點 / 連接埠"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "已略過的鏈路行"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "未相符的鏈路記錄"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Fabric %s：清冊狀態為 %s；上次成功探索時間為 %s。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Fabric %s：其已指派給輪詢器 %d，但在新增遠端輪詢器支援之前，僅主輪詢器可以掃描 Fabric。目前未進行掃描；請將其指派給主輪詢器。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Fabric %s：無法讀取其健康狀態記錄，因此探索狀態不明。請參閱 Cacti 日誌。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Fabric %s：尚未探索。掃描僅能從已對應至 Cacti 裝置的節點開始，因此請在主輪詢器上執行一次「php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force」。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Fabric %s：沒有節點對應至 Cacti 裝置，因此不會啟動掃描，清冊也不會重新整理。請在 Fabric 管理頁面對應節點，或在主輪詢器上執行「php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force」。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Fabric %s：無法讀取 %d 行 iblinkinfo 輸出，極可能是因為節點描述模仿了工具輸出格式。這些節點將保留其上次的鏈路狀態。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Fabric %s：%s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "已停用"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "警告"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "沒有警告。"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "識別資訊"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "有 %d 個識別衝突與 %d 個待處理的重新連結提案。請至 Fabric 管理頁面解決。"
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "需要注意的計數器掃描"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "持續時間"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "失敗"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "上次成功"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "上次掃描"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "結果"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "連接埠讀取 / 失敗 / 略過"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s 秒"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "所有掃描的節點皆已完成上次掃描。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "正常，%s 秒"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "最後出現時間"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "存在狀態"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "類型"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "沒有可顯示的節點。"
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "尚未定義任何 Fabric。"
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "傳送等待時間最高的連接埠"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "傳送等待時間最高的連接埠"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "無法讀取 Fabric 清冊。請參閱 Cacti 日誌。"
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "傳送等待（Transmit wait）統計連接埠有資料要傳送但因缺乏信用（credits）或仲裁而無法傳送的刻度數。數值偏高表示往遠端方向存在壅塞，並不代表連接埠或其纜線故障。由於目前的鏈路速度未公布刻度長度，因此數值單位為每秒刻度數，而非時間。"
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "連接埠"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "遠端"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "傳送捨棄（每秒）"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "傳送等待（每秒 tick 數）"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "目前沒有任何連接埠有傳送等待速率。"
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "未知"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "Fabric 節點"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "該節點不存在，或您無權檢視。"
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "作用中"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "兩端最佳支援"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "計數器有效性"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "計數器"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "圖表"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "鏈路"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "尚未記錄任何連接埠。"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "裝置 %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "%s 計數器已飽和，發佈為未知：%s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "%s 計數器：%d 次不連續，最近一次為 %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "有效"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "運作中"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "低於最佳，受限於已啟用值"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "低於最佳，原因未知"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "降級"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "離線"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "交換器"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "通道配接器"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "路由器"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "請檢視下方已記錄的觀測項目。確認狀態僅適用於目前的工作階段，會在觀測項目變更時失效，且永遠不會抑制警示或變更健康狀態。"
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "Fabric 維運"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "調查"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "物件"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "觀測時間 (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "未知或已過時"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "已確認；健康狀態不變。"
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "確認"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "您可存取的裝置目前沒有可用的觀測項目。"
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "Fabric 操作員"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "Fabric 檢視"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "掃描正在以 root 身分執行。請改以無特權帳號執行輪詢器，並透過群組授與 umad 裝置的讀取權限。"
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "某個診斷工具設定了 setuid 或 setgid 位元。此外掛程式完全不需要這些權限。"
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "某個診斷工具或其目錄可被擁有者以外的帳號或輪詢器帳號寫入。任何具備寫入權限者都能決定輪詢器執行的程式。"
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "某個 umad 裝置可被所有帳號讀取或寫入，導致任何本機使用者都能查詢 Fabric 網路。請將權限限制為僅限特定群組。"
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "未知警告"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "診斷工具"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "位於每個執行 Fabric 掃描的輪詢器上之絕對目錄路徑，用於存放 perfquery、ibnetdiscover 與 iblinkinfo。Debian 與 Ubuntu 套件會將其安裝在 /usr/sbin。不會從該目錄執行其他任何程式。"
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "工具目錄"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "節點名稱對應表"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "選填的 infiniband-diags 節點名稱對應檔絕對路徑。其提供的名稱僅供顯示；節點識別碼始終為節點 GUID。"
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "資料報逾時"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "工具在重試每個管理資料報前可等待的毫秒數（對應工具的 -t 選項）。"
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "命令逾時"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "單次工具執行在被中止並記錄為失敗前可花費的秒數。"
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "單次工具執行可輸出的最大 KiB 數。超過此大小的輸出將被捨棄並記錄為失敗。"
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "最大輸出"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "掃描"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "節點時間預算"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "單次節點掃描可用於讀取計數器的秒數。尚未讀取的連接埠將於下一個週期讀取。"
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "在本週期中，節點掃描在多少個連接埠失敗後即停止。沒有回應的連接埠會耗費數秒時間。"
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "節點失敗預算"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "索引離線連接埠"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "勾選時，Fabric 連接埠資料查詢也會列出處於離線狀態且無遠端連線的連接埠（例如未使用的配接器連接埠）。取消勾選時，這些連接埠會被略過，直到恢復連線為止。"
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "解除安裝"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "解除安裝時保留外掛程式資料表"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "勾選時，解除安裝外掛程式會保留其 Fabric 網路、清冊與取樣資料。取消勾選則會在解除安裝時將其刪除；請先從 Fabric 管理頁面匯出清冊。無論採用何種方式，都不會聯繫實際的 Fabric 網路。"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "工具目錄必須是由英文字母、數字、點（.）、連字號（-）、底線（_）與斜線（/）組成的絕對路徑，且結尾不可有斜線。"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "工具目錄不存在或不是目錄。"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "工具目錄路徑包含符號連結。請輸入真實路徑。"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "工具目錄的擁有者不是 root。"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "工具目錄可被其群組或其他使用者寫入。"
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "某個診斷工具的擁有者不是 root。"
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "某個診斷工具可被其群組或其他使用者寫入。"
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Fabric 外掛程式需要 PHP %s 或更新版本。此伺服器執行的是 PHP %s，因此未安裝或啟用該外掛程式。"
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Fabric 外掛程式尚未啟用。"
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Fabric 外掛程式需要 PHP %s 或更新版本。"
+
+#: setup.php
+msgid "Management"
+msgstr "管理"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "工具目錄未儲存。%s"

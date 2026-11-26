@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: ja-JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "ページの描画後にノードが変更されたため、何も実行されませんでした。内容を確認してからもう一度お試しください。"
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "お使いのデバイス権限ではこのレコードを変更できません。"
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "名前: この名前はすでに別のファブリックで使用されています。"
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "アダプター: このポーラー上のこのアダプターポートは、すでに別のファブリックによってスイープされています。1 つのアダプターポートにつき 1 つのファブリックのみ設定できます。"
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "ファブリックを保存できませんでした。"
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "ファブリックが保存されました。"
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "このファブリックのスイープが実行中のため、何も削除されませんでした。完了してからもう一度お試しください。"
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "ファブリックとそのインベントリが削除されました。Cacti デバイスは変更されておらず、ファブリックへの通信も行われていません。"
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "ファブリックを削除できませんでした。"
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "ノード ID は変更されませんでした。"
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "ノード ID が更新されました。次のサイクルから再度スイープされます。"
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "デバイスマッピングが新しいノードに移動しました。"
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "提案を確定できませんでした。提案の作成後にノードが変更された可能性があります。"
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "提案を却下できませんでした。"
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "提案が却下されました。"
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "ノードマッピングは変更されませんでした。%s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "ノードマッピングは変更されませんでした。"
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "ノードマッピングが保存されました。"
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "デバイスは作成されませんでした。Cacti ログを確認してください。"
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "デバイスが作成され、ノードがそのデバイスにマッピングされました。「新しいグラフ」ページでグラフ化するポートを選択してください。"
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "エクスポート用のインベントリを読み取れませんでした。"
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "Fabric テンプレートおよびデータクエリファイルがインストールされました。"
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Fabric テンプレートはインストールされませんでした。Cacti Objects テーブルおよび Cacti ログを確認してください。"
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "監視ビュー"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "観測結果を読み取れませんでした。管理者にプラグインのログを確認するよう依頼してください。"
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "ポートの有効性、リンク幅と速度、および輻輳ビューを点検してください。ID の競合およびデバイスの再リンクは管理者にエスカレーションし、カウンターはリセットしないでください。"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Fabric 管理者"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "ファブリックレコードを読み取れませんでした。Cacti ログを確認してください。"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "ファブリック"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "操作"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "アダプター"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "バックエンド"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "名前"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "ノード"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "ポーラー"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "状態"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "スイープ間隔"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "ファブリックがまだ定義されていません。"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "削除済みポーラー (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "ポート %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d 秒"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "削除"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "閲覧権限のないデバイスを含みます"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "エクスポート"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "プラグインテーブルを削除するアンインストールの前に、ファブリックおよびノードインベントリとデバイスマッピングを JSON としてダウンロードします。認証情報は含まれません。"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "ファブリック: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "新規ファブリック"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "スイープ間隔（秒）"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "アダプターポート"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "有効"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "保存"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "ファブリックの削除: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "このファブリックと %d 個のノード、そのポート、サンプル、および提案を削除しますか？%d 個のノードが Cacti デバイスにマッピングされていますが、それらのデバイス、データソース、および RRD ファイルは保持されます。ファブリックへの通信は行われません。"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "未マッピング"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "削除済みデバイス (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "ファブリックノード: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "ノード名に一致するデバイス"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (デバイス %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "なし"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Cacti デバイス"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "保存すると、ノードがデバイスにマッピングされ、ノードのポート一覧を取得する Fabric Port データクエリがデバイスに追加されます。グラフ、データソース、およびデバイス設定は変更されません。デバイスは、ファブリックをスイープするポーラーによってポーリングされる必要があります。"
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "このノード用のデバイスを作成"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "ここではデバイスを作成できません。"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "%s 用のデバイスを作成"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "デバイスを作成すると、以下が追加されます:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "作成"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "識別子の競合"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "ノード"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "検出済み"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "保存済み"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "競合はありません。"
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "1 回の検出で 2 回出力されました"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "検出された識別子を承認"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "再リンクの提案"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "デバイス"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "欠落ノード"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "新規ノード"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "共有隣接ポート"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "未解決の提案はありません。"
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "確認"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "却下"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "診断ツール (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "ファブリックまたはプラグインの設定が不完全または無効です"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "設定されたディレクトリにツールが存在しないか、実行可能ではありません"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "ツールが制限時間を超過したため停止されました"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "ツールの出力がサイズ制限を超過したため破棄されました"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "ツールが失敗しました"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "ツールの出力が期待される形式ではありませんでした"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "未実行: 時間または失敗の上限に達しました"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "プラグインテーブルを読み書きできませんでした"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Fabric テンプレートがインストールされていません。ヘルスページから再インストールしてください。"
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "このノードはすでにデバイスにマッピングされています。"
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "ノードのファブリックはメインポーラーによってスイープされないため、デバイスをポーリングできませんでした。"
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "デバイスが存在しません。"
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "このデバイスは、このファブリックをスイープするポーラーとは別のポーラーによってポーリングされるため、ファブリックキャッシュを読み取れませんでした。"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "デバイス \"%s\" (デバイステンプレート: %s、ホスト名: %s、ポーラー: %d、可用性チェックおよび SNMP オフ)。"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "ノードのポート一覧を取得する %s データクエリが追加されます。これ自体ではグラフやデータソースは作成されません。"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "ノード %s 用に Fabric プラグインによって作成されました。値はプラグインキャッシュから取得されます。ホスト名は予約名であり、実際に通信されることはありません。"
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "名前: 英字または数字で始まり、1 ～ 64 文字の英数字、スペース、ドット、ハイフン、またはアンダースコアを使用してください。"
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "バックエンド: 一覧にあるバックエンドのいずれかを選択してください。"
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "ポーラー: 一覧にあるポーラーのいずれかを選択してください。"
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "ポーラー: リモートポーラーのサポートが追加されるまで、メインポーラーのみがファブリックをスイープできます。"
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "スイープ間隔: %d ～ %d の整数 (秒) を入力してください。"
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "アダプター: カーネルが認識するローカルアダプター名 (例: mlx5_0) を入力してください。"
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "アダプターポート: ローカルアダプターのポート番号を 1 ～ %d の範囲で入力してください。"
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "未実施"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "%d 秒前"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "%d 分前"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "%d 時間前"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "%d 日前"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Cacti オブジェクト"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "インストール済み"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "未付与"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "テンプレート"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "データクエリファイル"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "最終インストール"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "テンプレートを再インストール"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "ファブリックヘルス"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "ヘルスレコードを読み取れませんでした。Cacti ログを確認してください。"
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "カウンタースイープ"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "ディスカバリー"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "ファブリック"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "最終ディスカバリ"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "最終リンク読み取り"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "最後に成功した検出"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "リンク読み取り"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "検出ノード / ポート数"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "スキップされたリンク行"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "一致しないリンクレコード"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "ファブリック %s: インベントリは %s です。最後に成功したディスカバリは %s です。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "ファブリック %s: ポーラー %d に割り当てられていますが、リモートポーラーのサポートが追加されるまで、メインポーラーのみがファブリックをスイープできます。スイープされないため、メインポーラーに割り当ててください。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "ファブリック %s: ヘルスレコードを読み取れなかったため、ディスカバリ状態が不明です。Cacti ログを確認してください。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "ファブリック %s: まだディスカバリされていません。スイープは Cacti デバイスにマッピングされたノードからのみ開始されるため、メインポーラー上で \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" を 1 回実行してください。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "ファブリック %s: Cacti デバイスにマッピングされたノードがないため、スイープが開始されずインベントリも更新されません。Fabric 管理ページでノードをマッピングするか、メインポーラー上で \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" を実行してください。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "ファブリック %s: %d 行の iblinkinfo 出力を読み取れませんでした。ノードの説明がツールの出力に似た文字列を含んでいる可能性が高いです。これらのノードは前回のリンク状態を保持します。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "ファブリック %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "無効"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "警告"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "警告はありません。"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "識別子"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "%d 件の識別子の競合と %d 件の未解決の再リンク提案があります。Fabric 管理ページで解決してください。"
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "確認が必要なカウンタースイープ"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "所要時間"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "失敗"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "最終成功"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "最終スイープ"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "結果"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "読み取り / 失敗 / スキップ ポート数"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s 秒"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "スイープ対象のすべてのノードが前回のスイープを完了しました。"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "OK、%s 秒"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "最終確認"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "存在状態"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "タイプ"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "表示するノードがありません。"
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "ファブリックはまだ定義されていません。"
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "送信待機が最も多いポート"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "送信待機が最も多いポート"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "ファブリックインベントリを読み取れませんでした。Cacti ログを確認してください。"
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "送信待機 (Transmit wait) は、ポートに送信すべきデータがあるにもかかわらず、クレジット不足や調停により送信できなかったティック数をカウントします。高い値はリモート側への輻輳を示しており、ポートやケーブルの故障を示すものではありません。現在のリンク速度ではティック長が公開されていないため、値は時間ではなく 1 秒あたりのティック数で表されます。"
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "ポート"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "リモート"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "送信破棄 (回/秒)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "送信待機 (ティック/秒)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "現在の送信待機レートがあるポートはありません。"
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "不明"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "ファブリックノード"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "ノードが存在しないか、閲覧権限がありません。"
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "アクティブ"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "両端でサポートされる最高値"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "カウンターの有効性"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "カウンター"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "グラフ"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "リンク"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "まだポートが記録されていません。"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "デバイス %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "%s カウンターが飽和したため、不明として公開されました: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "%s カウンター: %d 回の不連続が発生、前回は %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "有効"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "アップ"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "最高値未満 (有効値による制限)"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "最高値未満 (原因不明)"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "低下"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "ダウン"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "スイッチ"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "チャネルアダプター"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "ルーター"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "以下に記録された観測結果を確認してください。確認済みの記録はこのセッションの自分だけに適用され、観測結果が変わると失効します。アラートの抑制や健全性の変更は行いません。"
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "ファブリック操作"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "調査"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "対象"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "観測日時 (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "不明または古い情報"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "確認済み。健全性に変更はありません。"
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "確認済みにする"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "アクセス権のあるデバイスの観測結果はありません。"
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "ファブリックオペレーター"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "ファブリック閲覧"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "スイープが root として実行されています。グループ経由で umad デバイスへの読み取り権限を持つ非特権アカウントでポーラーを実行してください。"
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "診断ツールに setuid または setgid ビットが設定されています。このプラグインでは不要です。"
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "診断ツールまたはそのディレクトリが、所有者以外のアカウントまたはポーラーアカウントによって書き込み可能です。書き込み可能なユーザーは、ポーラーが実行する内容を書き換えることができます。"
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "umad デバイスがすべてのアカウントから読み取りまたは書き込み可能になっており、どのローカルユーザーでもファブリックを照会できます。特定のグループに制限してください。"
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "不明な警告"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "診断ツール"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "ファブリックをスイープする各ポーラー上の、perfquery、ibnetdiscover、および iblinkinfo が格納されている絶対パスディレクトリです。Debian および Ubuntu のパッケージでは /usr/sbin にインストールされます。ここから他のプログラムが実行されることはありません。"
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "ツールディレクトリ"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "ノード名マップ"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "infiniband-diags のノード名マップファイルへの任意の絶対パスです。このファイルで提供される名前は表示のみに使用され、識別子は常にノード GUID になります。"
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "データグラムタイムアウト"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "ツールが再試行するまでに各管理データグラムに許容される時間 (ミリ秒、ツールの -t オプション) です。"
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "コマンドタイムアウト"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "1 回のツール実行が停止され失敗として記録されるまでの時間 (秒) です。"
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "1 回のツール実行で出力できるサイズ (KiB) です。これを超える出力は破棄され、失敗として記録されます。"
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "最大出力"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "スイープ"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "ノード時間上限"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "1 回のノードスイープでカウンター読み取りに費やせる時間 (秒) です。到達しなかったポートは次のサイクルで読み取られます。"
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "このサイクルのノードスイープを停止するまでの失敗ポート数です。応答しないポートでは数秒の時間がかかります。"
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "ノード失敗上限"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "ダウンポートのインデックス作成"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "チェックすると、Fabric Port データクエリは、未使用のアダプターポートなど、ダウン状態でリモート端がないポートも一覧表示します。チェックを外すと、ポートがアップするまで除外されます。"
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "アンインストール"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "アンインストール時にプラグインのテーブルを保持"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "チェックすると、プラグインをアンインストールしてもファブリック、インベントリ、およびサンプルが保持されます。アンインストール時にこれらを削除する場合はチェックを外してください (先に Fabric 管理ページからインベントリをエクスポートしてください)。どちらの場合も、ファブリックへの通信は一切行われません。"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "ツールディレクトリは、英字、数字、ドット、ハイフン、アンダースコア、およびスラッシュで構成される絶対パスで、末尾にスラッシュを含めないでください。"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "ツールディレクトリが存在しないか、ディレクトリではありません。"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "ツールディレクトリのパスにシンボリックリンクが含まれています。実際のパスを入力してください。"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "ツールディレクトリの所有者が root ではありません。"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "ツールディレクトリがグループまたはその他のユーザーによって書き込み可能になっています。"
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "診断ツールの所有者が root ではありません。"
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "診断ツールがグループまたはその他のユーザーによって書き込み可能になっています。"
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Fabric プラグインには PHP %s 以降が必要です。このサーバーでは PHP %s が実行されているため、プラグインはインストールまたは有効化されませんでした。"
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Fabric プラグインは有効になっていません。"
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Fabric プラグインには PHP %s 以降が必要です。"
+
+#: setup.php
+msgid "Management"
+msgstr "管理"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "ツールディレクトリは保存されませんでした。%s"
