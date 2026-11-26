@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: ha-NG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "Node ya sauya bayan an zana shafin, don haka ba a yi komai ba. Duba shi sannan ka sake gwadawa."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "Izinin na'urarka ba su yarda a sauya wannan bayanin ba."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "Suna: wani fabric yana amfani da wannan sunan tuni."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "Adapter: wani fabric yana share wannan tashar adapter a kan wannan poller tuni. Fabric ɗaya ne ga kowace tashar adapter."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "Ba a iya adana fabric ɗin ba."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "An adana fabric ɗin."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "Sharewar wannan fabric tana gudana, don haka ba a goge komai ba. Sake gwadawa idan ta gama."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "An goge fabric ɗin da jerin kayayyakinsa. Ba a sauya wata na'urar Cacti ba kuma ba a tuntuɓi fabric ɗin ba."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "Ba a iya goge fabric ɗin ba."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "Ba a sauya shaidar node ɗin ba."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "An sabunta shaidar node ɗin. Za a sake share shi daga zagaye na gaba."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "Taswirar na'urar ta koma sabon node ɗin."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "Ba a iya tabbatar da shawarar ba. Wataƙila nodes sun sauya tun bayan da aka yi ta."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "Ba a iya ƙin shawarar ba."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "An ƙi shawarar."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "Ba a sauya taswirar node ɗin ba. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "Ba a sauya taswirar node ɗin ba."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "An adana taswirar node ɗin."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "Ba a ƙirƙiri wata na'ura ba. Duba rajistar Cacti."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "An ƙirƙiri na'urar kuma an taswira node zuwa gare ta. Zaɓi tashoshin da za a zana a shafin New Graphs."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "Ba a iya karanta jerin kayayyakin don fitarwa ba."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "An shigar da samfuran Fabric da fayil ɗin tambayar bayanai."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Ba a shigar da samfuran Fabric ba. Duba teburin Cacti Objects da rajistar Cacti."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "Duban sa ido"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "Ba a iya karanta abubuwan da aka lura ba. Nemi mai gudanarwa ya duba rajistar plugin."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "Bincika ingancin tasha, faɗi da saurin haɗi, da yanayin cunkoso. Miƙa rikicin shaida da sake haɗa na'ura ga mai gudanarwa; kar ka sake saita na'urorin ƙididdiga."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Gudanar da Fabric"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "Ba a iya karanta bayanan fabric ba. Duba rajistar Cacti."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "Fabrics"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "Ayyuka"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "Adapter"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "Backend"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "Suna"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "Nodes"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Poller"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "Hali"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "Tazarar Sharewa"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "Ba a ƙayyade wani fabric ba tukuna."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "Poller da aka goge (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "tasha %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "daƙiƙoƙi %d"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "Share"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "Yana ɗauke da na'urorin da ƙila ba za ka iya gani ba"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "Fitarwa"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "Sauke jerin fabrics da na nodes, tare da taswirorin na'ura, a matsayin JSON kafin cire shigarwar da ke goge teburan ƙari. Ba ya ɗauke da wata shaidar shiga."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Fabric: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "Sabon Fabric"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "Tazarar Sharewa (daƙiƙoƙi)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "Tashar Adapter"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "An kunna"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "Adana"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "Goge Fabric: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "Goge wannan fabric tare da nodes %d nasa, tashoshinsu, samfura, da shawarwari? Nodes %d an taswira su zuwa na'urorin Cacti; ana riƙe waɗannan na'urori, tushen bayanansu, da fayilolin RRD. Ba a tuntuɓar fabric ɗin."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "Ba a taswira ba"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "Na'urar da aka goge (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "Node na Fabric: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "Na'urorin da Suka Dace da Sunan Node"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (na'ura %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "Babu"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Na'urar Cacti"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "Adanawa tana taswira node zuwa na'urar kuma tana ƙara tambayar bayanan Fabric Port ga na'urar, wadda ke jera tashoshin node ɗin. Ba a sauya wani zayyana, tushen bayanai, ko saitin na'ura ba. Dole ne poller ɗin da ke share fabric ɗin ya bincika na'urar."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "Ƙirƙiri Na'ura don Wannan Node"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "Ba za a iya ƙirƙirar na'urori a nan ba."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "Ƙirƙiri Na'ura don %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "Ƙirƙirar na'urar tana ƙara:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "Ƙirƙiri"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "Rikice-rikicen Shaida"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "Node"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "An Gani"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "An Adana"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "Babu rikici."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "An buga sau biyu a cikin bincike guda"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "Karɓi Shaidar da Aka Gani"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "Shawarwarin Sake Haɗawa"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "Na'ura"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "Node da Ya Ɓace"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "Sabon Node"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "Tashar Maƙwabci ta Haɗin Gwiwa"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "Babu shawarwari a buɗe."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "Tabbatar"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "Ƙi"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "Kayan aikin bincike (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "Saitunan fabric ko ƙarin ba su cika ba ko ba su da inganci"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "Kayan aikin ya ɓace ko ba ya aiki a cikin kundin adireshin da aka saita"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "Kayan aikin ya wuce iyakar lokacinsa kuma an dakatar da shi"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "Sakamakon kayan aikin ya wuce iyakar girma kuma an zubar da shi"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "Kayan aikin ya kasa"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "Sakamakon kayan aikin bai zo da siffar da ake tsammani ba"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "Ba a gwada ba: kasafin lokaci ko na gazawa ya ƙare"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "Ba a iya karantawa ko rubutawa a teburan ƙarin ba"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Ba a shigar da samfuran Fabric ba. Sake shigar da su daga shafin lafiya."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "An riga an taswira node ɗin zuwa wata na'ura."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "Main poller ba ya share fabric ɗin node, don haka ba a iya bincikar na'urarsa ba."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "Na'urar ba ta wanzu ba."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "Wani poller daban ne yake bincikar na'urar ba wanda yake share wannan fabric ba, don haka ba ta iya karanta ajiyar wucin-gadi ta fabric ba."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "Na'ura \"%s\" daga samfurin na'ura na %s, sunan uwar garke %s, wadda poller %d ke bincika, tare da kashe duba samuwa da SNMP."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "Tambayar bayanai ta %s a kanta, tana jera tashoshin node. Ba ta ƙirƙirar wani zayyana ko tushen bayanai da kanta ba."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "Ƙarin Fabric ne ya ƙirƙira don node %s. Ƙimominta suna fitowa daga ajiyar wucin-gadi ta ƙari; sunan uwar garke keɓaɓɓen suna ne da ba a taɓa tuntuɓarsa ba."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "Suna: yi amfani da haruffa, lambobi, sarari, ɗigo, layin tsakiya, ko layin ƙasa daga 1 zuwa 64, yana farawa da harafi ko lamba."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "Backend: zaɓi ɗaya daga cikin backends da aka jera."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "Poller: zaɓi ɗaya daga cikin pollers da aka jera."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "Poller: main poller kaɗai zai iya share fabric har sai an ƙara goyon bayan poller na nesa."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "Tazarar Sharewa: shigar da cikakkun daƙiƙoƙi daga %d zuwa %d."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "Adapter: shigar da sunan adapter na gida kamar yadda kernel ke kiransa, kamar mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "Tashar Adapter: shigar da lambar tashar adapter na gida, daga 1 zuwa %d."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "Ba taɓa ba"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "daƙiƙa %d da suka wuce"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "minti %d da suka wuce"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "sa'a %d da suka wuce"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "kwana %d da suka wuce"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Cacti Objects"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "An Shigar"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "Ya ɓace"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "Samfura"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "Fayil ɗin Tambayar Bayanai"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "Shigarwa ta Ƙarshe"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "Sake Shigar da Samfuran"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Lafiyar Fabric"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "Ba a iya karanta bayanan lafiya ba. Duba rajistar Cacti."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "Sharewar Na'urorin Ƙididdiga"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "Ganowa"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Fabric"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "Bincike na Ƙarshe"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "Karatun Haɗi na Ƙarshe"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "Nasarar Gano ta Ƙarshe"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "Karatun Haɗi"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "Nodes / Tashoshin da Aka Gani"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "Layukan Haɗi da Aka Tsallake"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "Bayanan Haɗi da Ba Su Dace Ba"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Fabric %s: jerin kayayyakin yana %s; bincike na ƙarshe da ya yi nasara shi ne %s."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Fabric %s: an sanya shi ga poller %d, amma main poller kaɗai zai iya share fabric har sai an ƙara goyon bayan poller na nesa. Ba a share shi ba; sanya shi ga main poller."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Fabric %s: ba a iya karanta bayanin lafiyarsa ba, don haka ba a san yanayin bincikensa ba. Duba rajistar Cacti."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Fabric %s: ba a gano shi ba tukuna. Sharewa tana farawa ne kawai daga node da aka taswira zuwa na'urar Cacti, don haka gudanar da \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" a kan main poller sau ɗaya."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Fabric %s: babu wani node da aka taswira zuwa na'urar Cacti, don haka babu sharewar da ke farawa kuma ba a sabunta jerin kayayyakin ba. Taswira wani node a shafin Gudanar da Fabric, ko gudanar da \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" a kan main poller."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Fabric %s: ba a iya karanta layukan iblinkinfo %d ba, mai yiwuwa saboda bayanin node yana kwaikwayon sakamakon kayan aikin. Waɗannan nodes suna riƙe yanayin haɗinsu na ƙarshe."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Fabric %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "an kashe"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "Gargaɗi"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "Babu gargaɗi."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "Shaida"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "rikice-rikicen shaida %d da shawarwarin sake haɗawa %d a buɗe. Warware su a shafin Gudanar da Fabric."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "Sharewar Na'urorin Ƙididdiga da ke Buƙatar Kulawa"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "Tsawon Lokaci"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "Gazawa"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "Nasara ta Ƙarshe"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "Sharewa ta Ƙarshe"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "Sakamako"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "Tashoshin da Aka Karanta / Suka Kasa / Aka Tsallake"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s s"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "Kowane node da aka share ya kammala sharewarsa ta ƙarshe."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "OK, %s s"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "Ganin Ƙarshe"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "Kasancewa"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "Nau'i"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "Babu nodes da za a nuna."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "Ba a ƙayyade wani fabric ba tukuna."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "Tashoshin da ke da mafi girman jiran watsawa"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "Tashoshin da ke da Mafi Girman Jiran Watsawa"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "Ba a iya karanta jerin kayayyakin fabric ba. Duba rajistar Cacti."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "Jiran watsawa yana ƙirga ticks waɗanda tasha take da bayanan da za ta aika amma ba ta iya aika su ba, saboda rashin credits ko sulhu. Ƙima mai girma tana nuna cunkoso zuwa ɓangaren nesa; ba ya nuna cewa tashar ko wayarta tana da matsala. Ba a wallafa tsawon tick don saurin haɗi na yanzu ba, don haka ƙimomin ticks ne a kowace daƙiƙa, ba lokaci ba."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "Tasha"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "Na Nesa"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "Watsar da Aika Bayanai (a kowace daƙiƙa)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "Jiran Aika Bayanai (bugu a kowace daƙiƙa)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "Babu tashar da ke da ƙimar jiran aika bayanai a halin yanzu."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "Ba a sani ba"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "Kullin Fabric"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "Kullin ba ya wanzu ko ba ka da damar ganinsa."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "Mai aiki"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "Mafi Kyawun Tallafi a Duka Ɓangarorin Biyu"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "Ingancin Ma'aunin Ƙidaya"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "Ma'aunan Ƙidaya"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "Jadawalai"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "Haɗi"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "Ba a yi rajistar kowace tasha ba tukuna."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "Na'ura %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "Ma'aunan ƙidaya na %s sun cika sosai, an wallafa su a matsayin ba a sani ba: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "Ma'aunan ƙidaya na %s: katsewa %d, na ƙarshe %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "Ingantacce"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "Yana aiki"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "Ƙasa da mafi kyau, ƙimar da aka kunna ce ta iyakance shi"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "Ƙasa da mafi kyau, ba a san dalili ba"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "Ya raunana"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "Ya faɗi"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "Na'urar Switch"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "Mai Daidaita Tasha"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "Na'urar Router"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "Duba abubuwan da aka lura da aka yi rajista a ƙasa. Amincewa ta keɓanta ga wannan zaman ne, tana ƙarewa idan abubuwan da aka lura suka canza, kuma ba ta taɓa hana faɗakarwa ko canza lafiya ba."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "Ayyukan Fabric"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "Bincike"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "Abu"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "An Lura (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "Ba a sani ba ko ya tsufa"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "An amince; lafiya ba ta canza ba."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "Amince"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "Babu abubuwan da aka lura don na'urorin da za ku iya shiga."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "Ma'aikacin Fabric"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "Kallon Fabric"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "Binciken yana gudana ne a matsayin root. Gudanar da mai tattara bayanai (poller) a matsayin asusun da ba shi da cikakken iko mai izinin karanta na'urorin umad ta hanyar rukuni."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "Wani kayan aikin bincike yana da alamar setuid ko setgid. Kari (plugin) ba ya taɓa buƙatarsa."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "Wani asusu banda mai shi, ko asusun mai tattara bayanai (poller), yana iya rubutu a cikin kayan aikin bincike ko babban fayil ɗinsa. Duk wanda ke iya rubutu a cikinsa zai iya zaɓar abin da mai tattara bayanan zai gudanar."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "Kowane asusu yana iya karantawa ko rubutawa a na'urar umad, don haka kowane mai amfani na gida zai iya bincikar fabric ɗin. Takaita shi zuwa rukuni."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "Gargaɗin da ba a sani ba"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "Kayan Aikin Bincike"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "Cikakken babban fayil, a kan kowane mai tattara bayanai (poller) da ke bincikar fabric, wanda ke ɗauke da perfquery, ibnetdiscover, da iblinkinfo. Fakitocin Debian da Ubuntu suna girka su a /usr/sbin. Ba a taɓa gudanar da wani shiri daban daga cikinsa ba."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "Babban Fayil na Kayan Aiki"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "Taswirar Sunan Kulli"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "Cikakkiyar hanyar zaɓi zuwa fayil ɗin taswirar sunan kulli na infiniband-diags. Sunayen da yake bayarwa ana nuna su ne kawai; ainihin shaidar kulli ita ce GUID."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "Ƙarewar Lokacin Datagram"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "Milisekon da kowane datagram na gudanarwa zai iya ɗauka kafin kayan aikin su sake gwadawa (zaɓinsu na -t)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "Ƙarewar Lokacin Umarni"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "Daƙiƙoƙin da gudanarwar kayan aiki guda ɗaya za ta iya ɗauka kafin a tsayar da ita kuma a yi mata rajista a matsayin wadda ta gaza."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "Adadin KiB da gudanarwar kayan aiki guda ɗaya za ta iya bugawa. Fitowar da ta fi haka girma za a zubar da ita kuma a yi mata rajista a matsayin wadda ta gaza."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "Mafi Girman Fitarwa"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "Bincike"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "Ƙayyadadden Lokacin Kulli"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "Daƙiƙoƙin da binciken kulli guda ɗaya zai iya ɗauka wajen karanta ma'aunan ƙidaya. Tashoshin da ba a kai gare su ba za a karanta su a zagaye na gaba."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "Adadin tashoshin da suka gaza waɗanda bayan su binciken kulli zai tsaya a wannan zagayen. Tasha da ba ta amsawa tana cin daƙiƙoƙi da yawa."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "Ƙayyadadden Gazawar Kulli"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "Yi Rajistar Tashoshin da Ba Sa Aiki"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "Idan an zaɓa, binciken bayanan Tashar Fabric zai kuma jero tashoshin da ba sa aiki kuma ba su da haɗi a ɗaya ƙarshen, kamar tashoshin mai daidaitawa da ba a amfani da su. Idan an cire zaɓin, za a bar su a waje har sai sun dawo aiki."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "Cirewa"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "Riƙe Teburan Plugin yayin Cirewa"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "Idan an zaɓa, cire kari (plugin) zai adana fabric ɗinsa, ƙididdigar kayayyaki, da samfurori. Cire zaɓin domin cirewa ya goge su; fara fitar da ƙididdigar kayayyaki daga shafin Gudanarwar Fabric. Ba a taɓa tuntuɓar fabric ɗin a kowane hali ba."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "Babban fayil na kayan aiki dole ne ya zama cikakkiyar hanya mai ɗauke da haruffa, lambobi, ɗigo, gajerun layuka, layukan ƙasa, da sandunan giciye, ba tare da sandar giciye a ƙarshe ba."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "Babban fayil na kayan aiki ba ya wanzu ko ba babban fayil ba ne."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "Hanyar babban fayil na kayan aiki tana ɗauke da hanyar haɗi ta alama (symbolic link). Shigar da ainihin hanyar."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "Babban fayil na kayan aiki ba mallakin root ba ne."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "Rukuninsa ko wasu suna iya rubutu a cikin babban fayil na kayan aiki."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "Wani kayan aikin bincike ba mallakin root ba ne."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "Rukuninsa ko wasu suna iya rubutu a cikin wani kayan aikin bincike."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Karin Fabric yana buƙatar PHP %s ko sabo. Wannan sabar tana amfani da PHP %s, don haka ba a girka ko kunna karin ba."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Ba a kunna karin Fabric ba."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Karin Fabric yana buƙatar PHP %s ko sabo."
+
+#: setup.php
+msgid "Management"
+msgstr "Gudanarwa"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "Ba a adana Babban Fayil na Kayan Aiki ba. %s"

@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: mr-IN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "पृष्ठ तयार झाल्यानंतर नोड बदलला, त्यामुळे काहीही केले गेले नाही. त्याचे पुनरावलोकन करा आणि पुन्हा प्रयत्न करा."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "तुमच्या डिव्हाइस परवानग्या या नोंदीत बदल करण्याची अनुमती देत नाहीत."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "नाव: दुसरे फॅब्रिक आधीच हे नाव वापरत आहे."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "अ‍ॅडॉप्टर: दुसरे फॅब्रिक आधीच या पोलरवर या अ‍ॅडॉप्टर पोर्टचा स्वीप करत आहे. प्रति अ‍ॅडॉप्टर पोर्ट एक फॅब्रिक."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "फॅब्रिक जतन करता आले नाही."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "फॅब्रिक जतन केले गेले."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "या फॅब्रिकचा स्वीप सुरू आहे, त्यामुळे काहीही हटवले गेले नाही. तो पूर्ण झाल्यावर पुन्हा प्रयत्न करा."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "फॅब्रिक आणि त्याची यादी हटवली गेली. कोणतेही Cacti डिव्हाइस बदलले गेले नाही आणि फॅब्रिकशी संपर्क साधला गेला नाही."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "फॅब्रिक हटवता आले नाही."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "नोड ओळख बदलली गेली नाही."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "नोड ओळख अद्यतनित केली गेली. पुढील चक्रापासून तिचा पुन्हा स्वीप केला जाईल."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "डिव्हाइस मॅपिंग नवीन नोडवर हलवले गेले."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "प्रस्ताव निश्चित करता आला नाही. तो तयार केल्यापासून नोड्स बदलले असावेत."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "प्रस्ताव नाकारता आला नाही."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "प्रस्ताव नाकारला गेला."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "नोड मॅपिंग बदलले गेले नाही. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "नोड मॅपिंग बदलले गेले नाही."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "नोड मॅपिंग जतन केले गेले."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "कोणतेही डिव्हाइस तयार केले गेले नाही. Cacti लॉग पहा."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "डिव्हाइस तयार केले गेले आणि नोड त्याशी मॅप केला गेला. नवीन आलेख पृष्ठावर आलेख काढण्यासाठी पोर्ट निवडा."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "निर्यातीसाठी यादी वाचता आली नाही."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "Fabric टेम्प्लेट्स आणि डेटा क्वेरी फाइल स्थापित केली गेली."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Fabric टेम्प्लेट्स स्थापित केले गेले नाहीत. Cacti ऑब्जेक्ट्स सारणी आणि Cacti लॉग पहा."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "निरीक्षण दृश्य"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "निरीक्षणे वाचता आली नाहीत. प्रशासकाला प्लगइन लॉग तपासण्यास सांगा."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "पोर्ट वैधता, लिंक रुंदी आणि वेग तसेच गर्दीचे दृश्य तपासा. ओळख संघर्ष आणि डिव्हाइस पुन्हा जोडणे प्रशासकाकडे पाठवा; काउंटर रीसेट करू नका."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Fabric प्रशासन"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "फॅब्रिक नोंदी वाचता आल्या नाहीत. Cacti लॉग पहा."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "फॅब्रिक्स"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "क्रिया"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "अ‍ॅडॉप्टर"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "बॅकएंड"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "नाव"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "नोड्स"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Poller"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "स्थिती"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "स्वीप अंतराल"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "अद्याप कोणतेही फॅब्रिक परिभाषित केलेले नाही."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "हटवलेला पोलर (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "पोर्ट %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d सेकंद"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "हटवा"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "तुम्हाला न दिसू शकणारी डिव्हाइसेस यात आहेत"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "निर्यात करा"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "प्लगइन सारण्या काढून टाकणाऱ्या अनइंस्टॉलपूर्वी फॅब्रिक्स आणि नोड यादी डिव्हाइस मॅपिंगसह JSON म्हणून डाउनलोड करा. यात कोणतीही क्रेडेन्शियल्स नसतात."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "फॅब्रिक: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "नवीन फॅब्रिक"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "स्वीप अंतराल (सेकंद)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "अ‍ॅडॉप्टर पोर्ट"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "सक्षम"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "जतन करा"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "फॅब्रिक हटवा: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "हे फॅब्रिक त्याचे %d नोड्स, त्यांचे पोर्ट्स, नमुने आणि प्रस्तावांसह हटवायचे का? %d नोड्स Cacti डिव्हाइसेसशी मॅप केलेले आहेत; ती डिव्हाइसेस, त्यांचे डेटा स्रोत आणि RRD फाइल्स ठेवल्या जातात. फॅब्रिकशी संपर्क साधला जात नाही."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "मॅप न केलेले"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "हटवलेले डिव्हाइस (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "फॅब्रिक नोड: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "नोड नावाशी जुळणारी डिव्हाइसेस"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (डिव्हाइस %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "काहीही नाही"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Cacti डिव्हाइस"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "जतन केल्याने नोड डिव्हाइसशी मॅप होतो आणि डिव्हाइसमध्ये Fabric Port डेटा क्वेरी जोडली जाते, जी नोडचे पोर्ट्स सूचीबद्ध करते. कोणताही आलेख, डेटा स्रोत किंवा डिव्हाइस सेटिंग बदलली जात नाही. फॅब्रिकचा स्वीप करणाऱ्या पोलरद्वारे डिव्हाइस पोल केले जाणे आवश्यक आहे."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "या नोडसाठी डिव्हाइस तयार करा"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "येथे डिव्हाइसेस तयार करता येत नाहीत."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "%s साठी डिव्हाइस तयार करा"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "डिव्हाइस तयार केल्याने हे जोडले जाते:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "तयार करा"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "ओळख संघर्ष"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "नोड"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "दिसलेले"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "संचयित"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "कोणतेही संघर्ष नाहीत."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "एकाच शोधात दोनदा मुद्रित"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "दिसलेली ओळख स्वीकारा"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "पुन्हा जोडण्याचे प्रस्ताव"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "डिव्हाइस"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "गहाळ नोड"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "नवीन नोड"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "सामायिक शेजारी पोर्ट"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "कोणतेही खुले प्रस्ताव नाहीत."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "निश्चित करा"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "नाकारा"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "निदान साधने (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "फॅब्रिक किंवा प्लगइन सेटिंग्ज अपूर्ण किंवा अवैध आहेत"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "कॉन्फिगर केलेल्या डिरेक्टरीमध्ये साधन गहाळ आहे किंवा कार्यान्वित करण्यायोग्य नाही"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "साधनाने त्याची वेळेची मर्यादा ओलांडली आणि ते थांबवले गेले"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "साधनाच्या आउटपुटने आकाराची मर्यादा ओलांडली आणि ते टाकून दिले गेले"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "साधन अयशस्वी झाले"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "साधनाचे आउटपुट अपेक्षित स्वरूपात नव्हते"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "प्रयत्न केला नाही: वेळ किंवा अपयश मर्यादा संपली होती"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "प्लगइन सारण्या वाचता किंवा लिहिता आल्या नाहीत"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Fabric टेम्प्लेट्स स्थापित केलेले नाहीत. आरोग्य पृष्ठावरून ते पुन्हा स्थापित करा."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "नोड आधीच एका डिव्हाइसशी मॅप केलेला आहे."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "नोडच्या फॅब्रिकचा स्वीप मुख्य पोलरद्वारे केला जात नाही, त्यामुळे त्याचे डिव्हाइस पोल करता आले नाही."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "डिव्हाइस अस्तित्वात नाही."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "या फॅब्रिकचा स्वीप करणाऱ्या पोलरपेक्षा वेगळ्या पोलरद्वारे हे डिव्हाइस पोल केले जाते, त्यामुळे ते फॅब्रिक कॅशे वाचू शकले नाही."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "डिव्हाइस \"%s\" (%s डिव्हाइस टेम्प्लेटमधून), होस्ट नाव %s, पोलर %d द्वारे पोल केलेले, उपलब्धता तपासण्या आणि SNMP बंद ठेवून."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "त्यावर %s डेटा क्वेरी, जी नोडचे पोर्ट्स सूचीबद्ध करते. ती स्वतःहून कोणताही आलेख किंवा डेटा स्रोत तयार करत नाही."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "नोड %s साठी Fabric प्लगइनद्वारे तयार केलेले. त्याची मूल्ये प्लगइन कॅशेमधून येतात; होस्ट नाव हे एक राखीव नाव आहे ज्याच्याशी कधीही संपर्क साधला जात नाही."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "नाव: अक्षर किंवा अंकाने सुरू होणारी 1 ते 64 अक्षरे, अंक, मोकळ्या जागा, बिंदू, डॅश किंवा अंडरस्कोर वापरा."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "बॅकएंड: सूचीबद्ध केलेल्या बॅकएंडपैकी एक निवडा."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "पोलर: सूचीबद्ध केलेल्या पोलर्सपैकी एक निवडा."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "पोलर: रिमोट पोलर समर्थन जोडेपर्यंत केवळ मुख्य पोलरच फॅब्रिकचा स्वीप करू शकतो."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "स्वीप अंतराल: %d ते %d पर्यंत पूर्ण सेकंद प्रविष्ट करा."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "अ‍ॅडॉप्टर: कर्नल ज्या नावाने ओळखतो ते स्थानिक अ‍ॅडॉप्टर नाव प्रविष्ट करा, जसे की mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "अ‍ॅडॉप्टर पोर्ट: स्थानिक अ‍ॅडॉप्टरचा पोर्ट क्रमांक प्रविष्ट करा, 1 ते %d पर्यंत."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "कधीही नाही"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "%d सेकंदांपूर्वी"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "%d मिनिटांपूर्वी"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "%d तासांपूर्वी"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "%d दिवसांपूर्वी"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Cacti ऑब्जेक्ट्स"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "स्थापित"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "गहाळ"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "टेम्प्लेट्स"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "डेटा क्वेरी फाइल"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "शेवटची स्थापना"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "टेम्प्लेट्स पुन्हा स्थापित करा"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Fabric आरोग्य"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "आरोग्य नोंदी वाचता आल्या नाहीत. Cacti लॉग पहा."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "काउंटर स्वीप्स"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "शोध"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "फॅब्रिक"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "शेवटचा शोध"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "शेवटचे लिंक वाचन"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "शेवटचा यशस्वी शोध"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "लिंक वाचन"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "दिसलेले नोड्स / पोर्ट्स"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "वगळलेल्या लिंक ओळी"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "न जुळलेल्या लिंक नोंदी"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "फॅब्रिक %s: यादी %s आहे; शेवटचा यशस्वी शोध %s होता."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "फॅब्रिक %s: ते पोलर %d ला नियुक्त केलेले आहे, परंतु रिमोट पोलर समर्थन जोडेपर्यंत केवळ मुख्य पोलरच फॅब्रिकचा स्वीप करू शकतो. त्याचा स्वीप केला जात नाही; ते मुख्य पोलरला नियुक्त करा."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "फॅब्रिक %s: त्याची आरोग्य नोंद वाचता आली नाही, त्यामुळे त्याची शोध स्थिती अज्ञात आहे. Cacti लॉग पहा."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "फॅब्रिक %s: त्याचा शोध घेतलेला नाही. स्वीप्स केवळ Cacti डिव्हाइसशी मॅप केलेल्या नोडपासून सुरू होतात, त्यामुळे मुख्य पोलरवर एकदा \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" चालवा."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "फॅब्रिक %s: कोणताही नोड Cacti डिव्हाइसशी मॅप केलेला नाही, त्यामुळे कोणताही स्वीप सुरू होत नाही आणि यादी ताजी केली जात नाही. Fabric प्रशासन पृष्ठावर एक नोड मॅप करा, किंवा मुख्य पोलरवर \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" चालवा."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "फॅब्रिक %s: %d iblinkinfo ओळी वाचता आल्या नाहीत, बहुधा नोड वर्णनाने साधनाच्या आउटपुटची नक्कल केल्यामुळे. ते नोड्स त्यांच्या मागील लिंक स्थिती ठेवतात."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "फॅब्रिक %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "अक्षम"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "इशारे"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "कोणतेही इशारे नाहीत."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "ओळख"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "%d ओळख संघर्ष आणि %d खुले पुन्हा-जोडणी प्रस्ताव. Fabric प्रशासन पृष्ठावर त्यांचे निराकरण करा."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "लक्ष देण्याची आवश्यकता असलेले काउंटर स्वीप्स"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "कालावधी"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "अपयश"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "शेवटचे यश"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "शेवटचा स्वीप"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "परिणाम"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "वाचलेले / अयशस्वी / वगळलेले पोर्ट्स"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s से"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "स्वीप केलेल्या प्रत्येक नोडने त्याचा शेवटचा स्वीप पूर्ण केला."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "ठीक, %s से"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "शेवटचे पाहिलेले"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "उपस्थिती"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "प्रकार"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "दाखवण्यासाठी कोणतेही नोड्स नाहीत."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "अद्याप कोणतीही फॅब्रिक्स परिभाषित केलेली नाहीत."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "सर्वाधिक ट्रान्समिट प्रतीक्षा असलेले पोर्ट्स"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "सर्वाधिक ट्रान्समिट प्रतीक्षा असलेले पोर्ट्स"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "फॅब्रिक यादी वाचता आली नाही. Cacti लॉग पहा."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "ट्रान्समिट प्रतीक्षा अशा टिक्सची मोजणी करते ज्यामध्ये पोर्टकडे पाठवण्यासाठी डेटा होता परंतु क्रेडिट्स किंवा आर्बिट्रेशनच्या अभावामुळे तो पाठवता आला नाही. उच्च मूल्य रिमोट टोकाकडे गर्दी दर्शवते; ते पोर्ट किंवा त्याची केबल सदोष असल्याचे दर्शवत नाही. सध्याच्या लिंक वेगांसाठी टिकची लांबी प्रकाशित केलेली नसते, त्यामुळे मूल्ये वेळ नसून प्रति सेकंद टिक्समध्ये असतात."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "पोर्ट"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "रिमोट"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "ट्रान्समिट डिस्कार्ड्स (प्रति सेकंद)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "ट्रान्समिट वेट (प्रति सेकंद टिक्स)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "कोणत्याही पोर्टवर सध्या ट्रान्समिट वेट दर नाही."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "अज्ञात"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "फॅब्रिक नोड"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "नोड अस्तित्वात नाही किंवा तुम्हाला तो पाहण्याची परवानगी नसावी."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "सक्रिय"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "दोन्ही टोकांना सर्वोत्तम समर्थन"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "काउंटर वैधता"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "काउंटर्स"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "ग्राफ्स"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "लिंक"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "अद्याप कोणतेही पोर्ट नोंदवलेले नाहीत."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "डिव्हाइस %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "%s काउंटर्स संतृप्त झाले, अज्ञात म्हणून प्रकाशित केले: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "%s काउंटर्स: %d खंड, शेवटचा %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "वैध"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "अप"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "सर्वोत्तमपेक्षा कमी, सक्षम केलेल्या मूल्यांद्वारे मर्यादित"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "सर्वोत्तमपेक्षा कमी, कारण अज्ञात"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "क्षीण"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "डाउन"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "स्विच"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "चॅनेल अ‍ॅडॉप्टर"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "राउटर"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "खाली नोंदवलेल्या निरीक्षणांचे पुनरावलोकन करा. पोचपावत्या या सत्रासाठी वैयक्तिक आहेत, निरीक्षणे बदलल्यावर कालबाह्य होतात आणि कधीही सूचना दाबत नाहीत किंवा स्थिती बदलत नाहीत."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "फॅब्रिक ऑपरेशन्स"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "तपास"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "ऑब्जेक्ट"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "निरीक्षित (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "अज्ञात किंवा जुने"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "पोचपावती दिली; आरोग्य स्थिती अपरिवर्तित."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "पोचपावती द्या"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "तुम्ही प्रवेश करू शकता अशा डिव्हाइसेससाठी कोणतीही निरीक्षणे उपलब्ध नाहीत."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "फॅब्रिक ऑपरेटर"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "फॅब्रिक दृश्य"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "स्वीप root म्हणून चालतो. पोलरला एका गटाद्वारे umad डिव्हाइसेसवर वाचन परवानगी असलेल्या विशेषाधिकाररहित खात्याद्वारे चालवा."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "निदान साधनावर setuid किंवा setgid बिट आहे. प्लगइनला याची कधीही आवश्यकता नसते."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "निदान साधन किंवा त्याची डिरेक्टरी मालकाव्यतिरिक्त इतर खात्याद्वारे किंवा पोलर खात्याद्वारे लिहिता येते. जो कोणी त्यात लिहू शकतो, तो पोलर काय चालवेल हे ठरवू शकतो."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "umad डिव्हाइस प्रत्येक खात्याद्वारे वाचता किंवा लिहिता येते, त्यामुळे कोणताही स्थानिक वापरकर्ता फॅब्रिकची क्वेरी करू शकतो. ते एका गटापुरते मर्यादित करा."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "अज्ञात चेतावणी"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "निदान साधने"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "फॅब्रिक स्वीप करणाऱ्या प्रत्येक पोलरवरील परिपूर्ण डिरेक्टरी, ज्यामध्ये perfquery, ibnetdiscover आणि iblinkinfo आहेत. Debian आणि Ubuntu पॅकेजेस ती /usr/sbin मध्ये स्थापित करतात. यातून इतर कोणताही प्रोग्राम कधीही चालवला जात नाही."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "साधन डिरेक्टरी"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "नोड नाव मॅप"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "infiniband-diags नोड नाव मॅप फाइलचा पर्यायी परिपूर्ण मार्ग. त्यातून मिळणारी नावे फक्त दर्शविली जातात; ओळख नेहमी नोड GUID असते."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "डेटाग्राम टाइमआउट"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "साधने पुन्हा प्रयत्न करण्यापूर्वी प्रत्येक व्यवस्थापन डेटाग्राम घेऊ शकणारा मिलीसेकंद कालावधी (त्यांचा -t पर्याय)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "कमांड टाइमआउट"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "साधनाची एक फेरी थांबवून अयशस्वी म्हणून नोंदवण्यापूर्वी ती घेऊ शकणारे सेकंद."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "साधनाची एक फेरी प्रिंट करू शकणारे KiB. यापेक्षा मोठे आउटपुट टाकून दिले जाते आणि अयशस्वी म्हणून नोंदवले जाते."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "कमाल आउटपुट"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "स्वीप"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "नोड वेळ मर्यादा"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "काउंटर्स वाचण्यासाठी एका नोड स्वीपला खर्च करता येणारे सेकंद. न पोहोचलेले पोर्ट पुढील चक्रात वाचले जातात."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "या चक्रासाठी नोड स्वीप ज्या अयशस्वी पोर्ट्सनंतर थांबतो त्यांची संख्या. प्रतिसाद न देणारा पोर्ट अनेक सेकंद घेतो."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "नोड अपयश मर्यादा"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "डाउन पोर्ट्स अनुक्रमित करा"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "निवडलेले असताना, Fabric Port डेटा क्वेरीमध्ये डाउन असलेले आणि दूरस्थ टोक नसलेले पोर्ट्स देखील सूचीबद्ध केले जातात, जसे की न वापरलेले अ‍ॅडॉप्टर पोर्ट्स. अनचेक केल्यास, ते अप होईपर्यंत वगळले जातात."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "अनइंस्टॉल करा"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "अनइंस्टॉल करताना प्लगइन सारण्या ठेवा"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "निवडलेले असताना, प्लगइन अनइंस्टॉल केल्यास त्याचे फॅब्रिक्स, इन्व्हेंटरी आणि नमुने जतन राहतात. अनइंस्टॉल करताना ते काढून टाकण्यासाठी हे अनचेक करा; प्रथम Fabric Admin पृष्ठावरून इन्व्हेंटरी एक्सपोर्ट करा. दोन्ही प्रकारे फॅब्रिकशी कधीही संपर्क साधला जात नाही."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "साधन डिरेक्टरी हा अक्षरे, अंक, टिंब, डॅश, अंडरस्कोर आणि स्लॅश यांचा परिपूर्ण मार्ग असावा, ज्याच्या शेवटी स्लॅश नसेल."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "साधन डिरेक्टरी अस्तित्वात नाही किंवा ती डिरेक्टरी नाही."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "साधन डिरेक्टरीच्या मार्गात सिम्बॉलिक लिंक आहे. वास्तविक मार्ग प्रविष्ट करा."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "साधन डिरेक्टरीची मालकी root कडे नाही."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "साधन डिरेक्टरी तिच्या गटाद्वारे किंवा इतरांद्वारे लिहिता येते."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "निदान साधनाची मालकी root कडे नाही."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "निदान साधन त्याच्या गटाद्वारे किंवा इतरांद्वारे लिहिता येते."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Fabric प्लगइनसाठी PHP %s किंवा त्यापुढील आवृत्ती आवश्यक आहे. या सर्व्हरवर PHP %s चालत आहे, त्यामुळे प्लगइन स्थापित किंवा सक्षम केले गेले नाही."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Fabric प्लगइन सक्षम केलेले नाही."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Fabric प्लगइनसाठी PHP %s किंवा त्यापुढील आवृत्ती आवश्यक आहे."
+
+#: setup.php
+msgid "Management"
+msgstr "व्यवस्थापन"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "साधन डिरेक्टरी जतन केली गेली नाही. %s"

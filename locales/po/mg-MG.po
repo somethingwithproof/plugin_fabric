@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: mg-MG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "Niova ny node taorian'ny fanehoana ny pejy, ka tsy nisy na inona na inona natao. Jereo indray izany ary andramo indray."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "Tsy mamela anao hanova ity firaketana ity ny fahazoan-dalanao momba ny fitaovana."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "Anarana: efa mampiasa io anarana io ny fabric iray hafa."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "Adapter: efa misava ity seranan'ny adapter ity amin'ity poller ity ny fabric iray hafa. Fabric iray isaky ny seranan'ny adapter."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "Tsy azo tehirizina ny fabric."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "Voatahiry ny fabric."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "Mandeha ny fisavana ity fabric ity, ka tsy nisy zavatra voafafa. Andramo indray rehefa vita izany."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "Voafafa ny fabric sy ny lisitry ny singany. Tsy nisy fitaovana Cacti novana ary tsy nifandraisana ny fabric."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "Tsy azo nofafana ny fabric."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "Tsy novana ny famantarana ny node."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "Nohavaozina ny famantarana ny node. Hosavaina indray izany manomboka amin'ny tsingerina manaraka."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "Nafindra tany amin'ny node vaovao ny fampifandraisana ny fitaovana."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "Tsy azo nohamarinina ny tolo-kevitra. Mety niova ny node hatramin'ny nanaovana azy."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "Tsy azo nolavina ny tolo-kevitra."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "Nolavina ny tolo-kevitra."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "Tsy novana ny fampifandraisana ny node. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "Tsy novana ny fampifandraisana ny node."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "Voatahiry ny fampifandraisana ny node."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "Tsy nisy fitaovana noforonina. Jereo ny firaketana Cacti."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "Noforonina ny fitaovana ary nampifandraisina taminy ny node. Fidio ao amin'ny pejy New Graphs ireo seranana hanaovana tabilao."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "Tsy azo novakina ho amin'ny fanondranana ny lisitry ny singa."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "Napetraka ireo modely Fabric sy ny rakitra fangatahana angona."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Tsy napetraka ireo modely Fabric. Jereo ny tabilao Cacti Objects sy ny firaketana Cacti."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "Fomba fijery fanaraha-maso"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "Tsy azo novakiana ny fandinihana. Angataho ny mpitantana hanamarina ny firaketana ny plugin."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "Jereo ny fahamarinan'ny seranana, ny sakan'ny rohy sy ny hafainganam-pandeha, ary ny fijerena ny fitohanana. Ampakaro any amin'ny mpitantana ny fifanoheran'ny famantarana sy ny fampifandraisana indray ny fitaovana; aza averina amin'ny zero ireo mpanisa."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Fitantanana Fabric"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "Tsy azo novakina ireo firaketana momba ny fabric. Jereo ny firaketana Cacti."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "Ireo fabric"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "Hetsika"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "Adapter"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "Backend"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "Anarana"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "Ireo node"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Poller"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "Toetra"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "Elanelam-potoanan'ny fisavana"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "Mbola tsy misy fabric voafaritra."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "Poller voafafa (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "seranana %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d segondra"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "Fafao"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "Mitahiry fitaovana mety tsy hitanao"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "Aondrana"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "Alaivo amin'ny endrika JSON ireo fabric sy ny lisitry ny node, miaraka amin'ny fampifandraisana fitaovana, mialoha ny fanesorana izay mamafa ireo tabilao ao amin'ny plugin. Tsy misy tenimiafina na fahazoan-dalana ao anatiny."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Fabric: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "Fabric vaovao"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "Elanelam-potoanan'ny fisavana (segondra)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "Seranan'ny adapter"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "Alefa"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "Tehirizo"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "Fafao ny fabric: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "Fafana ve ity fabric ity miaraka amin'ireo node %d ao aminy, ny seranan'izy ireo, ny santionany ary ny tolo-kevitra? Node %d no mifandray amin'ny fitaovana Cacti; tazonina ireo fitaovana ireo, ny loharanon'angona ary ny rakitra RRD. Tsy hifandraisana ny fabric."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "Tsy mifandray"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "Fitaovana voafafa (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "Node Fabric: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "Fitaovana mifanaraka amin'ny anaran'ny node"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (fitaovana %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "Tsy misy"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Fitaovana Cacti"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "Ny fitahirizana dia mampifandray ny node amin'ny fitaovana ary manampy ny fangatahana angona Fabric Port amin'ny fitaovana, izay mitanisa ireo seranan'ny node. Tsy misy tabilao, loharanon'angona, na fikirakirana fitaovana ovaina. Ny poller izay misava ny fabric no tsy maintsy manangona ny fitaovana."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "Mamoròna fitaovana ho an'ity node ity"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "Tsy azo foronina eto ny fitaovana."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "Mamoròna fitaovana ho an'ny %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "Ny famoronana ny fitaovana dia manampy:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "Mamorona"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "Fifanoheran'ny famantarana"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "Node"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "Hita"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "Voatahiry"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "Tsy misy fifanoherana."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "Navoaka indroa tao anatin'ny fitadiavana iray"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "Ekeo ny famantarana hita"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "Tolo-kevitra fampifandraisana indray"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "Fitaovana"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "Node tsy hita"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "Node vaovao"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "Seranana mpifanolo-bodirindrina iombonana"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "Tsy misy tolo-kevitra misokatra."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "Hamafiso"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "Tsipaho"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "Fitaovana fitiliana (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "Tsy feno na tsy manan-kery ny fikirakirana ny fabric na ny plugin"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "Tsy hita na tsy azo alefa ao amin'ny lahatahiry voafaritra ilay fitaovana"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "Nihoatra ny fetram-potoanany ilay fitaovana ka najanona"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "Nihoatra ny fetran'ny habe ny valin'ilay fitaovana ka nariana"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "Tsy nahomby ilay fitaovana"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "Tsy nanana ny endrika nandrasana ny valin'ilay fitaovana"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "Tsy nandramana: lany ny fetram-potoana na ny fetran'ny tsy fahombiazana"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "Tsy azo novakina na nosoratana ireo tabilaon'ny plugin"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Tsy napetraka ireo modely Fabric. Apetraho indray izy ireo avy ao amin'ny pejin'ny fahasalamana."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "Efa mifandray amin'ny fitaovana iray ny node."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "Tsy ny poller fototra no misava ny fabric-n'ilay node, ka tsy azo nangonina ny fitaovany."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "Tsy misy ilay fitaovana."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "Poller hafa noho ilay misava ity fabric ity no manangona ny fitaovana, ka tsy afaka namaky ny tahiry vonjimaikan'ny fabric izy."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "Fitaovana \"%s\" avy amin'ny modelin'ny fitaovana %s, anaran'ny mpampiantrano %s, angonin'ny poller %d, miaraka amin'ny fanamarinana ny fahafahana mifandray sy ny SNMP maty."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "Ny fangatahana angona %s ao aminy, izay mitanisa ireo seranan'ny node. Tsy mamorona tabilao na loharanon'angona irery izany."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "Noforonin'ny plugin Fabric ho an'ny node %s. Avy amin'ny tahiry vonjimaikan'ny plugin ny sandany; anarana voatokana tsy hifandraisana mihitsy ny anaran'ny mpampiantrano."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "Anarana: mampiasà litera, isa, elanelana, teboka, tsipika kely, na tsipika ambany 1 hatramin'ny 64, manomboka amin'ny litera na isa."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "Backend: mifidiana iray amin'ireo backend voatanisa."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "Poller: mifidiana iray amin'ireo poller voatanisa."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "Poller: ny poller fototra ihany no afaka misava fabric mandra-panampiana ny fanohanana poller lavitra."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "Elanelam-potoanan'ny fisavana: ampidiro segondra feno manomboka amin'ny %d hatramin'ny %d."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "Adapter: ampidiro ny anaran'ny adapter eo an-toerana araka ny fiantsoan'ny kernel azy, toy ny mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "Seranan'ny adapter: ampidiro ny laharan'ny seranan'ny adapter eo an-toerana, manomboka amin'ny 1 hatramin'ny %d."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "Tsy mbola nisy"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "%d segondra lasa izay"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "%d minitra lasa izay"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "%d ora lasa izay"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "%d andro lasa izay"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Cacti Objects"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "Napetraka"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "Tsy hita"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "Modely"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "Rakitra fangatahana angona"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "Fametrahana farany"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "Apetraho indray ireo modely"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Fahasalaman'ny Fabric"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "Tsy azo novakina ireo firaketana momba ny fahasalamana. Jereo ny firaketana Cacti."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "Fisavana mpanisa"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "Fitadiavana"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Fabric"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "Fitadiavana farany"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "Famakiana rohy farany"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "Fitadiavana Nahomby Farany"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "Famakiana rohy"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "Node / Seranana hita"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "Andalana rohy nodinganina"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "Firaketana rohy tsy mifanaraka"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Fabric %s: %s ny lisitry ny singa; tamin'ny %s ny fitadiavana nahomby farany."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Fabric %s: voatendry amin'ny poller %d izy io, nefa ny poller fototra ihany no afaka misava fabric mandra-panampiana ny fanohanana poller lavitra. Tsy voasava izany; tendreo amin'ny poller fototra izany."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Fabric %s: tsy azo novakina ny firaketana momba ny fahasalamany, ka tsy fantatra ny toetry ny fitadiavany. Jereo ny firaketana Cacti."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Fabric %s: mbola tsy hita izany. Ny fisavana dia manomboka avy amin'ny node mifandray amin'ny fitaovana Cacti ihany, ka alefaso indray mandeha ao amin'ny poller fototra ny \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\"."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Fabric %s: tsy misy node mifandray amin'ny fitaovana Cacti, ka tsy misy fisavana manomboka ary tsy havaozina ny lisitry ny singa. Ampifandraiso ny node ao amin'ny pejy Fabric Admin, na alefaso ao amin'ny poller fototra ny \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\"."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Fabric %s: andalana iblinkinfo %d no tsy azo novakina, angamba satria maka tahaka ny valin'ilay fitaovana ny famaritana ny node iray. Mitazona ny toetry ny rohiny farany ireo node ireo."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Fabric %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "tsy mandeha"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "Fampitandremana"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "Tsy misy fampitandremana."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "Famantarana"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "Fifanoheran'ny famantarana %d sy tolo-kevitra fampifandraisana indray misokatra %d. Vahao ao amin'ny pejy Fabric Admin izy ireo."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "Fisavana mpanisa mila fitandremana"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "Faharetany"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "Tsy fahombiazana"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "Fahombiazana farany"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "Fisavana farany"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "Vokatra"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "Seranana voavaky / Tsy nahomby / Nodinganina"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s s"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "Nahavita ny fisavana farany avokoa ny node voasava rehetra."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "OK, %s s"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "Hita Farany"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "Fisiana"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "Karazana"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "Tsy misy node haseho."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "Mbola tsy misy fabric voafaritra."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "Seranana manana fiandrasana fandefasana ambony indrindra"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "Seranana manana fiandrasana fandefasana ambony indrindra"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "Tsy azo novakina ny lisitry ny singan'ny fabric. Jereo ny firaketana Cacti."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "Ny fiandrasana fandefasana dia manisa ny ticks izay nananan'ny seranana angona halefa nefa tsy afaka nandefa izany, noho ny tsy fahampian'ny credits na ny arbitration. Ny sanda ambony dia mampiseho fitohanana mankany amin'ny ilany lavitra; tsy mampiseho izany fa simba ny seranana na ny taribiny. Tsy navoaka ny halavan'ny tick ho an'ny hafainganam-pandehan'ny rohy ankehitriny, ka ticks isan-tsegondra ny sanda fa tsy fotoana."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "Seranana"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "Lavitra"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "Fandefasana nariana (isan-tsegondra)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "Fiandrasana fandefasana (tika isan-tsegondra)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "Tsy misy seranana manana tahan'ny fiandrasana fandefasana amin'izao fotoana izao."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "Tsy fantatra"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "Tendron'ny Fabric"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "Tsy misy io tendro io na tsy mahazo mijery azy ianao."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "Miasa"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "Fanohanana tsara indrindra amin'ny roa tonta"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "Fahamarinan'ny mpanisa"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "Mpanisa"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "Kisary"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "Rohy"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "Mbola tsy misy seranana voarakitra."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "Fitaovana %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "Mpanisa %s feno loatra, navoaka ho tsy fantatra: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "Mpanisa %s: fahatapahana %d, ny farany %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "Manan-kery"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "Mandeha"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "Ambany noho ny tsara indrindra, voafetran'ny sanda alefa"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "Ambany noho ny tsara indrindra, tsy fantatra ny antony"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "Niharatsy"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "Tsy azo tratrarina"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "Switch"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "Mpandrindra fantsona"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "Mpandrindra lalana"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "Jereo eto ambany ny fandinihana voarakitra. Ny fanekena dia manokana ho an'ity fivoriana ity, lany daty rehefa miova ny fandinihana, ary tsy manafoana fampitandremana na manova ny fahasalamana velively."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "Fikirakirana ny Fabric"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "Fanadihadiana"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "Singa"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "Voamarika (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "Tsy fantatra na efa antitra"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "Voamarika ho ekena; tsy niova ny fahasalamana."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "Ekeo"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "Tsy misy fandinihana azo jerena ho an'ny fitaovana azonao idirana."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "Mpikirakira ny Fabric"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "Fijerena ny Fabric"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "Mandeha amin'ny alalan'ny root ny fitiliana. Ampandehano amin'ny kaonty tsy manana tombontsoa manokana ny poller miaraka amin'ny fahazoan-dalana mamaky ireo fitaovana umad amin'ny alalan'ny vondrona."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "Misy fitaovana fitiliana manana bit setuid na setgid. Tsy mila izany mihitsy ny plugin."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "Ny fitaovana fitiliana na ny lahatahiriny dia azo soratan'ny kaonty hafa ankoatra ny tompony, na ny kaontin'ny poller. Izay mahasoratra ao no mifidy izay ampandehanin'ny poller."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "Ny fitaovana umad iray dia azon'ny kaonty rehetra vakina na soratana, ka ny mpampiasa eo an-toerana rehetra dia afaka manontany ny fabric. Ferana ho an'ny vondrona iray izany."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "Fampitandremana tsy fantatra"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "Fitaovana fitiliana"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "Lahatahiry feno, eo amin'ny poller tsirairay mitily ny fabric, izay misy ny perfquery, ibnetdiscover, ary iblinkinfo. Ny fonosana Debian sy Ubuntu dia mametraka azy ireo ao amin'ny /usr/sbin. Tsy misy programa hafa ampandehanina avy ao mihitsy."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "Lahatahirin'ny fitaovana"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "Sarin-tany anaran'ny tendro"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "Lalana feno tsy voatery mankany amin'ny rakitra sarin-tany anaran'ny tendro infiniband-diags. Ny anarana omeny ihany no aseho; ny GUID-n'ny tendro foana no famantarana."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "Fe-potoana faran'ny datagram"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "Milisegondra azon'ny datagram fitantanana tsirairay raisina alohan'ny hanandraman'ny fitaovana azy indray (ny safidy -t an'izy ireo)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "Fe-potoana faran'ny baiko"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "Segondra azon'ny fandehanan'ny fitaovana iray raisina alohan'ny hampijanona azy sy hiraketana azy ho tsy nahomby."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "KiB azon'ny fandehanan'ny fitaovana iray avoaka. Ny vokatra lehibe kokoa dia ariana ary voarakitra ho tsy nahomby."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "Vokatra ambony indrindra"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "Fitiliana"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "Fetr'ora isaky ny tendro"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "Segondra azon'ny fitiliana tendro iray laniana amin'ny famakiana mpanisa. Ny seranana tsy tratra dia vakina amin'ny tsingerina manaraka."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "Isan'ny seranana tsy nahomby izay mampijanona ny fitiliana tendro amin'ity tsingerina ity. Ny seranana tsy mamaly dia mandany segondra maromaro."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "Fetran'ny tsy fahombiazan'ny tendro"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "Raketo ny seranana tsy mandeha"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "Rehefa voamarika, ny fanontaniana angona Seranana Fabric dia mitanisa ihany koa ireo seranana tsy mandeha sy tsy manana farany lavitra, toy ny seranana mpandrindra tsy ampiasaina. Rehefa tsy voamarika, dia avela izy ireo mandra-pandehany indray."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "Fanesorana"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "Tazomy ny tabilaon'ny plugin rehefa manaisotra"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "Rehefa voamarika, ny fanesorana ny plugin dia mitazona ny fabric, ny lisitra, ary ny santionany. Esory ny marika mba hamafan'ny fanesorana azy ireo; aondrano aloha ny lisitra avy ao amin'ny pejy Fitantanana Fabric. Tsy ifandraisana mihitsy ny fabric na amin'ny fomba ahoana na amin'ny fomba ahoana."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "Ny lahatahirin'ny fitaovana dia tsy maintsy lalana feno ahitana litera, isa, teboka, tsipika, tsipika ambany, ary tsipika mitongilana, ary tsy misy tsipika mitongilana any amin'ny farany."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "Tsy misy ny lahatahirin'ny fitaovana na tsy lahatahiry izy io."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "Misy rohy an'ohatra (symbolic link) ny lalan'ny lahatahirin'ny fitaovana. Ampidiro ny tena lalana."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "Tsy an'ny root ny lahatahirin'ny fitaovana."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "Ny lahatahirin'ny fitaovana dia azon'ny vondrony na ny hafa soratana."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "Misy fitaovana fitiliana tsy an'ny root."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "Misy fitaovana fitiliana azon'ny vondrony na ny hafa soratana."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Mitaky PHP %s na vaovao kokoa ny plugin Fabric. Mampiasa PHP %s ity mpizara ity, ka tsy napetraka na tsy nalefa ny plugin."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Tsy mandeha ny plugin Fabric."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Mitaky PHP %s na vaovao kokoa ny plugin Fabric."
+
+#: setup.php
+msgid "Management"
+msgstr "Fitantanana"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "Tsy voatahiry ny Lahatahirin'ny fitaovana. %s"

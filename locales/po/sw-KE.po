@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: sw-KE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "Nodi ilibadilika baada ya ukurasa kuchorwa, kwa hivyo hakuna kilichofanyika. Ikague na ujaribu tena."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "Ruhusa zako za kifaa haziruhusu kubadilisha rekodi hii."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "Jina: fabric nyingine tayari inatumia jina hili."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "Adapta: fabric nyingine tayari inafagia mlango huu wa adapta kwenye poller hii. Fabric moja kwa kila mlango wa adapta."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "Fabric haikuweza kuhifadhiwa."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "Fabric ilihifadhiwa."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "Ufagiaji wa fabric hii unaendelea, kwa hivyo hakuna kilichofutwa. Jaribu tena itakapomalizika."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "Fabric na orodha yake ya rasilimali zilifutwa. Hakuna kifaa cha Cacti kilichobadilishwa na fabric haikuwasiliwa."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "Fabric haikuweza kufutwa."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "Utambulisho wa nodi haukubadilishwa."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "Utambulisho wa nodi ulisasishwa. Unafagiwa tena kuanzia mzunguko ujao."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "Uunganishaji wa kifaa ulihamishiwa kwenye nodi mpya."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "Pendekezo halikuweza kuthibitishwa. Nodi huenda zimebadilika tangu lilipofanywa."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "Pendekezo halikuweza kukataliwa."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "Pendekezo lilikataliwa."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "Uunganishaji wa nodi haukubadilishwa. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "Uunganishaji wa nodi haukubadilishwa."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "Uunganishaji wa nodi ulihifadhiwa."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "Hakuna kifaa kilichoundwa. Tazama kumbukumbu ya Cacti."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "Kifaa kiliundwa na nodi ikaunganishwa nacho. Chagua milango ya kuchora grafu kwenye ukurasa wa Grafu Mpya."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "Orodha ya rasilimali haikuweza kusomwa kwa ajili ya kuhamishwa."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "Vigezo vya Fabric na faili ya hoja ya data vilisakinishwa."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Vigezo vya Fabric havikusakinishwa. Tazama jedwali la Vipengee vya Cacti na kumbukumbu ya Cacti."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "Mwonekano wa ufuatiliaji"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "Maangalizo hayakuweza kusomwa. Mwombe msimamizi aangalie kumbukumbu ya programu-jalizi."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "Kagua uhalali wa mlango, upana na kasi ya kiungo, na mwonekano wa msongamano. Peleka migogoro ya utambulisho na uunganishaji upya wa kifaa kwa msimamizi; usirejeshe vihesabio mwanzo."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Usimamizi wa Fabric"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "Rekodi za fabric hazikuweza kusomwa. Tazama kumbukumbu ya Cacti."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "Fabrics"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "Vitendo"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "Adapta"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "Mfumo wa nyuma"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "Jina"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "Nodi"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Kikusanyaji"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "Hali"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "Muda wa Ufagiaji"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "Hakuna fabrics zilizobainishwa bado."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "Poller iliyofutwa (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "mlango %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "sekunde %d"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "Futa"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "Inashikilia vifaa ambavyo huenda usivione"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "Hamisha"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "Pakua fabrics na orodha ya nodi, pamoja na miunganisho ya vifaa, kama JSON kabla ya kuondoa programu-jalizi kunakofuta majedwali yake. Haina vitambulisho vyovyote vya siri."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Fabric: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "Fabric Mpya"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "Muda wa Ufagiaji (sekunde)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "Mlango wa Adapta"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "Imewashwa"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "Hifadhi"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "Futa Fabric: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "Futa fabric hii pamoja na nodi zake %d, milango yake, sampuli, na mapendekezo? Nodi %d zimeunganishwa na vifaa vya Cacti; vifaa hivyo, vyanzo vyake vya data, na faili za RRD vinahifadhiwa. Fabric haiwasiliwi."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "Haijaunganishwa"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "Kifaa kilichofutwa (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "Nodi ya Fabric: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "Vifaa Vinavyolingana na Jina la Nodi"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (kifaa %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "Hakuna"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Kifaa cha Cacti"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "Kuhifadhi kunaunganisha nodi na kifaa na kuongeza hoja ya data ya Fabric Port kwenye kifaa, ambayo inaorodhesha milango ya nodi. Hakuna grafu, chanzo cha data, au mipangilio ya kifaa inayobadilishwa. Kifaa lazima kikaguliwe na poller inayofagia fabric."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "Unda Kifaa kwa Nodi Hii"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "Vifaa haviwezi kuundwa hapa."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "Unda Kifaa kwa %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "Kuunda kifaa kunaongeza:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "Unda"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "Migogoro ya Utambulisho"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "Nodi"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "Ilionekana"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "Imehifadhiwa"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "Hakuna migogoro."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "Imechapishwa mara mbili katika ugunduzi mmoja"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "Kubali Utambulisho Ulioonekana"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "Mapendekezo ya Kuunganisha Upya"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "Kifaa"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "Nodi Inayokosekana"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "Nodi Mpya"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "Mlango wa Jirani Unaoshirikiwa"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "Hakuna mapendekezo yaliyo wazi."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "Thibitisha"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "Kataa"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "Zana za uchunguzi (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "Mipangilio ya fabric au programu-jalizi haijakamilika au si sahihi"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "Zana haipo au haiwezi kuendeshwa katika saraka iliyosanidiwa"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "Zana ilizidi kikomo chake cha muda na ilisimamishwa"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "Matokeo ya zana yalizidi kikomo cha ukubwa na yalitupwa"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "Zana ilishindwa"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "Matokeo ya zana hayakuwa na muundo uliotarajiwa"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "Haikujaribiwa: bajeti ya muda au kushindwa ilikuwa imeisha"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "Majedwali ya programu-jalizi hayakuweza kusomwa au kuandikwa"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Vigezo vya Fabric havijasakinishwa. Visakinishe tena kutoka kwa ukurasa wa afya."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "Nodi tayari imeunganishwa na kifaa."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "Fabric ya nodi haifagiwi na poller kuu, kwa hivyo kifaa chake hakikuweza kukaguliwa."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "Kifaa hakipo."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "Kifaa kinakaguliwa na poller nyingine tofauti na ile inayofagia fabric hii, kwa hivyo haikuweza kusoma hifadhi ya muda ya fabric."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "Kifaa \"%s\" kutoka kwa kigezo cha kifaa cha %s, jina la mwenyeji %s, kinachokaguliwa na poller %d, huku ukaguzi wa upatikanaji na SNMP vikiwa vimezimwa."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "Hoja ya data ya %s juu yake, ikiorodhesha milango ya nodi. Haiundi grafu wala chanzo cha data peke yake."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "Imeundwa na programu-jalizi ya Fabric kwa ajili ya nodi %s. Thamani zake zinatoka kwenye hifadhi ya muda ya programu-jalizi; jina la mwenyeji ni jina lililotengwa ambalo haliwasiliwi kamwe."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "Jina: tumia herufi, tarakimu, nafasi, nukta, vistari, au mistari ya chini 1 hadi 64, ukianza na herufi au tarakimu."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "Mfumo wa nyuma: chagua mojawapo ya mifumo ya nyuma iliyoorodheshwa."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "Poller: chagua mojawapo ya poller zilizoorodheshwa."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "Poller: poller kuu pekee ndiyo inayoweza kufagia fabric hadi usaidizi wa poller ya mbali utakapoongezwa."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "Muda wa Ufagiaji: weka sekunde kamili kutoka %d hadi %d."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "Adapta: weka jina la adapta ya ndani kama kernel inavyoliita, kama vile mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "Mlango wa Adapta: weka nambari ya mlango wa adapta ya ndani, kutoka 1 hadi %d."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "Kamwe"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "sekunde %d zilizopita"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "dakika %d zilizopita"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "saa %d zilizopita"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "siku %d zilizopita"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Vipengee vya Cacti"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "Imesakinishwa"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "Inakosekana"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "Vigezo"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "Faili ya Hoja ya Data"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "Usakinishaji wa Mwisho"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "Sakinisha Tena Vigezo"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Afya ya Fabric"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "Rekodi za afya hazikuweza kusomwa. Tazama kumbukumbu ya Cacti."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "Ufagiaji wa Vihesabio"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "Ugunduzi"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Fabric"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "Ugunduzi wa Mwisho"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "Usomaji wa Mwisho wa Kiungo"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "Ugunduzi wa Mwisho Uliofanikiwa"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "Usomaji wa Kiungo"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "Nodi / Milango Iliyoonekana"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "Mistari ya Kiungo Iliyorukwa"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "Rekodi za Kiungo Zisizolingana"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Fabric %s: orodha ya rasilimali ni %s; ugunduzi wa mwisho uliofanikiwa ulikuwa %s."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Fabric %s: imegawiwa poller %d, lakini poller kuu pekee ndiyo inayoweza kufagia fabric hadi usaidizi wa poller ya mbali utakapoongezwa. Haifagiwi; igawie poller kuu."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Fabric %s: rekodi yake ya afya haikuweza kusomwa, kwa hivyo hali yake ya ugunduzi haijulikani. Tazama kumbukumbu ya Cacti."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Fabric %s: haijagunduliwa. Ufagiaji huanza tu kutoka kwa nodi iliyounganishwa na kifaa cha Cacti, kwa hivyo endesha \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" kwenye poller kuu mara moja."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Fabric %s: hakuna nodi iliyounganishwa na kifaa cha Cacti, kwa hivyo hakuna ufagiaji unaoanza na orodha ya rasilimali haisasishwi. Unganisha nodi kwenye ukurasa wa Usimamizi wa Fabric, au endesha \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" kwenye poller kuu."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Fabric %s: mistari %d ya iblinkinfo haikuweza kusomwa, huenda kwa sababu maelezo ya nodi yanaiga matokeo ya zana. Nodi hizo zinahifadhi hali zake za mwisho za kiungo."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Fabric %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "imezimwa"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "Maonyo"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "Hakuna maonyo."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "Utambulisho"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "Migogoro %d ya utambulisho na mapendekezo %d yaliyo wazi ya kuunganisha upya. Yatatue kwenye ukurasa wa Usimamizi wa Fabric."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "Ufagiaji wa Vihesabio Unaohitaji Umakini"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "Muda"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "Kushindwa"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "Mafanikio ya Mwisho"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "Ufagiaji wa Mwisho"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "Matokeo"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "Milango Iliyosomwa / Iliyoshindwa / Iliyorukwa"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s s"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "Kila nodi iliyofagiwa ilikamilisha ufagiaji wake wa mwisho."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "Sawa, %s s"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "Ilipoonekana Mwisho"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "Uwepo"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "Aina"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "Hakuna nodi za kuonyesha."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "Hakuna fabrics zilizobainishwa bado."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "Milango yenye muda mrefu zaidi wa kusubiri kutuma"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "Milango Yenye Muda Mrefu Zaidi wa Kusubiri Kutuma"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "Orodha ya rasilimali ya fabric haikuweza kusomwa. Tazama kumbukumbu ya Cacti."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "Kusubiri kutuma huhesabu tiki ambazo mlango ulikuwa na data ya kutuma lakini haukuweza kuituma, kwa kukosa salio au usuluhishi. Thamani ya juu inaonyesha msongamano kuelekea upande wa mbali; haionyeshi kuwa mlango au kebo yake ina hitilafu. Urefu wa tiki haujachapishwa kwa kasi za sasa za kiungo, kwa hivyo thamani ni tiki kwa sekunde, si muda."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "Mlango"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "Mbali"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "Utupaji wa Utumaji (kwa sekunde)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "Kusubiri kwa Utumaji (tiki kwa sekunde)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "Hakuna bandari iliyo na kiwango cha sasa cha kusubiri utumaji."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "Haijulikani"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "Nodi ya Fabric"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "Nodi haipo au huenda usiwe na ruhusa ya kuiona."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "Inafanya kazi"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "Usaidizi Bora kwa Pande Zote Mbili"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "Uhalali wa Vihesabu"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "Vihesabu"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "Grafu"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "Kiungo"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "Hakuna bandari zilizorekodiwa bado."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "Kifaa %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "Vihesabu vya %s vimejaa kupita kiasi, vimechapishwa kama haijulikani: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "Vihesabu vya %s: mikatiko %d, ya mwisho %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "Halali"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "Iko juu"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "Chini ya kiwango bora, imepunguzwa na thamani zilizowezeshwa"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "Chini ya kiwango bora, sababu haijulikani"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "Imedorora"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "Haifikiwi"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "Swichi"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "Adapta ya mkondo"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "Ruta"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "Kagua maangalizo yaliyorekodiwa hapa chini. Utambuzi ni wa kipindi hiki cha mtumiaji pekee, huisha wakati maangalizo yanapobadilika, na kamwe hauzuii arifa au kubadilisha afya."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "Uendeshaji wa Fabric"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "Uchunguzi"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "Kipengee"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "Ilionekana (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "Haijulikani au imepitwa na wakati"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "Imetambuliwa; afya haijabadilika."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "Tambua"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "Hakuna maangalizo yanayopatikana kwa vifaa unavyoweza kufikia."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "Mwendeshaji wa Fabric"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "Mtazamo wa Fabric"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "Uchunguzi unaendeshwa kama root. Endesha kichunguzi kama akaunti isiyo na mamlaka maalum yenye ufikiaji wa kusoma vifaa vya umad kupitia kikundi."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "Zana ya uchunguzi ina biti ya setuid au setgid. Programu-jalizi haihitaji kamwe."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "Zana ya uchunguzi au saraka yake inaweza kuandikwa na akaunti nyingine isiyokuwa mmiliki wake, au na akaunti ya kichunguzi. Yeyote anayeweza kuiandika huchagua kile kichunguzi huendesha."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "Kifaa cha umad kinaweza kusomwa au kuandikwa na kila akaunti, kwa hivyo mtumiaji yeyote wa ndani anaweza kuuliza fabric. Kiwekee mipaka kwa kikundi."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "Onyo lisilojulikana"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "Zana za Uchunguzi"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "Saraka kamili, kwenye kila kichunguzi kinachokagua fabric, iliyo na perfquery, ibnetdiscover, na iblinkinfo. Vifurushi vya Debian na Ubuntu huvisakinisha katika /usr/sbin. Hakuna programu nyingine yoyote inayoendeshwa kutoka humo."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "Saraka ya Zana"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "Ramani ya Majina ya Nodi"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "Njia kamili ya hiari kuelekea faili ya ramani ya majina ya nodi ya infiniband-diags. Majina inayotoa huonyeshwa tu; utambulisho daima ni GUID ya nodi."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "Muda wa Kuisha wa Datagramu"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "Milisekunde ambazo kila datagramu ya usimamizi inaweza kuchukua kabla ya zana kuijaribu tena (chaguo lao la -t)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "Muda wa Kuisha wa Amri"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "Sekunde ambazo uendeshaji mmoja wa zana unaweza kuchukua kabla ya kusimamishwa na kurekodiwa kuwa umeshindwa."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "KiB ambazo uendeshaji mmoja wa zana unaweza kuchapisha. Tokeo kubwa zaidi hutupwa na kurekodiwa kuwa limeshindwa."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "Upeo wa Tokeo"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "Uchunguzi"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "Bajeti ya Muda wa Nodi"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "Sekunde ambazo uchunguzi wa nodi moja unaweza kutumia kusoma vihesabu. Bandari ambazo hazikufikiwa husomwa katika mzunguko unaofuata."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "Idadi ya bandari zilizoshindwa ambazo baada yake uchunguzi wa nodi husimama kwa mzunguko huu. Bandari isiyojibu hugharimu sekunde kadhaa."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "Bajeti ya Kushindwa kwa Nodi"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "Orodhesha Bandari Zilizo Chini"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "Ikiteuliwa, hoja ya data ya Bandari ya Fabric pia huorodhesha bandari zilizo chini na zisizo na upande wa mbali, kama vile bandari za adapta zisizotumika. Ikiondolewa uteuzi, huachwa nje hadi zitakaporudi juu."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "Sakinusha"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "Weka Majedwali ya Programu-jalizi Wakati wa Kusakinusha"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "Ikiteuliwa, kuondoa usakinishaji wa programu-jalizi huhifadhi fabric zake, orodha ya vifaa, na sampuli. Ondoa uteuzi ili kuondoa usakinishaji kuzifute; hamisha orodha ya vifaa kwanza kutoka ukurasa wa Msimamizi wa Fabric. Mtandao wa fabric hauwasiliwi kamwe kwa njia yoyote."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "Saraka ya zana lazima iwe njia kamili yenye herufi, tarakimu, nukta, vistari, mistari ya chini, na mikwaju, bila mkwaju wa mwisho."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "Saraka ya zana haipo au si saraka."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "Njia ya saraka ya zana ina kiungo cha ishara. Ingiza njia halisi."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "Saraka ya zana haimilikiwi na root."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "Saraka ya zana inaweza kuandikwa na kikundi chake au na wengine."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "Zana ya uchunguzi haimilikiwi na root."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "Zana ya uchunguzi inaweza kuandikwa na kikundi chake au na wengine."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Programu-jalizi ya Fabric inahitaji PHP %s au toleo jipya zaidi. Seva hii inaendesha PHP %s, kwa hivyo programu-jalizi haikusakinishwa au kuwezeshwa."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Programu-jalizi ya Fabric haijawezeshwa."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Programu-jalizi ya Fabric inahitaji PHP %s au toleo jipya zaidi."
+
+#: setup.php
+msgid "Management"
+msgstr "Usimamizi"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "Saraka ya Zana haikuhifadhiwa. %s"

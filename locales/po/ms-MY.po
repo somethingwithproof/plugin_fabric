@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: ms-MY\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "Nod telah berubah selepas halaman dilukis, jadi tiada tindakan dilakukan. Semak dan cuba lagi."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "Kebenaran peranti anda tidak membenarkan pengubahan rekod ini."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "Nama: fabrik lain sudah menggunakan nama ini."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "Penyesuai: fabrik lain sudah menyapu port penyesuai ini pada poller ini. Satu fabrik bagi setiap port penyesuai."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "Fabrik tidak dapat disimpan."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "Fabrik telah disimpan."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "Sapuan bagi fabrik ini sedang berjalan, jadi tiada apa-apa dipadamkan. Cuba lagi apabila ia selesai."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "Fabrik dan inventorinya telah dipadamkan. Tiada peranti Cacti diubah dan fabrik tidak dihubungi."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "Fabrik tidak dapat dipadamkan."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "Identiti nod tidak diubah."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "Identiti nod telah dikemas kini. Ia akan disapu semula bermula dari kitaran seterusnya."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "Pemetaan peranti dipindahkan ke nod baharu."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "Cadangan tidak dapat disahkan. Nod mungkin telah berubah sejak ia dibuat."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "Cadangan tidak dapat ditolak."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "Cadangan telah ditolak."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "Pemetaan nod tidak diubah. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "Pemetaan nod tidak diubah."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "Pemetaan nod telah disimpan."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "Tiada peranti dicipta. Lihat log Cacti."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "Peranti telah dicipta dan nod dipetakan kepadanya. Pilih port untuk digrafkan pada halaman Graf Baharu."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "Inventori tidak dapat dibaca untuk dieksport."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "Templat Fabric dan fail pertanyaan data telah dipasang."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Templat Fabric tidak dipasang. Lihat jadual Objek Cacti dan log Cacti."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "Paparan pemantauan"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "Pemerhatian tidak dapat dibaca. Minta pentadbir menyemak log pemalam."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "Periksa kesahan port, lebar dan kelajuan pautan, serta paparan kesesakan. Eskalasi konflik identiti dan pemautan semula peranti kepada pentadbir; jangan tetapkan semula pembilang."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Pentadbiran Fabric"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "Rekod fabrik tidak dapat dibaca. Lihat log Cacti."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "Fabrik"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "Tindakan"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "Penyesuai"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "Backend"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "Nama"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "Nod"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Poller"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "Keadaan"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "Selang Sapuan"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "Tiada fabrik ditakrifkan lagi."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "Poller dipadamkan (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "port %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d saat"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "Padam"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "Menyimpan peranti yang mungkin tidak dapat anda lihat"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "Eksport"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "Muat turun inventori fabrik dan nod, bersama pemetaan peranti, sebagai JSON sebelum nyahpasang yang menggugurkan jadual pemalam. Ia tidak mengandungi sebarang kelayakan."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Fabrik: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "Fabrik Baharu"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "Selang Sapuan (saat)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "Port Penyesuai"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "Didayakan"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "Simpan"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "Padamkan Fabrik: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "Padamkan fabrik ini bersama %d nodnya, port, sampel, dan cadangannya? %d nod dipetakan ke peranti Cacti; peranti tersebut, sumber datanya, dan fail RRD dikekalkan. Fabrik tidak dihubungi."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "Tidak Dipetakan"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "Peranti dipadamkan (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "Nod Fabrik: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "Peranti yang Padan dengan Nama Nod"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (peranti %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "Tiada"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Peranti Cacti"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "Menyimpan akan memetakan nod kepada peranti dan menambahkan pertanyaan data Fabric Port pada peranti, yang menyenaraikan port nod tersebut. Tiada graf, sumber data, atau tetapan peranti diubah. Peranti mesti diundi oleh poller yang menyapu fabrik."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "Cipta Peranti untuk Nod Ini"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "Peranti tidak boleh dicipta di sini."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "Cipta Peranti untuk %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "Mencipta peranti akan menambahkan:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "Cipta"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "Konflik Identiti"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "Nod"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "Dilihat"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "Disimpan"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "Tiada konflik."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "Dicetak dua kali dalam satu penemuan"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "Terima Identiti Dilihat"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "Cadangan Paut Semula"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "Peranti"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "Nod Hilang"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "Nod Baharu"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "Port Jiran Dikongsi"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "Tiada cadangan terbuka."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "Sahkan"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "Tolak"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "Alat diagnostik (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "Tetapan fabrik atau pemalam tidak lengkap atau tidak sah"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "Alat tiada atau tidak boleh dilaksanakan dalam direktori yang dikonfigurasi"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "Alat melebihi had masanya dan telah dihentikan"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "Output alat melebihi had saiz dan telah dibuang"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "Alat gagal"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "Output alat tidak mempunyai bentuk yang dijangkakan"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "Tidak dicuba: bajet masa atau kegagalan telah habis digunakan"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "Jadual pemalam tidak dapat dibaca atau ditulis"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Templat Fabric belum dipasang. Pasang semula dari halaman kesihatan."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "Nod sudah dipetakan kepada satu peranti."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "Fabrik nod ini tidak disapu oleh poller utama, jadi perantinya tidak dapat diundi."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "Peranti tidak wujud."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "Peranti ini diundi oleh poller yang berbeza daripada poller yang menyapu fabrik ini, jadi ia tidak dapat membaca cache fabrik."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "Peranti \"%s\" daripada templat peranti %s, nama hos %s, diundi oleh poller %d, dengan semakan ketersediaan dan SNMP dimatikan."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "Pertanyaan data %s padanya, yang menyenaraikan port nod tersebut. Ia tidak mencipta sebarang graf dan sumber data dengan sendirinya."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "Dicipta oleh pemalam Fabric untuk nod %s. Nilainya datang daripada cache pemalam; nama hos adalah nama terpelihara yang tidak pernah dihubungi."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "Nama: gunakan 1 hingga 64 huruf, digit, ruang, titik, sempang, atau garis bawah, bermula dengan huruf atau digit."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "Backend: pilih salah satu backend yang disenaraikan."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "Poller: pilih salah satu poller yang disenaraikan."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "Poller: hanya poller utama boleh menyapu fabrik sehingga sokongan poller jauh ditambahkan."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "Selang Sapuan: masukkan saat bulat dari %d hingga %d."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "Penyesuai: masukkan nama penyesuai setempat seperti yang dinamakan oleh kernel, seperti mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "Port Penyesuai: masukkan nombor port bagi penyesuai setempat, dari 1 hingga %d."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "Tidak pernah"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "%d saat lalu"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "%d minit lalu"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "%d jam lalu"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "%d hari lalu"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Objek Cacti"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "Dipasang"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "Tiada"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "Templat"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "Fail Pertanyaan Data"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "Pemasangan Terakhir"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "Pasang Semula Templat"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Kesihatan Fabric"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "Rekod kesihatan tidak dapat dibaca. Lihat log Cacti."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "Sapuan Pembilang"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "Penemuan"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Fabrik"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "Penemuan Terakhir"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "Bacaan Pautan Terakhir"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "Penemuan Berjaya Terakhir"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "Bacaan Pautan"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "Nod / Port Dilihat"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "Baris Pautan Dilangkau"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "Rekod Pautan Tidak Sepadan"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Fabrik %s: inventori adalah %s; penemuan berjaya terakhir adalah %s."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Fabrik %s: ia diperuntukkan kepada poller %d, tetapi hanya poller utama boleh menyapu fabrik sehingga sokongan poller jauh ditambahkan. Ia tidak disapu; peruntukkannya kepada poller utama."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Fabrik %s: rekod kesihatannya tidak dapat dibaca, jadi keadaan penemuannya tidak diketahui. Lihat log Cacti."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Fabrik %s: ia belum ditemui. Sapuan bermula hanya daripada nod yang dipetakan kepada peranti Cacti, jadi jalankan \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" pada poller utama sekali."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Fabrik %s: tiada nod dipetakan kepada peranti Cacti, jadi tiada sapuan bermula dan inventori tidak disegarkan semula. Petakan nod pada halaman Pentadbiran Fabric, atau jalankan \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" pada poller utama."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Fabrik %s: %d baris iblinkinfo tidak dapat dibaca, berkemungkinan besar kerana perihalan nod meniru output alat tersebut. Nod tersebut mengekalkan keadaan pautan terakhirnya."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Fabrik %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "dilumpuhkan"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "Amaran"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "Tiada amaran."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "Identiti"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "%d konflik identiti dan %d cadangan paut semula terbuka. Selesaikannya pada halaman Pentadbiran Fabric."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "Sapuan Pembilang yang Memerlukan Perhatian"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "Tempoh"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "Kegagalan"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "Kejayaan Terakhir"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "Sapuan Terakhir"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "Keputusan"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "Port Dibaca / Gagal / Dilangkau"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s s"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "Setiap nod yang disapu telah menyelesaikan sapuan terakhirnya."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "OK, %s s"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "Terakhir Dilihat"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "Kehadiran"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "Jenis"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "Tiada nod untuk dipaparkan."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "Tiada fabrik ditakrifkan lagi."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "Port dengan masa menunggu penghantaran tertinggi"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "Port dengan Masa Menunggu Penghantaran Tertinggi"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "Inventori fabrik tidak dapat dibaca. Lihat log Cacti."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "Masa menunggu penghantaran mengira detik di mana sesuatu port mempunyai data untuk dihantar tetapi tidak dapat menghantarnya, kerana kekurangan kredit atau timbang tara. Nilai yang tinggi menunjukkan kesesakan ke arah hujung jauh; ia tidak menunjukkan bahawa port atau kabelnya rosak. Panjang detik tidak diterbitkan untuk kelajuan pautan semasa, jadi nilainya adalah detik sesaat, bukan masa."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "Port"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "Jauh"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "Buangan Penghantaran (sesaat)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "Tunggu Penghantaran (detik sesaat)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "Tiada port yang mempunyai kadar tunggu penghantaran semasa."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "Tidak diketahui"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "Nod Fabric"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "Nod tersebut tidak wujud atau anda tidak dibenarkan melihatnya."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "Aktif"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "Sokongan Terbaik Kedua-dua Hujung"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "Kesahan Pembilang"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "Pembilang"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "Graf"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "Pautan"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "Belum ada port direkodkan."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "Peranti %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "Pembilang %s tepu, diterbitkan sebagai tidak diketahui: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "Pembilang %s: %d ketidaksinambungan, yang terakhir %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "Sah"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "Aktif"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "Di bawah tahap terbaik, dihadkan oleh nilai yang didayakan"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "Di bawah tahap terbaik, punca tidak diketahui"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "Merosot"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "Tidak boleh dicapai"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "Suis"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "Penyesuai saluran"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "Penghala"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "Semak pemerhatian yang direkodkan di bawah. Pengakuan adalah peribadi untuk sesi ini, tamat tempoh apabila pemerhatian berubah, dan tidak sekali-kali menyekat amaran atau mengubah kesihatan."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "Operasi Fabric"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "Siasatan"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "Objek"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "Diperhatikan (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "Tidak diketahui atau lapuk"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "Diakui; kesihatan tidak berubah."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "Akui"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "Tiada pemerhatian tersedia untuk peranti yang boleh anda akses."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "Pengendali Fabric"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "Paparan Fabric"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "Imbasan dijalankan sebagai root. Jalankan poller sebagai akaun tanpa keistimewaan dengan akses baca ke peranti umad melalui satu kumpulan."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "Alat diagnostik mempunyai bit setuid atau setgid. Pemalam ini tidak pernah memerlukannya."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "Alat diagnostik atau direktorinya boleh ditulis oleh akaun selain pemiliknya, atau oleh akaun poller. Sesiapa yang boleh menulisnya dapat menentukan perkara yang dijalankan oleh poller."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "Peranti umad boleh dibaca atau ditulis oleh setiap akaun, jadi mana-mana pengguna setempat boleh membuat pertanyaan terhadap fabric. Hadkannya kepada satu kumpulan."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "Amaran tidak diketahui"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "Alat Diagnostik"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "Direktori mutlak pada setiap poller yang mengimbas fabric, yang menyimpan perfquery, ibnetdiscover, dan iblinkinfo. Pakej Debian dan Ubuntu memasangnya di dalam /usr/sbin. Tiada atur cara lain akan dijalankan daripadanya."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "Direktori Alat"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "Peta Nama Nod"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "Laluan mutlak pilihan ke fail peta nama nod infiniband-diags. Nama yang dibekalkannya hanya untuk paparan; identiti sentiasa menggunakan GUID nod."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "Tamat Masa Datagram"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "Milisaat yang dibenarkan untuk setiap datagram pengurusan sebelum alat mencubanya semula (pilihan -t alat tersebut)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "Tamat Masa Perintah"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "Saat yang dibenarkan untuk satu pelaksanaan alat sebelum dihentikan dan direkodkan sebagai gagal."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "KiB yang boleh dicetak oleh satu pelaksanaan alat. Output yang lebih besar akan dibuang dan direkodkan sebagai gagal."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "Output Maksimum"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "Imbasan"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "Had Masa Nod"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "Saat yang boleh digunakan oleh satu imbasan nod untuk membaca pembilang. Port yang tidak sempat dicapai akan dibaca pada kitaran seterusnya."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "Bilangan port gagal sebelum imbasan nod dihentikan bagi kitaran ini. Port yang tidak menjawab mengambil masa beberapa saat."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "Had Kegagalan Nod"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "Indeks Port Terputus"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "Apabila ditandakan, pertanyaan data Fabric Port turut menyenaraikan port yang terputus dan tidak mempunyai hujung jauh, seperti port penyesuai yang tidak digunakan. Jika tidak ditandakan, port tersebut dikecualikan sehingga aktif semula."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "Nyahpasang"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "Kekalkan Jadual Pemalam semasa Nyahpasang"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "Apabila ditandakan, menyahpasang pemalam akan mengekalkan fabric, inventori, dan sampelnya. Nyahtandakan untuk membuangnya semasa penyahpasangan; eksport inventori terlebih dahulu daripada halaman Fabric Admin. Fabric tidak akan dihubungi dalam kedua-dua keadaan."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "Direktori alat mestilah laluan mutlak yang terdiri daripada huruf, digit, titik, sempang, garis bawah, dan garis miring, tanpa garis miring di penghujung."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "Direktori alat tidak wujud atau bukan direktori."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "Laluan direktori alat mengandungi pautan simbolik. Masukkan laluan sebenar."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "Direktori alat tidak dimiliki oleh root."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "Direktori alat boleh ditulis oleh kumpulannya atau oleh pihak lain."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "Alat diagnostik tidak dimiliki oleh root."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "Alat diagnostik boleh ditulis oleh kumpulannya atau oleh pihak lain."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Pemalam Fabric memerlukan PHP %s atau lebih baharu. Pelayan ini menjalankan PHP %s, maka pemalam ini tidak dipasang atau didayakan."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Pemalam Fabric tidak didayakan."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Pemalam Fabric memerlukan PHP %s atau lebih baharu."
+
+#: setup.php
+msgid "Management"
+msgstr "Pengurusan"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "Direktori Alat tidak disimpan. %s"

@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: am-ET\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "ገጹ ከተሳለ በኋላ ኖዱ ስለተቀየረ ምንም አልተደረገም። ይገምግሙትና እንደገና ይሞክሩ።"
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "የመሣሪያ ፈቃዶችዎ ይህን መዝገብ ለመቀየር አይፈቅዱም።"
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "ስም፦ ሌላ ፋብሪክ አስቀድሞ ይህን ስም እየተጠቀመበት ነው።"
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "አዳፕተር፦ ሌላ ፋብሪክ በዚህ ፖለር ላይ ይህን የአዳፕተር ፖርት አስቀድሞ ይቃኛል። በአንድ የአዳፕተር ፖርት አንድ ፋብሪክ ብቻ ይፈቀዳል።"
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "ፋብሪኩ ሊቀመጥ አልቻለም።"
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "ፋብሪኩ ተቀምጧል።"
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "የዚህ ፋብሪክ ቅኝት እየተካሄደ ስለሆነ ምንም አልተሰረዘም። ሲጨርስ እንደገና ይሞክሩ።"
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "ፋብሪኩ እና የንብረት ዝርዝሩ ተሰርዘዋል። የትኛውም የCacti መሣሪያ አልተቀየረም፤ ፋብሪኩም አልተገናኘም።"
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "ፋብሪኩ ሊሰረዝ አልቻለም።"
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "የኖዱ ማንነት አልተቀየረም።"
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "የኖዱ ማንነት ተዘምኗል። ከሚቀጥለው ዑደት ጀምሮ እንደገና ይቃኛል።"
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "የመሣሪያው ማዛመጃ ወደ አዲሱ ኖድ ተዛውሯል።"
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "ጥቆማው ሊረጋገጥ አልቻለም። ጥቆማው ከቀረበ በኋላ ኖዶቹ ተቀይረው ሊሆን ይችላል።"
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "ጥቆማው ውድቅ ሊደረግ አልቻለም።"
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "ጥቆማው ውድቅ ተደርጓል።"
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "የኖዱ ማዛመጃ አልተቀየረም። %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "የኖዱ ማዛመጃ አልተቀየረም።"
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "የኖዱ ማዛመጃ ተቀምጧል።"
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "ምንም መሣሪያ አልተፈጠረም። የCacti መዝገቡን ይመልከቱ።"
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "መሣሪያው ተፈጥሯል፤ ኖዱም ከእሱ ጋር ተዛምዷል። ግራፍ የሚሠራባቸውን ፖርቶች በአዲስ ግራፎች ገጽ ላይ ይምረጡ።"
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "የንብረት ዝርዝሩ ወደ ውጭ ለመላክ ሊነበብ አልቻለም።"
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "የFabric ቴምፕሌቶች እና የዳታ መጠይቅ ፋይል ተጭነዋል።"
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "የFabric ቴምፕሌቶች አልተጫኑም። የCacti ቁሶች ሰንጠረዥን እና የCacti መዝገቡን ይመልከቱ።"
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "የክትትል እይታ"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "ምልከታዎቹን ማንበብ አልተቻለም። አስተዳዳሪ የተሰኪውን መዝገብ እንዲያረጋግጥ ይጠይቁ።"
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "የፖርቱን ትክክለኛነት፣ የአገናኙን ስፋትና ፍጥነት፣ እና የመጨናነቅ እይታውን ይመርምሩ። የማንነት ግጭቶችን እና የመሣሪያ ዳግም ማገናኘትን ለአስተዳዳሪ ያሳውቁ፤ ቆጣሪዎችን ዳግም አያስጀምሩ።"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "የFabric አስተዳደር"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "የፋብሪኩ መዝገቦች ሊነበቡ አልቻሉም። የCacti መዝገቡን ይመልከቱ።"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "ፋብሪኮች"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "እርምጃዎች"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "አዳፕተር"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "ባክኤንድ"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "ስም"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "ኖዶች"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "ሰብሳቢ"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "ሁኔታ"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "የቅኝት ክፍለ ጊዜ"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "እስካሁን የተገለጹ ፋብሪኮች የሉም።"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "የተሰረዘ ፖለር (መታወቂያ %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "ፖርት %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d ሰከንዶች"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "ሰርዝ"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "እርስዎ ላይታዩዎት የሚችሉ መሣሪያዎችን ይዟል"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "ላክ"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "የፕለጊን ሰንጠረዦችን ከሚያጠፋ ማራገፍ በፊት ፋብሪኮችን እና የኖድ ዝርዝርን ከመሣሪያ ማዛመጃዎች ጋር በJSON መልክ ያውርዱ። ምንም የማረጋገጫ መረጃ አይይዝም።"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "ፋብሪክ፦ %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "አዲስ ፋብሪክ"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "የቅኝት ክፍለ ጊዜ (ሰከንዶች)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "የአዳፕተር ፖርት"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "ነቅቷል"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "አስቀምጥ"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "ፋብሪክ ሰርዝ፦ %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "ይህን ፋብሪክ ከ%d ኖዶቹ፣ ፖርቶቻቸው፣ ናሙናዎቻቸው እና ጥቆማዎቻቸው ጋር መሰረዝ ይፈልጋሉ? %d ኖዶች ከCacti መሣሪያዎች ጋር ተዛምደዋል፤ እነዚያ መሣሪያዎች፣ የዳታ ምንጮቻቸው እና የRRD ፋይሎቻቸው ይጠበቃሉ። ፋብሪኩ አይገናኝም።"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "ያልተዛመደ"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "የተሰረዘ መሣሪያ (መታወቂያ %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "የፋብሪክ ኖድ፦ %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "ከኖዱ ስም ጋር የሚዛመዱ መሣሪያዎች"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (መሣሪያ %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "ምንም"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "የCacti መሣሪያ"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "ማስቀመጥ ኖዱን ከመሣሪያው ጋር ያዛምዳል እንዲሁም የኖዱን ፖርቶች የሚዘረዝረውን የFabric Port ዳታ መጠይቅ ወደ መሣሪያው ይጨምራል። ምንም ግራፍ፣ የዳታ ምንጭ ወይም የመሣሪያ ቅንብር አይቀየርም። መሣሪያው ፋብሪኩን በሚቃኘው ፖለር መሰብሰብ አለበት።"
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "ለዚህ ኖድ መሣሪያ ፍጠር"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "መሣሪያዎች እዚህ ሊፈጠሩ አይችሉም።"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "ለ%s መሣሪያ ፍጠር"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "መሣሪያውን መፍጠር የሚከተሉትን ይጨምራል፦"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "ፍጠር"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "የማንነት ግጭቶች"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "ኖድ"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "የታየ"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "የተቀመጠ"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "ምንም ግጭቶች የሉም።"
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "በአንድ ግኝት ውስጥ ሁለት ጊዜ የታተመ"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "የታየውን ማንነት ተቀበል"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "ዳግም የማገናኘት ጥቆማዎች"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "መሣሪያ"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "የጠፋ ኖድ"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "አዲስ ኖድ"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "የጋራ ጎረቤት ፖርት"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "ምንም ክፍት ጥቆማዎች የሉም።"
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "አረጋግጥ"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "ውድቅ አድርግ"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "የምርመራ መሣሪያዎች (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "የፋብሪክ ወይም የፕለጊን ቅንብሮች ያልተሟሉ ወይም ልክ ያልሆኑ ናቸው"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "መሣሪያው በተዋቀረው ማውጫ ውስጥ የለም ወይም ሊከናወን የሚችል አይደለም"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "መሣሪያው የጊዜ ገደቡን ስላለፈ ቆሟል"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "የመሣሪያው ውጤት የመጠን ገደቡን ስላለፈ ተጥሏል"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "መሣሪያው አልተሳካም"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "የመሣሪያው ውጤት የሚጠበቀው ቅርጽ አልነበረውም"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "አልተሞከረም፦ የጊዜ ወይም የውድቀት በጀቱ አልቋል"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "የፕለጊን ሰንጠረዦች ሊነበቡ ወይም ሊጻፉ አልቻሉም"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "የFabric ቴምፕሌቶች አልተጫኑም። ከጤና ገጹ ላይ እንደገና ይጫኗቸው።"
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "ኖዱ አስቀድሞ ከመሣሪያ ጋር ተዛምዷል።"
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "የኖዱ ፋብሪክ በዋናው ፖለር ስለማይቃኝ መሣሪያው ሊሰበሰብ አልቻለም።"
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "መሣሪያው የለም።"
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "መሣሪያው ይህን ፋብሪክ ከሚቃኘው ሌላ ፖለር ስለሚሰበሰብ የፋብሪኩን መሸጎጫ ሊያነብ አልቻለም።"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "የ\"%s\" መሣሪያ ከ%s የመሣሪያ ቴምፕሌት፣ የሆስት ስም %s፣ በፖለር %d የሚሰበሰብ፣ የመገኘት ፍተሻዎች እና SNMP የጠፉበት።"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "የኖዱን ፖርቶች የሚዘረዝረው የ%s ዳታ መጠይቅ በላዩ ላይ ይኖራል። በራሱ ምንም ግራፍ እና ምንም የዳታ ምንጭ አይፈጥርም።"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "በFabric ፕለጊን ለኖድ %s የተፈጠረ። እሴቶቹ ከፕለጊኑ መሸጎጫ ይመጣሉ፤ የሆስት ስሙ መቼም የማይገናኝ የተያዘ ስም ነው።"
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "ስም፦ በፊደል ወይም በአኃዝ የሚጀምሩ ከ1 እስከ 64 ፊደላት፣ አኃዞች፣ ክፍተቶች፣ ነጥቦች፣ ሰረዞች ወይም የግርጌ ሰረዞች ይጠቀሙ።"
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "ባክኤንድ፦ ከተዘረዘሩት ባክኤንዶች አንዱን ይምረጡ።"
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "ፖለር፦ ከተዘረዘሩት ፖለሮች አንዱን ይምረጡ።"
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "ፖለር፦ የርቀት ፖለር ድጋፍ እስኪታከል ድረስ ፋብሪክን መቃኘት የሚችለው ዋናው ፖለር ብቻ ነው።"
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "የቅኝት ክፍለ ጊዜ፦ ከ%d እስከ %d ያሉ ሙሉ ሰከንዶችን ያስገቡ።"
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "አዳፕተር፦ የአካባቢውን አዳፕተር ስም ከርነሉ እንደሚሰይመው ያስገቡ፣ ለምሳሌ mlx5_0።"
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "የአዳፕተር ፖርት፦ የአካባቢውን አዳፕተር የፖርት ቁጥር ከ1 እስከ %d ያስገቡ።"
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "በፍጹም"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "ከ%d ሰከንዶች በፊት"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "ከ%d ደቂቃዎች በፊት"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "ከ%d ሰዓታት በፊት"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "ከ%d ቀናት በፊት"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "የCacti ቁሶች"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "ተጭኗል"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "የጠፋ"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "ቴምፕሌቶች"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "የዳታ መጠይቅ ፋይል"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "የመጨረሻ ጭነት"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "ቴምፕሌቶቹን እንደገና ጫን"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "የFabric ጤና"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "የጤና መዝገቦቹ ሊነበቡ አልቻሉም። የCacti መዝገቡን ይመልከቱ።"
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "የቆጣሪ ቅኝቶች"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "ግኝት"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "ፋብሪክ"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "የመጨረሻ ግኝት"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "የመጨረሻ የአገናኝ ንባብ"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "የመጨረሻው የተሳካ ግኝት"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "የአገናኝ ንባብ"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "የታዩ ኖዶች / ፖርቶች"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "የተዘለሉ የአገናኝ መስመሮች"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "ያልተዛመዱ የአገናኝ መዝገቦች"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "ፋብሪክ %s፦ የንብረት ዝርዝሩ %s ነው፤ የመጨረሻው የተሳካ ግኝት %s ነበር።"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "ፋብሪክ %s፦ ለፖለር %d ተመድቧል፣ ነገር ግን የርቀት ፖለር ድጋፍ እስኪታከል ድረስ ፋብሪክን መቃኘት የሚችለው ዋናው ፖለር ብቻ ነው። አልተቃኘም፤ ወደ ዋናው ፖለር ይመድቡት።"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "ፋብሪክ %s፦ የጤና መዝገቡ ሊነበብ ስላልቻለ የግኝት ሁኔታው አይታወቅም። የCacti መዝገቡን ይመልከቱ።"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "ፋብሪክ %s፦ ገና አልተገኘም። ቅኝቶች የሚጀምሩት ከCacti መሣሪያ ጋር ከተዛመደ ኖድ ብቻ ስለሆነ በዋናው ፖለር ላይ \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" አንድ ጊዜ ያሂዱ።"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "ፋብሪክ %s፦ ምንም ኖድ ከCacti መሣሪያ ጋር ስላልተዛመደ ምንም ቅኝት አይጀምርም፤ የንብረት ዝርዝሩም አይታደስም። በFabric Admin ገጽ ላይ አንድ ኖድ ያዛምዱ፣ ወይም በዋናው ፖለር ላይ \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" ያሂዱ።"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "ፋብሪክ %s፦ %d የiblinkinfo መስመሮች ሊነበቡ አልቻሉም፣ ምናልባትም የአንድ ኖድ መግለጫ የመሣሪያውን ውጤት ስለሚመስል ሊሆን ይችላል። እነዚያ ኖዶች የመጨረሻ የአገናኝ ሁኔታዎቻቸውን ይዘው ይቆያሉ።"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "ፋብሪክ %s፦ %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "ተሰናክሏል"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "ማስጠንቀቂያዎች"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "ምንም ማስጠንቀቂያዎች የሉም።"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "ማንነት"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "%d የማንነት ግጭቶች እና %d ክፍት ዳግም የማገናኘት ጥቆማዎች አሉ። በFabric Admin ገጽ ላይ ይፍቷቸው።"
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "ትኩረት የሚሹ የቆጣሪ ቅኝቶች"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "የቆይታ ጊዜ"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "ውድቀት"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "የመጨረሻ ስኬት"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "የመጨረሻ ቅኝት"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "ውጤት"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "የተነበቡ / ያልተሳኩ / የተዘለሉ ፖርቶች"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s ሰ"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "እያንዳንዱ የተቃኘ ኖድ የመጨረሻ ቅኝቱን አጠናቋል።"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "እሺ፣ %s ሰ"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "ለመጨረሻ ጊዜ የታየው"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "መገኘት"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "ዓይነት"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "የሚታዩ ኖዶች የሉም።"
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "እስካሁን የተገለጹ ፋብሪኮች የሉም።"
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "ከፍተኛ የማስተላለፊያ መጠበቂያ ያላቸው ፖርቶች"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "ከፍተኛ የማስተላለፊያ መጠበቂያ ያላቸው ፖርቶች"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "የፋብሪኩ የንብረት ዝርዝር ሊነበብ አልቻለም። የCacti መዝገቡን ይመልከቱ።"
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "የማስተላለፊያ መጠበቂያ አንድ ፖርት የሚልከው ዳታ እያለው በክሬዲት ወይም በአርቢትሬሽን እጥረት ምክንያት መላክ ያልቻለባቸውን ቲኮች ይቆጥራል። ከፍተኛ እሴት ወደ ርቀት ጫፉ መጨናነቅ መኖሩን ያሳያል እንጂ ፖርቱ ወይም ገመዱ የተበላሸ መሆኑን አያሳይም። ለአሁኑ የአገናኝ ፍጥነቶች የቲክ ርዝመት ስለማይታተም እሴቶቹ በሰከንድ ያሉ ቲኮች እንጂ ጊዜ አይደሉም።"
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "ፖርት"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "የርቀት"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "የማስተላለፍ ውድቅ የተደረጉ (በሰከንድ)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "የማስተላለፍ መጠበቅ (ቲኮች በሰከንድ)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "ምንም ወደብ የአሁን የማስተላለፍ መጠበቂያ መጠን የለውም።"
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "ያልታወቀ"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "የፋብሪክ ኖድ"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "ኖዱ የለም ወይም እርስዎ ላይመለከቱት ይችላሉ።"
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "ንቁ"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "የሁለቱም ጫፎች ምርጥ ድጋፍ"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "የቆጣሪ ትክክለኛነት"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "ቆጣሪዎች"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "ግራፎች"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "አገናኝ"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "እስካሁን ምንም ወደቦች አልተመዘገቡም።"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "መሣሪያ %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "%s ቆጣሪዎች ሞልተዋል፣ እንደ ያልታወቀ ታትመዋል፦ %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "%s ቆጣሪዎች፦ %d መቋረጦች፣ የመጨረሻው %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "ትክክለኛ"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "የሚሰራ"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "ከምርጡ በታች፣ በነቁ እሴቶች የተገደበ"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "ከምርጡ በታች፣ ምክንያቱ ያልታወቀ"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "አፈጻጸሙ የቀነሰ"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "የማይደረስ"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "ስዊች"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "የቻናል አዳፕተር"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "ራውተር"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "ከዚህ በታች የተመዘገቡትን ምልከታዎች ይገምግሙ። እውቅናዎች ለዚህ ክፍለ ጊዜ ግላዊ ናቸው፣ ምልከታዎች ሲለወጡ ጊዜያቸው ያልፋል፣ እና ማንቂያዎችን አያፍኑም ወይም ጤናን አይለውጡም።"
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "የፋብሪክ ኦፕሬሽኖች"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "ምርመራ"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "ነገር"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "የታየበት (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "ያልታወቀ ወይም ያረጀ"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "እውቅና ተሰጥቷል፤ ጤና አልተለወጠም።"
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "እውቅና ስጥ"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "መድረስ ለሚችሉባቸው መሣሪያዎች ምንም ምልከታዎች የሉም።"
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "የፋብሪክ ኦፕሬተር"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "የፋብሪክ እይታ"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "ቅኝቱ እንደ root ይሰራል። ፖለሩን በቡድን በኩል የumad መሳሪያዎችን የማንበብ መብት ባለው ልዩ መብት በሌለው መለያ ያስኪዱ።"
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "አንድ የምርመራ መሳሪያ setuid ወይም setgid ቢት አለው። ተሰኪው በፍጹም አያስፈልገውም።"
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "አንድ የምርመራ መሳሪያ ወይም ማውጫው ከባለቤቱ ሌላ በሆነ መለያ፣ ወይም በፖለሩ መለያ ሊጻፍበት ይችላል። ሊጽፍበት የሚችል ማንኛውም ሰው ፖለሩ ምን እንደሚያስኬድ ይመርጣል።"
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "አንድ የumad መሳሪያ በእያንዳንዱ መለያ ሊነበብ ወይም ሊጻፍበት ይችላል፣ ስለዚህ ማንኛውም የአካባቢ ተጠቃሚ ፋብሪኩን መጠየቅ ይችላል። ለአንድ ቡድን ይገድቡት።"
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "ያልታወቀ ማስጠንቀቂያ"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "የምርመራ መሳሪያዎች"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "ፋብሪክን በሚቃኝ እያንዳንዱ ፖለር ላይ perfquery፣ ibnetdiscover እና iblinkinfo የያዘ ፍጹም ማውጫ። የDebian እና Ubuntu ጥቅሎች በ/usr/sbin ውስጥ ይጭኗቸዋል። ከዚህ ማውጫ ሌላ ምንም ፕሮግራም በፍጹም አይሰራም።"
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "የመሳሪያ ማውጫ"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "የኖድ ስም ካርታ"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "ወደ infiniband-diags የኖድ ስም ካርታ ፋይል የሚወስድ አማራጭ ፍጹም መንገድ። የሚያቀርባቸው ስሞች ለማሳያ ብቻ ናቸው፤ ማንነቱ ሁልጊዜ የኖድ GUID ነው።"
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "የዳታግራም የጊዜ ገደብ"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "መሳሪያዎቹ እንደገና ከመሞከራቸው በፊት እያንዳንዱ የአስተዳደር ዳታግራም ሊወስድ የሚችለው ሚሊሰከንዶች (የእነሱ -t አማራጭ)።"
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "የትዕዛዝ የጊዜ ገደብ"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "አንድ የመሳሪያ አፈጻጸም ከመቆሙ እና እንደከሸፈ ከመመዝገቡ በፊት ሊወስድ የሚችለው ሰከንዶች።"
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "አንድ የመሳሪያ አፈጻጸም ሊያትም የሚችለው KiB። ከዚያ የበለጠ ውጤት ይጣላል እና እንደከሸፈ ይመዘገባል።"
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "ከፍተኛ ውጤት"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "ቅኝት"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "የኖድ ጊዜ በጀት"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "አንድ የኖድ ቅኝት ቆጣሪዎችን በማንበብ ሊያጠፋ የሚችለው ሰከንዶች። ያልተደረሱ ወደቦች በሚቀጥለው ዑደት ይነበባሉ።"
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "የኖድ ቅኝት ለዚህ ዑደት ከመቆሙ በፊት የሚከሽፉ ወደቦች ብዛት። መልስ የማይሰጥ ወደብ ብዙ ሰከንዶችን ያስወጣል።"
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "የኖድ ውድቀት በጀት"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "የተቋረጡ ወደቦችን መዝግብ"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "ሲመረጥ፣ የፋብሪክ ወደብ የውሂብ መጠይቁ የተቋረጡ እና የርቀት ጫፍ የሌላቸውን ወደቦች፣ እንደ ጥቅም ላይ ያልዋሉ የአዳፕተር ወደቦችን ጭምር ይዘረዝራል። ሲጸዳ፣ እስኪነሱ ድረስ ሳይካተቱ ይቀራሉ።"
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "አራግፍ"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "ሲራገፍ የተሰኪ ሰንጠረዦችን አቆይ"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "ሲመረጥ፣ ተሰኪውን ማራገፍ ፋብሪኮቹን፣ ቆጠራውን እና ናሙናዎቹን ያቆያል። ማራገፉ እንዲያጠፋቸው ከፈለጉ ያጽዱት፤ መጀመሪያ ቆጠራውን ከፋብሪክ አስተዳዳሪ ገጽ ወደ ውጭ ይላኩ። በሁለቱም መንገድ ፋብሪኩ በፍጹም አይገናኝም።"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "የመሳሪያው ማውጫ መጨረሻ ላይ የስላሽ ምልክት የሌለው፣ የፊደላት፣ አሃዞች፣ ነጥቦች፣ ሰረዞች፣ የግርጌ ሰረዞች እና ስላሾች ፍጹም መንገድ መሆን አለበት።"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "የመሳሪያው ማውጫ የለም ወይም ማውጫ አይደለም።"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "የመሳሪያው ማውጫ መንገድ ተምሳሌታዊ አገናኝ ይዟል። ትክክለኛውን መንገድ ያስገቡ።"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "የመሳሪያው ማውጫ በroot ባለቤትነት የተያዘ አይደለም።"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "የመሳሪያው ማውጫ በቡድኑ ወይም በሌሎች ሊጻፍበት ይችላል።"
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "አንድ የምርመራ መሳሪያ በroot ባለቤትነት የተያዘ አይደለም።"
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "አንድ የምርመራ መሳሪያ በቡድኑ ወይም በሌሎች ሊጻፍበት ይችላል።"
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "የፋብሪክ ተሰኪ PHP %s ወይም ከዚያ በላይ ይፈልጋል። ይህ አገልጋይ PHP %s ያስኬዳል፣ ስለዚህ ተሰኪው አልተጫነም ወይም አልነቃም።"
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "የፋብሪክ ተሰኪው አልነቃም።"
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "የፋብሪክ ተሰኪው PHP %s ወይም ከዚያ በላይ ይፈልጋል።"
+
+#: setup.php
+msgid "Management"
+msgstr "አስተዳደር"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "የመሳሪያው ማውጫ አልተቀመጠም። %s"

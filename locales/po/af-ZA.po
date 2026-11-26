@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: af-ZA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "Die nodus het verander nadat die bladsy geteken is, so niks is gedoen nie. Hersien dit en probeer weer."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "Jou toesteltoestemmings laat nie toe dat hierdie rekord gewysig word nie."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "Naam: 'n ander fabric gebruik reeds hierdie naam."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "Adapter: 'n ander fabric skandeer reeds hierdie adapterpoort op hierdie poller. Een fabric per adapterpoort."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "Die fabric kon nie gestoor word nie."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "Die fabric is gestoor."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "'n Skandering van hierdie fabric loop tans, so niks is geskrap nie. Probeer weer wanneer dit klaar is."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "Die fabric en sy inventaris is geskrap. Geen Cacti-toestel is verander nie en die fabric is nie gekontak nie."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "Die fabric kon nie geskrap word nie."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "Die nodusidentiteit is nie verander nie."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "Die nodusidentiteit is bygewerk. Dit word weer vanaf die volgende siklus geskandeer."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "Die toestelkartering is na die nuwe nodus geskuif."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "Die voorstel kon nie bevestig word nie. Die nodusse het moontlik verander sedert dit gemaak is."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "Die voorstel kon nie verwerp word nie."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "Die voorstel is verwerp."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "Die noduskartering is nie verander nie. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "Die noduskartering is nie verander nie."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "Die noduskartering is gestoor."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "Geen toestel is geskep nie. Sien die Cacti-logboek."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "Die toestel is geskep en die nodus is daaraan gekarteer. Kies die poorte vir grafieke op die Nuwe Grafieke-bladsy."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "Die inventaris kon nie vir uitvoer gelees word nie."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "Die Fabric-sjablone en datanavraaglêer is geïnstalleer."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Die Fabric-sjablone is nie geïnstalleer nie. Sien die Cacti-objektetabel en die Cacti-logboek."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "Moniteringsaansig"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "Waarnemings kon nie gelees word nie. Vra 'n administrateur om die inproplogboek na te gaan."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "Ondersoek poortgeldigheid, skakelwydte en -spoed, en die opeenhopingsaansig. Eskaleer identiteitskonflikte en toestelherkoppeling na 'n administrateur; moet nie tellers terugstel nie."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Fabric-administrasie"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "Die fabric-rekords kon nie gelees word nie. Sien die Cacti-logboek."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "Fabrics"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "Aksies"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "Adapter"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "Agterend"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "Naam"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "Nodusse"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Poller"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "Toestand"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "Skanderingsinterval"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "Nog geen fabrics gedefinieer nie."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "Geskrapte poller (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "poort %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d sekondes"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "Skrap"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "Bevat toestelle wat jy nie mag sien nie"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "Voer uit"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "Laai die fabrics en nodusinventaris, met toestelkarterings, as JSON af voor 'n deïnstallasie wat die inproptabelle skrap. Dit bevat geen aanmeldbewyse nie."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Fabric: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "Nuwe Fabric"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "Skanderingsinterval (sekondes)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "Adapterpoort"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "Geaktiveer"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "Stoor"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "Skrap Fabric: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "Skrap hierdie fabric met sy %d nodusse, hul poorte, monsters en voorstelle? %d nodusse is aan Cacti-toestelle gekarteer; daardie toestelle, hul databronne en RRD-lêers word behou. Die fabric word nie gekontak nie."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "Ongekarteer"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "Geskrapte toestel (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "Fabric-nodus: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "Toestelle wat by die nodusnaam pas"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (toestel %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "Geen"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Cacti-toestel"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "Stoor karteer die nodus aan die toestel en voeg die Fabric Port-datanavraag by die toestel, wat die nodus se poorte lys. Geen grafiek, databron of toestelopstelling word verander nie. Die toestel moet gepol word deur die poller wat die fabric skandeer."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "Skep 'n toestel vir hierdie nodus"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "Toestelle kan nie hier geskep word nie."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "Skep 'n toestel vir %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "Die skepping van die toestel voeg by:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "Skep"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "Identiteitskonflikte"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "Nodus"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "Gesien"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "Gestoor"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "Geen konflikte nie."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "Twee keer gedruk in een ontdekking"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "Aanvaar gesiene identiteit"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "Herkoppelingsvoorstelle"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "Toestel"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "Vermiste nodus"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "Nuwe nodus"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "Gedeelde buurpoort"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "Geen oop voorstelle nie."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "Bevestig"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "Verwerp"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "Diagnostieknutsgoed (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "Die fabric- of inpropopstellings is onvolledig of ongeldig"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "Die nutsding ontbreek of is nie uitvoerbaar in die opgestelde gids nie"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "Die nutsding het sy tydsbeperking oorskry en is gestop"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "Die nutsding-afvoer het die groottebeperking oorskry en is weggegooi"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "Die nutsding het misluk"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "Die nutsding-afvoer het nie die verwagte vorm gehad nie"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "Nie probeer nie: die tyd- of mislukkingsbegroting is opgebruik"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "Die inproptabelle kon nie gelees of geskryf word nie"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Die Fabric-sjablone is nie geïnstalleer nie. Herinstalleer hulle vanaf die gesondheidsbladsy."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "Die nodus is reeds aan 'n toestel gekarteer."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "Die nodus se fabric word nie deur die hoof-poller geskandeer nie, so sy toestel kon nie gepol word nie."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "Die toestel bestaan nie."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "Die toestel word deur 'n ander poller gepol as die een wat hierdie fabric skandeer, so dit kon nie die fabric-kas lees nie."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "'n Toestel \"%s\" vanaf die %s-toestelsjabloon, gasheernaam %s, gepol deur poller %d, met beskikbaarheidskontroles en SNMP af."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "Die %s-datanavraag daarop, wat die nodus se poorte lys. Dit skep geen grafiek en geen databron op sigself nie."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "Geskep deur die Fabric-inprop vir nodus %s. Sy waardes kom uit die inpropkas; die gasheernaam is 'n gereserveerde naam wat nooit gekontak word nie."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "Naam: gebruik 1 tot 64 letters, syfers, spasies, punte, koppeltekens of onderstrepe, en begin met 'n letter of syfer."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "Agterend: kies een van die gelyste agterende."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "Poller: kies een van die gelyste pollers."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "Poller: slegs die hoof-poller kan 'n fabric skandeer totdat ondersteuning vir afgeleë pollers bygevoeg word."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "Skanderingsinterval: voer heel sekondes van %d tot %d in."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "Adapter: voer die plaaslike adapternaam in soos die kern dit noem, soos mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "Adapterpoort: voer die poortnommer van die plaaslike adapter in, van 1 tot %d."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "Nooit"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "%d sekondes gelede"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "%d minute gelede"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "%d ure gelede"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "%d dae gelede"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Cacti-objekte"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "Geïnstalleer"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "Ontbreek"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "Sjablone"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "Datanavraaglêer"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "Laaste installasie"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "Herinstalleer die sjablone"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Fabric-gesondheid"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "Die gesondheidsrekords kon nie gelees word nie. Sien die Cacti-logboek."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "Tellerskanderings"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "Ontdekking"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Fabric"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "Laaste ontdekking"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "Laaste skakellesing"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "Laaste suksesvolle ontdekking"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "Skakellesing"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "Nodusse / Poorte gesien"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "Oorgeslane skakelreëls"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "Ongepaarde skakelrekords"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Fabric %s: die inventaris is %s; die laaste suksesvolle ontdekking was %s."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Fabric %s: dit is aan poller %d toegewys, maar slegs die hoof-poller kan 'n fabric skandeer totdat ondersteuning vir afgeleë pollers bygevoeg word. Dit word nie geskandeer nie; wys dit aan die hoof-poller toe."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Fabric %s: sy gesondheidsrekord kon nie gelees word nie, so sy ontdekkingstatus is onbekend. Sien die Cacti-logboek."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Fabric %s: dit is nog nie ontdek nie. Skanderings begin slegs vanaf 'n nodus wat aan 'n Cacti-toestel gekarteer is, so voer \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" een keer op die hoof-poller uit."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Fabric %s: geen nodus is aan 'n Cacti-toestel gekarteer nie, so geen skandering begin nie en die inventaris word nie verfris nie. Karteer 'n nodus op die Fabric-administrasiebladsy, of voer \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" op die hoof-poller uit."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Fabric %s: %d iblinkinfo-reëls kon nie gelees word nie, heel waarskynlik omdat 'n nodusbeskrywing die nutsding-afvoer naboots. Daardie nodusse behou hul laaste skakelstate."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Fabric %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "gedeaktiveer"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "Waarskuwings"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "Geen waarskuwings nie."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "Identiteit"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "%d identiteitskonflikte en %d oop herkoppelingsvoorstelle. Los dit op die Fabric-administrasiebladsy op."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "Tellerskanderings wat aandag verg"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "Duur"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "Mislukking"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "Laaste sukses"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "Laaste skandering"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "Uitkoms"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "Poorte gelees / misluk / oorgeslaan"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s s"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "Elke geskandeerde nodus het sy laaste skandering voltooi."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "OK, %s s"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "Laas gesien"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "Aanwesigheid"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "Tipe"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "Geen nodusse om te wys nie."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "Nog geen fabrics is gedefinieer nie."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "Poorte met die hoogste versendingswagtyd"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "Poorte met die hoogste versendingswagtyd"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "Die fabric-inventaris kon nie gelees word nie. Sien die Cacti-logboek."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "Versendingswagtyd tel tikkies waarin 'n poort data gehad het om te stuur maar dit nie kon stuur nie weens 'n gebrek aan krediete of arbitrasie. 'n Hoë waarde dui op opeenhoping na die afgeleë kant toe; dit dui nie aan dat die poort of sy kabel foutief is nie. Die tikkielengte word nie vir huidige skakelspoede gepubliseer nie, dus is waardes tikkies per sekonde, nie tyd nie."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "Poort"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "Afgeleë"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "Versendingsverwerpings (per sekonde)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "Versendingswagtyd (tikke per sekonde)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "Geen poort het 'n huidige versendingswagtempo nie."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "Fabric-nodus"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "Die nodus bestaan nie of jy mag dit nie sien nie."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "Aktief"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "Beste ondersteuning aan beide kante"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "Tellergeldigheid"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "Tellers"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "Grafieke"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "Skakel"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "Nog geen poorte aangeteken nie."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "Toestel %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "%s-tellers versadig, as onbekend gepubliseer: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "%s-tellers: %d onderbrekings, die laaste %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "Geldig"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "Op"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "Onder beste, beperk deur geaktiveerde waardes"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "Onder beste, oorsaak onbekend"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "Verswak"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "Af"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "Skakelaar"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "Kanaaladapter"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "Roeteerder"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "Hersien die aangetekende waarnemings hieronder. Erkennings is persoonlik tot hierdie sessie, verval wanneer waarnemings verander, en onderdruk nooit waarskuwings of verander gesondheid nie."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "Fabric-bedrywighede"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "Ondersoek"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "Objek"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "Waargeneem (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "Onbekend of verouderd"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "Erken; gesondheid onveranderd."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "Erken"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "Geen waarnemings is beskikbaar vir toestelle waartoe jy toegang het nie."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "Fabric-operateur"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "Fabric-aansig"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "Die skandering loop as root. Laat die poller loop as 'n onbevoorregte rekening met leestoegang tot die umad-toestelle deur middel van 'n groep."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "'n Diagnostiese hulpmiddel het die setuid- of setgid-bis. Die inprop het dit nooit nodig nie."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "'n Diagnostiese hulpmiddel of sy gids kan deur 'n ander rekening as sy eienaar, of deur die poller-rekening, geskryf word. Wie dit kan skryf, kies wat die poller uitvoer."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "'n umad-toestel is leesbaar of skryfbaar vir elke rekening, dus kan enige plaaslike gebruiker die fabric navraag doen. Beperk dit tot 'n groep."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "Onbekende waarskuwing"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "Diagnostiese hulpmiddels"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "Absolute gids, op elke poller wat 'n fabric skandeer, wat perfquery, ibnetdiscover en iblinkinfo bevat. Die Debian- en Ubuntu-pakkette installeer dit in /usr/sbin. Geen ander program word ooit daaruit uitgevoer nie."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "Hulpmiddelgids"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "Nodusnaamkaart"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "Opsionele absolute pad na 'n infiniband-diags-nodusnaamkaartlêer. Name wat dit verskaf word slegs vertoon; identiteit is altyd die nodus-GUID."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "Datagram-uitteltyd"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "Millisekondes wat elke bestuursdatagram mag neem voordat die hulpmiddels dit weer probeer (hul -t-opsie)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "Opdrag-uitteltyd"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "Sekondes wat een hulpmiddeluitvoering mag neem voordat dit gestop en as misluk aangeteken word."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "KiB wat een hulpmiddeluitvoering mag druk. Groter afvoer word verwerp en as misluk aangeteken."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "Maksimum afvoer"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "Skandering"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "Nodus-tydbegroting"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "Sekondes wat een nodusskandering mag bestee aan die lees van tellers. Poorte wat nie bereik word nie, word in die volgende siklus gelees."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "Mislukte poorte waarna 'n nodusskandering vir hierdie siklus stop. 'n Poort wat nie antwoord nie, kos etlike sekondes."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "Nodus-mislukkingsbegroting"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "Indekseer af-poorte"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "Wanneer gemerk, lys die Fabric Port-datanavraag ook poorte wat af is en geen afgeleë punt het nie, soos ongebruikte adapterpoorte. Wanneer ontmerk, word hulle uitgelaat totdat hulle opkom."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "Deïnstalleer"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "Behou inproptabelle by deïnstallasie"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "Wanneer gemerk, behou die deïnstallering van die inprop sy fabrics, inventaris en monsters. Ontmerk dit sodat die deïnstallering dit laat vaar; voer eers die inventaris uit vanaf die Fabric Admin-bladsy. Die fabric word in elk geval nooit gekontak nie."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "Die hulpmiddelgids moet 'n absolute pad van letters, syfers, punte, koppeltekens, onderstrepe en skuinsstrepe wees, sonder 'n afsluitende skuinsstreep."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "Die hulpmiddelgids bestaan nie of is nie 'n gids nie."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "Die hulpmiddelgidspad bevat 'n simboliese skakel. Voer die werklike pad in."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "Die hulpmiddelgids word nie deur root besit nie."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "Die hulpmiddelgids kan deur sy groep of deur ander geskryf word."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "'n Diagnostiese hulpmiddel word nie deur root besit nie."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "'n Diagnostiese hulpmiddel kan deur sy groep of deur ander geskryf word."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Die Fabric-inprop vereis PHP %s of nuwer. Hierdie bediener loop PHP %s, dus is die inprop nie geïnstalleer of geaktiveer nie."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Die Fabric-inprop is nie geaktiveer nie."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Die Fabric-inprop vereis PHP %s of nuwer."
+
+#: setup.php
+msgid "Management"
+msgstr "Bestuur"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "Die Hulpmiddelgids is nie gestoor nie. %s"
