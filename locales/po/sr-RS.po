@@ -24,31 +24,31 @@ msgstr "Ваше дозволе за уређаје не допуштају из
 
 #: fabric_admin.php
 msgid "Name: another fabric already uses this name."
-msgstr "Назив: друга фабрика већ користи овај назив."
+msgstr "Назив: друга мрежна структура већ користи овај назив."
 
 #: fabric_admin.php
 msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
-msgstr "Адаптер: друга фабрика већ скенира овај порт адаптера на овом полеру. Дозвољена је једна фабрика по порту адаптера."
+msgstr "Адаптер: друга мрежна структура већ скенира овај порт адаптера на овом полеру. Дозвољена је једна мрежна структура по порту адаптера."
 
 #: fabric_admin.php
 msgid "The fabric could not be saved."
-msgstr "Фабрика није могла да се сачува."
+msgstr "Мрежна структура није могла да се сачува."
 
 #: fabric_admin.php
 msgid "The fabric was saved."
-msgstr "Фабрика је сачувана."
+msgstr "Мрежна структура је сачувана."
 
 #: fabric_admin.php
 msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
-msgstr "Скенирање ове фабрике је у току, па ништа није обрисано. Покушајте поново када се заврши."
+msgstr "Скенирање ове мрежне структуре је у току, па ништа није обрисано. Покушајте поново када се заврши."
 
 #: fabric_admin.php
 msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
-msgstr "Фабрика и њен инвентар су обрисани. Ниједан Cacti уређај није измењен и фабрика није контактирана."
+msgstr "Мрежна структура и њен инвентар су обрисани. Ниједан Cacti уређај није измењен и мрежна структура није контактирана."
 
 #: fabric_admin.php
 msgid "The fabric could not be deleted."
-msgstr "Фабрика није могла да се обрише."
+msgstr "Мрежна структура није могла да се обрише."
 
 #: fabric_admin.php
 msgid "The node identity was not changed."
@@ -125,12 +125,12 @@ msgstr "Fabric администрација"
 
 #: lib/AdminPage.php
 msgid "The fabric records could not be read. See the Cacti log."
-msgstr "Записи фабрике нису могли да се прочитају. Погледајте Cacti дневник."
+msgstr "Записи мрежне структуре нису могли да се прочитају. Погледајте Cacti дневник."
 
 #: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
 #: setup.php
 msgid "Fabrics"
-msgstr "Фабрике"
+msgstr "Мрежне структуре"
 
 #: lib/AdminPage.php lib/OperatorPage.php
 msgid "Actions"
@@ -166,7 +166,7 @@ msgstr "Интервал скенирања"
 
 #: lib/AdminPage.php lib/HealthPage.php
 msgid "No fabrics defined yet."
-msgstr "Још ниједна фабрика није дефинисана."
+msgstr "Још ниједна мрежна структура није дефинисана."
 
 #: lib/AdminPage.php
 #, php-format
@@ -197,16 +197,16 @@ msgstr "Извоз"
 
 #: lib/AdminPage.php
 msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
-msgstr "Преузмите фабрике и инвентар чворова са мапирањима уређаја у JSON формату пре деинсталације која уклања табеле додатка. Датотека не садржи приступне податке."
+msgstr "Преузмите мрежне структуре и инвентар чворова са мапирањима уређаја у JSON формату пре деинсталације која уклања табеле додатка. Датотека не садржи приступне податке."
 
 #: lib/AdminPage.php lib/InventoryPage.php
 #, php-format
 msgid "Fabric: %s"
-msgstr "Фабрика: %s"
+msgstr "Мрежна структура: %s"
 
 #: lib/AdminPage.php
 msgid "New Fabric"
-msgstr "Нова фабрика"
+msgstr "Нова мрежна структура"
 
 #: lib/AdminPage.php
 msgid "Sweep Interval (seconds)"
@@ -227,12 +227,12 @@ msgstr "Сачувај"
 #: lib/AdminPage.php
 #, php-format
 msgid "Delete Fabric: %s"
-msgstr "Обриши фабрику: %s"
+msgstr "Обриши мрежну структуру: %s"
 
 #: lib/AdminPage.php
 #, php-format
 msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
-msgstr "Обрисати ову фабрику са њених %d чворова, њиховим портовима, узорцима и предлозима? На Cacti уређаје је мапирано %d чворова; ти уређаји, њихови извори података и RRD датотеке остају сачувани. Фабрика се не контактира."
+msgstr "Обрисати ову мрежну структуру са њених %d чворова, њиховим портовима, узорцима и предлозима? На Cacti уређаје је мапирано %d чворова; ти уређаји, њихови извори података и RRD датотеке остају сачувани. Мрежна структура се не контактира."
 
 #: lib/AdminPage.php lib/InventoryPage.php
 msgid "Unmapped"
@@ -246,7 +246,7 @@ msgstr "Обрисани уређај (ID %d)"
 #: lib/AdminPage.php lib/InventoryPage.php
 #, php-format
 msgid "Fabric Node: %s"
-msgstr "Чвор фабрике: %s"
+msgstr "Чвор мрежне структуре: %s"
 
 #: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
 msgid "GUID"
@@ -271,7 +271,7 @@ msgstr "Cacti уређај"
 
 #: lib/AdminPage.php
 msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
-msgstr "Чувањем се чвор мапира на уређај и уређају се додаје упит података Fabric Port, који приказује списак портова чвора. Ниједан графикон, извор података ни подешавање уређаја се не мењају. Уређај мора да анкетира исти полер који скенира фабрику."
+msgstr "Чувањем се чвор мапира на уређај и уређају се додаје упит података Fabric Port, који приказује списак портова чвора. Ниједан графикон, извор података ни подешавање уређаја се не мењају. Уређај мора да анкетира исти полер који скенира мрежну структуру."
 
 #: lib/AdminPage.php
 msgid "Create a Device for This Node"
@@ -360,7 +360,7 @@ msgstr "Дијагностички алати (infiniband-diags)"
 
 #: lib/CommandError.php
 msgid "The fabric or plugin settings are incomplete or invalid"
-msgstr "Подешавања фабрике или додатка су непотпуна или неисправна"
+msgstr "Подешавања мрежне структуре или додатка су непотпуна или неисправна"
 
 #: lib/CommandError.php
 msgid "The tool is missing or not executable in the configured directory"
@@ -400,7 +400,7 @@ msgstr "Чвор је већ мапиран на уређај."
 
 #: lib/DeviceProvisioner.php
 msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
-msgstr "Фабрику овог чвора не скенира главни полер, па његов уређај не може да се анкетира."
+msgstr "Мрежну структуру овог чвора не скенира главни полер, па његов уређај не може да се анкетира."
 
 #: lib/DeviceProvisioner.php
 msgid "The device does not exist."
@@ -408,7 +408,7 @@ msgstr "Уређај не постоји."
 
 #: lib/DeviceProvisioner.php
 msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
-msgstr "Уређај анкетира други полер, различит од оног који скенира ову фабрику, па не може да прочита кеш фабрике."
+msgstr "Уређај анкетира други полер, различит од оног који скенира ову мрежну структуру, па не може да прочита кеш мрежне структуре."
 
 #: lib/DeviceProvisioner.php
 #, php-format
@@ -439,7 +439,7 @@ msgstr "Полер: изаберите један са списка."
 
 #: lib/FabricInput.php
 msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
-msgstr "Полер: само главни полер може да скенира фабрику док се не дода подршка за удаљене полере."
+msgstr "Полер: само главни полер може да скенира мрежну структуру док се не дода подршка за удаљене полере."
 
 #: lib/FabricInput.php
 #, php-format
@@ -525,7 +525,7 @@ msgstr "Откривање"
 
 #: lib/HealthPage.php
 msgid "Fabric"
-msgstr "Фабрика"
+msgstr "Мрежна структура"
 
 #: lib/HealthPage.php
 msgid "Last Discovery"
@@ -558,37 +558,37 @@ msgstr "Неупарени записи веза"
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
-msgstr "Фабрика %s: стање инвентара је %s; последње успешно откривање било је %s."
+msgstr "Мрежна структура %s: стање инвентара је %s; последње успешно откривање било је %s."
 
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
-msgstr "Фабрика %s: додељена је полеру %d, али само главни полер може да скенира фабрику док се не дода подршка за удаљене полере. Не скенира се; доделите је главном полеру."
+msgstr "Мрежна структура %s: додељена је полеру %d, али само главни полер може да скенира мрежну структуру док се не дода подршка за удаљене полере. Не скенира се; доделите је главном полеру."
 
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
-msgstr "Фабрика %s: њен запис о исправности није могао да се прочита, па је стање откривања непознато. Погледајте Cacti дневник."
+msgstr "Мрежна структура %s: њен запис о исправности није могао да се прочита, па је стање откривања непознато. Погледајте Cacti дневник."
 
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
-msgstr "Фабрика %s: још није откривена. Скенирања почињу само од чвора мапираног на Cacti уређај, па покрените једном команду \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" на главном полеру."
+msgstr "Мрежна структура %s: још није откривена. Скенирања почињу само од чвора мапираног на Cacti уређај, па покрените једном команду \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" на главном полеру."
 
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
-msgstr "Фабрика %s: ниједан чвор није мапиран на Cacti уређај, па се скенирање не покреће и инвентар се не освежава. Мапирајте чвор на страници Fabric администрација или покрените команду \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" на главном полеру."
+msgstr "Мрежна структура %s: ниједан чвор није мапиран на Cacti уређај, па се скенирање не покреће и инвентар се не освежава. Мапирајте чвор на страници Fabric администрација или покрените команду \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" на главном полеру."
 
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
-msgstr "Фабрика %s: није било могуће прочитати %d линија из iblinkinfo, највероватније зато што опис чвора опонаша излаз алата. Ти чворови задржавају своја последња стања везе."
+msgstr "Мрежна структура %s: није било могуће прочитати %d линија из iblinkinfo, највероватније зато што опис чвора опонаша излаз алата. Ти чворови задржавају своја последња стања везе."
 
 #: lib/HealthPage.php
 #, php-format
 msgid "Fabric %s: %s"
-msgstr "Фабрика %s: %s"
+msgstr "Мрежна структура %s: %s"
 
 #: lib/HealthPage.php
 msgid "disabled"
@@ -675,7 +675,7 @@ msgstr "Нема чворова за приказ."
 
 #: lib/InventoryPage.php
 msgid "No fabrics are defined yet."
-msgstr "Још није дефинисана ниједна фабрика."
+msgstr "Још није дефинисана ниједна мрежна структура."
 
 #: lib/InventoryPage.php
 msgid "Ports with the highest transmit wait"
@@ -687,7 +687,7 @@ msgstr "Портови са највећим чекањем на пренос"
 
 #: lib/InventoryPage.php
 msgid "The fabric inventory could not be read. See the Cacti log."
-msgstr "Инвентар фабрике није могао да се прочита. Погледајте Cacti дневник."
+msgstr "Инвентар мрежне структуре није могао да се прочита. Погледајте Cacti дневник."
 
 #: lib/InventoryPage.php
 msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
@@ -719,7 +719,7 @@ msgstr "Непознато"
 
 #: lib/InventoryPage.php
 msgid "Fabric Node"
-msgstr "Чвор фабрике"
+msgstr "Чвор мрежне структуре"
 
 #: lib/InventoryPage.php
 msgid "The node does not exist or you may not see it."
@@ -862,7 +862,7 @@ msgstr "У дијагностички алат или његов директо�
 
 #: lib/PrivilegeProbe.php
 msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
-msgstr "Уређај umad је доступан за читање или писање сваком налогу, па сваки локални корисник може да упита фабрику. Ограничите приступ на групу."
+msgstr "Уређај umad је доступан за читање или писање сваком налогу, па сваки локални корисник може да упита мрежну структуру. Ограничите приступ на групу."
 
 #: lib/PrivilegeProbe.php lib/ToolDirectory.php
 msgid "Unknown warning"
@@ -874,7 +874,7 @@ msgstr "Дијагностички алати"
 
 #: lib/Settings.php
 msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
-msgstr "Апсолутна путања директоријума, на сваком полеру који скенира фабрику, у ком се налазе perfquery, ibnetdiscover и iblinkinfo. Пакети за Debian и Ubuntu инсталирају их у /usr/sbin. Ниједан други програм се никада не покреће из њега."
+msgstr "Апсолутна путања директоријума, на сваком полеру који скенира мрежну структуру, у ком се налазе perfquery, ibnetdiscover и iblinkinfo. Пакети за Debian и Ubuntu инсталирају их у /usr/sbin. Ниједан други програм се никада не покреће из њега."
 
 #: lib/Settings.php
 msgid "Tool Directory"
@@ -950,7 +950,7 @@ msgstr "Задржи табеле додатка при деинсталациј
 
 #: lib/Settings.php
 msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
-msgstr "Када је означено, деинсталација додатка задржава његове фабрике, инвентар и узорке. Уклоните ознаку да би их деинсталација обрисала; прво извезите инвентар са странице Fabric администрација. Фабрика се у оба случаја никада не контактира."
+msgstr "Када је означено, деинсталација додатка задржава његове мрежне структуре, инвентар и узорке. Уклоните ознаку да би их деинсталација обрисала; прво извезите инвентар са странице Fabric администрација. Мрежна структура се у оба случаја никада не контактира."
 
 #: lib/ToolDirectory.php
 msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."

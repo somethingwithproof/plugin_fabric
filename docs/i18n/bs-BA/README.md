@@ -12,7 +12,7 @@ Dodatak za Cacti 1.2 koji u Cacti donosi brojače InfiniBand portova, širinu i 
 >
 > - instalaciju, nadogradnju, deinstalaciju i provjeru verzije PHP 8.2
 > - oblasti dozvola View, Operator i Admin, te postavke
-> - zapise fabrike
+> - zapise mrežne strukture
 > - granicu komandi samo za čitanje za `perfquery`, `ibnetdiscover` i `iblinkinfo`
 > - inventar po GUID-u, sa sukobima identiteta i prijedlozima ponovnog povezivanja
 > - stanje linka i keš skeniranja brojača
@@ -24,9 +24,9 @@ Dodatak za Cacti 1.2 koji u Cacti donosi brojače InfiniBand portova, širinu i 
 > - mapiranje čvora na Cacti uređaj ili kreiranje novog nakon potvrde ([ADR 0010](../../../docs/decisions/0010-one-device-per-node.md))
 > - izvore podataka brojača za grafikone, kao i GAUGE izvore podataka za stanje linka i stope za Thold ([ADR 0011](../../../docs/decisions/0011-derive-counters-and-gauge-alert-values.md))
 > - obradu prekida kontinuiteta i očitavanje zasićenih osnovnih brojača kao nepoznatih ([ADR 0012](../../../docs/decisions/0012-saturated-basic-counters-read-as-unknown.md)), ispravnost brojača i linkove grafikona na stranici porta, te rang-listu zagušenja
-> - testiranje od početka do kraja sa neizmijenjenim Thold v1.8.2 i Maint v1.3, te CI zadatak koji pokreće stvarne dijagnostičke alate nad simuliranom fabrikom
+> - testiranje od početka do kraja sa neizmijenjenim Thold v1.8.2 i Maint v1.3, te CI zadatak koji pokreće stvarne dijagnostičke alate nad simuliranom mrežnom strukturom
 >
-> Fabrika se može skenirati samo sa glavnog pollera dok se u fazi 3 ne doda podrška za udaljene prikupljače podataka. Dodatak je testiran sa lažnim alatima i simulatorom fabrike ibsim, ali nikada na stvarnoj InfiniBand fabrici. Provjere koje zahtijevaju stvarnu fabriku ostaju otvorene u tabeli provjera uživo na svakoj istraživačkoj stranici. Ovaj projekat nije povezan sa projektom Cacti.
+> Mrežna struktura se može skenirati samo sa glavnog pollera dok se u fazi 3 ne doda podrška za udaljene prikupljače podataka. Dodatak je testiran sa lažnim alatima i simulatorom mrežne strukture ibsim, ali nikada na stvarnoj InfiniBand mrežnoj strukturi. Provjere koje zahtijevaju stvarnu mrežnu strukturu ostaju otvorene u tabeli provjera uživo na svakoj istraživačkoj stranici. Ovaj projekat nije povezan sa projektom Cacti.
 
 ## Uloge pristupa
 
@@ -42,23 +42,23 @@ Cacti dozvole za uređaje i dalje ograničavaju redove i radnje dostupne svakom 
 
 ## Zašto
 
-Degradiran InfiniBand link i dalje prenosi saobraćaj. Link širine 4X koji se ponovo uspostavi na 1X ostavlja port u stanju "active", pa SNMP grafikoni mrežnih interfejsa na računaru izgledaju normalno, ali čvrsto spregnuti poslovi usporavaju. Dokaz se nalazi u samoj fabrici: svaki port prijavljuje svoju aktivnu, omogućenu i podržanu širinu i brzinu, uz brojače grešaka i zagušenja. Za njihovo čitanje potrebni su InfiniBand dijagnostički alati ili API upravitelja fabrike. Kada se pokreću ručno, ostavljaju tri praznine:
+Degradiran InfiniBand link i dalje prenosi saobraćaj. Link širine 4X koji se ponovo uspostavi na 1X ostavlja port u stanju "active", pa SNMP grafikoni mrežnih interfejsa na računaru izgledaju normalno, ali čvrsto spregnuti poslovi usporavaju. Dokaz se nalazi u samoj mrežnoj strukturi: svaki port prijavljuje svoju aktivnu, omogućenu i podržanu širinu i brzinu, uz brojače grešaka i zagušenja. Za njihovo čitanje potrebni su InfiniBand dijagnostički alati ili API upravitelja mrežne strukture. Kada se pokreću ručno, ostavljaju tri praznine:
 
 - **Nema historije.** `perfquery` i `iblinkinfo` prikazuju samo trenutno stanje, pa link koji je bio degradiran prošle sedmice ostaje nevidljiv.
-- **Nema konteksta uređaja.** Portovi fabrike nisu Cacti objekti, pa port ne može biti prikazan na grafikonu pored računara koji napaja.
+- **Nema konteksta uređaja.** Portovi mrežne strukture nisu Cacti objekti, pa port ne može biti prikazan na grafikonu pored računara koji napaja.
 - **Nema puta do Cacti upozorenja.** Thold i Maint rade nad Cacti izvorima podataka i uređajima.
 
-Dodatak popunjava ove praznine čitajući fabriku putem njenih dijagnostičkih alata (a kasnije i putem UFM-a), identifikujući čvorove i portove po GUID-u i objavljujući brojače i stanje linka kao Cacti izvore podataka. Radi isključivo u režimu čitanja: nikada ne resetuje brojače niti mijenja stanje porta.
+Dodatak popunjava ove praznine čitajući mrežnu strukturu putem njenih dijagnostičkih alata (a kasnije i putem UFM-a), identifikujući čvorove i portove po GUID-u i objavljujući brojače i stanje linka kao Cacti izvore podataka. Radi isključivo u režimu čitanja: nikada ne resetuje brojače niti mijenja stanje porta.
 
 ## Prvo otkrivanje
 
-Nova fabrika nema čvorova, a skeniranja sa skriptnog servera pokreću se samo za čvor mapiran na Cacti uređaj. Prvo otkrivanje je zato ručni korak. Nakon što sačuvate omogućenu fabriku, pokrenite ovu komandu jednom na polleru kojem je fabrika dodijeljena, pod nalogom pollera, pri čemu `/path/to/cacti` zamjenjujete svojim Cacti direktorijem (apsolutna putanja radi i iz cron-a):
+Nova mrežna struktura nema čvorova, a skeniranja sa skriptnog servera pokreću se samo za čvor mapiran na Cacti uređaj. Prvo otkrivanje je zato ručni korak. Nakon što sačuvate omogućenu mrežnu strukturu, pokrenite ovu komandu jednom na polleru kojem je mrežna struktura dodijeljena, pod nalogom pollera, pri čemu `/path/to/cacti` zamjenjujete svojim Cacti direktorijem (apsolutna putanja radi i iz cron-a):
 
 ```
 php /path/to/cacti/plugins/fabric/fabric_sweep.php --fabric=ID --force
 ```
 
-Inventar se tada popunjava. Mapirajte čvorove na Cacti uređaje na stranici Fabric administracija; kasnija skeniranja pokreću se iz upita podataka. Dok nijedan čvor fabrike nije mapiran, ništa ne osvježava njen inventar, pa po želji ponovo pokrenite istu komandu, na primjer putem cron-a, kako biste zabilježili nove ili nedostajuće čvorove. Stranica zdravlja prikazuje ovu komandu za svaku omogućenu fabriku koja još nije otkrivena ili nema mapiran čvor.
+Inventar se tada popunjava. Mapirajte čvorove na Cacti uređaje na stranici Fabric administracija; kasnija skeniranja pokreću se iz upita podataka. Dok nijedan čvor mrežne strukture nije mapiran, ništa ne osvježava njen inventar, pa po želji ponovo pokrenite istu komandu, na primjer putem cron-a, kako biste zabilježili nove ili nedostajuće čvorove. Stranica zdravlja prikazuje ovu komandu za svaku omogućenu mrežnu strukturu koja još nije otkrivena ili nema mapiran čvor.
 
 ## Planirani opseg
 
@@ -67,9 +67,9 @@ Inventar se tada popunjava. Mapirajte čvorove na Cacti uređaje na stranici Fab
 | 0, istraživanje | Matrica verzija, potvrda ponašanja uzvodnih projekata, ponašanje brojača na hardveru, model privilegija, MAD budžet, UFM API | [M1](https://github.com/somethingwithproof/plugin_fabric/milestone/1) |
 | 1, posmatranje | Inventar po GUID-u, Cacti uređaji, upit podataka za portove, izvori podataka za brojače i stanje linka, Thold upozorenja, Maint potiskivanje, stranica zdravlja | [M2](https://github.com/somethingwithproof/plugin_fabric/milestone/2), [M3](https://github.com/somethingwithproof/plugin_fabric/milestone/3), [M4](https://github.com/somethingwithproof/plugin_fabric/milestone/4) |
 | 2, UFM | UFM REST pozadinski sistem samo za čitanje, upravljanje pristupnim podacima, kontinuitet identiteta između pozadinskih sistema | [M5](https://github.com/somethingwithproof/plugin_fabric/milestone/5) |
-| 3, udaljeni rad | Udaljeni prikupljači podataka, replikacija, `remote_agent` radnje, podijeljena skeniranja za velike fabrike | [M6](https://github.com/somethingwithproof/plugin_fabric/milestone/6) |
+| 3, udaljeni rad | Udaljeni prikupljači podataka, replikacija, `remote_agent` radnje, podijeljena skeniranja za velike mrežne strukture | [M6](https://github.com/somethingwithproof/plugin_fabric/milestone/6) |
 
-Izvan opsega: izmjena stanja fabrike, zamjena upravitelja fabrike ili podmreže, vlastiti sistem za upozorenja unutar dodatka, poseban daemon ili mrežni protokol, te Ethernet ili RoCE fabrike (istraživanje).
+Izvan opsega: izmjena stanja mrežne strukture, zamjena upravitelja mrežne strukture ili podmreže, vlastiti sistem za upozorenja unutar dodatka, poseban daemon ili mrežni protokol, te Ethernet ili RoCE mrežne strukture (istraživanje).
 
 ## Ciljevi kompatibilnosti
 
@@ -91,7 +91,7 @@ Zadržite Cacti vremensko ograničenje skripte na podrazumijevanoj vrijednosti o
 
 ```mermaid
 flowchart LR
-    F[InfiniBand fabrika] --> T[infiniband-diags alati, samo za čitanje]
+    F[InfiniBand mrežna struktura] --> T[infiniband-diags alati, samo za čitanje]
     F --> U[UFM REST, faza 2]
     T --> S[Zadatak skeniranja na Cacti polleru]
     U --> S
