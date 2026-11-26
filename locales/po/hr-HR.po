@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: hr-HR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "Čvor se izmijenio nakon prikaza stranice pa nije izvršena nijedna radnja. Pregledajte stanje i pokušajte ponovno."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "Vaša dopuštenja za uređaje ne dopuštaju izmjenu ovog zapisa."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "Naziv: drugi fabric već rabi ovaj naziv."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "Prilagodnik: drugi fabric već očitava ovaj priključak prilagodnika na ovom polleru. Dopušten je samo jedan fabric po priključku prilagodnika."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "Nije moguće spremiti fabric."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "Fabric je spremljen."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "Očitavanje ovog fabrica je u tijeku pa ništa nije izbrisano. Pokušajte ponovno kada dovrši."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "Fabric i njegov inventar su izbrisani. Nijedan uređaj u sustavu Cacti nije izmijenjen, a s fabricom nije uspostavljena komunikacija."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "Nije moguće izbrisati fabric."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "Identitet čvora nije izmijenjen."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "Identitet čvora je ažuriran. Očitavanje se nastavlja od sljedećeg ciklusa."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "Pridruživanje uređaja premješteno je na novi čvor."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "Prijedlog nije moguće potvrditi. Čvorovi su se možda promijenili otkad je stvoren."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "Prijedlog nije moguće odbaciti."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "Prijedlog je odbačen."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "Pridruživanje čvora nije izmijenjeno. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "Pridruživanje čvora nije izmijenjeno."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "Pridruživanje čvora je spremljeno."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "Nije stvoren nijedan uređaj. Provjerite dnevnik sustava Cacti."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "Uređaj je stvoren i čvor mu je pridružen. Odaberite priključke za iscrtavanje na stranici Novi grafovi."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "Nije moguće pročitati inventar za izvoz."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "Predlošci Fabric i datoteka upita za podatke uspješno su instalirani."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Predlošci Fabric nisu instalirani. Provjerite tablicu Objekti sustava Cacti i dnevnik sustava Cacti."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "Nadzorni prikaz"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "Opažanja nije moguće pročitati. Zamolite administratora da provjeri dnevnik dodatka."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "Pregledajte valjanost priključaka, širinu i brzinu veze te prikaz zagušenja. Sukobe identiteta i ponovno povezivanje uređaja proslijedite administratoru; nemojte poništavati brojače."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Upravljanje Fabricom"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "Zapise fabrica nije moguće pročitati. Provjerite dnevnik sustava Cacti."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "Fabrici"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "Radnje"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "Prilagodnik"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "Pozadinski sustav"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "Naziv"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "Čvorovi"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Poller"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "Stanje"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "Razdoblje očitavanja"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "Još nije definiran nijedan fabric."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "Izbrisani poller (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "priključak %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d sekundi"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "Izbriši"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "Sadrži uređaje kojima nemate pristup"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "Izvoz"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "Preuzmite popis fabrica i inventar čvorova s pridruživanjima uređaja kao JSON datoteku prije uklanjanja dodatka koje briše njegove tablice. Datoteka ne sadrži vjerodajnice."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Fabric: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "Novi fabric"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "Razdoblje očitavanja (sekunde)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "Priključak prilagodnika"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "Omogućeno"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "Spremi"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "Brisanje fabrica: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "Izbrisati ovaj fabric s njegovih %d čvorova, njihovim priključcima, uzorcima i prijedlozima? Broj čvorova pridruženih uređajima sustava Cacti iznosi %d; ti uređaji, njihovi izvori podataka i RRD datoteke bit će sačuvani. S fabricom se ne komunicira."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "Nepridruženo"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "Izbrisani uređaj (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "Čvor fabrica: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "Uređaji koji se podudaraju s nazivom čvora"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (uređaj %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "Ništa"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Uređaj sustava Cacti"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "Spremanjem se čvor pridružuje uređaju i uređaju se dodaje upit za podatke Fabric Port koji donosi popis priključaka čvora. Nijedan graf, izvor podataka niti postavka uređaja ne mijenja se. Uređaj mora ispitivati isti poller koji očitava fabric."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "Stvori uređaj za ovaj čvor"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "Ovdje nije dopušteno stvarati uređaje."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "Stvori uređaj za %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "Stvaranjem uređaja dodaje se:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "Stvori"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "Sukobi identiteta"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "Čvor"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "Zabilježeno"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "Pohranjeno"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "Nema sukoba."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "Ispisano dvaput tijekom jednog otkrivanja"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "Prihvati zabilježeni identitet"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "Prijedlozi ponovnog povezivanja"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "Uređaj"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "Nedostajući čvor"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "Novi čvor"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "Zajednički susjedni priključak"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "Nema otvorenih prijedloga."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "Potvrdi"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "Odbaci"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "Dijagnostički alati (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "Postavke fabrica ili dodatka su nepotpune ili nevaljane"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "Alat nedostaje ili nije izvršiv u konfiguriranom direktoriju"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "Alat je premašio vremensko ograničenje i zaustavljen je"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "Izlaz alata premašio je ograničenje veličine i odbačen je"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "Alat je završio pogreškom"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "Izlaz alata nije bio u očekivanom obliku"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "Nije pokrenuto: iscrpljeno je ograničenje vremena ili pogrešaka"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "Nije moguće čitati niti pisati u tablice dodatka"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Predlošci Fabric nisu instalirani. Ponovno ih instalirajte sa stranice ispravnosti."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "Čvor je već pridružen uređaju."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "Fabric ovog čvora ne očitava glavni poller pa se njegov uređaj ne može ispitivati."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "Uređaj ne postoji."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "Uređaj ispituje drugi poller od onoga koji očitava ovaj fabric pa ne može čitati predmemoriju fabrica."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "Uređaj \"%s\" iz predloška uređaja %s, naziv računala %s, ispituje ga poller %d, s isključenim provjerama dostupnosti i SNMP-om."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "Upit za podatke %s dodijeljen uređaju, koji sadrži popis priključaka čvora. Samostalno ne stvara grafove niti izvore podataka."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "Stvorio dodatak Fabric za čvor %s. Njegove vrijednosti potječu iz predmemorije dodatka; naziv računala je rezervirani naziv s kojim se nikada ne komunicira."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "Naziv: upotrijebite 1 do 64 slova, znamenke, razmake, točke, crtice ili podvlake, počevši slovom ili znamenkom."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "Pozadinski sustav: odaberite jedan s popisa."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "Poller: odaberite jedan s popisa."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "Poller: samo glavni poller može očitavati fabric dok se ne doda podrška za udaljene pollere."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "Razdoblje očitavanja: unesite cijeli broj sekundi od %d do %d."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "Prilagodnik: unesite naziv lokalnog prilagodnika kako ga imenuje jezgra sustava, primjerice mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "Priključak prilagodnika: unesite broj priključka lokalnog prilagodnika, od 1 do %d."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "Nikad"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "prije %d sekundi"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "prije %d minuta"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "prije %d sati"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "prije %d dana"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Objekti sustava Cacti"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "Instalirano"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "Nedostaje"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "Predlošci"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "Datoteka upita za podatke"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "Posljednja instalacija"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "Ponovno instaliraj predloške"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Ispravnost Fabrica"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "Zapise o ispravnosti nije moguće pročitati. Provjerite dnevnik sustava Cacti."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "Očitavanja brojača"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "Otkrivanje"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Fabric"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "Posljednje otkrivanje"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "Posljednje čitanje veza"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "Posljednje uspješno otkrivanje"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "Čitanje veza"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "Otkriveni čvorovi / priključci"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "Preskočeni retci veza"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "Nepodudarni zapisi veza"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Fabric %s: inventar je %s; posljednje uspješno otkrivanje zabilježeno je %s."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Fabric %s: dodijeljen je polleru %d, ali samo glavni poller može očitavati fabric dok se ne doda podrška za udaljene pollere. Ne očitava se; dodijelite ga glavnom polleru."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Fabric %s: zapis o ispravnosti nije moguće pročitati pa je stanje otkrivanja nepoznato. Provjerite dnevnik sustava Cacti."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Fabric %s: još nije otkriven. Očitavanja se pokreću samo s čvora pridruženog uređaju sustava Cacti, stoga jednom pokrenite naredbu \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" na glavnom polleru."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Fabric %s: nijedan čvor nije pridružen uređaju sustava Cacti pa se očitavanje ne pokreće i inventar se ne osvježava. Pridružite čvor na stranici Upravljanje Fabricom ili pokrenite naredbu \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" na glavnom polleru."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Fabric %s: nije moguće pročitati %d redaka izlaza alata iblinkinfo, najvjerojatnije zato što opis čvora oponaša izlaz alata. Ti čvorovi zadržavaju posljednja stanja veza."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Fabric %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "onemogućeno"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "Upozorenja"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "Nema upozorenja."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "Identitet"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "Broj sukoba identiteta: %d; broj otvorenih prijedloga ponovnog povezivanja: %d. Riješite ih na stranici Upravljanje Fabricom."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "Očitavanja brojača koja zahtijevaju pozornost"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "Trajanje"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "Pogreška"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "Posljednji uspjeh"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "Posljednje očitavanje"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "Ishod"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "Priključci: pročitano / neuspjelo / preskočeno"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s s"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "Svaki očitavani čvor dovršio je posljednje očitavanje."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "U redu, %s s"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "Posljednji put viđeno"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "Prisutnost"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "Vrsta"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "Nema čvorova za prikaz."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "Još nije definiran nijedan fabric."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "Priključci s najvećim čekanjem prijenosa"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "Priključci s najvećim čekanjem prijenosa"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "Inventar fabrica nije moguće pročitati. Provjerite dnevnik sustava Cacti."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "Čekanje prijenosa broji otkucaje u kojima je priključak imao podatke za slanje, ali ih nije mogao poslati zbog manjka kredita ili arbitraže. Visoka vrijednost upućuje na zagušenje prema udaljenoj strani i ne znači da je priključak ili kabel neispravan. Trajanje otkucaja nije objavljeno za trenutačne brzine veze pa su vrijednosti iskazane u otkucajima u sekundi, a ne u vremenu."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "Priključak"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "Udaljeni kraj"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "Odbačeni paketi pri prijenosu (u sekundi)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "Čekanje prijenosa (otkucaja u sekundi)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "Nijedan priključak trenutačno nema zabilježenu stopu čekanja prijenosa."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "Nepoznato"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "Čvor fabrica"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "Čvor ne postoji ili nemate dopuštenje za njegov pregled."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "Aktivan"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "Najviše što obje strane podržavaju"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "Valjanost brojača"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "Brojači"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "Grafovi"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "Veza"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "Još nije zabilježen nijedan priključak."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "Uređaj %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "Brojači %s su zasićeni te su objavljeni kao nepoznati: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "Brojači %s: broj prekida kontinuiteta %d, posljednji %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "Valjano"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "U radu"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "Ispod najviših mogućnosti, ograničeno omogućenim vrijednostima"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "Ispod najviših mogućnosti, uzrok nepoznat"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "Degradirana"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "Prekinuta"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "Preklopnik"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "Kanalni prilagodnik"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "Usmjernik"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "Pregledajte zabilježena opažanja u nastavku. Potvrde obrade osobne su za ovu sesiju, istječu kada se opažanja promijene te nikada ne potiskuju uzbune niti mijenjaju stanje ispravnosti."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "Operacije Fabrica"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "Analiza"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "Objekt"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "Zabilježeno (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "Nepoznato ili zastarjelo"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "Potvrđeno; ispravnost nepromijenjena."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "Potvrdi"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "Nema dostupnih opažanja za uređaje kojima smijete pristupiti."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "Operater Fabrica"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "Pregled Fabrica"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "Očitavanje se izvodi kao root. Pokrenite poller pod nepovlaštenim računom koji ima dopuštenje čitanja umad uređaja putem grupe."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "Dijagnostički alat ima postavljen bit setuid ili setgid. Dodatku to nikada nije potrebno."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "U dijagnostički alat ili njegov direktorij može pisati račun koji nije vlasnik ili račun pollera. Tko ima pravo pisanja, određuje što poller pokreće."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "Uređaj umad dostupan je za čitanje ili pisanje svakom računu pa bilo koji lokalni korisnik može ispitivati fabric. Ograničite pristup na grupu."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "Nepoznato upozorenje"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "Dijagnostički alati"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "Apsolutni direktorij na svakom polleru koji očitava fabric, a sadrži perfquery, ibnetdiscover i iblinkinfo. Paketi za Debian i Ubuntu instaliraju ih u /usr/sbin. Nijedan drugi program nikada se ne pokreće iz njega."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "Direktorij alata"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "Tablica naziva čvorova"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "Neobavezna apsolutna putanja do datoteke s tablicom naziva čvorova za infiniband-diags. Nazivi koje ona navodi služe isključivo za prikaz; identitet je uvijek GUID čvora."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "Istek vremena datagrama"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "Broj milisekundi koje svaki upravljački datagram smije trajati prije nego što ga alati ponovno pokušaju poslati (njihova opcija -t)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "Istek vremena naredbe"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "Broj sekundi koje jedno izvođenje alata smije trajati prije nego što bude zaustavljeno i zabilježeno kao pogreška."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "Količina izlaza u KiB koju jedno izvođenje alata smije ispisati. Veći izlaz se odbacuje i bilježi kao pogreška."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "Najveća veličina izlaza"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "Očitavanje"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "Vremensko ograničenje po čvoru"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "Broj sekundi koje jedno očitavanje čvora smije potrošiti na čitanje brojača. Priključci koji nisu stigli na red čitaju se u sljedećem ciklusu."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "Broj neuspjelih priključaka nakon kojega očitavanje čvora staje za ovaj ciklus. Priključak koji ne odgovara oduzima nekoliko sekundi."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "Ograničenje pogrešaka po čvoru"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "Indeksiraj prekinute priključke"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "Kada je označeno, upit za podatke Fabric Port prikazuje i prekinute priključke bez udaljenog kraja, kao što su nekorišteni priključci prilagodnika. Kada nije označeno, izostavljaju se dok ne prorade."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "Uklanjanje"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "Zadrži tablice dodatka pri uklanjanju"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "Kada je označeno, uklanjanje dodatka zadržava pohranu fabrica, inventara i uzoraka. Poništite odabir kako bi ih uklanjanje izbrisalo; najprije izvezite inventar sa stranice Upravljanje Fabricom. Ni u jednom slučaju ne uspostavlja se veza s fabricom."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "Direktorij alata mora biti apsolutna putanja od slova, znamenki, točaka, crtica, podvlaka i kosih crta, bez završne kose crte."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "Direktorij alata ne postoji ili nije direktorij."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "Putanja direktorija alata sadrži simboličku poveznicu. Unesite stvarnu putanju."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "Direktorij alata nije u vlasništvu korisnika root."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "U direktorij alata može pisati njegova grupa ili drugi korisnici."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "Dijagnostički alat nije u vlasništvu korisnika root."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "U dijagnostički alat može pisati njegova grupa ili drugi korisnici."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Dodatak Fabric zahtijeva PHP %s ili noviji. Ovaj poslužitelj izvršava PHP %s pa dodatak nije instaliran niti omogućen."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Dodatak Fabric nije omogućen."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Dodatak Fabric zahtijeva PHP %s ili noviji."
+
+#: setup.php
+msgid "Management"
+msgstr "Upravljanje"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "Direktorij alata nije spremljen. %s"
