@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: ig-NG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "Node gbanwere mgbe e sere ibe ahụ gasịrị, ya mere emeghị ihe ọ bụla. Nyochaa ya ma nwaa ọzọ."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "Ikike ngwaọrụ gị anaghị ekwe ka ị gbanwee ndekọ a."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "Aha: fabric ọzọ na-eji aha a ugbu a."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "Adapter: fabric ọzọ na-enyocha ọdụ adapter a na poller a ugbu a. Otu fabric maka otu ọdụ adapter."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "Enweghị ike ichekwa fabric ahụ."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "E chekwara fabric ahụ."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "Nnyocha nke fabric a na-aga n'ihu, ya mere ehichapụghị ihe ọ bụla. Nwaa ọzọ mgbe o rụchara."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "Ehichapụrụ fabric ahụ na ndekọ ihe ya. Agbanweghị ngwaọrụ Cacti ọ bụla ma kpọtụrụghị fabric ahụ."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "Enweghị ike ihichapụ fabric ahụ."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "Agbanweghị njirimara node ahụ."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "Emelitere njirimara node ahụ. A ga-enyocha ya ọzọ site na okirikiri na-abịa."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "Ntụaka ngwaọrụ ahụ bufere na node ọhụrụ ahụ."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "Enweghị ike ịkwado atụmatụ ahụ. O nwere ike ịbụ na node ndị ahụ agbanweela kemgbe e mere ya."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "Enweghị ike ịjụ atụmatụ ahụ."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "Ajụrụ atụmatụ ahụ."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "Agbanweghị ntụaka node ahụ. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "Agbanweghị ntụaka node ahụ."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "E chekwara ntụaka node ahụ."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "Ekepụtaghị ngwaọrụ ọ bụla. Lee ndekọ Cacti."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "Ekepụtara ngwaọrụ ahụ ma tụọ node ahụ na ya. Họrọ ọdụ ndị a ga-ese na eserese na ibe Eserese Ọhụrụ."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "Enweghị ike ịgụ ndekọ ihe ahụ maka mbupụ."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "E tinyere ndebiri Fabric na faịlụ ajụjụ data."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Etinyeghị ndebiri Fabric. Lee tebụl Ihe Cacti na ndekọ Cacti."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "Nlere nleba anya"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "Enweghị ike ịgụ nchọpụta ndị ahụ. Gwa onye nchịkwa ka ọ lelee ndekọ mgbakwunye ahụ."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "Nyochaa izi ezi ọdụ, obosara na ọsọ njikọ, na ngosipụta mkpọchi. Ziga esemokwu njirimara na njikọghachi ngwaọrụ n'aka onye nchịkwa; atọgharịla ihe ngụkọta."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Nchịkwa Fabric"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "Enweghị ike ịgụ ndekọ fabric ahụ. Lee ndekọ Cacti."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "Fabrics"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "Omume"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "Adapter"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "Backend"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "Aha"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "Nodes"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Poller"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "Ọnọdụ"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "Oge nnyocha"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "Enweghị fabric ọ bụla akọwapụtara ugbu a."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "Poller ehichapụrụ (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "ọdụ %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "sekọnd %d"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "Hichapụ"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "Nwere ngwaọrụ ndị ị gaghị ahụ"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "Bupụ"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "Budata fabrics na ndekọ ihe node, tinyere ntụaka ngwaọrụ, dị ka JSON tupu iwepụ nke ga-ewepụ tebụl plugin ahụ. O nweghị nzere ọ bụla."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Fabric: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "Fabric Ọhụrụ"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "Oge nnyocha (sekọnd)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "Ọdụ Adapter"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "Agbanyere"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "Chekwaa"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "Hichapụ Fabric: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "Hichapụ fabric a tinyere node %d ya, ọdụ ha, ihe nlele, na atụmatụ? Node %d ka atụrụ na ngwaọrụ Cacti; ngwaọrụ ndị ahụ, isi mmalite data ha, na faịlụ RRD ha ka e debere. Akpọtụrụghị fabric ahụ."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "Atụghị"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "Ngwaọrụ ehichapụrụ (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "Node Fabric: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "Ngwaọrụ ndị kwekọrọ na Aha Node"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (ngwaọrụ %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "Ọ dịghị"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Ngwaọrụ Cacti"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "Nchekwa na-atụ node ahụ na ngwaọrụ ahụ ma na-agbakwụnye ajụjụ data Fabric Port na ngwaọrụ ahụ, nke na-edepụta ọdụ nke node ahụ. Agbanweghị eserese, isi mmalite data, maọbụ ntọala ngwaọrụ ọ bụla. Poller nke na-enyocha fabric ahụ ga-enyocha ngwaọrụ ahụ."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "Kepụta Ngwaọrụ maka Node a"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "Enweghị ike ịkepụta ngwaọrụ ebe a."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "Kepụta Ngwaọrụ maka %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "Ikepụta ngwaọrụ ahụ na-agbakwụnye:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "Kepụta"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "Esemokwu Njirimara"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "Node"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "Ahụrụ"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "Echekwara"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "Enweghị esemokwu."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "E bipụtara ya ugboro abụọ n'otu nchọpụta"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "Nabata Njirimara Ahụrụ"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "Atụmatụ Njikọghachi"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "Ngwaọrụ"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "Node Na-efu"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "Node Ọhụrụ"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "Ọdụ Agbata Obi Ekekọrịtara"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "Enweghị atụmatụ mepere emepe."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "Kwenye"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "Jụ"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "Ngwaọrụ nchọpụta nsogbu (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "Ntọala fabric maọbụ plugin ezughị oke maọbụ adịghị mma"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "Ngwaọrụ ahụ na-efu maọbụ enweghị ike ịgba ya n'akwụkwọ ndekọ ahaziri"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "Ngwaọrụ ahụ gafere ókè oge ya ma kwụsị ya"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "Mpụtara ngwaọrụ ahụ gafere ókè nha ya ma tụfuo ya"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "Ngwaọrụ ahụ dara"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "Mpụtara ngwaọrụ ahụ enweghị ụdị a tụrụ anya ya"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "Anwaghị ya: emefuola oge maọbụ ókè ọdịda ahụ"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "Enweghị ike ịgụ maọbụ ide tebụl plugin ahụ"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Etinyeghị ndebiri Fabric. Tinyeghachi ha site na ibe ahụike."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "Atụrụla node ahụ na ngwaọrụ ugbu a."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "Ọ bụghị main poller na-enyocha fabric nke node ahụ, ya mere enweghị ike ịnyocha ngwaọrụ ya."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "Ngwaọrụ ahụ adịghị."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "Poller ọzọ dị iche na nke na-enyocha fabric a na-enyocha ngwaọrụ ahụ, ya mere o nweghị ike ịgụ nchekwa nwa oge fabric."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "Ngwaọrụ \"%s\" sitere na ndebiri ngwaọrụ %s, aha host %s, nke poller %d na-enyocha, na nlele nnweta na SNMP agbanyụrụ."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "Ajụjụ data %s dị na ya, na-edepụta ọdụ nke node ahụ. Ọ naghị ekepụta eserese maọbụ isi mmalite data n'onwe ya."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "Plugin Fabric kepụtara ya maka node %s. Ọnụọgụgụ ya sitere na nchekwa nwa oge plugin; aha host ahụ bụ aha echekwara nke a na-anaghị akpọtụrụ."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "Aha: jiri mkpụrụedemede, ọnụọgụgụ, oghere, ntụpọ, ahịrị etiti, maọbụ ahịrị okpuru 1 ruo 64, malite na mkpụrụedemede maọbụ ọnụọgụgụ."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "Backend: họrọ otu n'ime backend ndị e depụtara."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "Poller: họrọ otu n'ime poller ndị e depụtara."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "Poller: naanị main poller nwere ike ịnyocha fabric ruo mgbe agbakwụnyere nkwado remote poller."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "Oge nnyocha: tinye sekọnd zuru oke site na %d ruo %d."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "Adapter: tinye aha adapter mpaghara dị ka kernel si akpọ ya, dị ka mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "Ọdụ Adapter: tinye nọmba ọdụ nke adapter mpaghara, site na 1 ruo %d."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "Ọ dịtụbeghị"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "sekọnd %d gara aga"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "nkeji %d gara aga"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "elekere %d gara aga"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "ụbọchị %d gara aga"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Ihe Cacti"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "Etinyere"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "Adịghị"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "Ndebiri"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "Faịlụ Ajụjụ Data"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "Ntinye Ikpeazụ"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "Tinyeghachi Ndebiri"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Ahụike Fabric"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "Enweghị ike ịgụ ndekọ ahụike. Lee ndekọ Cacti."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "Nnyocha Ihe Ngụkọta"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "Nchọpụta"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Fabric"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "Nchọpụta Ikpeazụ"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "Ọgụgụ Njikọ Ikpeazụ"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "Nchọpụta Gara Nke Ọma Ikpeazụ"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "Ọgụgụ Njikọ"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "Nodes / Ọdụ Ahụrụ"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "Ahịrị Njikọ A Mafere"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "Ndekọ Njikọ Na-ekwekọghị"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Fabric %s: ndekọ ihe ahụ bụ %s; nchọpụta gara nke ọma ikpeazụ bụ %s."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Fabric %s: ekenyere ya poller %d, mana naanị main poller nwere ike ịnyocha fabric ruo mgbe agbakwụnyere nkwado remote poller. Anaghị enyocha ya; kenye ya main poller."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Fabric %s: enweghị ike ịgụ ndekọ ahụike ya, ya mere amaghị ọnọdụ nchọpụta ya. Lee ndekọ Cacti."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Fabric %s: achọpụtabeghị ya. Nnyocha na-amalite naanị site na node atụrụ na ngwaọrụ Cacti, ya mere gbaa \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" na main poller otu ugboro."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Fabric %s: enweghị node ọ bụla atụrụ na ngwaọrụ Cacti, ya mere nnyocha anaghị amalite ma anaghị emegharị ndekọ ihe ahụ. Tụọ node na ibe Nchịkwa Fabric, maọbụ gbaa \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" na main poller."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Fabric %s: enweghị ike ịgụ ahịrị iblinkinfo %d, o yikarịrị n'ihi na nkọwa node na-eṅomi mpụtara ngwaọrụ ahụ. Node ndị ahụ na-edobe ọnọdụ njikọ ikpeazụ ha."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Fabric %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "agbanyụrụ"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "Ịdọ aka ná ntị"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "Enweghị ịdọ aka ná ntị."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "Njirimara"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "Esemokwu njirimara %d na atụmatụ njikọghachi mepere emepe %d. Dozie ha na ibe Nchịkwa Fabric."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "Nnyocha Ihe Ngụkọta Chọrọ Nlebara Anya"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "Ogologo oge"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "Ọdịda"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "Ọganihu Ikpeazụ"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "Nnyocha Ikpeazụ"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "Mpụtara"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "Ọdụ Agụrụ / Dara / Mafere"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s s"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "Node ọ bụla e nyochara rụchara nnyocha ikpeazụ ya."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "OK, %s s"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "Mgbe Ikpeazụ A Hụrụ Ya"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "Ọnụnọ"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "Ụdị"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "Enweghị node a ga-egosi."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "Enweghị fabric ọ bụla akọwapụtara ugbu a."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "Ọdụ ndị nwere nchere mbufe kachasị elu"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "Ọdụ ndị Nwere Nchere Mbufe Kachasị Elu"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "Enweghị ike ịgụ ndekọ ihe fabric ahụ. Lee ndekọ Cacti."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "Nchere mbufe na-agụ ticks nke ọdụ nwere data iji ziga mana enweghị ike iziga ya, n'ihi ụkọ kredit maọbụ ikpebi. Ọnụọgụgụ dị elu na-egosi mkpọchi n'akụkụ nke ọzọ; ọ naghị egosi na ọdụ ahụ maọbụ eriri ya mebiri emebi. Ebipụtaghị ogologo tick maka ọsọ njikọ dị ugbu a, ya mere ọnụọgụgụ bụ ticks kwa sekọnd, ọ bụghị oge."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "Ọdụ"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "Mpụga"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "Ntụfu Mbufe (nkeji sekọnd ọ bụla)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "Nchere Mbufe (tiks n'otu sekọnd)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "Ọ dịghị ọdụ njikọ nwere ọnụọgụ nchere mbufe ugbu a."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "Amaghị"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "Nọọdụ Fabric"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "Nọọdụ ahụ adịghị maọbụ ị nweghị ike ịhụ ya."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "Na-arụ ọrụ"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "Nkwado Kachasị Mma nke Akụkụ Abụọ"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "Ịdị Mma nke Kaụnta"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "Kaụnta"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "Eserese"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "Njikọ"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "Ederebeghị ọdụ njikọ ọ bụla."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "Ngwaọrụ %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "Kaụnta %s ejupụtala, e bipụtara ha dị ka amaghị: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "Kaụnta %s: nkwụsịtụ %d, nke ikpeazụ %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "Ziri ezi"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "Na-arụ ọrụ"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "Dị ala karịa nke kachasị mma, oke sitere na ụkpụrụ agbanyere"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "Dị ala karịa nke kachasị mma, amaghị ihe kpatara ya"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "Belatara arụmọrụ"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "Anaghị enweta ya"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "Swiichi"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "Ngwa nkwụnye ọwa"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "Raụta"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "Nyochaa nchọpụta edere n'okpuru ebe a. Nkweta bụ maka oge nnọkọ a naanị, ha na-agwụ mgbe nchọpụta gbanwere, ma ha anaghị egbochi ọkwa ịdọ aka ná ntị ma ọ bụ gbanwee ahụike."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "Ọrụ Fabric"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "Nnyocha"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "Ihe"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "Achọpụtara (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "Amaghị ma ọ bụ ochie"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "Ekwetala; ahụike agbanweghị."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "Kweta"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "Enweghị nchọpụta dị maka ngwaọrụ ndị ị nwere ike ịnweta."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "Onye Ọrụ Fabric"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "Nlele Fabric"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "Nnyocha ahụ na-agba ọsọ dị ka root. Gbaa poller dị ka akaụntụ na-enweghị ikike pụrụ iche nke nwere ikike ịgụ ngwaọrụ umad site n'otu."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "Ngwaọrụ nchọpụta nsogbu nwere bit setuid maọbụ setgid. Plọgin ahụ anaghị achọ ya ma ọlị."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "Akaụntụ ọzọ na-abụghị onye nwe ya, maọbụ akaụntụ poller, nwere ike ide ihe na ngwaọrụ nchọpụta nsogbu maọbụ ndekọ ya. Onye ọ bụla nwere ike ide ihe n'ime ya na-ekpebi ihe poller na-agba."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "Akaụntụ ọ bụla nwere ike ịgụ maọbụ ide na ngwaọrụ umad, ya mere onye ọrụ mpaghara ọ bụla nwere ike ịjụ fabric ase. Machibido ya naanị otu."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "Ịdọ aka ná ntị amaghị"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "Ngwaọrụ Nchọpụta Nsogbu"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "Ndekọ zuru oke, na poller ọ bụla na-enyocha fabric, nke nwere perfquery, ibnetdiscover, na iblinkinfo. Ngwugwu Debian na Ubuntu na-etinye ha na /usr/sbin. Enweghị mmemme ọzọ a na-agba site na ya."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "Ndekọ Ngwaọrụ"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "Maapụ Aha Nọọdụ"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "Ụzọ zuru oke nke nhọrọ gaa na faịlụ maapụ aha nọọdụ infiniband-diags. A na-egosi naanị aha ndị o nyere; njirimara bụ mgbe niile node GUID."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "Oge Njedebe Datagram"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "Milisekọnd datagram njikwa ọ bụla nwere ike iwere tupu ngwaọrụ anwaa ya ọzọ (nhọrọ -t ha)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "Oge Njedebe Iwu"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "Sekọnd otu ọsọ ngwaọrụ nwere ike iwere tupu a kwụsị ya ma dekọọ ya dị ka ọ dara ada."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "KiB otu ọsọ ngwaọrụ nwere ike ibipụta. A na-atụfu mmepụta buru ibu ma dekọọ ya dị ka ọ dara ada."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "Mmepụta Kachasị"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "Nnyocha"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "Oke Oge Nọọdụ"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "Sekọnd otu nnyocha nọọdụ nwere ike iji gụọ kaụnta. A na-agụ ọdụ njikọ a na-eruteghị n'okirikiri na-abịa."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "Ọdụ njikọ dara ada nke ga-eme ka nnyocha nọọdụ kwụsị maka okirikiri a. Ọdụ njikọ na-azaghị na-ewe ọtụtụ sekọnd."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "Oke Ọdịda Nọọdụ"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "Depụta Ọdụ Njikọ Adịghị Arụ Ọrụ"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "Mgbe a tụrụ ya akara, ajụjụ data Fabric Port na-edepụtakwa ọdụ njikọ ndị anọghị n'ọrụ ma enweghị njedebe dịpụrụ adịpụ, dị ka ọdụ njikọ adapter a na-ejighị. Mgbe ewepụrụ akara, a na-ahapụ ha ruo mgbe ha ga-amalite ịrụ ọrụ."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "Wepụ"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "Debe Tebụl Mgbakwunye Mgbe A Na-ewepụ"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "Mgbe a tụrụ ya akara, iwepụ plọgin ahụ na-edebe fabric ya, ngwaahịa dị na ndekọ, na nlele ya. Wepụ akara ka iwepụ ahụ tufuo ha; buru ụzọ bupụ ngwaahịa dị na ndekọ site na peeji Fabric Admin. A naghị akpọtụrụ fabric ahụ n'ụzọ ọ bụla."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "Ndekọ ngwaọrụ ga-abụrịrị ụzọ zuru oke nke mkpụrụedemede, ọnụọgụ, ntụpọ, akara nkwụsị, ahịrị okpuru, na slash, na-enweghị slash n'ikpeazụ."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "Ndekọ ngwaọrụ adịghị maọbụ abụghị ndekọ."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "Ụzọ ndekọ ngwaọrụ nwere njikọ ihe atụ. Tinye ezigbo ụzọ."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "Ọ bụghị root nwe ndekọ ngwaọrụ ahụ."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "Otu ya maọbụ ndị ọzọ nwere ike ide ihe na ndekọ ngwaọrụ ahụ."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "Ọ bụghị root nwe ngwaọrụ nchọpụta nsogbu ahụ."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "Otu ya maọbụ ndị ọzọ nwere ike ide ihe na ngwaọrụ nchọpụta nsogbu ahụ."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Plọgin Fabric chọrọ PHP %s maọbụ nke ọhụrụ karịa. Sava a na-agba PHP %s, ya mere etinyeghị maọbụ agbanyeghị plọgin ahụ."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Agbanyeghị plọgin Fabric."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Plọgin Fabric chọrọ PHP %s maọbụ nke ọhụrụ karịa."
+
+#: setup.php
+msgid "Management"
+msgstr "Njikwa"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "Echekwaghị Ndekọ Ngwaọrụ ahụ. %s"

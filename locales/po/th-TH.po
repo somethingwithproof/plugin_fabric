@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: th-TH\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "โหนดมีการเปลี่ยนแปลงหลังจากแสดงหน้าเว็บ จึงไม่มีการดำเนินการใดๆ โปรดตรวจสอบและลองใหม่อีกครั้ง"
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "สิทธิ์อุปกรณ์ของคุณไม่อนุญาตให้แก้ไขรายการนี้"
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "ชื่อ: มี fabric อื่นใช้ชื่อนี้อยู่แล้ว"
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "อะแดปเตอร์: มี fabric อื่นกวาดข้อมูลพอร์ตอะแดปเตอร์นี้บน poller นี้อยู่แล้ว อนุญาตหนึ่ง fabric ต่อหนึ่งพอร์ตอะแดปเตอร์"
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "ไม่สามารถบันทึก fabric ได้"
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "บันทึก fabric แล้ว"
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "การกวาดข้อมูลของ fabric นี้กำลังทำงานอยู่ จึงไม่มีการลบใดๆ ลองใหม่อีกครั้งเมื่อเสร็จสิ้น"
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "ลบ fabric และรายการทรัพย์สินของมันแล้ว ไม่มีการเปลี่ยนแปลงอุปกรณ์ Cacti และไม่ได้ติดต่อไปยัง fabric"
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "ไม่สามารถลบ fabric ได้"
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "ข้อมูลประจำตัวของโหนดไม่มีการเปลี่ยนแปลง"
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "อัปเดตข้อมูลประจำตัวของโหนดแล้ว จะมีการกวาดข้อมูลอีกครั้งตั้งแต่รอบถัดไป"
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "ย้ายการจับคู่อุปกรณ์ไปยังโหนดใหม่แล้ว"
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "ไม่สามารถยืนยันข้อเสนอได้ โหนดอาจมีการเปลี่ยนแปลงตั้งแต่สร้างข้อเสนอ"
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "ไม่สามารถปฏิเสธข้อเสนอได้"
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "ปฏิเสธข้อเสนอแล้ว"
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "การจับคู่โหนดไม่มีการเปลี่ยนแปลง %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "การจับคู่โหนดไม่มีการเปลี่ยนแปลง"
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "บันทึกการจับคู่โหนดแล้ว"
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "ไม่ได้สร้างอุปกรณ์ใดๆ ดูบันทึก Cacti"
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "สร้างอุปกรณ์และจับคู่โหนดกับอุปกรณ์แล้ว เลือกพอร์ตที่ต้องการสร้างกราฟในหน้า New Graphs"
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "ไม่สามารถอ่านรายการทรัพย์สินเพื่อส่งออกได้"
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "ติดตั้งเทมเพลต Fabric และไฟล์ data query แล้ว"
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "ไม่ได้ติดตั้งเทมเพลต Fabric ดูตารางอ็อบเจกต์ Cacti และบันทึก Cacti"
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "มุมมองการติดตามตรวจสอบ"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "ไม่สามารถอ่านผลการสังเกตการณ์ได้ โปรดแจ้งผู้ดูแลระบบให้ตรวจสอบบันทึกของปลั๊กอิน"
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "ตรวจสอบความถูกต้องของพอร์ต ความกว้างและความเร็วของลิงก์ และมุมมองความแออัด ส่งต่อความขัดแย้งของข้อมูลประจำตัวและการเชื่อมโยงอุปกรณ์ใหม่ไปยังผู้ดูแลระบบ ห้ามรีเซ็ตตัวนับ"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "ผู้ดูแลระบบ Fabric"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "ไม่สามารถอ่านรายการ fabric ได้ ดูบันทึก Cacti"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "รายการ Fabric"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "การดำเนินการ"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "อะแดปเตอร์"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "แบ็กเอนด์"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "ชื่อ"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "โหนด"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Poller"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "สถานะ"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "ช่วงเวลาการกวาดข้อมูล"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "ยังไม่ได้กำหนด fabric"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "poller ที่ถูกลบ (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "พอร์ต %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d วินาที"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "ลบ"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "มีอุปกรณ์ที่คุณอาจไม่มีสิทธิ์ดู"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "ส่งออก"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "ดาวน์โหลด fabric และรายการโหนดพร้อมการจับคู่อุปกรณ์เป็น JSON ก่อนการถอนการติดตั้งที่จะลบตารางของปลั๊กอิน ไฟล์นี้ไม่มีข้อมูลรับรอง"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Fabric: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "Fabric ใหม่"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "ช่วงเวลาการกวาดข้อมูล (วินาที)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "พอร์ตอะแดปเตอร์"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "เปิดใช้งาน"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "บันทึก"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "ลบ Fabric: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "ลบ fabric นี้พร้อมโหนด %d โหนด พอร์ต ตัวอย่างข้อมูล และข้อเสนอของโหนดหรือไม่? มีโหนด %d โหนดที่จับคู่กับอุปกรณ์ Cacti อุปกรณ์เหล่านั้น แหล่งข้อมูล และไฟล์ RRD จะยังคงอยู่ จะไม่มีการติดต่อไปยัง fabric"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "ยังไม่ได้จับคู่"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "อุปกรณ์ที่ถูกลบ (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "โหนด Fabric: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "อุปกรณ์ที่ตรงกับชื่อโหนด"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (อุปกรณ์ %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "ไม่มี"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "อุปกรณ์ Cacti"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "การบันทึกจะจับคู่โหนดกับอุปกรณ์และเพิ่ม data query ของ Fabric Port ให้กับอุปกรณ์ซึ่งแสดงรายการพอร์ตของโหนด จะไม่มีการเปลี่ยนแปลงกราฟ แหล่งข้อมูล หรือการตั้งค่าอุปกรณ์ อุปกรณ์ต้องถูกทำโพลโดย poller ที่กวาดข้อมูล fabric"
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "สร้างอุปกรณ์สำหรับโหนดนี้"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "ไม่สามารถสร้างอุปกรณ์ได้ที่นี่"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "สร้างอุปกรณ์สำหรับ %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "การสร้างอุปกรณ์จะเพิ่ม:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "สร้าง"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "ความขัดแย้งของข้อมูลประจำตัว"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "โหนด"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "ที่พบ"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "ที่จัดเก็บ"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "ไม่มีความขัดแย้ง"
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "แสดงซ้ำสองครั้งในการค้นพบครั้งเดียว"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "ยอมรับข้อมูลประจำตัวที่พบ"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "ข้อเสนอการเชื่อมโยงใหม่"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "อุปกรณ์"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "โหนดที่หายไป"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "โหนดใหม่"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "พอร์ตเพื่อนบ้านที่ใช้ร่วมกัน"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "ไม่มีข้อเสนอที่เปิดอยู่"
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "ยืนยัน"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "ปฏิเสธ"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "เครื่องมือวินิจฉัย (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "การตั้งค่า fabric หรือปลั๊กอินไม่สมบูรณ์หรือไม่ถูกต้อง"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "ไม่มีเครื่องมือหรือไม่สามารถเรียกใช้งานได้ในไดเรกทอรีที่ตั้งค่าไว้"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "เครื่องมือทำงานเกินเวลาที่กำหนดและถูกหยุดการทำงาน"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "ผลลัพธ์ของเครื่องมือมีขนาดเกินขีดจำกัดและถูกทิ้ง"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "เครื่องมือทำงานล้มเหลว"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "ผลลัพธ์ของเครื่องมือไม่ได้อยู่ในรูปแบบที่คาดไว้"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "ไม่ได้ดำเนินการ: งบประมาณเวลาหรือความล้มเหลวถูกใช้หมดแล้ว"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "ไม่สามารถอ่านหรือเขียนตารางของปลั๊กอินได้"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "ยังไม่ได้ติดตั้งเทมเพลต Fabric โปรดติดตั้งใหม่จากหน้าสุขภาพ"
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "โหนดนี้ถูกจับคู่กับอุปกรณ์อยู่แล้ว"
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "fabric ของโหนดไม่ได้ถูกกวาดข้อมูลโดย poller หลัก จึงไม่สามารถทำโพลอุปกรณ์ได้"
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "ไม่มีอุปกรณ์นี้อยู่"
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "อุปกรณ์ถูกทำโพลโดย poller อื่นที่ไม่ใช่ตัวที่กวาดข้อมูล fabric นี้ จึงไม่สามารถอ่านแคชของ fabric ได้"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "อุปกรณ์ \"%s\" จากเทมเพลตอุปกรณ์ %s ชื่อโฮสต์ %s ทำโพลโดย poller %d โดยปิดการตรวจสอบความพร้อมใช้งานและ SNMP"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "data query %s บนอุปกรณ์นั้น ซึ่งแสดงรายการพอร์ตของโหนด โดยจะไม่สร้างกราฟและแหล่งข้อมูลใดๆ เอง"
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "สร้างโดยปลั๊กอิน Fabric สำหรับโหนด %s ค่าต่างๆ มาจากแคชของปลั๊กอิน ชื่อโฮสต์เป็นชื่อสงวนที่จะไม่มีการติดต่อ"
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "ชื่อ: ใช้ตัวอักษร ตัวเลข ช่องว่าง จุด ขีดกลาง หรือขีดล่าง 1 ถึง 64 ตัว โดยขึ้นต้นด้วยตัวอักษรหรือตัวเลข"
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "แบ็กเอนด์: เลือกหนึ่งในแบ็กเอนด์ที่แสดงอยู่"
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "Poller: เลือกหนึ่งใน poller ที่แสดงอยู่"
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "Poller: มีเพียง poller หลักเท่านั้นที่สามารถกวาดข้อมูล fabric ได้จนกว่าจะมีการเพิ่มการรองรับ poller ระยะไกล"
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "ช่วงเวลาการกวาดข้อมูล: ป้อนจำนวนเต็มวินาทีตั้งแต่ %d ถึง %d"
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "อะแดปเตอร์: ป้อนชื่ออะแดปเตอร์ภายในเครื่องตามที่เคอร์เนลตั้งชื่อ เช่น mlx5_0"
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "พอร์ตอะแดปเตอร์: ป้อนหมายเลขพอร์ตของอะแดปเตอร์ภายในเครื่อง ตั้งแต่ 1 ถึง %d"
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "ไม่เคย"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "%d วินาทีที่แล้ว"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "%d นาทีที่แล้ว"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "%d ชั่วโมงที่แล้ว"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "%d วันที่แล้ว"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "อ็อบเจกต์ Cacti"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "ติดตั้งแล้ว"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "ขาดหาย"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "เทมเพลต"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "ไฟล์ Data Query"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "การติดตั้งล่าสุด"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "ติดตั้งเทมเพลตใหม่"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "สุขภาพของ Fabric"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "ไม่สามารถอ่านรายการสุขภาพได้ ดูบันทึก Cacti"
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "การกวาดข้อมูลตัวนับ"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "การค้นหา"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Fabric"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "การค้นพบล่าสุด"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "การอ่านลิงก์ล่าสุด"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "การค้นหาที่สำเร็จล่าสุด"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "การอ่านลิงก์"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "โหนด / พอร์ตที่พบ"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "บรรทัดลิงก์ที่ข้าม"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "รายการลิงก์ที่ไม่ตรงกัน"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Fabric %s: รายการทรัพย์สินมีสถานะ %s; การค้นพบที่สำเร็จล่าสุดคือ %s"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Fabric %s: ถูกกำหนดให้กับ poller %d แต่มีเพียง poller หลักเท่านั้นที่สามารถกวาดข้อมูล fabric ได้จนกว่าจะมีการเพิ่มการรองรับ poller ระยะไกล จึงไม่มีการกวาดข้อมูล โปรดกำหนดให้กับ poller หลัก"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Fabric %s: ไม่สามารถอ่านรายการสุขภาพได้ จึงไม่ทราบสถานะการค้นพบ ดูบันทึก Cacti"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Fabric %s: ยังไม่ถูกค้นพบ การกวาดข้อมูลจะเริ่มจากโหนดที่จับคู่กับอุปกรณ์ Cacti เท่านั้น ดังนั้นให้รัน \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" บน poller หลักหนึ่งครั้ง"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Fabric %s: ไม่มีโหนดใดจับคู่กับอุปกรณ์ Cacti จึงไม่มีการเริ่มกวาดข้อมูลและไม่รีเฟรชรายการทรัพย์สิน จับคู่โหนดในหน้าผู้ดูแลระบบ Fabric หรือรัน \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" บน poller หลัก"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Fabric %s: ไม่สามารถอ่าน %d บรรทัดจาก iblinkinfo ได้ ซึ่งมักเกิดจากคำอธิบายโหนดมีรูปแบบคล้ายผลลัพธ์ของเครื่องมือ โหนดเหล่านั้นจะคงสถานะลิงก์ล่าสุดไว้"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Fabric %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "ปิดใช้งาน"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "คำเตือน"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "ไม่มีคำเตือน"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "ข้อมูลประจำตัว"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "มีความขัดแย้งของข้อมูลประจำตัว %d รายการ และข้อเสนอการเชื่อมโยงใหม่ที่เปิดอยู่ %d รายการ โปรดแก้ไขในหน้าผู้ดูแลระบบ Fabric"
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "การกวาดข้อมูลตัวนับที่ต้องตรวจสอบ"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "ระยะเวลา"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "ความล้มเหลว"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "ความสำเร็จล่าสุด"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "การกวาดข้อมูลล่าสุด"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "ผลลัพธ์"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "พอร์ตที่อ่าน / ล้มเหลว / ข้าม"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s วินาที"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "ทุกโหนดที่กวาดข้อมูลเสร็จสิ้นการกวาดข้อมูลล่าสุดแล้ว"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "ปกติ, %s วินาที"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "พบล่าสุด"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "สถานะการมีอยู่"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "ประเภท"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "ไม่มีโหนดที่จะแสดง"
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "ยังไม่ได้กำหนด fabric"
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "พอร์ตที่มีเวลารอการส่งข้อมูลสูงสุด"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "พอร์ตที่มีเวลารอการส่งข้อมูลสูงสุด"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "ไม่สามารถอ่านรายการทรัพย์สินของ fabric ได้ ดูบันทึก Cacti"
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "เวลารอการส่งข้อมูลนับจำนวน tick ที่พอร์ตมีข้อมูลต้องส่งแต่ไม่สามารถส่งได้ เนื่องจากขาดเครดิตหรือการรอจัดสรรสิทธิ์ ค่าที่สูงแสดงถึงความแออัดไปยังฝั่งปลายทาง ไม่ได้แสดงว่าพอร์ตหรือสายเคเบิลมีปัญหา ไม่มีการเผยแพร่ความยาวของ tick สำหรับความเร็วลิงก์ปัจจุบัน ดังนั้นค่าจึงเป็นจำนวน tick ต่อวินาที ไม่ใช่เวลา"
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "พอร์ต"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "ปลายทาง"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "ข้อมูลส่งออกที่ถูกทิ้ง (ต่อวินาที)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "การรอส่งข้อมูล (ticks ต่อวินาที)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "ไม่มีพอร์ตที่มีอัตราการรอส่งข้อมูลในปัจจุบัน"
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "ไม่ทราบ"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "โหนด Fabric"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "ไม่พบโหนดนี้ หรือคุณอาจไม่มีสิทธิ์ดู"
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "ใช้งานอยู่"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "ดีที่สุดที่ทั้งสองฝั่งรองรับ"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "ความถูกต้องของตัวนับ"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "ตัวนับ"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "กราฟ"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "ลิงก์"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "ยังไม่มีพอร์ตที่บันทึกไว้"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "อุปกรณ์ %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "ตัวนับ %s อิ่มตัว จึงเผยแพร่เป็นไม่ทราบค่า: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "ตัวนับ %s: ข้อมูลไม่ต่อเนื่อง %d ครั้ง ล่าสุด %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "ถูกต้อง"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "ทำงาน"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "ต่ำกว่าค่าสูงสุดที่รองรับ โดยถูกจำกัดด้วยค่าที่เปิดใช้งาน"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "ต่ำกว่าค่าสูงสุดที่รองรับ ไม่ทราบสาเหตุ"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "ประสิทธิภาพลดลง"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "ไม่สามารถติดต่อได้"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "สวิตช์"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "อะแดปเตอร์ช่องสัญญาณ"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "เราเตอร์"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "ตรวจสอบผลการสังเกตการณ์ที่บันทึกไว้ด้านล่าง การรับทราบมีผลเฉพาะในเซสชันนี้ จะหมดอายุเมื่อผลการสังเกตการณ์เปลี่ยนแปลง และจะไม่ระงับการแจ้งเตือนหรือเปลี่ยนสถานะสุขภาพ"
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "การปฏิบัติการ Fabric"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "การตรวจสอบเชิงลึก"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "ออบเจ็กต์"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "เวลาที่สังเกตการณ์ (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "ไม่ทราบค่าหรือข้อมูลเก่า"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "รับทราบแล้ว สถานะสุขภาพยังคงเดิม"
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "รับทราบ"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "ไม่มีผลการสังเกตการณ์สำหรับอุปกรณ์ที่คุณมีสิทธิ์เข้าถึง"
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "ผู้ปฏิบัติการ Fabric"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "มุมมอง Fabric"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "การสแกนทำงานด้วยสิทธิ์ root ควรรันโพลเลอร์ด้วยบัญชีที่ไม่มีสิทธิ์พิเศษซึ่งมีสิทธิ์อ่านอุปกรณ์ umad ผ่านกลุ่ม"
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "เครื่องมือวินิจฉัยมีการตั้งค่าบิต setuid หรือ setgid ซึ่งปลั๊กอินไม่จำเป็นต้องใช้เลย"
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "เครื่องมือวินิจฉัยหรือไดเรกทอรีของเครื่องมือสามารถถูกเขียนโดยบัญชีอื่นที่ไม่ใช่เจ้าของ หรือโดยบัญชีของโพลเลอร์ ผู้ที่สามารถเขียนได้จะกำหนดได้ว่าจะให้โพลเลอร์รันอะไร"
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "อุปกรณ์ umad สามารถอ่านหรือเขียนได้โดยทุกบัญชี ทำให้ผู้ใช้ในเครื่องทุกคนสามารถสืบค้นข้อมูล Fabric ได้ ควรจำกัดสิทธิ์ไว้เฉพาะกลุ่ม"
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "คำเตือนที่ไม่ทราบสาเหตุ"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "เครื่องมือวินิจฉัย"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "ไดเรกทอรีพาธสัมบูรณ์บนโพลเลอร์แต่ละตัวที่สแกน Fabric ซึ่งเก็บไฟล์ perfquery, ibnetdiscover และ iblinkinfo แพ็กเกจของ Debian และ Ubuntu จะติดตั้งไว้ที่ /usr/sbin จะไม่มีการรันโปรแกรมอื่นใดจากไดเรกทอรีนี้"
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "ไดเรกทอรีเครื่องมือ"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "แผนผังชื่อโหนด"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "พาธสัมบูรณ์ (ไม่บังคับ) ไปยังไฟล์แผนผังชื่อโหนดของ infiniband-diags ชื่อจากไฟล์นี้ใช้สำหรับแสดงผลเท่านั้น ตัวตนของโหนดยังคงเป็น GUID ของโหนดเสมอ"
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "หมดเวลาดาตาแกรม"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "จำนวนมิลลิวินาทีที่ดาตาแกรมการจัดการแต่ละรายการใช้ได้ก่อนที่เครื่องมือจะลองใหม่ (ตัวเลือก -t ของเครื่องมือ)"
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "หมดเวลาคำสั่ง"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "จำนวนวินาทีที่การรันเครื่องมือหนึ่งครั้งใช้ได้ก่อนที่จะถูกหยุดและบันทึกว่าล้มเหลว"
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "ขนาดผลลัพธ์สูงสุด (KiB) ที่การรันเครื่องมือหนึ่งครั้งพิมพ์ได้ ผลลัพธ์ที่ใหญ่กว่านี้จะถูกละทิ้งและบันทึกว่าล้มเหลว"
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "ผลลัพธ์สูงสุด"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "การสแกน"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "ขีดจำกัดเวลาต่อโหนด"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "จำนวนวินาทีที่การสแกนหนึ่งโหนดใช้ในการอ่านตัวนับได้ พอร์ตที่ยังอ่านไม่ถึงจะถูกอ่านในรอบถัดไป"
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "จำนวนพอร์ตที่ล้มเหลวก่อนที่จะหยุดการสแกนโหนดสำหรับรอบนี้ พอร์ตที่ไม่ตอบสนองจะเสียเวลาหลายวินาที"
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "ขีดจำกัดความล้มเหลวต่อโหนด"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "ทำดัชนีพอร์ตที่ล่ม"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "เมื่อเลือก คำสั่งสืบค้นข้อมูล Fabric Port จะแสดงพอร์ตที่ล่มและไม่มีปลายทางฝั่งตรงข้ามด้วย เช่น พอร์ตอะแดปเตอร์ที่ไม่ได้ใช้งาน หากไม่เลือก พอร์ตเหล่านั้นจะถูกเว้นไว้จนกว่าจะกลับมาทำงาน"
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "ถอนการติดตั้ง"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "เก็บตารางของปลั๊กอินไว้เมื่อถอนการติดตั้ง"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "เมื่อเลือก การถอนการติดตั้งปลั๊กอินจะยังคงเก็บข้อมูล Fabric รายการอุปกรณ์ และตัวอย่างข้อมูลไว้ ยกเลิกการเลือกเพื่อให้การถอนการติดตั้งลบข้อมูลเหล่านี้ออก ควรส่งออกรายการอุปกรณ์จากหน้าผู้ดูแล Fabric ก่อน ไม่ว่าจะเลือกแบบใด ระบบจะไม่ติดต่อไปยัง Fabric โดยตรง"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "ไดเรกทอรีเครื่องมือต้องเป็นพาธสัมบูรณ์ที่ประกอบด้วยตัวอักษร ตัวเลข จุด เครื่องหมายขีดกลาง ขีดล่าง และทับ โดยไม่มีเครื่องหมายทับปิดท้าย"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "ไม่มีไดเรกทอรีเครื่องมือนี้อยู่ หรือไม่ใช่ไดเรกทอรี"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "พาธไดเรกทอรีเครื่องมือมีลิงก์สัญลักษณ์ โปรดป้อนพาธจริง"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "ไดเรกทอรีเครื่องมือไม่ได้เป็นของ root"
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "ไดเรกทอรีเครื่องมือสามารถถูกเขียนโดยกลุ่มเจ้าของหรือผู้อื่นได้"
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "เครื่องมือวินิจฉัยไม่ได้เป็นของ root"
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "เครื่องมือวินิจฉัยสามารถถูกเขียนโดยกลุ่มเจ้าของหรือผู้อื่นได้"
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "ปลั๊กอิน Fabric ต้องการ PHP %s หรือใหม่กว่า เซิร์ฟเวอร์นี้รัน PHP %s จึงไม่ได้ติดตั้งหรือเปิดใช้งานปลั๊กอิน"
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "ปลั๊กอิน Fabric ไม่ได้เปิดใช้งานอยู่"
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "ปลั๊กอิน Fabric ต้องการ PHP %s หรือใหม่กว่า"
+
+#: setup.php
+msgid "Management"
+msgstr "การจัดการ"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "ไม่ได้บันทึกไดเรกทอรีเครื่องมือ %s"

@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: ar-MA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "تغيرت العقدة بعد رسم الصفحة، لذا لم يُنفذ أي إجراء. راجعها وحاول مرة أخرى."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "صلاحيات الأجهزة الخاصة بك لا تسمح بتغيير هذا السجل."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "الاسم: هناك نسيج آخر يستخدم هذا الاسم بالفعل."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "المحول: هناك نسيج آخر يمسح منفذ المحول هذا على هذا المستطلع بالفعل. نسيج واحد فقط لكل منفذ محول."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "تعذر حفظ النسيج."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "تم حفظ النسيج."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "عملية مسح لهذا النسيج قيد التشغيل، لذا لم يُحذف أي شيء. حاول مرة أخرى عند انتهائها."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "تم حذف النسيج وجرده. لم يتغير أي جهاز في Cacti ولم يتم الاتصال بالنسيج."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "تعذر حذف النسيج."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "لم تتغير هوية العقدة."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "تم تحديث هوية العقدة. سيتم مسحها مجدداً بدءاً من الدورة القادمة."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "تم نقل ربط الجهاز إلى العقدة الجديدة."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "تعذر تأكيد المقترح. ربما تغيرت العقد منذ إنشائه."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "تعذر رفض المقترح."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "تم رفض المقترح."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "لم يتغير ربط العقدة. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "لم يتغير ربط العقدة."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "تم حفظ ربط العقدة."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "لم يُنشأ أي جهاز. راجع سجل Cacti."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "تم إنشاء الجهاز وربط العقدة به. اختر المنافذ المراد رسمها بيانياً في صفحة الرسوم البيانية الجديدة."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "تعذرت قراءة الجرد للتصدير."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "تم تثبيت قوالب Fabric وملف استعلام البيانات."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "لم تُثبت قوالب Fabric. راجع جدول كائنات Cacti وسجل Cacti."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "عرض المراقبة"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "تعذرت قراءة الملاحظات. اطلب من المسؤول فحص سجل الملحق."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "تحقق من صلاحية المنافذ، وعرض الرابط وسرعته، وعرض الازدحام. صعّد تعارضات الهوية وإعادة ربط الأجهزة إلى المسؤول؛ ولا تقم بتصفير العدادات."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "إدارة Fabric"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "تعذرت قراءة سجلات النسيج. راجع سجل Cacti."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "الأنسجة"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "الإجراءات"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "المحول"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "الواجهة الخلفية"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "الاسم"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "العقد"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "المُستطلع"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "الحالة"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "فترة المسح"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "لم يتم تعريف أي أنسجة بعد."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "مستطلع محذوف (المعرف %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "المنفذ %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d ثانية"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "حذف"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "يحتوي على أجهزة قد لا تملك صلاحية رؤيتها"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "تصدير"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "نزّل الأنسجة وجرد العقد، مع روابط الأجهزة، بصيغة JSON قبل إلغاء التثبيت الذي يحذف جداول الملحق. لا يحتوي الملف على أي بيانات اعتماد."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "النسيج: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "نسيج جديد"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "فترة المسح (بالثواني)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "منفذ المحول"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "مفعل"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "حفظ"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "حذف النسيج: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "هل تريد حذف هذا النسيج مع عقده (%d) ومنافذها وعيناتها ومقترحاتها؟ هناك %d عقدة مربوطة بأجهزة Cacti؛ سيتم الاحتفاظ بتلك الأجهزة ومصادر بياناتها وملفات RRD. لن يتم الاتصال بالنسيج."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "غير مربوط"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "جهاز محذوف (المعرف %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "عقدة النسيج: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "الأجهزة المطابقة لاسم العقدة"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (الجهاز %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "لا شيء"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "جهاز Cacti"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "يربط الحفظ العقدة بالجهاز ويضيف استعلام بيانات Fabric Port إلى الجهاز، مما يعرض قائمة بمنافذ العقدة. لا يتغير أي رسم بياني أو مصدر بيانات أو إعداد للجهاز. يجب استطلاع الجهاز بواسطة نفس المستطلع الذي يمسح النسيج."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "إنشاء جهاز لهذه العقدة"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "لا يمكن إنشاء الأجهزة هنا."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "إنشاء جهاز لـ %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "يؤدي إنشاء الجهاز إلى إضافة:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "إنشاء"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "تعارضات الهوية"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "العقدة"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "المرصودة"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "المحفوظة"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "لا توجد تعارضات."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "طُبع مرتين في عملية اكتشاف واحدة"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "قبول الهوية المرصودة"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "مقترحات إعادة الربط"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "الجهاز"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "عقدة مفقودة"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "عقدة جديدة"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "منفذ الجار المشترك"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "لا توجد مقترحات مفتوحة."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "تأكيد"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "رفض"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "أدوات التشخيص (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "إعدادات النسيج أو الملحق غير مكتملة أو غير صالحة"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "الأداة مفقودة أو غير قابلة للتنفيذ في المجلد المُعد"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "تجاوزت الأداة حدها الزمني وتم إيقافها"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "تجاوزت مخرجات الأداة حد الحجم وتم تجاهلها"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "فشلت الأداة"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "لم تكن مخرجات الأداة بالشكل المتوقع"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "لم تتم المحاولة: تم استنفاد مهلة الوقت أو حد الإخفاقات"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "تعذرت قراءة جداول الملحق أو الكتابة فيها"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "قوالب Fabric غير مثبتة. أعد تثبيتها من صفحة الصحة."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "العقدة مربوطة بجهاز بالفعل."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "لا يتم مسح نسيج العقدة بواسطة المستطلع الرئيسي، لذا تعذر استطلاع جهازها."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "الجهاز غير موجود."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "يتم استطلاع الجهاز بواسطة مستطلع آخر غير الذي يمسح هذا النسيج، لذا تعذر عليه قراءة ذاكرة التخزين المؤقت للنسيج."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "جهاز \"%s\" من قالب الجهاز %s، اسم المضيف %s، يُستطلع بواسطة المستطلع %d، مع إيقاف فحوصات التوافر وSNMP."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "استعلام البيانات %s عليه، والذي يسرد منافذ العقدة. لا ينشئ أي رسم بياني أو مصدر بيانات من تلقاء نفسه."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "تم إنشاؤه بواسطة ملحق Fabric للعقدة %s. تأتي قيمه من ذاكرة التخزين المؤقت للملحق؛ اسم المضيف هو اسم محجوز لا يتم الاتصال به أبداً."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "الاسم: استخدم من 1 إلى 64 حرفاً أو رقماً أو مسافة أو نقطة أو شرطة أو شرطة سفلية، على أن يبدأ بحرف أو رقم."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "الواجهة الخلفية: اختر إحدى الواجهات الخلفية المدرجة."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "المستطلع: اختر أحد المستطلعات المدرجة."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "المستطلع: لا يمكن إلا للمستطلع الرئيسي مسح النسيج حتى يتم دعم المستطلعات البعيدة."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "فترة المسح: أدخل عدداً صحيحاً من الثواني من %d إلى %d."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "المحول: أدخل اسم المحول المحلي كما تسميه النواة، مثل mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "منفذ المحول: أدخل رقم منفذ المحول المحلي، من 1 إلى %d."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "أبداً"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "منذ %d ثوانٍ"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "منذ %d دقائق"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "منذ %d ساعات"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "منذ %d أيام"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "كائنات Cacti"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "مثبت"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "مفقودة"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "القوالب"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "ملف استعلام البيانات"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "آخر تثبيت"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "إعادة تثبيت القوالب"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "صحة Fabric"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "تعذرت قراءة سجلات الصحة. راجع سجل Cacti."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "عمليات مسح العدادات"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "الاكتشاف"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "النسيج"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "آخر اكتشاف"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "آخر قراءة للروابط"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "آخر اكتشاف ناجح"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "قراءة الروابط"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "العقد / المنافذ المرصودة"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "أسطر الروابط المتجاوزة"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "سجلات الروابط غير المطابقة"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "النسيج %s: الجرد %s؛ آخر اكتشاف ناجح كان %s."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "النسيج %s: مُسند إلى المستطلع %d، ولكن لا يمكن إلا للمستطلع الرئيسي مسح النسيج حتى يتم دعم المستطلعات البعيدة. لا يتم مسحه حالياً؛ أسنده إلى المستطلع الرئيسي."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "النسيج %s: تعذرت قراءة سجل صحته، لذا فإن حالة اكتشافه غير معروفة. راجع سجل Cacti."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "النسيج %s: لم يتم اكتشافه بعد. تبدأ عمليات المسح فقط من عقدة مربوطة بجهاز Cacti، لذا نفّذ \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" على المستطلع الرئيسي مرة واحدة."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "النسيج %s: لا توجد عقدة مربوطة بجهاز Cacti، لذا لا تبدأ أي عملية مسح ولا يتم تحديث الجرد. اربط عقدة في صفحة إدارة Fabric، أو نفّذ \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" على المستطلع الرئيسي."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "النسيج %s: تعذرت قراءة %d من أسطر iblinkinfo، غالباً لأن وصف عقدة ما يحاكي مخرجات الأداة. تحتفظ تلك العقد بآخر حالات روابطها."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "النسيج %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "معطل"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "تحذيرات"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "لا توجد تحذيرات."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "الهوية"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "%d تعارض هوية و %d مقترح إعادة ربط مفتوح. قم بحلها في صفحة إدارة Fabric."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "عمليات مسح العدادات التي تتطلب الانتباه"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "المدة"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "الفشل"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "آخر نجاح"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "آخر مسح"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "النتيجة"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "المنافذ المقروءة / الفاشلة / المتجاوزة"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s ث"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "أكملت كل عقدة ممسوحة آخر عملية مسح لها."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "سليم، %s ث"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "آخر ظهور"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "التواجد"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "النوع"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "لا توجد عقد للعرض."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "لم يتم تعريف أي أنسجة بعد."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "المنافذ ذات أعلى انتظار للإرسال"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "المنافذ ذات أعلى انتظار للإرسال"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "تعذرت قراءة جرد النسيج. راجع سجل Cacti."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "يحسب انتظار الإرسال النبضات التي كان لدى المنفذ فيها بيانات لإرسالها ولكنه لم يتمكن من ذلك، لنقص الأرصدة أو التحكيم. تشير القيمة العالية إلى ازدحام باتجاه الطرف البعيد؛ ولا تعني وجود عطل في المنفذ أو كبله. مدة النبضة غير منشورة لسرعات الروابط الحالية، لذا فإن القيم هي نبضات في الثانية وليست زمناً."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "المنفذ"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "الطرف البعيد"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "الإرسالات المهملة (في الثانية)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "انتظار الإرسال (نبضات في الثانية)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "لا يوجد أي منفذ لديه معدل انتظار إرسال حالي."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "غير معروف"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "عقدة Fabric"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "العقدة غير موجودة أو ليست لديك صلاحية للاطلاع عليها."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "نشط"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "أفضل ما يدعمه الطرفان"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "صلاحية العدادات"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "العدادات"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "الرسوم البيانية"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "الرابط"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "لم يتم تسجيل أي منافذ بعد."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "الجهاز %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "تشبّعت عدادات %s، ونُشرت كغير معروفة: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "عدادات %s: %d انقطاعات، آخرها %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "صالح"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "متصل"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "أقل من الأفضل، ومحدود بالقيم المفعّلة"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "أقل من الأفضل، والسبب غير معروف"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "متدهور"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "منقطع"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "مبدّل"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "محوّل قناة"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "موجّه"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "راجع الملاحظات المسجلة أدناه. الإقرارات شخصية لهذه الجلسة، وتنتهي صلاحيتها عند تغير الملاحظات، ولا تكتم التنبيهات أبداً ولا تغير الحالة الصحية."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "عمليات Fabric"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "التحقيق"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "الكائن"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "تاريخ الرصد (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "غير معروف أو قديم"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "تم الإقرار؛ الحالة الصحية لم تتغير."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "إقرار"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "لا تتوفر ملاحظات للأجهزة التي يحق لك الوصول إليها."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "مشغّل Fabric"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "عرض Fabric"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "يشتغل المسح بصلاحيات root. شغّل المجمّع (poller) بحساب غير ذي امتيازات يملك صلاحية القراءة لأجهزة umad عبر مجموعة."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "تحتوي أداة تشخيص على بت setuid أو setgid. لا يحتاج الملحق إلى ذلك إطلاقاً."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "يمكن الكتابة في أداة تشخيص أو مجلدها من طرف حساب غير مالكها، أو من طرف حساب المجمّع (poller). من يستطيع الكتابة فيها يتحكم فيما يشغّله المجمّع."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "يمكن قراءة جهاز umad أو الكتابة فيه من طرف أي حساب، مما يتيح لأي مستخدم محلي استعلام الـ fabric. قصر الوصول عليه لمجموعة محددة."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "تحذير غير معروف"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "أدوات التشخيص"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "مسار مجلد مطلق على كل مجمّع (poller) يمسح الـ fabric، يحتوي على perfquery وibnetdiscover وiblinkinfo. تثبّتها حزم Debian وUbuntu في /usr/sbin. لا يتم تشغيل أي برنامج آخر منه."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "مجلد الأدوات"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "خريطة أسماء العقد"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "مسار مطلق اختياري لملف خريطة أسماء العقد الخاص بـ infiniband-diags. تُعرض الأسماء التي يوفرها فقط؛ وتظل الهوية دائماً هي GUID العقدة."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "مهلة حزمة البيانات (Datagram)"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "عدد الملي ثانية التي قد تستغرقها كل حزمة بيانات إدارية قبل أن تعيد الأدوات محاولتها (خيار -t الخاص بها)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "مهلة الأمر"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "عدد الثواني التي قد يستغرقها تشغيل أداة واحدة قبل إيقافها وتسجيلها كفاشلة."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "حجم المخرجات بالكيلوبايت الثنائي (KiB) الذي يُسمح لتشغيل أداة واحدة بطباعته. يتم تجاهل المخرجات الأكبر وتسجيلها كفاشلة."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "الحد الأقصى للمخرجات"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "المسح"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "الميزانية الزمنية للعقدة"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "عدد الثواني التي قد يقضيها مسح عقدة واحدة في قراءة العدادات. المنافذ التي لم يتم الوصول إليها تُقرأ في الدورة التالية."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "عدد المنافذ الفاشلة التي يتوقف بعدها مسح العقدة لهذه الدورة. المنفذ الذي لا يستجيب يستهلك عدة ثوانٍ."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "حد إخفاقات العقدة"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "فهرسة المنافذ غير المتصلة"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "عند التحديد، يسرد استعلام بيانات Fabric Port أيضاً المنافذ غير المتصلة التي ليس لها طرف بعيد، مثل منافذ المحول غير المستخدمة. عند إلغاء التحديد، تُستبعد حتى تصبح متصلة."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "إلغاء التثبيت"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "الاحتفاظ بجداول الملحق عند إلغاء التثبيت"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "عند التحديد، يحتفظ إلغاء تثبيت الملحق بشبكات fabric والجرد والعينات الخاصة به. ألغِ التحديد لحذفها عند إلغاء التثبيت؛ صدّر الجرد أولاً من صفحة Fabric Admin. لا يتم الاتصال بالـ fabric في كلتا الحالتين."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "يجب أن يكون مجلد الأدوات مساراً مطلقاً يتكون من أحرف وأرقام ونقاط وشرطات وشرطات سفلية وشرطات مائلة، دون شرطة مائلة في النهاية."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "مجلد الأدوات غير موجود أو ليس مجلداً."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "يحتوي مسار مجلد الأدوات على رابط رمزي. أدخل المسار الحقيقي."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "مجلد الأدوات ليس مملوكاً لـ root."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "يمكن الكتابة في مجلد الأدوات من طرف مجموعته أو من طرف الآخرين."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "إحدى أدوات التشخيص ليست مملوكة لـ root."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "يمكن الكتابة في إحدى أدوات التشخيص من طرف مجموعتها أو من طرف الآخرين."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "يتطلب ملحق Fabric إصدار PHP %s أو أحدث. يشغّل هذا الخادم PHP %s، لذلك لم يتم تثبيت الملحق أو تفعيله."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "ملحق Fabric غير مفعّل."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "يتطلب ملحق Fabric إصدار PHP %s أو أحدث."
+
+#: setup.php
+msgid "Management"
+msgstr "الإدارة"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "لم يتم حفظ مجلد الأدوات. %s"
