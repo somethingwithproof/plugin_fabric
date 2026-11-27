@@ -163,11 +163,24 @@ it('registers read-only MCP abilities gated by View realm and Doctor + CasC prov
 	expect($healthResult['status'])->toBe('pass')
 		->and($healthResult['schemaCurrent'])->toBeTrue();
 
-	// Doctor checks
+	// Doctor checks (evaluated canonical descriptors, status ok|warn|fail|info)
 	$checks = (new DoctorProvider($eval))->checks();
 	expect(array_column($checks, 'id'))->toBe(['fabric.schema', 'fabric.poller_freshness', 'fabric.identity_conflicts', 'fabric.ufm_vault']);
 
-	// CasC provider
+	foreach ($checks as $check) {
+		expect($check)->toHaveKeys(['id', 'plugin', 'category', 'title', 'status', 'message', 'details', 'remediation'])
+			->and($check['plugin'])->toBe('fabric')
+			->and(['ok', 'warn', 'fail', 'info'])->toContain($check['status'])
+			->and($check['status'])->toBe('ok')
+			->and($check['message'])->not->toBe('');
+	}
+
+	$hookChecks = fabric_doctor_register_checks(['mode' => 'run', 'plugin' => 'fabric']);
+	expect(array_is_list($hookChecks))->toBeTrue()
+		->and(array_key_exists('mode', $hookChecks))->toBeFalse()
+		->and(array_column($hookChecks, 'id'))->toBe(['fabric.schema', 'fabric.poller_freshness', 'fabric.identity_conflicts', 'fabric.ufm_vault']);
+
+	// CasC provider (1-arg ProviderRegistrar contract on array<string, mixed>)
 	$casc = (new CascProvider(new ConfigService(
 		new SettingsRepository(false),
 		new FabricRepository(false, $clock),
@@ -175,9 +188,36 @@ it('registers read-only MCP abilities gated by View realm and Doctor + CasC prov
 		new ConfigRepository(false),
 	)))->descriptor();
 
-	expect($casc['plugin'])->toBe('fabric')
-		->and($casc['formats'])->toBe([ConfigCodec::YAML, ConfigCodec::XML])
-		->and(($casc['export'])(ConfigCodec::YAML))->toContain('schema_version: 1');
+	expect($casc['slug'])->toBe('fabric')
+		->and($casc['schemaVersion'])->toBe('1.0');
+
+	$exported = ($casc['export'])([]);
+	expect($exported)->toHaveKeys(['config', 'reference'])
+		->and($exported['config']['schema_version'])->toBe(ConfigCodec::VERSION)
+		->and(($casc['validate'])($exported['config']))->toBe([])
+		->and(($casc['validate'])($exported))->toBe([])
+		->and(($casc['validate'])(['schema_version' => 999]))->not->toBeEmpty()
+		->and(($casc['plan'])($exported['config'], []))->toBe([]);
+
+	$desired = $exported['config'];
+	$desired['settings']['fabric_mad_timeout'] = 2000;
+	expect(($casc['plan'])($desired, []))->toHaveCount(1)
+		->and(($casc['plan'])(['schema_version' => 999], [])[0]['operation'])->toBe('error')
+		->and(($casc['apply'])($desired, 'wrong-hash', [])['ok'])->toBeFalse();
+
+	$cascReg = new class {
+		/** @var list<array<string, mixed>> */
+		public array $registered = [];
+
+		/** @param array<string, mixed> $descriptor */
+		public function register(array $descriptor): void {
+			$this->registered[] = $descriptor;
+		}
+	};
+	expect(fabric_casc_register_providers($cascReg))->toBe($cascReg)
+		->and($cascReg->registered)->toHaveCount(1)
+		->and($cascReg->registered[0]['slug'])->toBe('fabric')
+		->and(fabric_casc_register_providers(null)['slug'])->toBe('fabric');
 
 	// Replicator never includes vault key file in non-secret settings.
 	$rep = new ReplicatorRepository(false);
@@ -185,14 +225,40 @@ it('registers read-only MCP abilities gated by View realm and Doctor + CasC prov
 });
 
 it('registers decoupled doctor_register_debug_info and api_register_resources hooks and ships a valid Config/State schema', function () {
+	$now = 1800000000;
 	$GLOBALS['__fabric_db_rows'] = [
-		'FROM settings' => [['value' => (string) Schema::VERSION]],
+		'FROM settings'                 => [['value' => (string) Schema::VERSION]],
+		'FROM plugin_fabric_fabric'     => [[
+			'id' => 1, 'name' => 'ib0', 'backend' => 'diags', 'poller_id' => 1,
+			'sweep_interval' => 300, 'adapter' => 'mlx5_0', 'adapter_port' => 1, 'admin_state' => 'enabled',
+		]],
+		'FROM plugin_fabric_health'     => [[
+			'fabric_id' => 1, 'discovery_attempt' => $now - 30, 'discovery_success' => $now - 30,
+			'discovery_error' => '', 'links_error' => '',
+		]],
+		'FROM plugin_fabric_node '      => [[
+			'id' => 10, 'fabric_id' => 1, 'guid' => '0x0002c90300a00000', 'node_type' => 'switch',
+			'port_count' => 36, 'host_id' => 42, 'presence' => 'present', 'identity' => 'ok', 'description' => 'sw01',
+		]],
+		'FROM plugin_fabric_node_sweep' => [['node_id' => 10, 'outcome' => 'failed']],
+		'FROM plugin_fabric_port'       => [[
+			'node_id' => 10, 'port_number' => 1, 'presence' => 'present',
+			'logical_state' => 'active', 'phys_state' => 'linkup',
+			'active_width' => 1, 'active_speed' => 'edr', 'best_width' => 4, 'best_speed' => 'edr', 'has_peer' => 1,
+		]],
+		'FROM plugin_fabric_sample'     => [],
+		'FROM plugin_fabric_relink'     => [],
 	];
 
-	$debugInfo = fabric_doctor_register_debug_info([]);
-	expect($debugInfo)->toHaveKey('fabric')
-		->and($debugInfo['fabric']['label'])->toBe('InfiniBand Fabric')
-		->and($debugInfo['fabric']['fields'])->toHaveKeys([
+	// doctor_register_debug_info returns a plain list and never echoes $context.
+	$debugInfo = fabric_doctor_register_debug_info(['plugin' => 'fabric']);
+	expect(array_is_list($debugInfo))->toBeTrue()
+		->and(array_key_exists('plugin', $debugInfo))->toBeFalse()
+		->and($debugInfo)->toHaveCount(1)
+		->and($debugInfo[0]['id'])->toBe('fabric.overview')
+		->and($debugInfo[0]['plugin'])->toBe('fabric')
+		->and($debugInfo[0]['label'])->toBe('InfiniBand Fabric')
+		->and($debugInfo[0]['fields'])->toHaveKeys([
 			'schema_version',
 			'health_status',
 			'fabrics_configured',
@@ -201,43 +267,63 @@ it('registers decoupled doctor_register_debug_info and api_register_resources ho
 			'identity_conflicts',
 			'ufm_vault_status',
 		])
-		->and($debugInfo['fabric']['fields']['ufm_vault_status']['private'])->toBeTrue();
+		->and($debugInfo[0]['fields']['ufm_vault_status']['private'])->toBeTrue();
 
-	// Object-registrar path works without importing any external Doctor class.
-	$debugReg = new class {
-		/** @var array<string, mixed> */
-		public array $sections = [];
-
-		/** @param array<string, mixed> $section */
-		public function register(string $id, array $section): void {
-			$this->sections[$id] = $section;
-		}
-	};
-	expect(fabric_doctor_register_debug_info($debugReg))->toBe($debugReg)
-		->and($debugReg->sections)->toHaveKey('fabric');
-
-	// Google AIP resource descriptors (plain array and object registrar).
+	// Google AIP resource descriptors (canonical lowerCamelCase collections, realm_read, handlers).
 	$resources = fabric_api_register_resources([]);
-	expect(array_keys($resources))->toBe(['fabric.fabrics', 'fabric.nodes', 'fabric.ports']);
+	expect(array_is_list($resources))->toBeTrue()
+		->and(array_column($resources, 'collection'))->toBe(['fabricFabrics', 'fabricPorts']);
 
-	foreach ($resources as $key => $descriptor) {
-		expect($descriptor['plugin'])->toBe('fabric', $key)
-			->and($descriptor['read_only'])->toBeTrue($key)
-			->and($descriptor['methods'])->toBe(['get', 'list'], $key)
+	foreach ($resources as $descriptor) {
+		expect($descriptor['plugin'])->toBe('fabric')
+			->and($descriptor['collection'])->toMatch('/^[a-z][A-Za-z0-9]{2,63}$/')
+			->and($descriptor['realm_read'])->toBe('fabric.php')
+			->and($descriptor['read_only'])->toBeTrue()
+			->and(array_keys($descriptor['handlers']))->toBe(['list', 'get'])
 			->and(json_encode($descriptor))->not->toContain('ciphertext');
 	}
 
-	$apiReg = new class {
-		/** @var array<string, mixed> */
-		public array $items = [];
-
-		/** @param array<string, mixed> $descriptor */
-		public function register(string $id, array $descriptor): void {
-			$this->items[$id] = $descriptor;
+	// Direct ApiResourceProvider handler execution (permitted and denied users).
+	$clock = new FixedClock($now);
+	$maint = new class implements DeviceMaintenance {
+		public function inMaintenance(int $hostId): bool {
+			return false;
 		}
 	};
-	expect(fabric_api_register_resources($apiReg))->toBe($apiReg)
-		->and(array_keys($apiReg->items))->toBe(['fabric.fabrics', 'fabric.nodes', 'fabric.ports']);
+	$eval = new HealthEvaluator(
+		new FabricRepository(false, $clock),
+		new NodeRepository(false),
+		new FabricHealthRepository(false),
+		new NodeSweepRepository(false),
+		new RelinkRepository(false, $clock),
+		new SampleRepository(false),
+		$clock,
+		$maint,
+		Settings::fromRow([]),
+		new Schema(false),
+	);
+	$apiProvider = new Somethingwithproof\Fabric\ApiResourceProvider(
+		$eval,
+		static fn (int $u): bool => $u === 5,
+		static fn (int $u, int $h): bool => $u === 5 && $h === 42,
+		static fn (int $u): bool => false,
+	);
+	$directResources = $apiProvider->resources();
+
+	expect(($directResources[0]['handlers']['list'])(['user_id' => 5]))->toHaveCount(1)
+		->and(($directResources[0]['handlers']['get'])('fabricFabrics/1', ['user_id' => 5])['display_name'])->toBe('ib0')
+		->and(($directResources[0]['handlers']['get'])('999', ['user_id' => 5]))->toBeNull()
+		->and(($directResources[0]['handlers']['list'])(['user_id' => 99]))->toBe([])
+		->and(($directResources[0]['handlers']['get'])('1', ['user_id' => 99]))->toBeNull()
+		->and(($directResources[1]['handlers']['list'])(['user_id' => 5, 'query' => ['fabric_id' => 1]]))->toHaveCount(1)
+		->and(($directResources[1]['handlers']['get'])('fabricPorts/0x0002c90300a00000:1', ['user_id' => 5])['port_number'])->toBe(1)
+		->and(($directResources[1]['handlers']['get'])('missing', ['user_id' => 5]))->toBeNull()
+		->and(($directResources[1]['handlers']['list'])(['user_id' => 99]))->toBe([])
+		->and(($directResources[1]['handlers']['get'])('0x0002c90300a00000:1', ['user_id' => 99]))->toBeNull();
+
+	$mergedApi = fabric_api_register_resources([['plugin' => 'other', 'collection' => 'otherItems']]);
+	expect($mergedApi)->toHaveCount(3)
+		->and($mergedApi[1]['collection'])->toBe('fabricFabrics');
 
 	// Static Drupal-style Config vs. State schema parses cleanly and covers all settings and tables.
 	$schemaFile = dirname(__DIR__, 2) . '/schema/fabric.schema.yaml';

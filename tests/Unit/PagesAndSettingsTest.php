@@ -453,7 +453,7 @@ it('exercises Pages navigation, MaintMaintenance, ConfigCodec, NodeRepository, a
 	$debug  = $doctor->debugInfo();
 	expect($checks[0]['status'])->toBe('fail')
 		->and($checks[3]['status'])->toBe('warn')
-		->and($debug['fields']['ufm_vault_status']['value'])->toBe('attention_required');
+		->and($debug[0]['fields']['ufm_vault_status']['value'])->toBe('attention_required');
 
 	// Execute fabric-list-fabrics and fabric-list-port-errors abilities.
 	$reg = new class {

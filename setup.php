@@ -726,35 +726,17 @@ function fabric_abilities_register($registrar): void {
 }
 
 /**
- * doctor_register_checks hook: provide read-only diagnostic checks for Cacti Doctor.
+ * doctor_register_checks hook: return evaluated diagnostic checks for Cacti Doctor.
  *
- * @param mixed $checks
- * @return mixed
+ * @param mixed $context
+ * @return list<array<string, mixed>>
  */
-function fabric_doctor_register_checks($checks = array()) {
+function fabric_doctor_register_checks($context = array()) {
 	if (!fabric_boot()) {
-		return $checks;
+		return array();
 	}
 
-	$results = (new \Somethingwithproof\Fabric\DoctorProvider(fabric_health_evaluator()))->checks();
-
-	if (is_object($checks) && method_exists($checks, 'register')) {
-		foreach ($results as $check) {
-			$checks->register($check);
-		}
-
-		return $checks;
-	}
-
-	if (!is_array($checks)) {
-		$checks = array();
-	}
-
-	foreach ($results as $check) {
-		$checks[] = $check;
-	}
-
-	return $checks;
+	return (new \Somethingwithproof\Fabric\DoctorProvider(fabric_health_evaluator()))->checks();
 }
 
 /**
@@ -763,7 +745,7 @@ function fabric_doctor_register_checks($checks = array()) {
  * @param mixed $providers
  * @return mixed
  */
-function fabric_casc_register_providers($providers = array()) {
+function fabric_casc_register_providers($providers = null) {
 	if (!fabric_boot()) {
 		return $providers;
 	}
@@ -771,47 +753,27 @@ function fabric_casc_register_providers($providers = array()) {
 	$descriptor = (new \Somethingwithproof\Fabric\CascProvider(fabric_config_service()))->descriptor();
 
 	if (is_object($providers) && method_exists($providers, 'register')) {
-		$providers->register('fabric', $descriptor);
+		$providers->register($descriptor);
 
 		return $providers;
 	}
 
-	if (!is_array($providers)) {
-		$providers = array();
-	}
-
-	$providers['fabric'] = $descriptor;
-
-	return $providers;
+	return $descriptor;
 }
 
 /**
  * doctor_register_debug_info hook: contribute a redacted plain-array
  * diagnostic snapshot for Cacti Doctor without importing external plugin classes.
  *
- * @param mixed $info
- * @return mixed
+ * @param mixed $context
+ * @return list<array<string, mixed>>
  */
-function fabric_doctor_register_debug_info($info = array()) {
+function fabric_doctor_register_debug_info($context = array()) {
 	if (!fabric_boot()) {
-		return $info;
+		return array();
 	}
 
-	$section = (new \Somethingwithproof\Fabric\DoctorProvider(fabric_health_evaluator()))->debugInfo();
-
-	if (is_object($info) && method_exists($info, 'register')) {
-		$info->register('fabric', $section);
-
-		return $info;
-	}
-
-	if (!is_array($info)) {
-		$info = array();
-	}
-
-	$info['fabric'] = $section;
-
-	return $info;
+	return (new \Somethingwithproof\Fabric\DoctorProvider(fabric_health_evaluator()))->debugInfo();
 }
 
 /**
@@ -819,30 +781,31 @@ function fabric_doctor_register_debug_info($info = array()) {
  * descriptors without importing external API plugin classes.
  *
  * @param mixed $resources
- * @return mixed
+ * @return list<mixed>
  */
 function fabric_api_register_resources($resources = array()) {
 	if (!fabric_boot()) {
-		return $resources;
+		return is_array($resources) ? array_values($resources) : array();
 	}
 
-	$descriptors = (new \Somethingwithproof\Fabric\ApiResourceProvider())->resources();
+	$provider = new \Somethingwithproof\Fabric\ApiResourceProvider(
+		fabric_health_evaluator(),
+		static function (int $userId): bool {
+			return fabric_user_view_allowed($userId);
+		},
+		static function (int $userId, int $hostId): bool {
+			return fabric_user_device_allowed($userId, $hostId);
+		},
+		static function (int $userId): bool {
+			return fabric_user_view_allowed($userId);
+		},
+	);
 
-	if (is_object($resources) && method_exists($resources, 'register')) {
-		foreach ($descriptors as $key => $descriptor) {
-			$resources->register($key, $descriptor);
-		}
+	$descriptors = $provider->resources();
 
-		return $resources;
+	if (is_array($resources) && $resources !== array()) {
+		return array_values(array_merge(array_values($resources), $descriptors));
 	}
 
-	if (!is_array($resources)) {
-		$resources = array();
-	}
-
-	foreach ($descriptors as $key => $descriptor) {
-		$resources[$key] = $descriptor;
-	}
-
-	return $resources;
+	return $descriptors;
 }

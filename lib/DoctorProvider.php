@@ -33,16 +33,18 @@ final class DoctorProvider {
 	}
 
 	/**
-	 * Build a redacted diagnostic debug-info section for the optional
+	 * Build a redacted diagnostic debug-info section list for the optional
 	 * doctor_register_debug_info hook. Excludes all vault key material,
 	 * credentials, and secret file paths.
 	 *
-	 * @return array{
+	 * @return list<array{
+	 *   id: string,
+	 *   plugin: string,
 	 *   label: string,
 	 *   description: string,
 	 *   private: bool,
 	 *   fields: array<string, array{label: string, value: string, private: bool}>
-	 * }
+	 * }>
 	 */
 	public function debugInfo(): array {
 		$report  = $this->evaluator->evaluate();
@@ -62,44 +64,48 @@ final class DoctorProvider {
 			: ($this->evaluator->checkVaultKey() === null ? 'valid' : 'attention_required');
 
 		return [
-			'label'       => 'InfiniBand Fabric',
-			'description' => 'Read-only health and inventory summary for plugin_fabric. Vault keys and credentials are redacted.',
-			'private'     => false,
-			'fields'      => [
-				'schema_version' => [
-					'label'   => 'Schema Version',
-					'value'   => sprintf('v%d (%s)', $report['schema_version'], $report['schema_current'] ? 'current' : 'upgrade_required'),
-					'private' => false,
-				],
-				'health_status' => [
-					'label'   => 'Health Status',
-					'value'   => $report['status'],
-					'private' => false,
-				],
-				'fabrics_configured' => [
-					'label'   => 'Configured Fabrics',
-					'value'   => sprintf('%d total (%d enabled)', $summary['fabrics'], $summary['enabled_fabrics']),
-					'private' => false,
-				],
-				'nodes_tracked' => [
-					'label'   => 'Tracked Nodes',
-					'value'   => sprintf('%d total (%d in maintenance)', $summary['nodes'], $summary['nodes_in_maintenance']),
-					'private' => false,
-				],
-				'degraded_ports' => [
-					'label'   => 'Degraded Ports',
-					'value'   => (string) $summary['degraded_ports'],
-					'private' => false,
-				],
-				'identity_conflicts' => [
-					'label'   => 'Identity Conflicts and Open Relinks',
-					'value'   => sprintf('%d conflicts, %d relinks', $summary['conflicts'], $summary['open_relinks']),
-					'private' => false,
-				],
-				'ufm_vault_status' => [
-					'label'   => 'UFM Vault Key Status',
-					'value'   => $vaultStatus,
-					'private' => true,
+			[
+				'id'          => 'fabric.overview',
+				'plugin'      => 'fabric',
+				'label'       => 'InfiniBand Fabric',
+				'description' => 'Read-only health and inventory summary for plugin_fabric. Vault keys and credentials are redacted.',
+				'private'     => false,
+				'fields'      => [
+					'schema_version' => [
+						'label'   => 'Schema Version',
+						'value'   => sprintf('v%d (%s)', $report['schema_version'], $report['schema_current'] ? 'current' : 'upgrade_required'),
+						'private' => false,
+					],
+					'health_status' => [
+						'label'   => 'Health Status',
+						'value'   => $report['status'],
+						'private' => false,
+					],
+					'fabrics_configured' => [
+						'label'   => 'Configured Fabrics',
+						'value'   => sprintf('%d total (%d enabled)', $summary['fabrics'], $summary['enabled_fabrics']),
+						'private' => false,
+					],
+					'nodes_tracked' => [
+						'label'   => 'Tracked Nodes',
+						'value'   => sprintf('%d total (%d in maintenance)', $summary['nodes'], $summary['nodes_in_maintenance']),
+						'private' => false,
+					],
+					'degraded_ports' => [
+						'label'   => 'Degraded Ports',
+						'value'   => (string) $summary['degraded_ports'],
+						'private' => false,
+					],
+					'identity_conflicts' => [
+						'label'   => 'Identity Conflicts and Open Relinks',
+						'value'   => sprintf('%d conflicts, %d relinks', $summary['conflicts'], $summary['open_relinks']),
+						'private' => false,
+					],
+					'ufm_vault_status' => [
+						'label'   => 'UFM Vault Key Status',
+						'value'   => $vaultStatus,
+						'private' => true,
+					],
 				],
 			],
 		];
@@ -107,9 +113,18 @@ final class DoctorProvider {
 
 	/**
 	 * Build structured diagnostic check results matching Cacti Doctor's check
-	 * contract (id, category, status, summary, detail).
+	 * contract (id, plugin, category, title, status, message, details, remediation).
 	 *
-	 * @return list<array{id: string, category: string, status: string, summary: string, detail: string}>
+	 * @return list<array{
+	 *   id: string,
+	 *   plugin: string,
+	 *   category: string,
+	 *   title: string,
+	 *   status: string,
+	 *   message: string,
+	 *   details: string,
+	 *   remediation: string
+	 * }>
 	 */
 	public function checks(): array {
 		$report  = $this->evaluator->evaluate();
@@ -117,13 +132,16 @@ final class DoctorProvider {
 		$checks  = [];
 
 		$checks[] = [
-			'id'       => 'fabric.schema',
-			'category' => 'fabric',
-			'status'   => $report['schema_current'] ? 'pass' : 'fail',
-			'summary'  => $report['schema_current']
+			'id'          => 'fabric.schema',
+			'plugin'      => 'fabric',
+			'category'    => 'fabric',
+			'title'       => 'InfiniBand Fabric schema currency',
+			'status'      => $report['schema_current'] ? 'ok' : 'fail',
+			'message'     => $report['schema_current']
 				? sprintf('Fabric schema is current (v%d)', $report['schema_version'])
 				: sprintf('Fabric schema is at v%d (expected v%d)', $report['schema_version'], Schema::VERSION),
-			'detail'   => sprintf('%d fabrics configured (%d enabled), %d nodes tracked.', $summary['fabrics'], $summary['enabled_fabrics'], $summary['nodes']),
+			'details'     => sprintf('%d fabrics configured (%d enabled), %d nodes tracked.', $summary['fabrics'], $summary['enabled_fabrics'], $summary['nodes']),
+			'remediation' => $report['schema_current'] ? '' : 'Re-run plugin upgrade to bring plugin_fabric tables to the current schema version.',
 		];
 
 		$staleFabrics  = 0;
@@ -143,27 +161,34 @@ final class DoctorProvider {
 			}
 		}
 
-		$checks[] = [
-			'id'       => 'fabric.poller_freshness',
-			'category' => 'fabric',
-			'status'   => $failedFabrics > 0 ? 'fail' : ($staleFabrics > 0 ? 'warn' : 'pass'),
-			'summary'  => $failedFabrics > 0
+		$freshStatus = $failedFabrics > 0 ? 'fail' : ($staleFabrics > 0 ? 'warn' : 'ok');
+		$checks[]    = [
+			'id'          => 'fabric.poller_freshness',
+			'plugin'      => 'fabric',
+			'category'    => 'fabric',
+			'title'       => 'InfiniBand Fabric poller freshness',
+			'status'      => $freshStatus,
+			'message'     => $failedFabrics > 0
 				? sprintf('%d enabled fabrics have discovery failures', $failedFabrics)
 				: ($staleFabrics > 0
 					? sprintf('%d enabled fabrics have stale or degraded observations', $staleFabrics)
 					: 'All enabled fabrics have current discovery and link state'),
-			'detail'   => sprintf('%d degraded ports, %d nodes in Cacti maintenance.', $summary['degraded_ports'], $summary['nodes_in_maintenance']),
+			'details'     => sprintf('%d degraded ports, %d nodes in Cacti maintenance.', $summary['degraded_ports'], $summary['nodes_in_maintenance']),
+			'remediation' => $freshStatus === 'ok' ? '' : 'Inspect Fabric discovery logs and poller_fabric.php execution on affected pollers.',
 		];
 
 		$conflictWarn = $summary['conflicts'] > 0 || $summary['open_relinks'] > 0;
 		$checks[]     = [
-			'id'       => 'fabric.identity_conflicts',
-			'category' => 'fabric',
-			'status'   => $conflictWarn ? 'warn' : 'pass',
-			'summary'  => $conflictWarn
+			'id'          => 'fabric.identity_conflicts',
+			'plugin'      => 'fabric',
+			'category'    => 'fabric',
+			'title'       => 'InfiniBand Fabric identity conflicts',
+			'status'      => $conflictWarn ? 'warn' : 'ok',
+			'message'     => $conflictWarn
 				? sprintf('%d identity conflicts and %d open re-link proposals', $summary['conflicts'], $summary['open_relinks'])
 				: 'No unresolved fabric identity conflicts or re-link proposals',
-			'detail'   => 'Review identity conflicts and re-link proposals on Fabric Admin.',
+			'details'     => sprintf('Conflicts: %d, open re-link proposals: %d.', $summary['conflicts'], $summary['open_relinks']),
+			'remediation' => $conflictWarn ? 'Review identity conflicts and re-link proposals on Fabric Admin.' : '',
 		];
 
 		$ufmUsed = false;
@@ -178,13 +203,16 @@ final class DoctorProvider {
 
 		$vaultErr = $ufmUsed ? $this->evaluator->checkVaultKey() : null;
 		$checks[] = [
-			'id'       => 'fabric.ufm_vault',
-			'category' => 'fabric',
-			'status'   => $vaultErr !== null ? 'warn' : 'pass',
-			'summary'  => !$ufmUsed
+			'id'          => 'fabric.ufm_vault',
+			'plugin'      => 'fabric',
+			'category'    => 'fabric',
+			'title'       => 'InfiniBand Fabric UFM credential vault key',
+			'status'      => $vaultErr !== null ? 'warn' : 'ok',
+			'message'     => !$ufmUsed
 				? 'No UFM fabrics configured; vault key not required'
 				: ($vaultErr === null ? 'UFM credential vault key is readable and valid' : 'UFM credential vault key problem'),
-			'detail'   => $vaultErr ?? 'External vault keyfile verified without disclosing key material.',
+			'details'     => $vaultErr ?? 'External vault keyfile verified without disclosing key material.',
+			'remediation' => $vaultErr !== null ? 'Verify the fabric_vault_key_file setting and file permissions on each poller.' : '',
 		];
 
 		return $checks;
