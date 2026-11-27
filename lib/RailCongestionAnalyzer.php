@@ -67,15 +67,32 @@ final class RailCongestionAnalyzer {
 	/** PFC pause frame rate threshold (frames per second) indicating congestion. */
 	public const DEFAULT_PFC_PAUSE_RATE = 5.0;
 
+	/** PFC pause duration threshold (microseconds per second) indicating congestion. */
+	public const DEFAULT_PFC_PAUSE_DURATION_US = 10000.0;
+
+	/** PFC pause frame rate threshold (frames per second) classifying a PFC storm. */
+	public const DEFAULT_PFC_STORM_RATE = 100.0;
+
+	/** PFC pause duration threshold (microseconds per second) classifying a PFC storm. */
+	public const DEFAULT_PFC_STORM_DURATION_US = 50000.0;
+
 	/** InfiniBand PortXmitWait rate threshold (ticks per second) indicating congestion. */
 	public const DEFAULT_XMIT_WAIT_RATE = 100.0;
 
 	/**
 	 * Bounded per-port flap damping state keyed by canonical port identifier.
+	 * Entries stay ordered by updatedAt ascending while timestamps are monotonic
+	 * so capacity eviction runs in O(1).
 	 *
 	 * @var array<string, array{penalty: float, suppressed: bool, lastFlapAt: int, updatedAt: int}>
 	 */
 	private array $flapTable = [];
+
+	/** Highest updatedAt timestamp recorded in $flapTable. */
+	private int $maxUpdatedAt = PHP_INT_MIN;
+
+	/** Whether $flapTable iteration order is guaranteed ascending by updatedAt. */
+	private bool $flapTableOrdered = true;
 
 	/**
 	 * Maximum number of tracked port entries before evicting the stalest key.
@@ -138,6 +155,21 @@ final class RailCongestionAnalyzer {
 	private readonly float $pfcPauseRate;
 
 	/**
+	 * Threshold for PFC pause duration in microseconds per second.
+	 */
+	private readonly float $pfcPauseDurationUs;
+
+	/**
+	 * Threshold for PFC pause frames per second declaring a PFC storm.
+	 */
+	private readonly float $pfcStormRate;
+
+	/**
+	 * Threshold for PFC pause duration in microseconds per second declaring a PFC storm.
+	 */
+	private readonly float $pfcStormDurationUs;
+
+	/**
 	 * Threshold for PortXmitWait ticks per second.
 	 */
 	private readonly float $xmitWaitRate;
@@ -158,6 +190,9 @@ final class RailCongestionAnalyzer {
 	 * @param float $ecnRate              ECN marking rate threshold (> 0)
 	 * @param float $pfcPauseRate         PFC pause rate threshold (> 0)
 	 * @param float $xmitWaitRate         PortXmitWait rate threshold (> 0)
+	 * @param float $pfcPauseDurationUs   PFC pause duration threshold in microseconds/s (> 0)
+	 * @param float $pfcStormRate         PFC pause frames/s storm threshold (> 0)
+	 * @param float $pfcStormDurationUs   PFC pause duration (us/s) storm threshold (> 0)
 	 */
 	public function __construct(
 		int $maxTrackedPorts = self::DEFAULT_MAX_TRACKED_PORTS,
@@ -173,6 +208,9 @@ final class RailCongestionAnalyzer {
 		float $ecnRate = self::DEFAULT_ECN_RATE,
 		float $pfcPauseRate = self::DEFAULT_PFC_PAUSE_RATE,
 		float $xmitWaitRate = self::DEFAULT_XMIT_WAIT_RATE,
+		float $pfcPauseDurationUs = self::DEFAULT_PFC_PAUSE_DURATION_US,
+		float $pfcStormRate = self::DEFAULT_PFC_STORM_RATE,
+		float $pfcStormDurationUs = self::DEFAULT_PFC_STORM_DURATION_US,
 	) {
 		$this->maxTrackedPorts      = max(1, $maxTrackedPorts);
 		$this->flapPenalty          = max(1.0, $flapPenalty);
@@ -187,6 +225,9 @@ final class RailCongestionAnalyzer {
 		$this->ecnRate              = max(0.0001, $ecnRate);
 		$this->pfcPauseRate         = max(0.0001, $pfcPauseRate);
 		$this->xmitWaitRate         = max(0.0001, $xmitWaitRate);
+		$this->pfcPauseDurationUs   = max(1.0, $pfcPauseDurationUs);
+		$this->pfcStormRate         = max(0.0001, $pfcStormRate);
+		$this->pfcStormDurationUs   = max(1.0, $pfcStormDurationUs);
 	}
 
 	/**
@@ -217,9 +258,22 @@ final class RailCongestionAnalyzer {
 		}
 
 		$lastFlapAt = $flaps > 0 ? $timestamp : $current['lastFlapAt'];
+		$exists     = isset($this->flapTable[$portKey]);
 
-		if (!isset($this->flapTable[$portKey]) && count($this->flapTable) >= $this->maxTrackedPorts) {
+		if (!$exists && count($this->flapTable) >= $this->maxTrackedPorts) {
 			$this->evictOldest();
+		}
+
+		// Move updated entries to the tail so monotonic timestamps keep
+		// $flapTable sorted by updatedAt ascending for O(1) eviction.
+		if ($timestamp < $this->maxUpdatedAt) {
+			$this->flapTableOrdered = false;
+		} else {
+			$this->maxUpdatedAt = $timestamp;
+
+			if ($exists) {
+				unset($this->flapTable[$portKey]);
+			}
 		}
 
 		$this->flapTable[$portKey] = [
@@ -285,7 +339,7 @@ final class RailCongestionAnalyzer {
 	/**
 	 * Analyze a batch of port observations across rails and tiers, separating
 	 * link-local physical/flap faults from correlated rail-wide congestion
-	 * storms.
+	 * storms and RoCEv2 PFC pause storms.
 	 *
 	 * @param list<array{
 	 *   port: string,
@@ -296,6 +350,7 @@ final class RailCongestionAnalyzer {
 	 *   linkDownedDelta?: int,
 	 *   ecnMarkedRate?: float,
 	 *   pfcPauseRate?: float,
+	 *   pfcPauseDurationUs?: float,
 	 *   xmitWaitRate?: float,
 	 *   active?: bool
 	 * }> $observations port telemetry snapshots for the current sweep window
@@ -306,14 +361,15 @@ final class RailCongestionAnalyzer {
 	 *   link_local_faults: list<array{port: string, rail: string, tier: string, causes: list<string>, flapPenalty: float, suppressed: bool}>,
 	 *   damped_ports: list<string>,
 	 *   isolated_congestion: list<array{port: string, rail: string, tier: string, signals: list<string>}>,
-	 *   rail_storms: list<array{rail: string, scope: string, affected_tiers: list<string>, affected_ports: int, eligible_ports: int, affected_ratio: float, dominant_signal: string, ports: list<string>}>,
+	 *   rail_storms: list<array{rail: string, scope: string, affected_tiers: list<string>, affected_ports: int, eligible_ports: int, affected_ratio: float, dominant_signal: string, pfc_storm: bool, max_pfc_pause_duration_us: float, ports: list<string>}>,
+	 *   pfc_storms: list<array{rail: string, ports: list<string>, max_pfc_pause_rate: float, max_pfc_pause_duration_us: float}>,
 	 *   tracked_ports: int
 	 * }
 	 */
 	public function analyze(array $observations, int $now): array {
 		$localFaults = [];
 		$dampedPorts = [];
-		/** @var array<string, array<string, array{eligible: int, congested: list<array{port: string, signals: list<string>, scores: array<string, float>}>}>> $buckets */
+		/** @var array<string, array<string, array{eligible: int, congested: list<array{port: string, signals: list<string>, scores: array<string, float>, pfcRate: float, pfcDurationUs: float, pfcStorm: bool}>}>> $buckets */
 		$buckets = [];
 
 		foreach ($observations as $obs) {
@@ -322,12 +378,13 @@ final class RailCongestionAnalyzer {
 			$tier   = self::normalizeTier($obs['tier']);
 			$active = $obs['active'] ?? true;
 
-			$symbolRate = self::nonNegative($obs['symbolErrorRate'] ?? 0.0);
-			$fecRate    = self::nonNegative($obs['fecUncorrectableRate'] ?? 0.0);
-			$flaps      = max(0, $obs['linkDownedDelta'] ?? 0);
-			$ecnRate    = self::nonNegative($obs['ecnMarkedRate'] ?? 0.0);
-			$pfcRate    = self::nonNegative($obs['pfcPauseRate'] ?? 0.0);
-			$xmitRate   = self::nonNegative($obs['xmitWaitRate'] ?? 0.0);
+			$symbolRate    = self::nonNegative($obs['symbolErrorRate'] ?? 0.0);
+			$fecRate       = self::nonNegative($obs['fecUncorrectableRate'] ?? 0.0);
+			$flaps         = max(0, $obs['linkDownedDelta'] ?? 0);
+			$ecnRate       = self::nonNegative($obs['ecnMarkedRate'] ?? 0.0);
+			$pfcRate       = self::nonNegative($obs['pfcPauseRate'] ?? 0.0);
+			$pfcDurationUs = self::nonNegative($obs['pfcPauseDurationUs'] ?? 0.0);
+			$xmitRate      = self::nonNegative($obs['xmitWaitRate'] ?? 0.0);
 
 			$flap = $flaps > 0
 				? $this->recordFlap($port, $now, $flaps)
@@ -380,10 +437,12 @@ final class RailCongestionAnalyzer {
 
 			$buckets[$rail][$tier]['eligible']++;
 
-			$signals = [];
-			$scores  = [
+			$pfcScore = max($pfcRate / $this->pfcPauseRate, $pfcDurationUs / $this->pfcPauseDurationUs);
+			$pfcStorm = $pfcRate >= $this->pfcStormRate || $pfcDurationUs >= $this->pfcStormDurationUs;
+			$signals  = [];
+			$scores   = [
 				'ecn'       => $ecnRate / $this->ecnRate,
-				'pfc'       => $pfcRate / $this->pfcPauseRate,
+				'pfc'       => $pfcScore,
 				'xmit_wait' => $xmitRate / $this->xmitWaitRate,
 			];
 
@@ -401,14 +460,18 @@ final class RailCongestionAnalyzer {
 
 			if ($signals !== []) {
 				$buckets[$rail][$tier]['congested'][] = [
-					'port'    => $port,
-					'signals' => $signals,
-					'scores'  => $scores,
+					'port'          => $port,
+					'signals'       => $signals,
+					'scores'        => $scores,
+					'pfcRate'       => $pfcRate,
+					'pfcDurationUs' => $pfcDurationUs,
+					'pfcStorm'      => $pfcStorm,
 				];
 			}
 		}
 
 		$railStorms         = [];
+		$pfcStorms          = [];
 		$isolatedCongestion = [];
 		ksort($buckets);
 
@@ -419,6 +482,9 @@ final class RailCongestionAnalyzer {
 			$stormAffected = 0;
 			$stormEligible = 0;
 			$signalTotals  = ['ecn' => 0.0, 'pfc' => 0.0, 'xmit_wait' => 0.0];
+			$pfcStormPorts = [];
+			$maxPfcRate    = 0.0;
+			$maxPfcDurUs   = 0.0;
 
 			foreach ($tiers as $tier => $bucket) {
 				$eligible  = $bucket['eligible'];
@@ -434,6 +500,18 @@ final class RailCongestionAnalyzer {
 					foreach ($congested as $entry) {
 						$stormPorts[] = $entry['port'];
 
+						if ($entry['pfcStorm']) {
+							$pfcStormPorts[] = $entry['port'];
+						}
+
+						if ($entry['pfcRate'] > $maxPfcRate) {
+							$maxPfcRate = $entry['pfcRate'];
+						}
+
+						if ($entry['pfcDurationUs'] > $maxPfcDurUs) {
+							$maxPfcDurUs = $entry['pfcDurationUs'];
+						}
+
 						foreach ($signalTotals as $sig => $sum) {
 							$signalTotals[$sig] = $sum + ($entry['scores'][$sig] ?? 0.0);
 						}
@@ -446,8 +524,32 @@ final class RailCongestionAnalyzer {
 							'tier'    => $tier,
 							'signals' => $entry['signals'],
 						];
+
+						if ($entry['pfcStorm']) {
+							$pfcStormPorts[] = $entry['port'];
+
+							if ($entry['pfcRate'] > $maxPfcRate) {
+								$maxPfcRate = $entry['pfcRate'];
+							}
+
+							if ($entry['pfcDurationUs'] > $maxPfcDurUs) {
+								$maxPfcDurUs = $entry['pfcDurationUs'];
+							}
+						}
 					}
 				}
+			}
+
+			$isPfcStorm = count($pfcStormPorts) >= $this->minRailPorts;
+
+			if ($isPfcStorm) {
+				sort($pfcStormPorts);
+				$pfcStorms[] = [
+					'rail'                      => $rail,
+					'ports'                     => $pfcStormPorts,
+					'max_pfc_pause_rate'        => round($maxPfcRate, 4),
+					'max_pfc_pause_duration_us' => round($maxPfcDurUs, 4),
+				];
 			}
 
 			if ($stormTiers !== []) {
@@ -457,14 +559,16 @@ final class RailCongestionAnalyzer {
 				$scope    = ($hasLeaf && $hasSpine) ? 'cross_tier_rail_storm' : 'tier_rail_storm';
 
 				$railStorms[] = [
-					'rail'            => $rail,
-					'scope'           => $scope,
-					'affected_tiers'  => $stormTiers,
-					'affected_ports'  => $stormAffected,
-					'eligible_ports'  => $stormEligible,
-					'affected_ratio'  => $stormEligible > 0 ? round($stormAffected / $stormEligible, 4) : 0.0,
-					'dominant_signal' => self::dominantSignal($signalTotals),
-					'ports'           => $stormPorts,
+					'rail'                      => $rail,
+					'scope'                     => $scope,
+					'affected_tiers'            => $stormTiers,
+					'affected_ports'            => $stormAffected,
+					'eligible_ports'            => $stormEligible,
+					'affected_ratio'            => $stormEligible > 0 ? round($stormAffected / $stormEligible, 4) : 0.0,
+					'dominant_signal'           => self::dominantSignal($signalTotals),
+					'pfc_storm'                 => $isPfcStorm,
+					'max_pfc_pause_duration_us' => round($maxPfcDurUs, 4),
+					'ports'                     => $stormPorts,
 				];
 			}
 		}
@@ -486,25 +590,32 @@ final class RailCongestionAnalyzer {
 			'damped_ports'        => $dampedPorts,
 			'isolated_congestion' => $isolatedCongestion,
 			'rail_storms'         => $railStorms,
+			'pfc_storms'          => $pfcStorms,
 			'tracked_ports'       => count($this->flapTable),
 		];
 	}
 
 	/**
 	 * Evict the oldest-updated entry when the bounded flap table reaches capacity.
+	 * Runs in O(1) while timestamps advance monotonically; restores order via a
+	 * single stable sort only after an out-of-order timestamp insert.
 	 *
 	 * @return void
 	 */
 	private function evictOldest(): void {
-		$oldestKey = null;
-		$oldestTs  = PHP_INT_MAX;
-
-		foreach ($this->flapTable as $key => $entry) {
-			if ($entry['updatedAt'] < $oldestTs) {
-				$oldestTs  = $entry['updatedAt'];
-				$oldestKey = $key;
-			}
+		if ($this->flapTable === []) {
+			return;
 		}
+
+		if (!$this->flapTableOrdered) {
+			uasort(
+				$this->flapTable,
+				static fn (array $a, array $b): int => $a['updatedAt'] <=> $b['updatedAt'],
+			);
+			$this->flapTableOrdered = true;
+		}
+
+		$oldestKey = array_key_first($this->flapTable);
 
 		if ($oldestKey !== null) {
 			unset($this->flapTable[$oldestKey]);

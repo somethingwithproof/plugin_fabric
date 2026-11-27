@@ -78,18 +78,25 @@ final class InventoryRepository {
 		}
 
 		// Neighbor ports of the nodes that are about to go missing, for
-		// replacement proposals. Read before anything changes.
-		$vacated = [];
+		// replacement proposals. Read in one query before anything changes.
+		$vacated     = [];
+		$goingAbsent = [];
 
 		foreach ($known as $node) {
 			if ($node->presence === Presence::Present && !isset($topology->nodes[$node->guid->text]) && $node->type !== NodeType::Switch) {
-				$ports = $nodes->ports($node->id);
+				$goingAbsent[$node->id] = $node;
+			}
+		}
 
-				if ($ports === null) {
-					return null;
-				}
+		if ($goingAbsent !== []) {
+			$portsByNode = $nodes->portsForFabric($fabric->id);
 
-				foreach ($ports as $port) {
+			if ($portsByNode === null) {
+				return null;
+			}
+
+			foreach ($goingAbsent as $nodeId => $node) {
+				foreach ($portsByNode[$nodeId] ?? [] as $port) {
 					if ($port->remote !== null) {
 						$vacated[$port->remote->key()] = $node;
 					}
@@ -97,9 +104,10 @@ final class InventoryRepository {
 			}
 		}
 
-		$now      = $this->clock->now();
-		$result   = new InventoryResult();
-		$this->tx = new TransactionRepository($this->connection);
+		$now          = $this->clock->now();
+		$result       = new InventoryResult();
+		$duplicateSet = $topology->duplicates !== [] ? array_flip($topology->duplicates) : [];
+		$this->tx     = new TransactionRepository($this->connection);
 
 		if (!$this->tx->begin()) {
 			return null;
@@ -108,7 +116,7 @@ final class InventoryRepository {
 		try {
 			foreach ($topology->nodes as $guid => $seen) {
 				$stored    = $byGuid[$guid] ?? null;
-				$duplicate = in_array($guid, $topology->duplicates, true);
+				$duplicate = isset($duplicateSet[$guid]);
 
 				if ($stored === null) {
 					$id = $this->insertNode($fabric, $seen, $duplicate, $topology->signature($guid), $now);

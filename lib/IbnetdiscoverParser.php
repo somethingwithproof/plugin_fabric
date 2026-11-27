@@ -75,7 +75,11 @@ final class IbnetdiscoverParser {
 		$pending = null;
 		$types   = [];
 
-		foreach (preg_split('/\r?\n/', $output) ?: [] as $index => $line) {
+		foreach (explode("\n", $output) as $index => $line) {
+			if ($line !== '' && $line[-1] === "\r") {
+				$line = substr($line, 0, -1);
+			}
+
 			$number = $index + 1;
 
 			if ($line === '') {
@@ -234,11 +238,17 @@ final class IbnetdiscoverParser {
 	 * @param array<string, string>       $types GUID text => the type letter its remote ends printed
 	 */
 	private static function checkLinks(array $nodes, array $duplicates, array $types): void {
+		$dupSet = $duplicates !== [] ? array_flip($duplicates) : [];
+
 		foreach ($nodes as $guid => $node) {
+			if (isset($dupSet[$guid])) {
+				continue;
+			}
+
 			foreach ($node->ports as $port) {
 				$remoteGuid = $port->remote->node->text;
 
-				if (in_array($guid, $duplicates, true) || in_array($remoteGuid, $duplicates, true)) {
+				if (isset($dupSet[$remoteGuid])) {
 					continue;
 				}
 

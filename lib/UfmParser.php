@@ -72,17 +72,21 @@ final class UfmParser {
 				throw ParseFailure::at($index + 1, 'UFM port entry is not an object');
 			}
 
-			$sysGuid = Guid::tryFromString(self::str($item, 'systemID') !== '' ? self::str($item, 'systemID') : self::str($item, 'guid'));
-			$portNum = self::int($item, 'number');
+			$rawSysGuid = self::str($item, 'systemID');
+			$rawGuid    = self::str($item, 'guid');
+			$sysGuid    = Guid::tryFromString($rawSysGuid !== '' ? $rawSysGuid : $rawGuid);
+			$portNum    = self::int($item, 'number');
 
 			if ($sysGuid === null || $portNum < 1 || $portNum > PortRef::MAX_PORT) {
 				continue;
 			}
 
-			$nodeType = self::nodeType(self::str($item, 'system_type') !== '' ? self::str($item, 'system_type') : self::str($item, 'tier'));
-			$desc     = self::cleanDesc(self::str($item, 'system_name') !== '' ? self::str($item, 'system_name') : self::str($item, 'description'));
+			$rawType  = self::str($item, 'system_type');
+			$nodeType = self::nodeType($rawType !== '' ? $rawType : self::str($item, 'tier'));
+			$rawDesc  = self::str($item, 'system_name');
+			$desc     = self::cleanDesc($rawDesc !== '' ? $rawDesc : self::str($item, 'description'));
 			$lid      = max(0, self::int($item, 'lid'));
-			$portGuid = Guid::tryFromString(self::str($item, 'guid')) ?? $sysGuid;
+			$portGuid = ($rawGuid !== '' ? Guid::tryFromString($rawGuid) : null) ?? $sysGuid;
 
 			if (!isset($nodes[$sysGuid->text])) {
 				$nodes[$sysGuid->text] = [
@@ -104,7 +108,8 @@ final class UfmParser {
 			$logical     = LogicalState::fromText(self::str($item, 'logical_state'));
 			$phys        = PhysState::fromText(self::str($item, 'physical_state'));
 
-			$peerGuid = Guid::tryFromString(self::str($item, 'peer_node_guid') !== '' ? self::str($item, 'peer_node_guid') : self::str($item, 'peer_guid'));
+			$rawPeerGuid = self::str($item, 'peer_node_guid');
+			$peerGuid    = Guid::tryFromString($rawPeerGuid !== '' ? $rawPeerGuid : self::str($item, 'peer_guid'));
 			$peerPort = self::parsePeerPort($item);
 			$hasPeer  = $peerGuid !== null && $peerPort !== null;
 
@@ -224,6 +229,20 @@ final class UfmParser {
 		}
 
 		return $out;
+	}
+
+	/**
+	 * Parse UFM cable-info or transceiver telemetry payload into optical DOM
+	 * samples keyed by canonical port identifier.
+	 *
+	 * @param array<array-key, mixed> $payload decoded UFM cable-info JSON
+	 *
+	 * @return array<string, OpticalDomSample>
+	 *
+	 * @throws ParseFailure
+	 */
+	public function parseOpticalDom(array $payload): array {
+		return (new OpticalDomParser())->parseUfmCableInfo($payload);
 	}
 
 	/**

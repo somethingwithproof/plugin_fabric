@@ -98,6 +98,39 @@ final class NodeRepository {
 	}
 
 	/**
+	 * Load every stored port for a fabric in one query, grouped by node_id,
+	 * avoiding per-node N+1 queries during topology and link-state imports.
+	 *
+	 * @param int $fabricId fabric identifier
+	 *
+	 * @return array<int, array<int, Port>>|null node_id => (port number => Port)
+	 */
+	public function portsForFabric(int $fabricId): ?array {
+		$rows = Row::rows(db_fetch_assoc_prepared(
+			'SELECT p.* FROM plugin_fabric_port p INNER JOIN plugin_fabric_node n ON n.id = p.node_id WHERE n.fabric_id = ? ORDER BY p.node_id, p.port_number',
+			[$fabricId],
+			true,
+			$this->connection,
+		));
+
+		if ($rows === null) {
+			return null;
+		}
+
+		$out = [];
+
+		foreach ($rows as $row) {
+			$port = Port::fromRow($row);
+
+			if ($port !== null) {
+				$out[$port->nodeId][$port->number] = $port;
+			}
+		}
+
+		return $out;
+	}
+
+	/**
 	 * Accept the conflicting sighting as the node's identity: the operator
 	 * confirmed the device behind the GUID changed (REQ-INV-005). The node
 	 * is swept again from the next cycle. The sighting is recorded as

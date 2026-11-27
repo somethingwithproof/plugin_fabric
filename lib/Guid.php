@@ -63,13 +63,27 @@ final readonly class Guid {
 	 * @return ?self
 	 */
 	public static function tryFromString(string $value): ?self {
-		if (preg_match('/^(?:0[xX])?([0-9a-fA-F]{1,16})$/D', $value, $match) !== 1) {
+		$hex = $value;
+
+		if (str_starts_with($hex, '0x') || str_starts_with($hex, '0X')) {
+			$hex = substr($hex, 2);
+		}
+
+		$len = strlen($hex);
+
+		if ($len < 1 || $len > 16 || !ctype_xdigit($hex)) {
 			return null;
 		}
 
-		$digits = str_pad(strtolower(ltrim($match[1], '0')), 16, '0', STR_PAD_LEFT);
+		$trimmed = ltrim($hex, '0');
 
-		return $digits === '0000000000000000' ? null : new self('0x' . $digits);
+		if ($trimmed === '') {
+			return null;
+		}
+
+		$digits = $len === 16 ? strtolower($hex) : str_pad(strtolower($trimmed), 16, '0', STR_PAD_LEFT);
+
+		return new self('0x' . $digits);
 	}
 
 	/**

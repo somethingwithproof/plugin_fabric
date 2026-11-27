@@ -151,6 +151,12 @@ final class UfmSweep {
 			return 0;
 		}
 
+		$allPrevious = $samples->keyedForFabric($fabric->id);
+
+		if ($allPrevious === null) {
+			return 0;
+		}
+
 		$now   = $this->clock->now();
 		$swept = 0;
 
@@ -159,11 +165,7 @@ final class UfmSweep {
 				continue;
 			}
 
-			$previous = $samples->keyed($node->id);
-
-			if ($previous === null) {
-				continue;
-			}
+			$previous = $allPrevious[$node->id] ?? [];
 
 			$result = new NodeSweepResult();
 			$start  = microtime(true);
