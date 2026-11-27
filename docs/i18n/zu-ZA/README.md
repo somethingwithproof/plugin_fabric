@@ -1,4 +1,4 @@
-<!-- Source: README.md; SHA256: ce5af61a1bc993ec2aae6d4f22c3885694632f2b1d5eb94e2ce88b8390e96f1e -->
+<!-- Source: README.md; SHA256: 79a16fb906f96ee79de2c719f18c38836f555440a7571a4a5ba38c64bb5b099f -->
 
 <!-- translations:start -->
 [English](../../../README.md) | [简体中文](../zh-CN/README.md) | [हिन्दी](../hi-IN/README.md) | [Español (España)](../es-ES/README.md) | [Español (Latinoamérica)](../es-419/README.md) | [العربية (السعودية)](../ar-SA/README.md) | [Afrikaans](../af-ZA/README.md) | [አማርኛ](../am-ET/README.md) | [العربية (مصر)](../ar-EG/README.md) | [العربية (المغرب)](../ar-MA/README.md) | [বাংলা](../bn-BD/README.md) | [Bosanski](../bs-BA/README.md) | [Deutsch](../de-DE/README.md) | [فارسی](../fa-IR/README.md) | [Filipino](../fil-PH/README.md) | [Français](../fr-FR/README.md) | [Français (Maroc)](../fr-MA/README.md) | [Français (Sénégal)](../fr-SN/README.md) | [Hausa](../ha-NG/README.md) | [עברית](../he-IL/README.md) | [Hrvatski](../hr-HR/README.md) | [Bahasa Indonesia](../id-ID/README.md) | [Igbo](../ig-NG/README.md) | [Italiano](../it-IT/README.md) | [日本語](../ja-JP/README.md) | [한국어](../ko-KR/README.md) | [Malagasy](../mg-MG/README.md) | [मराठी](../mr-IN/README.md) | [Bahasa Melayu](../ms-MY/README.md) | [Nederlands](../nl-NL/README.md) | [Polski](../pl-PL/README.md) | [Português (Brasil)](../pt-BR/README.md) | [Русский](../ru-RU/README.md) | [Kinyarwanda](../rw-RW/README.md) | [Soomaali](../so-SO/README.md) | [Српски](../sr-RS/README.md) | [Svenska](../sv-SE/README.md) | [Kiswahili](../sw-KE/README.md) | [தமிழ்](../ta-IN/README.md) | [తెలుగు](../te-IN/README.md) | [ไทย](../th-TH/README.md) | [Türkçe](../tr-TR/README.md) | [Українська](../uk-UA/README.md) | [اردو](../ur-PK/README.md) | [Tiếng Việt](../vi-VN/README.md) | [isiXhosa](../xh-ZA/README.md) | [Yorùbá](../yo-NG/README.md) | [繁體中文](../zh-TW/README.md) | [isiZulu](README.md)
@@ -6,109 +6,140 @@
 
 # plugin_fabric
 
-I-plugin ye-Cacti 1.2 eletha izibali zezimbobo ze-InfiniBand, ububanzi nesivinini sokuxhumana, kanye nezinkomba zokuminyana ku-Cacti njengamadivayisi ajwayelekile, imithombo yedatha, namagrafu. Ukuxhumana okuqeqeshwe ku-1X esikhundleni se-4X bese kuvela njengegrafu kanye nesixwayiso se-Thold eceleni kwe-host ekusebenzelayo, ngaphansi kwezimvume ze-Cacti, lapho i-Maint ikwazi ukukucindezela.
+I-plugin ye-Cacti 1.2 (`fabric`, inguqulo `0.1.0-dev`) eletha izibali zezimbobo ze-InfiniBand, ububanzi nesivinini sokuxhumana, kanye nezinkomba zokuminyana ku-Cacti njengamadivayisi ajwayelekile, imithombo yedatha, namagrafu. Ukuxhumana okuqeqeshwe ku-1X esikhundleni se-4X bese kuvela njengegrafu kanye nesixwayiso se-Thold eceleni kwe-host ekusebenzelayo, ngaphansi kwezimvume ze-Cacti, ngokwazi nokucindezelwa kwe-Maint.
 
-> **Isimo: isathuthukiswa, akukho ukukhishwa okwamanje.** I-Milestone 2 (isisekelo) ihlanganiswe ku-`main`, kanti i-milestone 3 (izinto ze-Cacti nezixwayiso) isabuyekezwa. I-Milestone 1 iqinisekise ukwakheka ngokubhekisela kumibhalo kanye nekhodi yomthombo engaphezulu (PR #71); imiphumela, kanye nemithombo, iku-[docs/research/](../../research). I-Milestone 2 yengeza isisekelo se-plugin:
->
-> - ukufaka, ukuthuthukisa, ukukhipha, kanye nesivikelo se-PHP 8.2
-> - izindawo zokufinyelela ze-View, Operator ne-Admin, kanye nezilungiselelo
-> - amarekhodi e-fabric
-> - umngcele wemiyalo efunda kuphela ye-`perfquery`, `ibnetdiscover`, ne-`iblinkinfo`
-> - uhlu lwempahla nge-GUID, olunokungqubuzana kobunikazi neziphakamiso zokuxhumanisa kabusha
-> - isimo sokuxhumana kanye ne-cache yokushanela izibali
-> - amakhasi ohlu lwempahla, okuphatha, kanye nempilo
->
-> I-Milestone 3 yengeza izinto ze-Cacti:
->
-> - izifanekiso zedivayisi, zedatha, nezegrafu ezithunyelwa njenge-XML yesifanekiso se-Cacti, kanye nombuzo wedatha we-"Fabric Port"
-> - ukuhlanganisa i-node nedivayisi ye-Cacti, noma ukudala eyodwa ngokuqinisekiswa ([ADR 0010](../../decisions/0010-one-device-per-node.md))
-> - imithombo yedatha yezibali zamagrafu, kanye nesimo sokuxhumana se-GAUGE nemithombo yedatha yesilinganiso ye-Thold ([ADR 0011](../../decisions/0011-derive-counters-and-gauge-alert-values.md))
-> - ukuphathwa kokuphazamiseka kanye nezibali eziyisisekelo ezigcwele ezifundeka njengezingaziwa ([ADR 0012](../../decisions/0012-saturated-basic-counters-read-as-unknown.md)), ukufaneleka kwezibali nezixhumanisi zamagrafu ekhasini lembobo, kanye nokuhlelwa kokuminyana
-> - ukuhlolwa kokuphela-kuya-ekupheleni nge-Thold v1.8.2 ne-Maint v1.3 engashintshiwe, kanye nomsebenzi we-CI osebenzisa amathuluzi angempela okuxilonga ku-fabric elingisiwe
->
-> I-fabric ingashanelwa kuphela kusukela ku-poller eyinhloko kuze kube yilapho abaqoqi bedatha abakude besekelwa ku-phase 3. Ihlolwe ngamathuluzi okuzenzisa kanye nesilingisi se-fabric i-ibsim, ayikaze ihlolwe ku-InfiniBand fabric yangempela. Ukuhlolwa okudinga i-fabric kuhlala kuvuliwe etafuleni lokuhlola okubukhoma ekhasini ngalinye locwaningo. Le phrojekthi ayihlangene nephrojekthi ye-Cacti.
+> **Isimo: isathuthukiswa, akukho ukukhishwa okwamanje.** Leli gatsha lenza isisekelo se-plugin, izinto ze-Cacti nezixwayiso, ukushanela okuhleliwe kwangemuva kwe-poller, ukukopisha kubaqoqi abakude, ingemuva le-NVIDIA UFM REST elifunda kuphela elinegumbi lemininingwane yokuqinisekisa elibethelwe, ukuphathwa kwe-CLI ye-Configuration-as-Code (CasC), kanye nezihuku ze-ecosystem ye-Cacti (CasC, Doctor, ne-MCP / Abilities API v2). Ihlolwe ngamathuluzi okuzenzisa, izindlela zokuhambisa ze-UFM ezenziwe, kanye nesilingisi se-fabric i-`ibsim` (rdma-core 50.0), ayikaze ihlolwe ku-InfiniBand fabric yangempela noma kuseva ye-UFM ephilayo. Ukuhlolwa okudinga ihadiwe kuhlala kuvuliwe ku-[docs/research/](../../research/). Le phrojekthi ayihlangene nephrojekthi ye-Cacti.
+
+## Okuphunyeziwe
+
+- **Umjikelezo wempilo nesikimu (v3)**: ukufaka, ukuthuthukisa okungashintshi umphumela uma kuphindwa, ukukhipha (okugcina amatafula e-plugin ngokuzenzakalelayo), kanye nesivikelo semfuneko ye-PHP 8.2 ngenkathi kugcina izindawo zokungena zifundeka ku-PHP 8.0.
+- **Izindima zokufinyelela namakhasi**: izindawo zokusebenza ze-`Fabric View` (`fabric.php`), `Fabric Operator` (`fabric_operator.php`), ne-`Fabric Admin` (`fabric_admin.php`, `fabric_health.php`), kanye nethebhu ye-Settings ngaphansi kwe-**Configuration > Settings > Fabrics**.
+- **Ingemuva lokuxilonga elifunda kuphela (`diags`)**: ukusebenzisa okuqinile kwe-argument-vector kwe-`perfquery`, `ibnetdiscover`, ne-`iblinkinfo`, uhlu lwempahla nge-GUID olunokuhlonza ukungqubuzana kobunikazi neziphakamiso zokuxhumanisa kabusha, ukuhlola isimo sokuxhumana, kanye nokushanela izibali ku-node ngayinye.
+- **Ingemuva le-NVIDIA UFM REST elifunda kuphela (`ufm`) negumbi elibethelwe**: iklayenti le-REST le-GET kuphela elinohlu oluvunyelwe (`/ufmRest/resources/ports`, `/ufmRest/resources/systems`, `/ufmRest/monitoring/session/0/data`, kanye nokulingana kwe-`/ufmRestV3/...` kokuqinisekiswa kwe-token) elihlinzeka ngamatafula afanayo ohlu lwempahla, isimo sokuxhumana, amasampula, nempilo njenge-`diags`. Imininingwane yokuqinisekisa (`token` noma `basic`) igcinwa ibethelwe nge-AES-256-GCM ku-`plugin_fabric_secret` kusetshenziswa ifayela lokhiye wangaphandle ongu-256-bit elilungiselelwe nge-`fabric_vault_key_file`. Ama-fabric e-UFM angachazwa nge-CasC (`cli/fabric.php`) noma ngamakhosombe; ifomu lokuphatha lewebhu njengamanje libonisa izinkambu ze-`diags`.
+- **Izinto ze-Cacti, i-Thold, ne-Maint**: izifanekiso zedivayisi, zedatha, nezegrafu ze-Cacti (`templates/fabric-templates.xml`), umbuzo wedatha we-script server we-"Fabric Port" (`scripts/ss_fabric_ports.php`, `resource/script_server/fabric_ports.xml`), imithombo yedatha yezibali ze-`DERIVE` nemithombo yedatha yesimo sokuxhumana/isilinganiso ye-`GAUGE` ye-Thold, ukulandelela ukuphazamiseka, kanye nezibali eziyisisekelo ezigcwele ezibikwa njenge-`U`. Ukuhlanganiswa kwe-Maint (`MaintMaintenance`) kubuza i-`plugin_maint_check_cacti_host()` (kubuyela kusihuku se-`is_device_in_maintenance`) ukuze ama-node asekulondolozeni okusebenzayo abalwe ngokwehlukana futhi akhishwe ezixwayisweni zempilo zokushanela okuhlulekile nezimbobo ezonakele.
+- **Ukushanela okuhleliwe, ukuhlukaniswa (sharding), nabaqoqi abakude**: i-`poller_bottom` iqala i-`poller_fabric.php` ngemuva kuma-fabric afike isikhathi sawo abelwe i-poller yamanje, kanye nokushanela okuvilaphayo okuqalwa yi-script server. I-`INFO` imemezela `remote_collect:1, remote_poller:1`, i-`poller_fabric.php` isekela ukuhlukaniswa kwe-GUID okunqunywa ngokuqinisekile (`--shard=K/N`), kanti i-`replicate_out` ikopisha imigqa engeyona eyemfihlo ye-`plugin_fabric_fabric` kubaqoqi abakude (`poller_id >= 2`). Okufakiwe kwegumbi (`plugin_fabric_secret`) namafayela okhiye bangaphandle akukaze kukopishwe.
+- **I-CasC CLI nezihuku ze-ecosystem**: i-`cli/fabric.php` yokuthekelisa i-YAML/XML, ukuqinisekisa, ukuhlela umehluko we-dry-run, ukusebenzisa okunesango lokuqinisekisa, kanye nokubika impilo, kanye nezihuku ze-`casc_register_providers`, `doctor_register_checks`, ne-`abilities_register`.
 
 ## Izindima zokufinyelela
 
 | Umkhakha | Ukufinyelela |
 | --- | --- |
-| Fabric View | Amakhasi okugada akhona. |
-| Fabric Operator | Ukugada kanye nekhasi le-Operations nokuvuma kokuhlola komuntu siqu. |
-| Fabric Admin | Ukufinyelela kwe-Operator kanye nezilungiselelo ezikhona nezenzo zokuphatha. |
+| Fabric View | Ukubuka kokugada uhlu lwempahla nezimbobo (`fabric.php`). |
+| Fabric Operator | Ukufinyelela kwe-View kanye nekhasi le-Operations (`fabric_operator.php`) nokuvuma kokuhlola komuntu siqu. |
+| Fabric Admin | Ukufinyelela kwe-Operator kanye nokumisa, izenzo zokuphatha (`fabric_admin.php`), nekhasi lempilo (`fabric_health.php`). |
 
-Ngemva kokukopisha amafayela okuthuthukisa, vula ikhasi le-Plugins njengomphathi ukuze ubhalise
-umkhakha omusha. Yabela umkhakha we-Operator ngokucacile ngaphansi kwe-**Configuration > Users** noma amaqembu abasebenzisi.
-Ukuthuthukisa kugcina ama-ID emikhakha ye-View ne-Admin akhona kanye nezimvume. Ukufinyelela kwe-Admin
-kuzuza ukufinyelela kwe-Operator, futhi ukufinyelela kwe-Operator kuzuza ukufinyelela kwe-View esicelweni ngasinye;
-lokhu akwengezi izimvume ezigciniwe kubasebenzisi noma kumaqembu. Izilungiselelo ze-plugin zidinga futhi
-ukufinyelela kwe-Fabric Admin ngaphezu kwemvume ye-Settings ye-Cacti.
+Ngemva kokukopisha amafayela okuthuthukisa, vula ikhasi le-Plugins njengomphathi ukuze ubhalise izindawo zokusebenza nezihuku ezintsha. Yabela umkhakha we-Operator ngokucacile ngaphansi kwe-**Configuration > Users** noma amaqembu abasebenzisi. Ukuthuthukisa kugcina ama-ID emikhakha ye-View ne-Admin akhona kanye nezimvume. Ukufinyelela kwe-Admin kuzuza ukufinyelela kwe-Operator, futhi ukufinyelela kwe-Operator kuzuza ukufinyelela kwe-View esicelweni ngasinye; lokhu akwengezi izimvume ezigciniwe kubasebenzisi noma kumaqembu. Izilungiselelo ze-plugin zidinga futhi ukufinyelela kwe-Fabric Admin ngaphezu kwemvume ye-Settings ye-Cacti.
 
-Izimvume zedivayisi ye-Cacti zisalinganisa imigqa nezenzo ezitholakalayo kumsebenzisi ngamunye; izinto ezingahlanganisiwe zidinga umphathi.
-Imininingwane yokuqinisekisa, ukumisa, ukuhlanganisa, ukususa kanye nezinye izinqubo zokuphatha
-zihlala emakhasini okuphatha. Ukuvuma kuhlala kuphela kusikhathi seseshini yomsebenzisi
-wamanje, isikhathi esingeqi ehoreni elilodwa futhi kuphela ngesikhathi ukubhekwa okufanayo kusakusha.
-Ukubhekwa okusha noma okushintshile kuyakwenqabela. Akulokothi kumake ukukala okuhlulekile
-njengokunempilo noma kucindezele izixwayiso.
+Izimvume zedivayisi ye-Cacti zilinganisa imigqa nezenzo ezitholakalayo kumsebenzisi ngamunye; izinto ezingahlanganisiwe zidinga umphathi. Imininingwane yokuqinisekisa, ukumisa, ukuhlanganisa, ukususa, nezinye izinqubo zokuphatha zihlala emakhasini okuphatha noma ku-CLI. Ukuvuma kuhlala kuphela kusikhathi seseshini yomsebenzisi wamanje, isikhathi esingeqi ehoreni elilodwa futhi kuphela ngesikhathi ukubhekwa okufanayo kusakusha. Ukubhekwa okusha noma okushintshile kuyakwenqabela. Akulokothi kumake ukukala okuhlulekile njengokunempilo noma kucindezele izixwayiso.
 
 ## Kungani
 
-Ukuxhumana kwe-InfiniBand okonakele kusadlulisa ithrafikhi. Ukuxhumana kwe-4X okuziqeqesha kabusha ku-1X kushiya imbobo "isebenza", futhi amagrafu esibonisi se-SNMP se-host abukeka ejwayelekile, kodwa imisebenzi ehlanganiswe ngokuqinile iyehla ngesivinini. Ubufakazi buku-fabric: imbobo ngayinye ibika ububanzi nesivinini sayo esisebenzayo, esinikwe amandla, nesisekelwayo, kanye nezibali zamaphutha nokuminyana. Ukukufunda kudinga amathuluzi okuxilonga e-InfiniBand noma i-API yomphathi we-fabric. Uma kwenziwa ngesandla, kushiya izikhala ezintathu:
+Ukuxhumana kwe-InfiniBand okonakele kusadlulisa ithrafikhi. Ukuxhumana kwe-4X okuziqeqesha kabusha ku-1X kushiya imbobo iku-"active", futhi amagrafu esibonisi se-SNMP se-host abukeka ejwayelekile, kodwa imisebenzi ehlanganiswe ngokuqinile iyehla ngesivinini. Ubufakazi buku-fabric: imbobo ngayinye ibika ububanzi nesivinini sayo esisebenzayo, esinikwe amandla, nesisekelwayo, kanye nezibali zamaphutha nokuminyana. Ukukufunda kudinga amathuluzi okuxilonga e-InfiniBand noma i-API yomphathi we-fabric. Uma kwenziwa ngesandla, kushiya izikhala ezintathu:
 
 - **Awukho umlando.** I-`perfquery` ne-`iblinkinfo` zibonisa okwamanje, ngakho ukuxhumana okonakale ngesonto eledlule akubonakali.
-- **Ayikho ingqikithi yedivayisi.** Izimbobo ze-fabric azizona izinto ze-Cacti, ngakho imbobo ngeke idwetshwe njengegrafu eceleni kwe-host eyiphakelayo.
+- **Ayikho ingqikithi yedivayisi.** Izimbobo ze-fabric azizona izinto ze-Cacti, ngakho imbobo ngeke idwetshwe njengegrafu eceleni kwe-host eyisebenzelayo.
 - **Ayikho indlela eya ezixwayisweni ze-Cacti.** I-Thold ne-Maint zisebenza emithonjeni yedatha nakumadivayisi e-Cacti.
 
-Le plugin ivala lezi zikhala ngokufunda i-fabric ngamathuluzi ayo okuxilonga (kanti kamuva nge-UFM), ihlonza ama-node nezimbobo nge-GUID, futhi ishicilele izibali nesimo sokuxhumana njengemithombo yedatha ye-Cacti. Ifunda kuphela: ayilokothi isethe kabusha izibali noma ishintshe isimo sembobo.
+Le plugin ivala lezi zikhala ngokufunda i-fabric nge-`infiniband-diags` noma i-NVIDIA UFM REST API, ihlonza ama-node nezimbobo nge-GUID, futhi ishicilele izibali nesimo sokuxhumana njengemithombo yedatha ye-Cacti. Ifunda kuphela: ayilokothi isethe kabusha izibali noma ishintshe isimo sembobo.
 
-## Ukutholwa kokuqala
+## Ukusebenza ne-CLI
 
-I-fabric entsha ayinazo ama-node, futhi ukushanela kuqala kusukela ku-script server kuphela ku-node ehlanganiswe nedivayisi ye-Cacti. Ngakho-ke ukutholwa kokuqala kuyisinyathelo sesandla. Ngemva kokulondoloza i-fabric enikwe amandla, sebenzisa lokhu kanye ku-poller leyo fabric eyabelwe kuyo, njenge-akhawunti ye-poller, kuthi `/path/to/cacti` kushintshwe ngomkhombandlela wakho we-Cacti (indlela ephelele iyasebenza futhi kusukela ku-cron):
+### I-poller yangemuva nokushanela okwenziwa ngesandla
 
+I-`fabric_poller_bottom()` iqala i-`poller_fabric.php` ngemuva ku-poller ngayinye kuma-fabric anikwe amandla abelwe leyo `poller_id` okufike isikhathi sawo sokushanela. Ungasebenzisa futhi isiqalisi se-poller noma ukushanela okwenziwa ngesandla ngqo ku-poller eyabelwe njengomsebenzisi we-poller (ushintsha i-`/path/to/cacti` ngomkhombandlela wakho we-Cacti):
+
+```sh
+php /path/to/cacti/plugins/fabric/poller_fabric.php [--fabric=ID] [--shard=K/N] [--force] [--debug]
+php /path/to/cacti/plugins/fabric/fabric_sweep.php --fabric=ID [--node=GUID] [--force]
 ```
-php /path/to/cacti/plugins/fabric/fabric_sweep.php --fabric=ID --force
+
+- I-`poller_fabric.php` isebenza wonke ama-fabric afike isikhathi sawo e-poller yendawo (noma i-fabric eyodwa nge-`--fabric=ID`), iphoqelela ukukhiya kwerejistri yenqubo ye-Cacti nokuqasha kwe-`ClaimRepository` ngesabelomali sesikhathi samasekhondi angu-`max(30, intdiv(sweep_interval, 2))`, futhi isekela i-`--shard=K/N` (`0 <= K < N`) ukuze ihlukanise ukushanela kwezibali ze-node ze-`diags` ngokuqinisekile nge-GUID ye-node.
+- I-`fabric_sweep.php` isebenza ukushanela okudingekayo kwe-fabric eyodwa enikwe amandla (noma i-node eyodwa nge-`--node=GUID`) eyabelwe i-poller yendawo. I-`--force` ayinaki ukuthi isikhathi se-fabric sifike yini ngenkathi isahlonipha izicelo zokugodla.
+
+Ngemva kokuba ukutholwa kokuqala kugcwalise uhlu lwempahla, hlanganisa ama-node namadivayisi e-Cacti ekhasini le-Fabric Admin. Gcina isikhathi sokuphela se-script ye-Cacti kumasekhondi angu-25 noma ngaphezulu: ukushanela okuvilaphayo okuqalwe ukufundwa kombuzo wedatha kukhawulela ukusetshenziswa kwethuluzi kumasekhondi angu-`script_timeout - 5` ukuze i-script server ibuye ngesikhathi nesampula yokugcina egciniwe noma u-`U`.
+
+### Ingemuva le-NVIDIA UFM REST negumbi lemininingwane yokuqinisekisa
+
+I-fabric ye-`ufm` idinga i-URL ye-`https://` engenayo imininingwane yokuqinisekisa eshumekiwe, imicu yemibuzo, noma izingxenye. I-`UfmSocketTransport` iphoqelela ukuqinisekiswa kwe-TLS peer negama le-host, yenqaba ukudluliselwa kwenye indawo, futhi isekela iphakethe le-CA elingakhethwa (`ufm_ca_file`) kanye ne-SHA-256 SPKI pin (`ufm_spki_pin`).
+
+Ukuze ugcine imininingwane yokuqinisekisa ye-UFM ku-`plugin_fabric_secret`, lungiselela i-`fabric_vault_key_file` ngaphansi kwe-**Configuration > Settings > Fabrics** ngendlela ephelele eya kufayela elijwayelekile eliphethwe ngumsebenzisi we-poller (azikho izixhumanisi ze-symlink kunoma yimuphi umkhombandlela womzali, imodi `0600`, elinezinhlamvu ezingama-64 ze-hex ezinjenge-`openssl rand -hex 32` noma amabhayithi angama-32 angahleliwe angaphrinteki). Le plugin ayilokothi idale noma ibhale ifayela lokhiye, futhi i-`replicate_out` ayilokothi ikopishe i-`plugin_fabric_secret` noma amafayela okhiye kuma-poller akude.
+
+### I-Configuration-as-Code ne-CLI yempilo
+
+I-`cli/fabric.php` iphatha izilungiselelo ze-plugin nezincazelo ze-fabric ngokusho ngaphakathi kwe-YAML noma i-XML, futhi ibika impilo eqaphela ukulondolozwa ngaphandle kokusebenzisa ukushanela okubukhoma:
+
+```sh
+php /path/to/cacti/plugins/fabric/cli/fabric.php export [--format=yaml|xml] [--file=PATH]
+php /path/to/cacti/plugins/fabric/cli/fabric.php validate --file=PATH [--format=yaml|xml]
+php /path/to/cacti/plugins/fabric/cli/fabric.php plan --file=PATH [--format=yaml|xml]
+php /path/to/cacti/plugins/fabric/cli/fabric.php apply --file=PATH --confirm=PLAN_HASH [--format=yaml|xml]
+php /path/to/cacti/plugins/fabric/cli/fabric.php health [--format=text|json]
 ```
 
-Uhlu lwempahla lube selugcwala. Hlanganisa ama-node namadivayisi e-Cacti ekhasini le-Fabric Admin; ukushanela okulandelayo kuqala kusukela kumbuzo wedatha. Ngenkathi kungekho i-node ye-fabric ehlanganisiwe, akukho lutho oluvuselela uhlu lwayo lwempahla, ngakho sebenzisa umyalo ofanayo futhi, kusukela ku-cron uma uthanda, ukuze urekhode ama-node amasha noma angekho. Ikhasi lempilo libonisa lo myalo ku-fabric enikwe amandla engakatholwa noma engenayo i-node ehlanganisiwe.
+I-`export` idala amafayela amasha ngemodi `0600`, ifihle i-`fabric_vault_key_file` njenge-`[REDACTED]`, futhi ikhiphe izinkomba eziqanjiwe ze-`ufm_credential_ref` esikhundleni sezimfihlo. I-`plan` ne-`apply` ziyenqaba amanani e-`ufm_token`, `ufm_password`, `secret`, namanani e-`fabric_vault_key_file` afakwe ngaphakathi. I-`apply` idinga i-`--confirm=PLAN_HASH` enembile ekhiqizwe yi-`plan`.
 
-## Ububanzi obuhleliwe
+### Izihuku ze-ecosystem
 
-| Isigaba | Ububanzi | Ama-milestone |
-|---|---|---|
-| 0, ucwaningo | I-matrix yezinguqulo, ukuqinisekiswa kokuziphatha kwangaphezulu, ukuziphatha kwezibali kuhadiwe, imodeli yamalungelo, isabelomali se-MAD, i-API ye-UFM | [M1](https://github.com/somethingwithproof/plugin_fabric/milestone/1) |
-| 1, ukubuka | Uhlu lwempahla nge-GUID, amadivayisi e-Cacti, umbuzo wedatha yembobo, izibali nemithombo yedatha yesimo sokuxhumana, izixwayiso ze-Thold, ukucindezelwa kwe-Maint, ikhasi lempilo | [M2](https://github.com/somethingwithproof/plugin_fabric/milestone/2), [M3](https://github.com/somethingwithproof/plugin_fabric/milestone/3), [M4](https://github.com/somethingwithproof/plugin_fabric/milestone/4) |
-| 2, i-UFM | Ingemuva le-UFM REST elifunda kuphela, ukuphathwa kwemininingwane yokuqinisekisa, ukuqhubeka kobunikazi phakathi kwezingemuva | [M5](https://github.com/somethingwithproof/plugin_fabric/milestone/5) |
-| 3, okukude | Abaqoqi bedatha abakude, ukukopisha, izenzo ze-`remote_agent`, ukushanela okuhlukanisiwe kwama-fabric amakhulu | [M6](https://github.com/somethingwithproof/plugin_fabric/milestone/6) |
+Uma kukhona ama-plugin e-Cacti ahambisanayo noma ukuhlanganiswa kwe-host, i-`setup.php` ibhalisa:
 
-Okungaphandle kobubanzi: ukushintsha isimo se-fabric, ukufaka esikhundleni umphathi we-fabric noma umphathi we-subnet, injini yezixwayiso ephethwe yi-plugin, i-daemon yangokwezifiso noma iphrothokholi yenethiwekhi, kanye nama-fabric e-Ethernet noma e-RoCE (ucwaningo).
+- `casc_register_providers`: ithekelisa, iqinisekisa, ihlela, futhi isebenzisa ngokuqinisekiswa ukumiswa kwe-`fabric` (`yaml` ne-`xml`, isikimu v1) ngokufihla izimfihlo.
+- `doctor_register_checks`: ihlinzeka ngokuhlolwa okune kokuxilonga okufunda kuphela (`fabric.schema`, `fabric.poller_freshness`, `fabric.identity_conflicts`, `fabric.ufm_vault`).
+- `abilities_register`: ibhalisa amakhono amathathu afunda kuphela, angalimazi, angashintshi umphumela uma ephindwa ngaphansi kwesigaba se-`fabric`, alawulwa wumkhakha we-Fabric View (nezimvume zedivayisi ye-Cacti kumaphutha embobo): `fabric-list-fabrics`, `fabric-get-health`, ne-`fabric-list-port-errors`.
 
-## Okuhloswe ngokuhambisana
+## Ububanzi nemingcele
+
+Okungaphandle kobubanzi: ukushintsha isimo se-fabric, ukusetha kabusha izibali, ukufaka esikhundleni umphathi we-fabric noma umphathi we-subnet, injini yezixwayiso ephethwe yi-plugin, i-daemon yangokwezifiso noma iphrothokholi yenethiwekhi, kanye nama-fabric e-Ethernet noma e-RoCE.
+
+## Izidingo nokuhambelana
 
 | Ingxenye | Okuhlosiwe |
 |---|---|
-| Cacti | 1.2.31 noma kamuva, azikho izichibiyelo eziyinhloko |
-| PHP | 8.2 noma kamuva; i-`setup.php` ihlala ifundeka ku-8.0 ukuze indawo yokusebenza engasekelwe ithole ukwenqatshwa esikhundleni se-UI ye-Cacti ephukile |
-| Amathuluzi e-InfiniBand | i-infiniband-diags kusukela ku-rdma-core; amafomethi okukhiphayo ahlolwe ngokumelene nomthombo we-v66.0 |
-| UFM | I-UFM Enterprise REST API, isigaba 2; i-matrix yokukhishwa iyinto okumele ilethwe ku-milestone 1 |
-| Thold, Maint | Azikho izinguquko ezidingekayo |
+| Cacti | 1.2.31 noma kamuva (`compat = 1.2.31`), azikho izichibiyelo eziyinhloko |
+| PHP | 8.2 noma kamuva; izindawo zokungena zihlala zifundeka ku-8.0 futhi zenqabe ukusebenza ku-8.1 ukuze indawo yokusebenza engasekelwe ithole ukwenqatshwa esikhundleni se-UI ye-Cacti ephukile |
+| Amathuluzi e-InfiniBand | i-`infiniband-diags` kusuka ku-`rdma-core` (ihlolwe ku-CI nge-rdma-core 50.0 ngaphansi kwe-`ibsim`; amafomethi okukhiphayo ahlolwe ngokumelene nomthombo we-v66.0) |
+| UFM | I-NVIDIA UFM Enterprise REST API (izindawo zokugcina ezifunda kuphela ze-`ufmRest` ne-`ufmRestV3`; zihlolwe ngokumelene nezindlela zokuhambisa ezenziwe ekuhloleni kweyunithi) |
+| Thold, Maint | Azikho izinguquko ezidingekayo; i-CI isebenzisa ukuhlolwa kokuphela-kuya-ekupheleni nge-Thold v1.8.2 ne-Maint v1.3 engashintshiwe |
 
-Gcina isikhathi sokuphela se-script ye-Cacti kusilungiselelo sayo esizenzakalelayo samasekhondi angu-25 noma ngaphezulu. Ukushanela okuqalwe ukufundwa kombuzo wedatha kukhawulela ukusetshenziswa kwethuluzi kuleso sikhathi sokuphela kususwe amasekhondi amahlanu, kugcinwa isikhathi sokufunda i-cache nokuphendula. Uma isabelomali siphela, umbuzo uhlinzeka ngesampula yamanje yokugcina noma engaziwa; umjikelezo olandelayo uzama ukushanela futhi. Lo mkhawulo usebenza nakwi-PHP poller. Isikhathi sokuphela samasekhondi amahlanu noma ngaphansi asishiyi sikhathi sokuqala ithuluzi.
+## Ukuthuthukisa nokuhlola
+
+Ukuhamba komsebenzi kwe-CI (`.github/workflows/plugin-ci-workflow.yml`) kuhlola i-PHP 8.2 kuya ku-8.5 ngokumelene ne-Cacti `release/1.2.31` ne-`1.2.x`, ukuhlola indawo yokungena ye-PHP 8.0, ukwenqatshwa kwe-PHP 8.1, i-PHPStan, ukuqinisekiswa kwe-gettext/ukuhumusha, ukulayisensa kwe-REUSE, ukuhlolwa kokuhamba komsebenzi, ukudlalwa kabusha kokuphela-kuya-ekupheleni kwe-Thold/Maint, kanye nokulingiswa kwe-fabric ye-`ibsim`.
+
+Nge-harness ye-plugin ye-Pest ehlanganyelwe ekhiyiwe ye-Cacti (`CACTI_PEST_BIN`) kanye nesizindalwazi se-Cacti esilahlwayo:
+
+```sh
+# Unit tests
+"$CACTI_PEST_BIN" --configuration=phpunit.xml
+
+# Lifecycle integration tests (disposable database only)
+CACTI_PATH=/path/to/cacti FABRIC_TEST_DATABASE=disposable "$CACTI_PEST_BIN" --configuration=phpunit-integration.xml
+
+# Static analysis (against Cacti 1.2.31)
+CACTI_PATH=/path/to/cacti phpstan analyse -c phpstan.neon --no-progress
+
+# Translation template, catalogs, and localized README checks
+sh locales/build_gettext.sh --check
+
+# Simulated ibsim fixture parser check
+php tests/bin/check-ibsim-fixtures.php tests/fixtures/ibsim
+```
 
 ## Ukwakheka
 
-- [docs/PLAN.md](../../PLAN.md) wuhlelo oluphelele: ukwakheka, amaqiniso angaphezulu okuncike kuwo (nemithombo) kanye nokucatshangwayo okusazokwaziwa, imodeli yobunikazi, imithetho yezibali neyesimo sokuxhumana, imingcele yokuphepha, izibalo zokusebenza, ukuhlola, kanye nezingozi.
-- [docs/decisions/](../../decisions) igcina amarekhodi ezinqumo zokwakheka ezishiwo kakade.
+- [docs/PLAN.md](../../PLAN.md) wuhlelo lokwakha nolwesakhiwo: amaqiniso angaphezulu anemithombo, ukuhlolwa kwehadiwe okuvuliwe, imodeli yobunikazi, imithetho yezibali neyesimo sokuxhumana, imingcele yokuphepha, izibalo zokusebenza, ukuhlola, kanye nezingozi.
+- [docs/decisions/](../../decisions/) igcina amarekhodi ezinqumo zokwakheka.
 - [docs/REQUIREMENTS.md](../../REQUIREMENTS.md) ihlanganisa i-ID yesidingo ngayinye nenkinga yayo.
 
 ```mermaid
 flowchart LR
     F[InfiniBand fabric] --> T[Amathuluzi e-infiniband-diags, afunda kuphela]
-    F --> U[UFM REST, phase 2]
-    T --> S[Umsebenzi wokushanela ku-Cacti poller]
+    F --> U[UFM REST API, efunda kuphela]
+    T --> S[I-poller_fabric.php noma ukushanela okuvilaphayo ku-poller eyabelwe]
     U --> S
     S --> C[(I-cache yamasampula)]
     C --> SS[I-script server nombuzo wedatha]
     SS --> R[Amafayela e-RRD namagrafu e-Cacti]
     SS -->|poller_output| TH[I-Thold ne-Maint]
+    C --> H[I-HealthEvaluator, Doctor, namakhono e-MCP]
     R --> P[Izimvume zegrafu ze-Cacti]
 ```
 
@@ -121,7 +152,7 @@ flowchart LR
 
 ## Ukufaka isandla
 
-Funda ku-[CONTRIBUTING.md](../../../CONTRIBUTING.md). Ama-commit adinga isiginesha ye-DCO. Izingxoxo zokwakheka zenzeka ezinkingeni; izinqumo ezivuliwe zithwala ilebuli ye-`type: decision`.
+Funda ku-[CONTRIBUTING.md](../../../CONTRIBUTING.md). Ama-commit adinga isiginesha ye-DCO (`git commit -s`). Izingxoxo zokwakheka zenzeka ezinkingeni; izinqumo ezivuliwe zithwala ilebuli ye-`type: decision`.
 
 ## Ukuphepha
 
@@ -129,4 +160,4 @@ Bika ubungozi ngasese; bheka ku-[SECURITY.md](../../../SECURITY.md).
 
 ## Ilayisensi
 
-I-GNU General Public License v2.0, ilayisensi efanayo neye-Cacti nama-plugin ayo. Bheka ku-[LICENSE](../../../LICENSE).
+GNU General Public License v2.0, ilayisensi efanayo neye-Cacti nama-plugin ayo. Bheka ku-[LICENSE](../../../LICENSE).
