@@ -127,12 +127,13 @@ final class FabricRepository {
 	 */
 	public function save(Fabric $fabric): int {
 		$now    = $this->clock->now();
-		$values = [
+		$adapter = ($fabric->backend === Backend::Ufm && $fabric->adapter === '') ? null : $fabric->adapter;
+		$values  = [
 			$fabric->name,
 			$fabric->backend->value,
 			$fabric->pollerId,
 			$fabric->interval,
-			$fabric->adapter,
+			$adapter,
 			$fabric->adapterPort,
 			$fabric->adminState->value,
 			$fabric->ufmUrl,

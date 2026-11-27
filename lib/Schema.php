@@ -34,9 +34,8 @@ namespace Somethingwithproof\Fabric;
  * the next run. No migration touches a Cacti device, data source, graph, or
  * RRD file, runs a fabric tool, or contacts UFM (REQ-LIFE-005).
  *
- * There is no poller_bottom hook: sweeps start lazily from the script
- * server (ADR 0008), so disabling the plugin, which stops core calling the
- * hooks, and the enabled check in fabric_sweep_allowed() stop them.
+ * Poller sweeps run via poller_bottom (poller_fabric.php) as well as lazily
+ * from the script server, gated by plugin enablement and per-fabric claims.
  */
 final class Schema {
 	public const VERSION = 3;
@@ -157,6 +156,7 @@ final class Schema {
 			1 => fn (): bool => $this->createTables(self::tables()),
 			2 => fn (): bool => $this->addColumns('plugin_fabric_sample', self::SAMPLE_V2),
 			3 => fn (): bool => $this->addColumns('plugin_fabric_fabric', self::FABRIC_V3)
+				&& $this->allowNullableAdapter()
 				&& $this->createTables(array_intersect_key(self::tables(), ['plugin_fabric_secret' => true])),
 		];
 	}
@@ -235,6 +235,10 @@ final class Schema {
 		return true;
 	}
 
+	private function allowNullableAdapter(): bool {
+		return db_execute_prepared('ALTER TABLE `plugin_fabric_fabric` MODIFY COLUMN `adapter` varchar(32) NULL DEFAULT NULL', [], true, $this->connection) !== false;
+	}
+
 	private function tableExists(string $table): bool {
 		return db_fetch_cell_prepared('SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ?', [$table], '', true, $this->connection) > 0;
 	}
@@ -269,7 +273,7 @@ final class Schema {
 					$text('backend', 16, 'diags'),
 					$id('poller_id') + ['default' => '1'],
 					$id('sweep_interval') + ['default' => '300'],
-					$text('adapter', 32),
+					['name' => 'adapter', 'type' => 'varchar(32)', 'NULL' => true],
 					$small('adapter_port'),
 					$text('admin_state', 16, 'enabled'),
 					$text('ufm_url', 255),
@@ -280,8 +284,10 @@ final class Schema {
 					$time('updated_at'),
 				],
 				'primary'     => 'id',
-				'unique_keys' => [['name' => 'name', 'columns' => ['name']]],
-				'keys'        => [['name' => 'poller_adapter_port', 'columns' => ['poller_id', 'adapter', 'adapter_port']]],
+				'unique_keys' => [
+					['name' => 'name', 'columns' => ['name']],
+					['name' => 'poller_adapter_port', 'columns' => ['poller_id', 'adapter', 'adapter_port']],
+				],
 			],
 			// Encrypted UFM credentials (AES-256-GCM; key lives in external keyfile).
 			'plugin_fabric_secret' => $innodb + [
