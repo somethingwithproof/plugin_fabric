@@ -39,6 +39,7 @@ namespace Somethingwithproof\Fabric;
 final class Sweep {
 	private readonly TopologySweep $topology;
 	private readonly CounterSweep $counters;
+	private readonly UfmSweep $ufm;
 
 	public function __construct(
 		private readonly \PDO|false $connection,
@@ -49,12 +50,15 @@ final class Sweep {
 		private readonly bool $pluginEnabled,
 		int $toolOwner = 0,
 		?float $deadline = null,
+		?UfmHttpTransport $ufmTransport = null,
+		?Vault $ufmVault = null,
 	) {
 		// Leave most of a script-server call for counters even when
 		// topology discovery runs up to its limit every polling cycle.
 		$topologyDeadline = $deadline === null ? null : microtime(true) + max(0.0, $deadline - microtime(true)) / 3;
 		$this->topology = new TopologySweep($connection, $clock, $runner, $settings, $toolOwner, $topologyDeadline);
 		$this->counters = new CounterSweep($connection, $clock, $runner, $settings, $toolOwner, $deadline);
+		$this->ufm      = new UfmSweep($connection, $clock, $settings, $ufmTransport, $ufmVault, $deadline);
 	}
 
 	/**
@@ -89,15 +93,20 @@ final class Sweep {
 	/**
 	 * Sweep a fabric's topology and nodes, or with $guid one node. $force
 	 * ignores whether they are due, for an operator's manual run; claims
-	 * still apply.
+	 * still apply. Optional sharding ($shardIndex in 0..$shardCount-1) splits
+	 * node counter sweeps deterministically by node GUID across workers.
 	 *
 	 * @return int|null nodes whose counters were swept, or null when the fabric may not be swept here
 	 */
-	public function forFabric(int $fabricId, ?Guid $guid, bool $force): ?int {
+	public function forFabric(int $fabricId, ?Guid $guid, bool $force, int $shardIndex = 0, int $shardCount = 1): ?int {
 		$fabric = (new FabricRepository($this->connection, $this->clock))->find($fabricId);
 
 		if (!$this->pluginEnabled || $fabric === null || !$this->allowed($fabric)) {
 			return null;
+		}
+
+		if ($fabric->backend === Backend::Ufm) {
+			return $this->ufm->run($fabric, ClaimRepository::holder(), !$force);
 		}
 
 		if ($force || $this->topology->due($fabric) === true) {
@@ -112,13 +121,15 @@ final class Sweep {
 
 		if ($guid !== null) {
 			$nodes = array_values(array_filter($nodes, static fn (Node $n): bool => $n->guid->equals($guid)));
+		} elseif ($shardCount > 1 && $shardIndex >= 0 && $shardIndex < $shardCount) {
+			$nodes = array_values(array_filter($nodes, static fn (Node $n): bool => ((int) sprintf('%u', crc32($n->guid->text))) % $shardCount === $shardIndex));
 		}
 
 		return $this->sweepNodes($fabric, $nodes, $force, false);
 	}
 
 	public function allowed(Fabric $fabric): bool {
-		return $fabric->enabled() && $fabric->onMainPoller() && $fabric->pollerId === $this->pollerId;
+		return $fabric->enabled() && $fabric->pollerId === $this->pollerId;
 	}
 
 	/**

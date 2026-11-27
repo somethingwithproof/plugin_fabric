@@ -45,6 +45,7 @@ final class HealthPage {
 		private readonly ?TemplateInstaller $templates = null,
 		private readonly bool $canImport = false,
 		private readonly string $basePath = '/path/to/cacti',
+		private readonly bool $remoteEnabled = true,
 	) {
 	}
 
@@ -143,7 +144,7 @@ final class HealthPage {
 				$warnings[] = __('Fabric %s: the inventory is %s; the last successful discovery was %s.', $fabric->name, $state->value, Format::age($success, $now), 'fabric');
 			}
 
-			if (!$fabric->onMainPoller()) {
+			if (!$this->remoteEnabled && !$fabric->onMainPoller()) {
 				$warnings[] = __('Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller.', $fabric->name, $fabric->pollerId, 'fabric');
 			}
 

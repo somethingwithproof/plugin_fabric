@@ -36,6 +36,7 @@ final readonly class Settings {
 		'fabric_failure_budget',
 		'fabric_uninstall_keep_tables',
 		'fabric_index_down_ports',
+		'fabric_vault_key_file',
 	];
 
 	public const DEFAULT_TOOL_DIR = '/usr/sbin';
@@ -55,6 +56,7 @@ final readonly class Settings {
 		public int $failureBudget,
 		public bool $keepTablesOnUninstall,
 		public bool $indexDownPorts = false,
+		public string $vaultKeyFile = '',
 	) {
 	}
 
@@ -78,6 +80,7 @@ final readonly class Settings {
 			failureBudget: min(Row::int($row, 'fabric_failure_budget', self::DEFAULT_FAILURES, 1), 64),
 			keepTablesOnUninstall: array_key_exists('fabric_uninstall_keep_tables', $row) ? Row::bool($row, 'fabric_uninstall_keep_tables') : true,
 			indexDownPorts: Row::bool($row, 'fabric_index_down_ports'),
+			vaultKeyFile: self::path($row, 'fabric_vault_key_file') ?? '',
 		);
 	}
 
@@ -169,6 +172,7 @@ final readonly class Settings {
 				'friendly_name' => __('Uninstall', 'fabric'),
 				'method'        => 'spacer',
 			],
+			'fabric_vault_key_file' => $path('UFM Vault Key File', 'Optional absolute path to a 256-bit AES-GCM vault keyfile (64 hex chars or 32 random bytes, 0600 owned by the poller user) used to encrypt NVIDIA UFM credentials.', ''),
 			'fabric_uninstall_keep_tables' => [
 				'friendly_name' => __('Keep Plugin Tables on Uninstall', 'fabric'),
 				'description'   => __('When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way.', 'fabric'),

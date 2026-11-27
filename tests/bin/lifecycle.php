@@ -182,7 +182,7 @@ switch ($action) {
 			'status' => $status,
 			'stderr' => trim((string) $stderr),
 			'stdout' => trim((string) $stdout),
-			'logged' => strpos($logged, 'Fabric ' . $remote . ' was not swept: only the main poller') !== false,
+			'logged' => strpos($logged, 'Fabric ' . $remote . ' was not swept: assigned to poller 2, not this poller (1)') !== false,
 			'health' => (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_health WHERE fabric_id = ?', array($remote)),
 		);
 

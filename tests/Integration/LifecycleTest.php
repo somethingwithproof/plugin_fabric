@@ -24,12 +24,12 @@ if (PHP_SAPI !== 'cli') {
 // The version INFO declares, which Cacti records as the installed version.
 define('FABRIC_VERSION', (string) (parse_ini_file(dirname(__DIR__, 2) . '/INFO', true)['info']['version'] ?? ''));
 
-const FABRIC_TABLES = ['plugin_fabric_claim', 'plugin_fabric_fabric', 'plugin_fabric_health', 'plugin_fabric_node', 'plugin_fabric_node_sweep', 'plugin_fabric_port', 'plugin_fabric_relink', 'plugin_fabric_sample'];
+const FABRIC_TABLES = ['plugin_fabric_claim', 'plugin_fabric_fabric', 'plugin_fabric_health', 'plugin_fabric_node', 'plugin_fabric_node_sweep', 'plugin_fabric_port', 'plugin_fabric_relink', 'plugin_fabric_sample', 'plugin_fabric_secret'];
 
 // What the seed action leaves: one fabric and one node.
-const FABRIC_SEEDED = ['plugin_fabric_claim' => 0, 'plugin_fabric_fabric' => 1, 'plugin_fabric_health' => 0, 'plugin_fabric_node' => 1, 'plugin_fabric_node_sweep' => 0, 'plugin_fabric_port' => 0, 'plugin_fabric_relink' => 0, 'plugin_fabric_sample' => 0];
+const FABRIC_SEEDED = ['plugin_fabric_claim' => 0, 'plugin_fabric_fabric' => 1, 'plugin_fabric_health' => 0, 'plugin_fabric_node' => 1, 'plugin_fabric_node_sweep' => 0, 'plugin_fabric_port' => 0, 'plugin_fabric_relink' => 0, 'plugin_fabric_sample' => 0, 'plugin_fabric_secret' => 0];
 
-const FABRIC_HOOKS = ['auth_alternate_realms', 'config_arrays', 'config_settings', 'device_remove', 'draw_navigation_text'];
+const FABRIC_HOOKS = ['abilities_register', 'auth_alternate_realms', 'casc_register_providers', 'config_arrays', 'config_settings', 'device_remove', 'doctor_register_checks', 'draw_navigation_text', 'poller_bottom', 'replicate_out'];
 
 beforeEach(function () {
 	lifecycle('reset');
@@ -44,7 +44,7 @@ it('installs fresh with tracked tables, hooks, and three realms, leaving the plu
 
 	expect($state['plugin']['status'])->toEqual('4')
 		->and($state['plugin']['version'])->toEqual(FABRIC_VERSION)
-		->and($state['schema'])->toEqual('2')
+		->and($state['schema'])->toEqual('3')
 		->and(array_keys($state['tables']))->toBe(FABRIC_TABLES)
 		->and($state['tracked'])->toBe(FABRIC_TABLES)
 		->and(array_keys($state['hooks']))->toBe(FABRIC_HOOKS)
@@ -130,7 +130,7 @@ it('finishes an upgrade that was interrupted after creating only some tables', f
 	expect($state['result'])->toBeTrue()
 		->and(array_keys($state['tables']))->toBe(FABRIC_TABLES)
 		->and($state['tables']['plugin_fabric_node'])->toBe(1)
-		->and($state['schema'])->toEqual('2')
+		->and($state['schema'])->toEqual('3')
 		->and($state['plugin']['version'])->toEqual(FABRIC_VERSION);
 });
 
@@ -143,7 +143,7 @@ it('does not advance past a migration that did not run', function () {
 		->and($stopped['schema'])->toEqual('0');
 
 	$finished = lifecycle('upgrade');
-	expect($finished['schema'])->toEqual('2');
+	expect($finished['schema'])->toEqual('3');
 });
 
 it('refuses a schema newer than the code and leaves the recorded version alone', function () {
@@ -208,14 +208,14 @@ it('grants realms on install but never on a repair a viewer triggers', function 
 		->and($repair['result'])->toBe(['viewer_realms' => 0]);
 });
 
-it('refuses to sweep a fabric assigned to a remote poller, with a logged reason', function () {
+it('refuses to sweep a fabric assigned to another poller, with a logged reason', function () {
 	lifecycle('install');
 	lifecycle('enable');
 
 	$r = lifecycle('remote_poller')['result'];
 
 	expect($r['status'])->toBe(1)
-		->and($r['stderr'])->toContain('Only the main poller sweeps a fabric')
+		->and($r['stderr'])->toContain('Fabric is assigned to another poller')
 		->and($r['stdout'])->toBe('')
 		->and($r['logged'])->toBeTrue()
 		->and($r['health'])->toBe(0);
@@ -279,7 +279,7 @@ it('migrates a version 1 sample table to version 2 and keeps its rows', function
 	$sample = lifecycle('sample')['result'];
 
 	expect($state['result'])->toBeTrue()
-		->and($state['schema'])->toEqual('2')
+		->and($state['schema'])->toEqual('3')
 		->and($state['columns'])->toContain('previous_at', 'rates', 'reset', 'discontinuities', 'discontinuity_at')
 		->and($state['tables']['plugin_fabric_node'])->toBe(1)
 		->and($sample)->toMatchArray([

@@ -516,3 +516,208 @@ function fabric_page_allowed(): bool {
 		&& ($current_user['enabled'] ?? '') === 'on'
 		&& api_plugin_user_realm_auth(get_current_page());
 }
+
+/**
+ * poller_bottom hook: launch poller_fabric.php in the background for each
+ * enabled fabric assigned to this poller whose discovery sweep is due.
+ */
+function fabric_poller_bottom(): void {
+	global $config;
+
+	if (!fabric_boot()) {
+		return;
+	}
+
+	if (!(new \Somethingwithproof\Fabric\Schema(false))->isCurrent()) {
+		return;
+	}
+
+	if (!function_exists('exec_background')) {
+		include_once($config['library_path'] . '/poller.php');
+	}
+
+	$php = trim((string) read_config_option('path_php_binary'));
+
+	if ($php === '' || !is_file($php) || !is_executable($php)) {
+		return;
+	}
+
+	$poller_id = (int) ($config['poller_id'] ?? 1);
+	$clock     = new \Somethingwithproof\Fabric\SystemClock();
+	$due       = (new \Somethingwithproof\Fabric\FabricRepository(false, $clock))->dueForPoller($poller_id);
+
+	foreach ($due as $fabric_id) {
+		// @phpstan-ignore argument.type
+		exec_background($php, array('-q', __DIR__ . '/poller_fabric.php', '--fabric=' . (int) $fabric_id));
+	}
+}
+
+/**
+ * replicate_out hook: replicate non-secret fabric definitions assigned to a
+ * remote collector. Vault entries (plugin_fabric_secret) and external key
+ * files are never replicated.
+ *
+ * @param mixed $data
+ * @return mixed
+ */
+function fabric_replicate_out($data) {
+	if (!fabric_boot() || !is_array($data)) {
+		return $data;
+	}
+
+	$remote_poller_id = isset($data['remote_poller_id']) && is_numeric($data['remote_poller_id']) ? (int) $data['remote_poller_id'] : 0;
+	$rcnn_id          = $data['rcnn_id'] ?? false;
+
+	if ($remote_poller_id < 2 || $rcnn_id === false || !function_exists('replicate_out_table')) {
+		return $data;
+	}
+
+	$replicator = new \Somethingwithproof\Fabric\ReplicatorRepository(false);
+	$fabrics    = $replicator->fabricsForPoller($remote_poller_id);
+
+	// @phpstan-ignore argument.type
+	replicate_out_table($rcnn_id, $fabrics, 'plugin_fabric_fabric', $remote_poller_id);
+
+	return $data;
+}
+
+function fabric_health_evaluator(): \Somethingwithproof\Fabric\HealthEvaluator {
+	$clock = new \Somethingwithproof\Fabric\SystemClock();
+
+	return new \Somethingwithproof\Fabric\HealthEvaluator(
+		new \Somethingwithproof\Fabric\FabricRepository(false, $clock),
+		new \Somethingwithproof\Fabric\NodeRepository(false),
+		new \Somethingwithproof\Fabric\FabricHealthRepository(false),
+		new \Somethingwithproof\Fabric\NodeSweepRepository(false),
+		new \Somethingwithproof\Fabric\RelinkRepository(false, $clock),
+		new \Somethingwithproof\Fabric\SampleRepository(false),
+		$clock,
+		new \Somethingwithproof\Fabric\MaintMaintenance(),
+		fabric_settings(),
+		new \Somethingwithproof\Fabric\Schema(false),
+	);
+}
+
+function fabric_config_service(): \Somethingwithproof\Fabric\ConfigService {
+	$clock = new \Somethingwithproof\Fabric\SystemClock();
+
+	return new \Somethingwithproof\Fabric\ConfigService(
+		new \Somethingwithproof\Fabric\SettingsRepository(false),
+		new \Somethingwithproof\Fabric\FabricRepository(false, $clock),
+		new \Somethingwithproof\Fabric\CredentialRepository(false, $clock),
+		new \Somethingwithproof\Fabric\ConfigRepository(false),
+	);
+}
+
+function fabric_user_view_allowed(int $userId): bool {
+	if ($userId < 1 || !function_exists('is_realm_allowed')) {
+		return false;
+	}
+
+	foreach ((new \Somethingwithproof\Fabric\RealmRepository(false))->viewRealmIds() as $realmId) {
+		if (is_realm_allowed($realmId, $userId)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+function fabric_user_device_allowed(int $userId, int $hostId): bool {
+	if ($userId < 1 || $hostId < 1) {
+		return false;
+	}
+
+	if (function_exists('is_device_allowed')) {
+		return (bool) is_device_allowed($hostId, $userId);
+	}
+
+	return false;
+}
+
+/**
+ * abilities_register hook: expose read-only Fabric abilities to Cacti MCP /
+ * Abilities API v2, gated by the Fabric View realm.
+ *
+ * @param mixed $registrar
+ */
+function fabric_abilities_register($registrar): void {
+	if (!fabric_boot() || !is_object($registrar)) {
+		return;
+	}
+
+	$provider = new \Somethingwithproof\Fabric\AbilitiesProvider(
+		fabric_health_evaluator(),
+		static function (int $userId): bool {
+			return fabric_user_view_allowed($userId);
+		},
+		static function (int $userId, int $hostId): bool {
+			return fabric_user_device_allowed($userId, $hostId);
+		},
+		static function (int $userId): bool {
+			return fabric_user_view_allowed($userId);
+		},
+	);
+
+	$provider->register($registrar);
+}
+
+/**
+ * doctor_register_checks hook: provide read-only diagnostic checks for Cacti Doctor.
+ *
+ * @param mixed $checks
+ * @return mixed
+ */
+function fabric_doctor_register_checks($checks = array()) {
+	if (!fabric_boot()) {
+		return $checks;
+	}
+
+	$results = (new \Somethingwithproof\Fabric\DoctorProvider(fabric_health_evaluator()))->checks();
+
+	if (is_object($checks) && method_exists($checks, 'register')) {
+		foreach ($results as $check) {
+			$checks->register($check);
+		}
+
+		return $checks;
+	}
+
+	if (!is_array($checks)) {
+		$checks = array();
+	}
+
+	foreach ($results as $check) {
+		$checks[] = $check;
+	}
+
+	return $checks;
+}
+
+/**
+ * casc_register_providers hook: register Fabric CasC provider descriptor.
+ *
+ * @param mixed $providers
+ * @return mixed
+ */
+function fabric_casc_register_providers($providers = array()) {
+	if (!fabric_boot()) {
+		return $providers;
+	}
+
+	$descriptor = (new \Somethingwithproof\Fabric\CascProvider(fabric_config_service()))->descriptor();
+
+	if (is_object($providers) && method_exists($providers, 'register')) {
+		$providers->register('fabric', $descriptor);
+
+		return $providers;
+	}
+
+	if (!is_array($providers)) {
+		$providers = array();
+	}
+
+	$providers['fabric'] = $descriptor;
+
+	return $providers;
+}

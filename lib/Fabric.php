@@ -50,6 +50,10 @@ final readonly class Fabric {
 		public string $adapter,
 		public int $adapterPort,
 		public AdminState $adminState,
+		public string $ufmUrl = '',
+		public string $ufmCaFile = '',
+		public string $ufmSpkiPin = '',
+		public int $ufmCredentialId = 0,
 	) {
 	}
 
@@ -58,8 +62,8 @@ final readonly class Fabric {
 	}
 
 	/**
-	 * A row whose name, backend, adapter, or port is not valid is no fabric
-	 * at all: it is never swept with values it was not saved with.
+	 * A row whose name, backend, or backend-specific parameters are not valid
+	 * is no fabric at all: it is never swept with values it was not saved with.
 	 *
 	 * @param array<array-key, mixed> $row
 	 */
@@ -68,9 +72,18 @@ final readonly class Fabric {
 		$name    = Row::string($row, 'name');
 		$backend = Backend::tryFrom(Row::string($row, 'backend'));
 		$adapter = Row::string($row, 'adapter');
-		$port    = Row::int($row, 'adapter_port', 0, 1);
+		$port    = Row::int($row, 'adapter_port', 0, 0);
+		$ufmUrl  = Row::string($row, 'ufm_url');
 
-		if ($id === 0 || preg_match(self::NAME_PATTERN, $name) !== 1 || $backend === null || preg_match(self::ADAPTER_PATTERN, $adapter) !== 1 || $port < 1 || $port > PortRef::MAX_PORT) {
+		if ($id === 0 || preg_match(self::NAME_PATTERN, $name) !== 1 || $backend === null) {
+			return null;
+		}
+
+		if ($backend === Backend::Diags) {
+			if (preg_match(self::ADAPTER_PATTERN, $adapter) !== 1 || $port < 1 || $port > PortRef::MAX_PORT) {
+				return null;
+			}
+		} elseif (UfmEndpoint::parse($ufmUrl) === null) {
 			return null;
 		}
 
@@ -83,6 +96,10 @@ final readonly class Fabric {
 			adapter: $adapter,
 			adapterPort: $port,
 			adminState: AdminState::tryFrom(Row::string($row, 'admin_state')) ?? AdminState::Disabled,
+			ufmUrl: $ufmUrl,
+			ufmCaFile: Row::string($row, 'ufm_ca_file'),
+			ufmSpkiPin: Row::string($row, 'ufm_spki_pin'),
+			ufmCredentialId: Row::int($row, 'ufm_credential_id', 0, 0),
 		);
 	}
 

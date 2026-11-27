@@ -37,14 +37,18 @@ final readonly class FabricInput {
 	 * @param array<string, string> $input
 	 * @param array<int, string>    $pollers poller id => name
 	 */
-	public static function parse(array $input, int $id, array $pollers): self {
-		$errors  = [];
-		$name    = trim($input['name'] ?? '');
-		$backend = Backend::tryFrom(trim($input['backend'] ?? ''));
-		$poller  = Row::int($input, 'poller_id', 0, 1);
-		$every   = Row::int($input, 'sweep_interval', 0, 1);
-		$adapter = trim($input['adapter'] ?? '');
-		$port    = Row::int($input, 'adapter_port', 0, 1);
+	public static function parse(array $input, int $id, array $pollers, bool $allowRemote = true): self {
+		$errors   = [];
+		$name     = trim($input['name'] ?? '');
+		$backend  = Backend::tryFrom(trim($input['backend'] ?? ''));
+		$poller   = Row::int($input, 'poller_id', 0, 1);
+		$every    = Row::int($input, 'sweep_interval', 0, 1);
+		$adapter  = trim($input['adapter'] ?? '');
+		$port     = Row::int($input, 'adapter_port', 0, 0);
+		$ufmUrl   = trim($input['ufm_url'] ?? '');
+		$ufmCa    = trim($input['ufm_ca_file'] ?? '');
+		$ufmPin   = trim($input['ufm_spki_pin'] ?? '');
+		$ufmCred  = Row::int($input, 'ufm_credential_id', 0, 0);
 
 		if (preg_match(Fabric::NAME_PATTERN, $name) !== 1) {
 			$errors['name'] = __('Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit.', 'fabric');
@@ -56,7 +60,7 @@ final readonly class FabricInput {
 
 		if (!isset($pollers[$poller])) {
 			$errors['poller_id'] = __('Poller: choose one of the listed pollers.', 'fabric');
-		} elseif ($poller !== Fabric::MAIN_POLLER) {
+		} elseif (!$allowRemote && $poller !== Fabric::MAIN_POLLER) {
 			$errors['poller_id'] = __('Poller: only the main poller can sweep a fabric until remote poller support is added.', 'fabric');
 		}
 
@@ -72,10 +76,37 @@ final readonly class FabricInput {
 			$errors['adapter_port'] = __('Adapter Port: enter the port number of the local adapter, from 1 to %d.', PortRef::MAX_PORT, 'fabric');
 		}
 
+		if ($backend === Backend::Ufm) {
+			if (UfmEndpoint::parse($ufmUrl) === null) {
+				$errors['ufm_url'] = 'UFM URL: enter an https:// URL without embedded credentials or query strings.';
+			}
+
+			if ($ufmCa !== '' && !SecureFile::pathAcceptable($ufmCa)) {
+				$errors['ufm_ca_file'] = 'UFM CA Bundle: enter an absolute path without traversal.';
+			}
+
+			if ($ufmPin !== '' && UfmSocketTransport::normalizeSpkiPin($ufmPin) === null) {
+				$errors['ufm_spki_pin'] = 'UFM SPKI Pin: enter sha256/<base64> or 64 hex characters.';
+			}
+		}
+
 		if ($errors !== [] || $backend === null) {
 			return new self(null, $errors);
 		}
 
-		return new self(new Fabric($id, $name, $backend, $poller, $every, $adapter, $port, Row::bool($input, 'enabled') ? AdminState::Enabled : AdminState::Disabled), []);
+		return new self(new Fabric(
+			$id,
+			$name,
+			$backend,
+			$poller,
+			$every,
+			$adapter,
+			$port,
+			Row::bool($input, 'enabled') ? AdminState::Enabled : AdminState::Disabled,
+			$ufmUrl,
+			$ufmCa,
+			$ufmPin,
+			$ufmCred,
+		), []);
 	}
 }

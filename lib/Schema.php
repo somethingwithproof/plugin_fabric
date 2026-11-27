@@ -39,18 +39,26 @@ namespace Somethingwithproof\Fabric;
  * hooks, and the enabled check in fabric_sweep_allowed() stop them.
  */
 final class Schema {
-	public const VERSION = 2;
+	public const VERSION = 3;
 
 	public const HOOKS = [
-		'auth_alternate_realms' => 'fabric_auth_alternate_realms',
-		'config_arrays'        => 'fabric_config_arrays',
-		'config_settings'      => 'fabric_config_settings',
-		'draw_navigation_text' => 'fabric_draw_navigation_text',
-		'device_remove'        => 'fabric_device_remove',
+		'auth_alternate_realms'  => 'fabric_auth_alternate_realms',
+		'config_arrays'          => 'fabric_config_arrays',
+		'config_settings'        => 'fabric_config_settings',
+		'draw_navigation_text'   => 'fabric_draw_navigation_text',
+		'device_remove'          => 'fabric_device_remove',
+		'poller_bottom'          => 'fabric_poller_bottom',
+		'replicate_out'          => 'fabric_replicate_out',
+		'abilities_register'     => 'fabric_abilities_register',
+		'doctor_register_checks' => 'fabric_doctor_register_checks',
+		'casc_register_providers' => 'fabric_casc_register_providers',
 	];
 
 	/** Columns version 2 adds to plugin_fabric_sample, for rates and discontinuities. */
 	private const SAMPLE_V2 = ['previous_at', 'rates', 'reset', 'discontinuities', 'discontinuity_at'];
+
+	/** Columns version 3 adds to plugin_fabric_fabric, for NVIDIA UFM REST backends. */
+	private const FABRIC_V3 = ['ufm_url', 'ufm_ca_file', 'ufm_spki_pin', 'ufm_credential_id'];
 
 	private const PLUGIN  = 'fabric';
 	private const SETTING = 'fabric_schema_version';
@@ -148,6 +156,8 @@ final class Schema {
 		return [
 			1 => fn (): bool => $this->createTables(self::tables()),
 			2 => fn (): bool => $this->addColumns('plugin_fabric_sample', self::SAMPLE_V2),
+			3 => fn (): bool => $this->addColumns('plugin_fabric_fabric', self::FABRIC_V3)
+				&& $this->createTables(array_intersect_key(self::tables(), ['plugin_fabric_secret' => true])),
 		];
 	}
 
@@ -262,13 +272,34 @@ final class Schema {
 					$text('adapter', 32),
 					$small('adapter_port'),
 					$text('admin_state', 16, 'enabled'),
+					$text('ufm_url', 255),
+					$text('ufm_ca_file', 255),
+					$text('ufm_spki_pin', 128),
+					$id('ufm_credential_id') + ['default' => '0'],
 					$time('created_at'),
 					$time('updated_at'),
 				],
 				'primary'     => 'id',
-				// One fabric per local adapter port and poller: a second one
-				// would import the same nodes again under its own records.
-				'unique_keys' => [['name' => 'name', 'columns' => ['name']], ['name' => 'poller_adapter_port', 'columns' => ['poller_id', 'adapter', 'adapter_port']]],
+				'unique_keys' => [['name' => 'name', 'columns' => ['name']]],
+				'keys'        => [['name' => 'poller_adapter_port', 'columns' => ['poller_id', 'adapter', 'adapter_port']]],
+			],
+			// Encrypted UFM credentials (AES-256-GCM; key lives in external keyfile).
+			'plugin_fabric_secret' => $innodb + [
+				'comment' => 'Encrypted UFM credential vault entries',
+				'columns' => [
+					$id('id') + ['auto_increment' => true],
+					$text('name', 64),
+					$text('auth_type', 16, 'token'),
+					$text('username', 128),
+					['name' => 'nonce', 'type' => 'varbinary(12)', 'NULL' => false, 'default' => ''],
+					['name' => 'ciphertext', 'type' => 'varbinary(4096)', 'NULL' => false, 'default' => ''],
+					['name' => 'tag', 'type' => 'varbinary(16)', 'NULL' => false, 'default' => ''],
+					$text('key_id', 16),
+					$time('created_at'),
+					$time('updated_at'),
+				],
+				'primary'     => 'id',
+				'unique_keys' => [['name' => 'name', 'columns' => ['name']]],
 			],
 			// One row per node GUID and fabric (ADR 0003). Type, port count,
 			// device, vendor, and system image GUID are the attributes whose

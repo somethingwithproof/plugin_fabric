@@ -76,14 +76,23 @@ it('cuts untrusted text to one bounded printable line', function () {
 		->and(strlen(Log::excerpt(str_repeat('a', 500))))->toBe(203);
 });
 
-it('registers no poller_bottom hook: sweeps start lazily (ADR 0008)', function () {
+it('registers all lifecycle, poller, replication, and ecosystem hooks', function () {
 	expect(Somethingwithproof\Fabric\Schema::HOOKS)->toBe([
-		'auth_alternate_realms' => 'fabric_auth_alternate_realms',
-		'config_arrays'        => 'fabric_config_arrays',
-		'config_settings'      => 'fabric_config_settings',
-		'draw_navigation_text' => 'fabric_draw_navigation_text',
-		'device_remove'        => 'fabric_device_remove',
+		'auth_alternate_realms'   => 'fabric_auth_alternate_realms',
+		'config_arrays'           => 'fabric_config_arrays',
+		'config_settings'         => 'fabric_config_settings',
+		'draw_navigation_text'    => 'fabric_draw_navigation_text',
+		'device_remove'           => 'fabric_device_remove',
+		'poller_bottom'           => 'fabric_poller_bottom',
+		'replicate_out'           => 'fabric_replicate_out',
+		'abilities_register'      => 'fabric_abilities_register',
+		'doctor_register_checks'  => 'fabric_doctor_register_checks',
+		'casc_register_providers' => 'fabric_casc_register_providers',
 	]);
+
+	foreach (Somethingwithproof\Fabric\Schema::HOOKS as $callback) {
+		expect(function_exists($callback))->toBeTrue($callback);
+	}
 });
 
 // core fires config_arrays before auth.php checks the session
