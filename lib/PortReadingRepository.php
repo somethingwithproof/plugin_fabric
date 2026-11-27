@@ -26,6 +26,12 @@ namespace Somethingwithproof\Fabric;
  * list.
  */
 final class PortReadingRepository {
+	/**
+	 * Construct a new PortReadingRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 */
 	public function __construct(private readonly \PDO|false $connection, private readonly Clock $clock) {
 	}
 

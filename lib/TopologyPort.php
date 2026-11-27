@@ -26,6 +26,16 @@ namespace Somethingwithproof\Fabric;
  * attribute (docs/research/identity.md, rule 3).
  */
 final readonly class TopologyPort {
+	/**
+	 * Construct a new TopologyPort instance.
+	 *
+	 * @param int $number
+	 * @param ?Guid $portGuid
+	 * @param int $lid
+	 * @param PortRef $remote
+	 * @param ?LinkWidth $width
+	 * @param ?LinkSpeed $speed
+	 */
 	public function __construct(
 		public int $number,
 		public ?Guid $portGuid,

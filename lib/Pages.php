@@ -30,8 +30,11 @@ namespace Somethingwithproof\Fabric;
  * The view realm sees the inventory of devices it may see.
  */
 final class Pages {
+	/** Operator constant for Pages. */
 	public const OPERATOR = ['fabric_operator.php'];
+	/** View constant for Pages. */
 	public const VIEW  = ['fabric.php'];
+	/** Admin constant for Pages. */
 	public const ADMIN = ['fabric_admin.php', 'fabric_health.php'];
 
 	/**

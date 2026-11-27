@@ -27,8 +27,15 @@ namespace Somethingwithproof\Fabric;
  * fits an integer. Inputs are canonical: digits only, no leading zero.
  */
 final class Decimal {
+	/** Low constant for Decimal. */
 	private const LOW = 9;
 
+	/**
+	 * Valid.
+	 *
+	 * @param string $value
+	 * @return bool
+	 */
 	public static function valid(string $value): bool {
 		return preg_match('/^(0|[1-9][0-9]{0,19})$/D', $value) === 1;
 	}

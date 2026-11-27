@@ -38,7 +38,9 @@ namespace Somethingwithproof\Fabric;
  *   first one names a file to write.
  */
 final class CommandBuilder {
+	/** Maximum ports. */
 	public const MAX_PORTS = 64;
+	/** Maximum lid. */
 	public const MAX_LID   = 0xBFFF;
 
 	/** Every option each tool may receive. */
@@ -48,13 +50,29 @@ final class CommandBuilder {
 		'iblinkinfo'    => ['--line', '-t', '-C', '-P', '--node-name-map'],
 	];
 
+	/**
+	 * Construct a new CommandBuilder instance.
+	 *
+	 * @param Settings $settings
+	 * @param Fabric $fabric
+	 */
 	public function __construct(private readonly Settings $settings, private readonly Fabric $fabric) {
 	}
 
+	/**
+	 * Discovery.
+	 *
+	 * @return Command
+	 */
 	public function discovery(): Command {
 		return $this->build(Tool::Ibnetdiscover, [...$this->common(), ...$this->nameMap()]);
 	}
 
+	/**
+	 * Link info.
+	 *
+	 * @return Command
+	 */
 	public function linkInfo(): Command {
 		return $this->build(Tool::Iblinkinfo, ['--line', ...$this->common(), ...$this->nameMap()]);
 	}

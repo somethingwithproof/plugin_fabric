@@ -24,6 +24,14 @@ namespace Somethingwithproof\Fabric;
  * embedded credentials, queries, fragments, and control characters.
  */
 final readonly class UfmEndpoint {
+	/**
+	 * Construct a new UfmEndpoint instance.
+	 *
+	 * @param string $scheme
+	 * @param string $host
+	 * @param int $port
+	 * @param string $basePath
+	 */
 	public function __construct(
 		public string $scheme,
 		public string $host,
@@ -32,6 +40,13 @@ final readonly class UfmEndpoint {
 	) {
 	}
 
+	/**
+	 * Parse.
+	 *
+	 * @param string $url
+	 * @param bool $allowLoopbackHttp
+	 * @return ?self
+	 */
 	public static function parse(string $url, bool $allowLoopbackHttp = false): ?self {
 		$url = trim($url);
 
@@ -72,6 +87,11 @@ final readonly class UfmEndpoint {
 		return new self($scheme, $host, $port, $path);
 	}
 
+	/**
+	 * Socket address.
+	 *
+	 * @return string
+	 */
 	public function socketAddress(): string {
 		$transport = $this->scheme === 'https' ? 'tls' : 'tcp';
 		$host      = str_contains($this->host, ':') ? '[' . $this->host . ']' : $this->host;
@@ -79,6 +99,11 @@ final readonly class UfmEndpoint {
 		return $transport . '://' . $host . ':' . $this->port;
 	}
 
+	/**
+	 * Host header.
+	 *
+	 * @return string
+	 */
 	public function hostHeader(): string {
 		$host        = str_contains($this->host, ':') ? '[' . $this->host . ']' : $this->host;
 		$defaultPort = $this->scheme === 'https' ? 443 : 80;
@@ -86,10 +111,21 @@ final readonly class UfmEndpoint {
 		return $this->port === $defaultPort ? $host : $host . ':' . $this->port;
 	}
 
+	/**
+	 * Canonical.
+	 *
+	 * @return string
+	 */
 	public function canonical(): string {
 		return $this->scheme . '://' . $this->hostHeader() . $this->basePath;
 	}
 
+	/**
+	 * Check whether loopback.
+	 *
+	 * @param string $host
+	 * @return bool
+	 */
 	public static function isLoopback(string $host): bool {
 		return $host === '127.0.0.1' || $host === '::1' || $host === 'localhost';
 	}

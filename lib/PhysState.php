@@ -33,6 +33,12 @@ enum PhysState: string {
 	case LinkErrorRecovery = 'error_recovery';
 	case PhyTest           = 'phytest';
 
+	/**
+	 * From text.
+	 *
+	 * @param string $text
+	 * @return ?self
+	 */
 	public static function fromText(string $text): ?self {
 		return match (trim($text)) {
 			'Sleep'                     => self::Sleep,

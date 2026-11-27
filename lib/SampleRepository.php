@@ -26,6 +26,11 @@ namespace Somethingwithproof\Fabric;
  * time and age into stale; they are never replaced by zeros.
  */
 final class SampleRepository {
+	/**
+	 * Construct a new SampleRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
@@ -61,6 +66,16 @@ final class SampleRepository {
 		return $ok === false ? null : $delta;
 	}
 
+	/**
+	 * Record failure.
+	 *
+	 * @param int $nodeId
+	 * @param int $port
+	 * @param CounterGroup $group
+	 * @param CommandError $error
+	 * @param int $attemptedAt
+	 * @return bool
+	 */
 	public function recordFailure(int $nodeId, int $port, CounterGroup $group, CommandError $error, int $attemptedAt): bool {
 		return db_execute_prepared(
 			"INSERT INTO plugin_fabric_sample (node_id, port_number, counter_group, observed_at, attempted_at, counters, error) VALUES (?, ?, ?, 0, ?, '', ?)

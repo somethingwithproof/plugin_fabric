@@ -33,6 +33,11 @@ enum CommandError: string {
 	case Budget      = 'budget';
 	case Storage     = 'storage';
 
+	/**
+	 * Message.
+	 *
+	 * @return string
+	 */
 	public function message(): string {
 		return match ($this) {
 			self::Config      => __('The fabric or plugin settings are incomplete or invalid', 'fabric'),

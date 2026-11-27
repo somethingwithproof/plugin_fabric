@@ -31,9 +31,21 @@ namespace Somethingwithproof\Fabric;
  * for "none", and a node or port with GUID 0 cannot be told apart.
  */
 final readonly class Guid {
+	/**
+	 * Construct a new Guid instance.
+	 *
+	 * @param string $text
+	 */
 	private function __construct(public string $text) {
 	}
 
+	/**
+	 * From string.
+	 *
+	 * @param string $value
+	 * @return self
+	 * @throws \InvalidArgumentException
+	 */
 	public static function fromString(string $value): self {
 		$guid = self::tryFromString($value);
 
@@ -44,6 +56,12 @@ final readonly class Guid {
 		return $guid;
 	}
 
+	/**
+	 * Try from string.
+	 *
+	 * @param string $value
+	 * @return ?self
+	 */
 	public static function tryFromString(string $value): ?self {
 		if (preg_match('/^(?:0[xX])?([0-9a-fA-F]{1,16})$/D', $value, $match) !== 1) {
 			return null;
@@ -54,6 +72,12 @@ final readonly class Guid {
 		return $digits === '0000000000000000' ? null : new self('0x' . $digits);
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param self $other
+	 * @return bool
+	 */
 	public function equals(self $other): bool {
 		return $this->text === $other->text;
 	}

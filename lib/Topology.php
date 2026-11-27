@@ -51,6 +51,11 @@ final readonly class Topology {
 		return hash('sha256', (in_array($guid, $this->duplicates, true) ? "duplicate\n" : "single\n") . implode("\n", $identities));
 	}
 
+	/**
+	 * Port count.
+	 *
+	 * @return int
+	 */
 	public function portCount(): int {
 		return array_sum(array_map(static fn (TopologyNode $n): int => count($n->ports), $this->nodes));
 	}

@@ -35,6 +35,7 @@ namespace Somethingwithproof\Fabric;
  * (REQ-PERM-001); the page has no permission layer of its own for them.
  */
 final class InventoryPage {
+	/** File constant for InventoryPage. */
 	public const FILE = 'fabric.php';
 
 	/** Rows on the congestion ranking. */
@@ -57,10 +58,21 @@ final class InventoryPage {
 	) {
 	}
 
+	/**
+	 * Visible.
+	 *
+	 * @param Node $node
+	 * @return bool
+	 */
 	public function visible(Node $node): bool {
 		return $node->hostId === 0 ? $this->admin : ($this->deviceAllowed)($node->hostId);
 	}
 
+	/**
+	 * Render list.
+	 *
+	 * @return void
+	 */
 	public function renderList(): void {
 		$fabrics = $this->fabrics->all();
 		$nodes   = $this->nodes->all();
@@ -161,10 +173,22 @@ final class InventoryPage {
 		html_end_box();
 	}
 
+	/**
+	 * Rate.
+	 *
+	 * @param float $value
+	 * @return string
+	 */
 	private static function rate(float $value): string {
 		return number_format($value, $value >= 100 ? 0 : 2);
 	}
 
+	/**
+	 * Render node.
+	 *
+	 * @param int $id
+	 * @return void
+	 */
 	public function renderNode(int $id): void {
 		$node = $this->nodes->find($id);
 
@@ -285,10 +309,22 @@ final class InventoryPage {
 		return $links === [] ? '-' : implode(', ', $links);
 	}
 
+	/**
+	 * Width speed.
+	 *
+	 * @param ?LinkWidth $width
+	 * @param ?LinkSpeed $speed
+	 * @return string
+	 */
 	private static function widthSpeed(?LinkWidth $width, ?LinkSpeed $speed): string {
 		return $width === null && $speed === null ? '-' : ($width?->label() ?? '?') . ' ' . ($speed?->label() ?? '?');
 	}
 
+	/**
+	 * Failure.
+	 *
+	 * @return void
+	 */
 	private function failure(): void {
 		html_start_box(__('Fabrics', 'fabric'), '100%', '', '3', 'center', '');
 		print '<tr><td class="textError">' . html_escape(__('The fabric inventory could not be read. See the Cacti log.', 'fabric')) . '</td></tr>';

@@ -29,7 +29,9 @@ namespace Somethingwithproof\Fabric;
  * used (REQ-EXEC-004).
  */
 final class ProcRunner implements ProcessRunner {
+	/** Chunk constant for ProcRunner. */
 	private const CHUNK       = 65536;
+	/** Stderr keep constant for ProcRunner. */
 	private const STDERR_KEEP = 2048;
 
 	/**
@@ -38,6 +40,14 @@ final class ProcRunner implements ProcessRunner {
 	public function __construct(private readonly array $env = ['PATH' => '/usr/bin:/bin', 'LC_ALL' => 'C']) {
 	}
 
+	/**
+	 * Run.
+	 *
+	 * @param Command $command
+	 * @param float $timeout
+	 * @param int $maxBytes
+	 * @return ProcessResult
+	 */
 	public function run(Command $command, float $timeout, int $maxBytes): ProcessResult {
 		$job = $this->start($command->argv);
 
@@ -148,6 +158,13 @@ final class ProcRunner implements ProcessRunner {
 		}
 	}
 
+	/**
+	 * Kill.
+	 *
+	 * @param ProcJob $job
+	 * @param bool $timedOut
+	 * @return ProcessResult
+	 */
 	private function kill(ProcJob $job, bool $timedOut): ProcessResult {
 		proc_terminate($job->process, 9);
 		fclose($job->stdout);

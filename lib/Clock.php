@@ -19,6 +19,14 @@
 
 namespace Somethingwithproof\Fabric;
 
+/**
+ * Contract for clock implementations.
+ */
 interface Clock {
+	/**
+	 * Now.
+	 *
+	 * @return int
+	 */
 	public function now(): int;
 }

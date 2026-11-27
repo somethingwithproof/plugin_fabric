@@ -24,10 +24,19 @@ namespace Somethingwithproof\Fabric;
  * never expose ciphertext, nonces, tags, or plaintext secrets.
  */
 final class CredentialRepository {
+	/** Auth token constant for CredentialRepository. */
 	public const AUTH_TOKEN = 'token';
+	/** Auth basic constant for CredentialRepository. */
 	public const AUTH_BASIC = 'basic';
+	/** Purpose constant for CredentialRepository. */
 	public const PURPOSE    = 'ufm_secret';
 
+	/**
+	 * Construct a new CredentialRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 */
 	public function __construct(private readonly \PDO|false $connection, private readonly Clock $clock) {
 	}
 
@@ -90,6 +99,12 @@ final class CredentialRepository {
 		];
 	}
 
+	/**
+	 * Find id by name.
+	 *
+	 * @param string $name
+	 * @return int
+	 */
 	public function findIdByName(string $name): int {
 		if ($name === '') {
 			return 0;
@@ -100,6 +115,17 @@ final class CredentialRepository {
 		return is_numeric($raw) ? max(0, (int) $raw) : 0;
 	}
 
+	/**
+	 * Save.
+	 *
+	 * @param int $id
+	 * @param string $name
+	 * @param string $authType
+	 * @param string $username
+	 * @param Secret $secret
+	 * @param Vault $vault
+	 * @return int
+	 */
 	public function save(int $id, string $name, string $authType, string $username, Secret $secret, Vault $vault): int {
 		if ($authType !== self::AUTH_TOKEN && $authType !== self::AUTH_BASIC) {
 			throw CredentialError::because('unsupported UFM auth type');
@@ -162,6 +188,12 @@ final class CredentialRepository {
 		];
 	}
 
+	/**
+	 * Delete.
+	 *
+	 * @param int $id
+	 * @return bool
+	 */
 	public function delete(int $id): bool {
 		if ($id < 1) {
 			return false;

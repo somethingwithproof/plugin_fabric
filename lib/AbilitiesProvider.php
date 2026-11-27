@@ -26,6 +26,7 @@ namespace Somethingwithproof\Fabric;
  * credentials or triggers live sweeps.
  */
 final class AbilitiesProvider {
+	/** Annotations constant for AbilitiesProvider. */
 	private const ANNOTATIONS = [
 		'readOnly'    => true,
 		'destructive' => false,
@@ -45,6 +46,12 @@ final class AbilitiesProvider {
 	) {
 	}
 
+	/**
+	 * Register.
+	 *
+	 * @param object $registrar
+	 * @return void
+	 */
 	public function register(object $registrar): void {
 		if (!method_exists($registrar, 'register')) {
 			return;

@@ -24,6 +24,11 @@ namespace Somethingwithproof\Fabric;
  * never creates, changes, or deletes a device in M2.
  */
 final class HostRepository {
+	/**
+	 * Construct a new HostRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
@@ -60,6 +65,12 @@ final class HostRepository {
 		return $id > 0 && $count !== false && (int) $count === 0;
 	}
 
+	/**
+	 * Exists.
+	 *
+	 * @param int $id
+	 * @return bool
+	 */
 	public function exists(int $id): bool {
 		return $id > 0 && (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM host WHERE id = ?', [$id], '', true, $this->connection) === 1;
 	}

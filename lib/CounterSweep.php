@@ -36,6 +36,16 @@ namespace Somethingwithproof\Fabric;
  * never stored as a zero.
  */
 final class CounterSweep {
+	/**
+	 * Construct a new CounterSweep instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 * @param ProcessRunner $runner
+	 * @param Settings $settings
+	 * @param int $toolOwner
+	 * @param ?float $deadline
+	 */
 	public function __construct(
 		private readonly \PDO|false $connection,
 		private readonly Clock $clock,
@@ -46,6 +56,13 @@ final class CounterSweep {
 	) {
 	}
 
+	/**
+	 * Due.
+	 *
+	 * @param Fabric $fabric
+	 * @param Node $node
+	 * @return ?bool
+	 */
 	public function due(Fabric $fabric, Node $node): ?bool {
 		$last = (new NodeSweepRepository($this->connection))->lastAttempt($node->id);
 
@@ -93,6 +110,15 @@ final class CounterSweep {
 		return $result;
 	}
 
+	/**
+	 * Sweep.
+	 *
+	 * @param Fabric $fabric
+	 * @param Node $node
+	 * @param NodeSweepResult $result
+	 * @param float $start
+	 * @return void
+	 */
 	private function sweep(Fabric $fabric, Node $node, NodeSweepResult $result, float $start): void {
 		$ports = (new NodeRepository($this->connection))->ports($node->id);
 

@@ -1,0 +1,94 @@
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# Static configuration and state schema for plugin_fabric.
+# Strictly separates declarative configuration (CasC-managed) from ephemeral
+# operational state (sweeps, inventory cache, claims, samples) and the
+# encrypted credential vault.
+
+schema_version: 1
+plugin: fabric
+storage_separation: strict
+
+config:
+  label: Fabric Declarative Configuration
+  casc_managed: true
+  settings:
+    fabric_tool_dir:
+      type: path
+      default: "/usr/sbin"
+      secret: false
+    fabric_node_name_map:
+      type: path
+      default: ""
+      secret: false
+    fabric_mad_timeout:
+      type: integer
+      default: 1000
+      min: 100
+      max: 10000
+      secret: false
+    fabric_command_timeout:
+      type: integer
+      default: 60
+      min: 5
+      max: 600
+      secret: false
+    fabric_max_output:
+      type: integer
+      default: 8192
+      min: 64
+      max: 65536
+      secret: false
+    fabric_node_budget:
+      type: integer
+      default: 30
+      min: 5
+      max: 300
+      secret: false
+    fabric_failure_budget:
+      type: integer
+      default: 3
+      min: 1
+      max: 64
+      secret: false
+    fabric_uninstall_keep_tables:
+      type: boolean
+      default: true
+      secret: false
+    fabric_index_down_ports:
+      type: boolean
+      default: false
+      secret: false
+    fabric_vault_key_file:
+      type: path
+      default: ""
+      secret: true
+      redacted: true
+  tables:
+    - plugin_fabric_fabric
+  redacted_fields:
+    - fabric_vault_key_file
+    - ufm_credential_secret
+
+secret_vault:
+  label: Encrypted UFM Credential Vault
+  casc_managed: false
+  replicated: false
+  tables:
+    - plugin_fabric_secret
+
+state:
+  label: Ephemeral Fabric Runtime State
+  casc_managed: false
+  tables:
+    - plugin_fabric_node
+    - plugin_fabric_port
+    - plugin_fabric_sample
+    - plugin_fabric_relink
+    - plugin_fabric_claim
+    - plugin_fabric_node_sweep
+    - plugin_fabric_health
+  settings:
+    - fabric_schema_version
+    - fabric_templates_version

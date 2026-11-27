@@ -24,6 +24,16 @@ namespace Somethingwithproof\Fabric;
  * link-state, sample, and health tables as the diagnostics backend.
  */
 final class UfmSweep {
+	/**
+	 * Construct a new UfmSweep instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 * @param Settings $settings
+	 * @param ?UfmHttpTransport $transport
+	 * @param ?Vault $vault
+	 * @param ?float $deadline
+	 */
 	public function __construct(
 		private readonly \PDO|false $connection,
 		private readonly Clock $clock,
@@ -114,6 +124,15 @@ final class UfmSweep {
 		}
 	}
 
+	/**
+	 * Sweep counters.
+	 *
+	 * @param Fabric $fabric
+	 * @param UfmClient $client
+	 * @param UfmParser $parser
+	 * @param float $limit
+	 * @return int
+	 */
 	private function sweepCounters(Fabric $fabric, UfmClient $client, UfmParser $parser, float $limit): int {
 		try {
 			$raw      = $client->fetchSessionCounters($limit);

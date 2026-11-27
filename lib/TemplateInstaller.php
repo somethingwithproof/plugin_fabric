@@ -46,15 +46,29 @@ final class TemplateInstaller {
 	/** Bump when templates/fabric-templates.xml or the query XML changes. */
 	public const VERSION = 1;
 
+	/** Setting constant for TemplateInstaller. */
 	public const SETTING         = 'fabric_templates_version';
+	/** Failure setting constant for TemplateInstaller. */
 	public const FAILURE_SETTING = 'fabric_templates_failure';
+	/** Files setting constant for TemplateInstaller. */
 	public const FILES_SETTING   = 'fabric_query_files';
 
+	/** Device template constant for TemplateInstaller. */
 	public const DEVICE_TEMPLATE = 'Fabric Node';
+	/** Query constant for TemplateInstaller. */
 	public const QUERY           = 'Fabric Port';
+	/** Query file constant for TemplateInstaller. */
 	public const QUERY_FILE      = 'fabric_ports.xml';
+	/** Template file constant for TemplateInstaller. */
 	public const TEMPLATE_FILE   = 'fabric-templates.xml';
 
+	/**
+	 * Construct a new TemplateInstaller instance.
+	 *
+	 * @param string $pluginPath
+	 * @param string $cactiPath
+	 * @param CactiObjectRepository $objects
+	 */
 	public function __construct(
 		private readonly string $pluginPath,
 		private readonly string $cactiPath,
@@ -80,6 +94,11 @@ final class TemplateInstaller {
 		return (int) read_config_option(self::SETTING) === self::VERSION;
 	}
 
+	/**
+	 * Check whether current.
+	 *
+	 * @return bool
+	 */
 	public function isCurrent(): bool {
 		return $this->installed() && $this->present() && $this->queryFileProblem() === null;
 	}
@@ -167,6 +186,11 @@ final class TemplateInstaller {
 		return null;
 	}
 
+	/**
+	 * Target.
+	 *
+	 * @return ?string
+	 */
 	public function target(): ?string {
 		$dir = $this->cactiPath . '/resource/script_server';
 
@@ -282,6 +306,11 @@ final class TemplateInstaller {
 		return preg_match('/^[0-9a-f]{64}$/D', $hash) === 1 ? $hash : '';
 	}
 
+	/**
+	 * Source.
+	 *
+	 * @return string
+	 */
 	private function source(): string {
 		return $this->pluginPath . '/resource/script_server/' . self::QUERY_FILE;
 	}

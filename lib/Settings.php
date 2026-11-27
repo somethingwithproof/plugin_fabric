@@ -26,6 +26,7 @@ namespace Somethingwithproof\Fabric;
  * file, never from the plugin or a command line (ADR 0009).
  */
 final readonly class Settings {
+	/** Registered setting names managed by the plugin. */
 	public const NAMES = [
 		'fabric_tool_dir',
 		'fabric_node_name_map',
@@ -39,13 +40,33 @@ final readonly class Settings {
 		'fabric_vault_key_file',
 	];
 
+	/** Default tool dir. */
 	public const DEFAULT_TOOL_DIR = '/usr/sbin';
+	/** Default mad ms. */
 	public const DEFAULT_MAD_MS   = 1000;
+	/** Default timeout. */
 	public const DEFAULT_TIMEOUT  = 60;
+	/** Default max kib. */
 	public const DEFAULT_MAX_KIB  = 8192;
+	/** Default budget. */
 	public const DEFAULT_BUDGET   = 30;
+	/** Default failures. */
 	public const DEFAULT_FAILURES = 3;
 
+	/**
+	 * Construct a new Settings instance.
+	 *
+	 * @param string $toolDir
+	 * @param string $nodeNameMap
+	 * @param int $madTimeoutMs
+	 * @param int $commandTimeout
+	 * @param int $maxOutputKib
+	 * @param int $nodeBudget
+	 * @param int $failureBudget
+	 * @param bool $keepTablesOnUninstall
+	 * @param bool $indexDownPorts
+	 * @param string $vaultKeyFile
+	 */
 	public function __construct(
 		public string $toolDir,
 		public string $nodeNameMap,
@@ -84,6 +105,11 @@ final readonly class Settings {
 		);
 	}
 
+	/**
+	 * Max output bytes.
+	 *
+	 * @return int
+	 */
 	public function maxOutputBytes(): int {
 		return $this->maxOutputKib * 1024;
 	}

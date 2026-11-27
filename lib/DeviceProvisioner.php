@@ -37,6 +37,15 @@ namespace Somethingwithproof\Fabric;
  * poller is refused.
  */
 final class DeviceProvisioner {
+	/**
+	 * Construct a new DeviceProvisioner instance.
+	 *
+	 * @param NodeRepository $nodes
+	 * @param FabricRepository $fabrics
+	 * @param CactiObjectRepository $objects
+	 * @param DeviceAccess $access
+	 * @param string $cactiPath
+	 */
 	public function __construct(
 		private readonly NodeRepository $nodes,
 		private readonly FabricRepository $fabrics,

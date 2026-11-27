@@ -35,6 +35,12 @@ namespace Somethingwithproof\Fabric;
  * last state and age into stale, as the skipped line may have named them.
  */
 final class LinkStateRepository {
+	/**
+	 * Construct a new LinkStateRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 */
 	public function __construct(private readonly \PDO|false $connection, private readonly Clock $clock) {
 	}
 

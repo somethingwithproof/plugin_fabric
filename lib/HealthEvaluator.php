@@ -25,6 +25,20 @@ namespace Somethingwithproof\Fabric;
  * contacts a fabric or UFM endpoint.
  */
 final class HealthEvaluator {
+	/**
+	 * Construct a new HealthEvaluator instance.
+	 *
+	 * @param FabricRepository $fabrics
+	 * @param NodeRepository $nodes
+	 * @param FabricHealthRepository $health
+	 * @param NodeSweepRepository $sweeps
+	 * @param RelinkRepository $relinks
+	 * @param SampleRepository $samples
+	 * @param Clock $clock
+	 * @param DeviceMaintenance $maintenance
+	 * @param Settings $settings
+	 * @param Schema $schema
+	 */
 	public function __construct(
 		private readonly FabricRepository $fabrics,
 		private readonly NodeRepository $nodes,
@@ -298,6 +312,11 @@ final class HealthEvaluator {
 		return false;
 	}
 
+	/**
+	 * Check vault key.
+	 *
+	 * @return ?string
+	 */
 	public function checkVaultKey(): ?string {
 		if ($this->settings->vaultKeyFile === '') {
 			return 'vault key file setting is empty';

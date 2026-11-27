@@ -26,10 +26,20 @@
  * down the whole Cacti UI.
  */
 
+/**
+ * Php supported.
+ *
+ * @return bool
+ */
 function fabric_php_supported(): bool {
 	return version_compare(PHP_VERSION, '8.2.0', '>=');
 }
 
+/**
+ * Boot.
+ *
+ * @return bool
+ */
 function fabric_boot(): bool {
 	if (!fabric_php_supported()) {
 		return false;
@@ -83,6 +93,11 @@ function plugin_fabric_version(): array {
 	return $version;
 }
 
+/**
+ * Plugin fabric install.
+ *
+ * @return void
+ */
 function plugin_fabric_install(): void {
 	if (fabric_refuse_unsupported()) {
 		return;
@@ -91,6 +106,11 @@ function plugin_fabric_install(): void {
 	plugin_fabric_upgrade(true);
 }
 
+/**
+ * Plugin fabric check config.
+ *
+ * @return bool
+ */
 function plugin_fabric_check_config(): bool {
 	if (fabric_refuse_unsupported()) {
 		return false;
@@ -178,10 +198,20 @@ function fabric_graph_allowed(int $localGraphId): bool {
 	return $localGraphId > 0 && (bool) is_graph_allowed($localGraphId);
 }
 
+/**
+ * Settings.
+ *
+ * @return \Somethingwithproof\Fabric\Settings
+ */
 function fabric_settings(): \Somethingwithproof\Fabric\Settings {
 	return (new \Somethingwithproof\Fabric\SettingsRepository(false))->load();
 }
 
+/**
+ * Templates.
+ *
+ * @return \Somethingwithproof\Fabric\TemplateInstaller
+ */
 function fabric_templates(): \Somethingwithproof\Fabric\TemplateInstaller {
 	global $config;
 
@@ -310,6 +340,11 @@ function plugin_fabric_uninstall(): void {
 	}
 }
 
+/**
+ * Config arrays.
+ *
+ * @return void
+ */
 function fabric_config_arrays(): void {
 	global $menu;
 
@@ -337,6 +372,11 @@ function fabric_repair_on_page(string $page): bool {
 	return !empty($_SESSION['sess_user_id']) && in_array($page, \Somethingwithproof\Fabric\Pages::upgradeTriggers(), true);
 }
 
+/**
+ * Config settings.
+ *
+ * @return void
+ */
 function fabric_config_settings(): void {
 	global $tabs, $settings;
 
@@ -581,6 +621,11 @@ function fabric_replicate_out($data) {
 	return $data;
 }
 
+/**
+ * Health evaluator.
+ *
+ * @return \Somethingwithproof\Fabric\HealthEvaluator
+ */
 function fabric_health_evaluator(): \Somethingwithproof\Fabric\HealthEvaluator {
 	$clock = new \Somethingwithproof\Fabric\SystemClock();
 
@@ -598,6 +643,11 @@ function fabric_health_evaluator(): \Somethingwithproof\Fabric\HealthEvaluator {
 	);
 }
 
+/**
+ * Config service.
+ *
+ * @return \Somethingwithproof\Fabric\ConfigService
+ */
 function fabric_config_service(): \Somethingwithproof\Fabric\ConfigService {
 	$clock = new \Somethingwithproof\Fabric\SystemClock();
 
@@ -609,6 +659,12 @@ function fabric_config_service(): \Somethingwithproof\Fabric\ConfigService {
 	);
 }
 
+/**
+ * User view allowed.
+ *
+ * @param int $userId
+ * @return bool
+ */
 function fabric_user_view_allowed(int $userId): bool {
 	if ($userId < 1 || !function_exists('is_realm_allowed')) {
 		return false;
@@ -623,6 +679,13 @@ function fabric_user_view_allowed(int $userId): bool {
 	return false;
 }
 
+/**
+ * User device allowed.
+ *
+ * @param int $userId
+ * @param int $hostId
+ * @return bool
+ */
 function fabric_user_device_allowed(int $userId, int $hostId): bool {
 	if ($userId < 1 || $hostId < 1) {
 		return false;
@@ -720,4 +783,66 @@ function fabric_casc_register_providers($providers = array()) {
 	$providers['fabric'] = $descriptor;
 
 	return $providers;
+}
+
+/**
+ * doctor_register_debug_info hook: contribute a redacted plain-array
+ * diagnostic snapshot for Cacti Doctor without importing external plugin classes.
+ *
+ * @param mixed $info
+ * @return mixed
+ */
+function fabric_doctor_register_debug_info($info = array()) {
+	if (!fabric_boot()) {
+		return $info;
+	}
+
+	$section = (new \Somethingwithproof\Fabric\DoctorProvider(fabric_health_evaluator()))->debugInfo();
+
+	if (is_object($info) && method_exists($info, 'register')) {
+		$info->register('fabric', $section);
+
+		return $info;
+	}
+
+	if (!is_array($info)) {
+		$info = array();
+	}
+
+	$info['fabric'] = $section;
+
+	return $info;
+}
+
+/**
+ * api_register_resources hook: expose plain-array Google AIP resource
+ * descriptors without importing external API plugin classes.
+ *
+ * @param mixed $resources
+ * @return mixed
+ */
+function fabric_api_register_resources($resources = array()) {
+	if (!fabric_boot()) {
+		return $resources;
+	}
+
+	$descriptors = (new \Somethingwithproof\Fabric\ApiResourceProvider())->resources();
+
+	if (is_object($resources) && method_exists($resources, 'register')) {
+		foreach ($descriptors as $key => $descriptor) {
+			$resources->register($key, $descriptor);
+		}
+
+		return $resources;
+	}
+
+	if (!is_array($resources)) {
+		$resources = array();
+	}
+
+	foreach ($descriptors as $key => $descriptor) {
+		$resources[$key] = $descriptor;
+	}
+
+	return $resources;
 }

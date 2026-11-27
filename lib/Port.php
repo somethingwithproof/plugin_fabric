@@ -24,6 +24,20 @@ namespace Somethingwithproof\Fabric;
  * iblinkinfo.
  */
 final readonly class Port {
+	/**
+	 * Construct a new Port instance.
+	 *
+	 * @param int $nodeId
+	 * @param int $number
+	 * @param ?Guid $portGuid
+	 * @param int $lid
+	 * @param ?PortRef $remote
+	 * @param Presence $presence
+	 * @param int $firstSeen
+	 * @param int $lastSeen
+	 * @param LinkState $link
+	 * @param int $linkObservedAt
+	 */
 	public function __construct(
 		public int $nodeId,
 		public int $number,

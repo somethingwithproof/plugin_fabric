@@ -71,6 +71,12 @@ final readonly class Sample {
 		);
 	}
 
+	/**
+	 * Has.
+	 *
+	 * @param string $counter
+	 * @return bool
+	 */
 	public function has(string $counter): bool {
 		return $this->observedAt > 0 && array_key_exists($counter, $this->counters);
 	}
@@ -95,6 +101,11 @@ final readonly class Sample {
 		return array_values(array_filter(array_keys($this->counters), fn (string $name): bool => $this->saturated($name)));
 	}
 
+	/**
+	 * Extended supported.
+	 *
+	 * @return bool
+	 */
 	public function extendedSupported(): bool {
 		return ($this->capMask & (Counters::CAP_EXT_WIDTH | Counters::CAP_EXT_WIDTH_NOIETF)) !== 0;
 	}

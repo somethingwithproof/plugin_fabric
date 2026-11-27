@@ -24,7 +24,85 @@ namespace Somethingwithproof\Fabric;
  * doctor_register_checks hook.
  */
 final class DoctorProvider {
+	/**
+	 * Construct a Cacti Doctor provider backed by a read-only health evaluator.
+	 *
+	 * @param HealthEvaluator $evaluator read-only fabric health evaluator
+	 */
 	public function __construct(private readonly HealthEvaluator $evaluator) {
+	}
+
+	/**
+	 * Build a redacted diagnostic debug-info section for the optional
+	 * doctor_register_debug_info hook. Excludes all vault key material,
+	 * credentials, and secret file paths.
+	 *
+	 * @return array{
+	 *   label: string,
+	 *   description: string,
+	 *   private: bool,
+	 *   fields: array<string, array{label: string, value: string, private: bool}>
+	 * }
+	 */
+	public function debugInfo(): array {
+		$report  = $this->evaluator->evaluate();
+		$summary = $report['summary'];
+		$ufmUsed = false;
+
+		foreach ($report['fabrics'] as $row) {
+			if (Row::string($row, 'backend') === Backend::Ufm->value) {
+				$ufmUsed = true;
+
+				break;
+			}
+		}
+
+		$vaultStatus = !$ufmUsed
+			? 'not_required'
+			: ($this->evaluator->checkVaultKey() === null ? 'valid' : 'attention_required');
+
+		return [
+			'label'       => 'InfiniBand Fabric',
+			'description' => 'Read-only health and inventory summary for plugin_fabric. Vault keys and credentials are redacted.',
+			'private'     => false,
+			'fields'      => [
+				'schema_version' => [
+					'label'   => 'Schema Version',
+					'value'   => sprintf('v%d (%s)', $report['schema_version'], $report['schema_current'] ? 'current' : 'upgrade_required'),
+					'private' => false,
+				],
+				'health_status' => [
+					'label'   => 'Health Status',
+					'value'   => $report['status'],
+					'private' => false,
+				],
+				'fabrics_configured' => [
+					'label'   => 'Configured Fabrics',
+					'value'   => sprintf('%d total (%d enabled)', $summary['fabrics'], $summary['enabled_fabrics']),
+					'private' => false,
+				],
+				'nodes_tracked' => [
+					'label'   => 'Tracked Nodes',
+					'value'   => sprintf('%d total (%d in maintenance)', $summary['nodes'], $summary['nodes_in_maintenance']),
+					'private' => false,
+				],
+				'degraded_ports' => [
+					'label'   => 'Degraded Ports',
+					'value'   => (string) $summary['degraded_ports'],
+					'private' => false,
+				],
+				'identity_conflicts' => [
+					'label'   => 'Identity Conflicts and Open Relinks',
+					'value'   => sprintf('%d conflicts, %d relinks', $summary['conflicts'], $summary['open_relinks']),
+					'private' => false,
+				],
+				'ufm_vault_status' => [
+					'label'   => 'UFM Vault Key Status',
+					'value'   => $vaultStatus,
+					'private' => true,
+				],
+			],
+		];
 	}
 
 	/**

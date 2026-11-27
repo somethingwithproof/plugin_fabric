@@ -123,6 +123,16 @@ switch ($action) {
 		}
 
 		break;
+	case 'make_schema_2':
+		// A version 2 (main) database: fabric table without UFM columns and no secret table.
+		foreach (array('ufm_url', 'ufm_ca_file', 'ufm_spki_pin', 'ufm_credential_id') as $column) {
+			db_execute('ALTER TABLE plugin_fabric_fabric DROP COLUMN `' . $column . '`');
+		}
+		db_execute("ALTER TABLE plugin_fabric_fabric MODIFY COLUMN `adapter` varchar(32) NOT NULL DEFAULT ''");
+		db_execute('DROP TABLE IF EXISTS plugin_fabric_secret');
+		db_execute("DELETE FROM plugin_db_changes WHERE plugin = 'fabric' AND `table` = 'plugin_fabric_secret'");
+
+		break;
 	case 'drop_table':
 		db_execute('DROP TABLE IF EXISTS `' . preg_replace('/[^a-z_]/', '', $argument) . '`');
 
@@ -360,8 +370,9 @@ print json_encode(array(
 	'realms'  => array_column(db_fetch_assoc("SELECT file, display FROM plugin_realms WHERE plugin = 'fabric' ORDER BY file"), 'display', 'file'),
 	'admin'   => (int) db_fetch_cell("SELECT COUNT(*) FROM user_auth_realm AS uar INNER JOIN plugin_realms AS pr ON pr.id + 100 = uar.realm_id WHERE pr.plugin = 'fabric' AND uar.user_id = 1"),
 	'tracked' => array_column(db_fetch_assoc("SELECT `table` FROM plugin_db_changes WHERE plugin = 'fabric' AND method = 'create' ORDER BY `table`"), 'table'),
-	'tables'  => $tables,
-	'columns' => array_column(db_fetch_assoc("SELECT COLUMN_NAME AS c FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'plugin_fabric_sample' ORDER BY ORDINAL_POSITION"), 'c'),
+	'tables'         => $tables,
+	'columns'        => array_column(db_fetch_assoc("SELECT COLUMN_NAME AS c FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'plugin_fabric_sample' ORDER BY ORDINAL_POSITION"), 'c'),
+	'fabric_columns' => array_column(db_fetch_assoc("SELECT COLUMN_NAME AS c FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'plugin_fabric_fabric' ORDER BY ORDINAL_POSITION"), 'c'),
 	// The shipped Cacti objects, counted by name, so a duplicate shows.
 	'objects' => array(
 		'host_template'  => (int) db_fetch_cell("SELECT COUNT(*) FROM host_template WHERE name = 'Fabric Node'"),

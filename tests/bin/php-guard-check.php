@@ -88,6 +88,14 @@ function guard_call_shims() {
 		guard_expect(fabric_doctor_register_checks(array()) === array(), 'doctor_register_checks returns checks unchanged');
 	}
 
+	if (function_exists('fabric_doctor_register_debug_info')) {
+		guard_expect(fabric_doctor_register_debug_info(array()) === array(), 'doctor_register_debug_info returns info unchanged');
+	}
+
+	if (function_exists('fabric_api_register_resources')) {
+		guard_expect(fabric_api_register_resources(array()) === array(), 'api_register_resources returns resources unchanged');
+	}
+
 	if (function_exists('fabric_casc_register_providers')) {
 		guard_expect(fabric_casc_register_providers(array()) === array(), 'casc_register_providers returns providers unchanged');
 	}
@@ -126,7 +134,7 @@ if (!$supported && ($preexisting['status'] == 1 || $preexisting['hooks'] > 0)) {
 	if ($supported) {
 		guard_expect($state['status'] == 1, 'install and enable succeed (status ' . $state['status'] . ')');
 		guard_expect($state['tables'] === 9, 'all nine plugin tables exist (' . $state['tables'] . ')');
-		guard_expect($state['hooks'] === 10 && $state['realms'] === 3, 'hooks and realms are registered');
+		guard_expect($state['hooks'] === 12 && $state['realms'] === 3, 'hooks and realms are registered');
 	} else {
 		guard_expect($state['status'] == 2, 'plugin is left as needing configuration, not enabled (status ' . $state['status'] . ')');
 		guard_expect($state['tables'] === 0 && $state['hooks'] === 0 && $state['realms'] === 0, 'no tables, hooks, or realms were created');

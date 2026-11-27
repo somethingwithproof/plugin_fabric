@@ -24,16 +24,32 @@ namespace Somethingwithproof\Fabric;
  * not leak into stack traces, var_dump(), or serialization.
  */
 final class Secret {
+	/** Value state for Secret. */
 	private string $value;
 
+	/**
+	 * Construct a new Secret instance.
+	 *
+	 * @param string $value
+	 */
 	public function __construct(#[\SensitiveParameter] string $value) {
 		$this->value = $value;
 	}
 
+	/**
+	 * Reveal.
+	 *
+	 * @return string
+	 */
 	public function reveal(): string {
 		return $this->value;
 	}
 
+	/**
+	 * Check whether empty.
+	 *
+	 * @return bool
+	 */
 	public function isEmpty(): bool {
 		return $this->value === '';
 	}
@@ -45,6 +61,11 @@ final class Secret {
 		return ['value' => '[redacted]'];
 	}
 
+	/**
+	 * Return the string representation.
+	 *
+	 * @return string
+	 */
 	public function __toString(): string {
 		return '[redacted]';
 	}

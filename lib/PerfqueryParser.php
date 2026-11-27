@@ -95,6 +95,7 @@ final class PerfqueryParser {
 		'QP1Dropped'                   => 64,
 	];
 
+	/** Max constant for PerfqueryParser. */
 	private const MAX = [4 => '15', 8 => '255', 16 => '65535', 32 => '4294967295', 64 => '18446744073709551615'];
 
 	/**
@@ -231,6 +232,13 @@ final class PerfqueryParser {
 		return new Counters($group, $lid, $port, $capMask, $capMask2, $values);
 	}
 
+	/**
+	 * Fits.
+	 *
+	 * @param string $value
+	 * @param int $width
+	 * @return bool
+	 */
 	private static function fits(string $value, int $width): bool {
 		if (preg_match('/^(0|[1-9][0-9]*)$/', $value) !== 1) {
 			return false;

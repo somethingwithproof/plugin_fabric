@@ -23,9 +23,21 @@ namespace Somethingwithproof\Fabric;
  * Persistence layer for Fabric CasC settings updates.
  */
 final class ConfigRepository {
+	/**
+	 * Construct a new ConfigRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
+	/**
+	 * Save setting.
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @return bool
+	 */
 	public function saveSetting(string $name, string $value): bool {
 		if (!in_array($name, Settings::NAMES, true)) {
 			return false;

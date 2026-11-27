@@ -28,15 +28,34 @@ namespace Somethingwithproof\Fabric;
  * and RFC 9112 chunked transfer decoding.
  */
 final class UfmSocketTransport implements UfmHttpTransport {
+	/** Maximum header bytes. */
 	private const MAX_HEADER_BYTES = 65536;
+	/** Maximum ca bytes. */
 	private const MAX_CA_BYTES     = 1048576;
 
+	/**
+	 * Construct a new UfmSocketTransport instance.
+	 *
+	 * @param int $maxBytes
+	 * @param float $connectTimeout
+	 */
 	public function __construct(
 		private readonly int $maxBytes = 8388608,
 		private readonly float $connectTimeout = 5.0,
 	) {
 	}
 
+	/**
+	 * Get.
+	 *
+	 * @param UfmEndpoint $endpoint
+	 * @param string $path
+	 * @param float $deadline
+	 * @param ?string $caFile
+	 * @param ?string $spkiPin
+	 * @return UfmHttpResponse
+	 * @throws UfmTransportError
+	 */
 	public function get(
 		UfmEndpoint $endpoint,
 		string $path,
@@ -358,6 +377,13 @@ final class UfmSocketTransport implements UfmHttpTransport {
 		return [(int) $m[1], $headers];
 	}
 
+	/**
+	 * Dechunk.
+	 *
+	 * @param string $raw
+	 * @return string
+	 * @throws UfmTransportError
+	 */
 	private static function dechunk(string $raw): string {
 		$out = '';
 		$pos = 0;
@@ -402,6 +428,12 @@ final class UfmSocketTransport implements UfmHttpTransport {
 		}
 	}
 
+	/**
+	 * Classify.
+	 *
+	 * @param string $message
+	 * @return string
+	 */
 	private static function classify(string $message): string {
 		return match (true) {
 			str_contains($message, 'certificate verify failed') => 'tls certificate not trusted',

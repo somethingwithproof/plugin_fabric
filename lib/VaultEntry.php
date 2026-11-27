@@ -23,6 +23,14 @@ namespace Somethingwithproof\Fabric;
  * One encrypted vault value as stored in plugin_fabric_secret.
  */
 final readonly class VaultEntry {
+	/**
+	 * Construct a new VaultEntry instance.
+	 *
+	 * @param string $nonce
+	 * @param string $ciphertext
+	 * @param string $tag
+	 * @param string $keyId
+	 */
 	public function __construct(
 		public string $nonce,
 		public string $ciphertext,

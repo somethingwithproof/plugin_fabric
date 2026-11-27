@@ -40,10 +40,22 @@ final class DeviceAccess {
 	public function __construct(private readonly \Closure $allowed) {
 	}
 
+	/**
+	 * Host.
+	 *
+	 * @param int $hostId
+	 * @return bool
+	 */
 	public function host(int $hostId): bool {
 		return $hostId === 0 || ($this->allowed)($hostId);
 	}
 
+	/**
+	 * Node.
+	 *
+	 * @param Node $node
+	 * @return bool
+	 */
 	public function node(Node $node): bool {
 		return $this->host($node->hostId);
 	}

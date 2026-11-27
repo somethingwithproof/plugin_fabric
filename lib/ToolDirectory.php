@@ -28,6 +28,7 @@ namespace Somethingwithproof\Fabric;
  * writable by neither its group nor others.
  */
 final class ToolDirectory {
+	/** Codes constant for ToolDirectory. */
 	public const CODES = ['path', 'missing', 'symlink', 'owner', 'writable', 'tool_owner', 'tool_writable', 'tool_setid'];
 
 	/**
@@ -97,6 +98,12 @@ final class ToolDirectory {
 		return null;
 	}
 
+	/**
+	 * Message.
+	 *
+	 * @param string $code
+	 * @return string
+	 */
 	public static function message(string $code): string {
 		return match ($code) {
 			'path'          => __('The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash.', 'fabric'),

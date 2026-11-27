@@ -28,6 +28,12 @@ final class MaintMaintenance implements DeviceMaintenance {
 	/** @var array<int, bool> */
 	private array $known = [];
 
+	/**
+	 * In maintenance.
+	 *
+	 * @param int $hostId
+	 * @return bool
+	 */
 	public function inMaintenance(int $hostId): bool {
 		if ($hostId < 1) {
 			return false;

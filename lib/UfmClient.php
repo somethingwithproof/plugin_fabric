@@ -26,8 +26,11 @@ namespace Somethingwithproof\Fabric;
  * mutation, reboot, port disable, or token creation can ever be issued.
  */
 final class UfmClient {
+	/** Path ports constant for UfmClient. */
 	public const PATH_PORTS   = '/ufmRest/resources/ports';
+	/** Path systems constant for UfmClient. */
 	public const PATH_SYSTEMS = '/ufmRest/resources/systems';
+	/** Path session constant for UfmClient. */
 	public const PATH_SESSION = '/ufmRest/monitoring/session/0/data';
 
 	/** @var list<string> */
@@ -40,6 +43,17 @@ final class UfmClient {
 		'/ufmRestV3/monitoring/session/0/data',
 	];
 
+	/**
+	 * Construct a new UfmClient instance.
+	 *
+	 * @param UfmHttpTransport $transport
+	 * @param UfmEndpoint $endpoint
+	 * @param string $authType
+	 * @param string $username
+	 * @param Secret $secret
+	 * @param ?string $caFile
+	 * @param ?string $spkiPin
+	 */
 	public function __construct(
 		private readonly UfmHttpTransport $transport,
 		private readonly UfmEndpoint $endpoint,
@@ -112,6 +126,11 @@ final class UfmClient {
 		return $response->json();
 	}
 
+	/**
+	 * Auth header.
+	 *
+	 * @return string
+	 */
 	private function authHeader(): string {
 		if ($this->authType === CredentialRepository::AUTH_TOKEN) {
 			return 'Basic ' . $this->secret->reveal();

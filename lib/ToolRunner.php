@@ -30,11 +30,25 @@ namespace Somethingwithproof\Fabric;
  * run with under MIN_SECONDS left is not started and reads as timed out.
  */
 final class ToolRunner {
+	/** Minimum seconds. */
 	public const MIN_SECONDS = 1.0;
 
+	/**
+	 * Construct a new ToolRunner instance.
+	 *
+	 * @param ProcessRunner $runner
+	 * @param Settings $settings
+	 * @param ?float $deadline
+	 */
 	public function __construct(private readonly ProcessRunner $runner, private readonly Settings $settings, private readonly ?float $deadline = null) {
 	}
 
+	/**
+	 * Run.
+	 *
+	 * @param Command $command
+	 * @return ProcessResult
+	 */
 	public function run(Command $command): ProcessResult {
 		$limit = (float) $this->settings->commandTimeout;
 

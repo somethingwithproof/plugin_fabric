@@ -41,8 +41,15 @@ namespace Somethingwithproof\Fabric;
  * No Cacti device, graph, or data source is created or changed.
  */
 final class InventoryRepository {
+	/** Tx state for InventoryRepository. */
 	private TransactionRepository $tx;
 
+	/**
+	 * Construct a new InventoryRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 */
 	public function __construct(private readonly \PDO|false $connection, private readonly Clock $clock) {
 	}
 
@@ -162,6 +169,17 @@ final class InventoryRepository {
 		return $result;
 	}
 
+	/**
+	 * Insert node.
+	 *
+	 * @param Fabric $fabric
+	 * @param TopologyNode $seen
+	 * @param bool $duplicate
+	 * @param string $signature
+	 * @param int $now
+	 * @return int
+	 * @throws \RuntimeException
+	 */
 	private function insertNode(Fabric $fabric, TopologyNode $seen, bool $duplicate, string $signature, int $now): int {
 		$this->write(
 			'INSERT INTO plugin_fabric_node (fabric_id, guid, node_type, port_count, device_id, vendor_id, sysimg_guid, port0_guid, description, lid, host_id, presence, identity, conflict_seen, conflict_signature, first_seen, last_seen, revision) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?, 0)',
@@ -177,6 +195,14 @@ final class InventoryRepository {
 		return $id;
 	}
 
+	/**
+	 * Update node.
+	 *
+	 * @param Node $stored
+	 * @param TopologyNode $seen
+	 * @param int $now
+	 * @return void
+	 */
 	private function updateNode(Node $stored, TopologyNode $seen, int $now): void {
 		$this->write(
 			'UPDATE plugin_fabric_node SET port0_guid = ?, description = ?, lid = ?, presence = ?, last_seen = ?, revision = revision + 1 WHERE id = ?',

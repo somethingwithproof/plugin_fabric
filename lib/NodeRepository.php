@@ -26,9 +26,20 @@ namespace Somethingwithproof\Fabric;
  * since the page read it, so a sweep that ran in between is never undone.
  */
 final class NodeRepository {
+	/**
+	 * Construct a new NodeRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
+	/**
+	 * Find.
+	 *
+	 * @param int $id
+	 * @return ?Node
+	 */
 	public function find(int $id): ?Node {
 		$row = db_fetch_row_prepared('SELECT * FROM plugin_fabric_node WHERE id = ?', [$id], true, $this->connection);
 

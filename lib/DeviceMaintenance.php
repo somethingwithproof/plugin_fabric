@@ -23,5 +23,11 @@ namespace Somethingwithproof\Fabric;
  * Checks whether a mapped Cacti host is currently inside a maintenance window.
  */
 interface DeviceMaintenance {
+	/**
+	 * In maintenance.
+	 *
+	 * @param int $hostId
+	 * @return bool
+	 */
 	public function inMaintenance(int $hostId): bool;
 }

@@ -28,6 +28,11 @@ enum NodeType: string {
 	case Adapter = 'ca';
 	case Router  = 'router';
 
+	/**
+	 * Label.
+	 *
+	 * @return string
+	 */
 	public function label(): string {
 		return match ($this) {
 			self::Switch  => __('Switch', 'fabric'),

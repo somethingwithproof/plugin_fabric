@@ -32,8 +32,24 @@ namespace Somethingwithproof\Fabric;
  * discovery and name no device.
  */
 final class HealthPage {
+	/** File constant for HealthPage. */
 	public const FILE = 'fabric_health.php';
 
+	/**
+	 * Construct a new HealthPage instance.
+	 *
+	 * @param FabricRepository $fabrics
+	 * @param NodeRepository $nodes
+	 * @param FabricHealthRepository $health
+	 * @param NodeSweepRepository $sweeps
+	 * @param RelinkRepository $relinks
+	 * @param Clock $clock
+	 * @param DeviceAccess $access
+	 * @param ?TemplateInstaller $templates
+	 * @param bool $canImport
+	 * @param string $basePath
+	 * @param bool $remoteEnabled
+	 */
 	public function __construct(
 		private readonly FabricRepository $fabrics,
 		private readonly NodeRepository $nodes,
@@ -79,6 +95,11 @@ final class HealthPage {
 		}
 	}
 
+	/**
+	 * Render.
+	 *
+	 * @return void
+	 */
 	public function render(): void {
 		$fabrics   = $this->fabrics->all();
 		$nodes     = $this->nodes->all();

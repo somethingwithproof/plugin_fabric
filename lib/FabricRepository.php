@@ -19,10 +19,25 @@
 
 namespace Somethingwithproof\Fabric;
 
+/**
+ * Fabric repository component.
+ */
 final class FabricRepository {
+	/**
+	 * Construct a new FabricRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 */
 	public function __construct(private readonly \PDO|false $connection, private readonly Clock $clock) {
 	}
 
+	/**
+	 * Find.
+	 *
+	 * @param int $id
+	 * @return ?Fabric
+	 */
 	public function find(int $id): ?Fabric {
 		$row = db_fetch_row_prepared('SELECT * FROM plugin_fabric_fabric WHERE id = ?', [$id], true, $this->connection);
 
@@ -102,6 +117,13 @@ final class FabricRepository {
 		return $due;
 	}
 
+	/**
+	 * Name taken.
+	 *
+	 * @param string $name
+	 * @param int $exceptId
+	 * @return bool
+	 */
 	public function nameTaken(string $name, int $exceptId): bool {
 		return (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_fabric WHERE name = ? AND id != ?', [$name, $exceptId], '', true, $this->connection) > 0;
 	}

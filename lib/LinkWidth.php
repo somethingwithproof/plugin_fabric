@@ -34,6 +34,12 @@ enum LinkWidth: int {
 	case X8  = 8;
 	case X12 = 12;
 
+	/**
+	 * From encoded.
+	 *
+	 * @param int $value
+	 * @return ?self
+	 */
 	public static function fromEncoded(int $value): ?self {
 		return match ($value) {
 			1       => self::X1,
@@ -60,10 +66,20 @@ enum LinkWidth: int {
 		};
 	}
 
+	/**
+	 * Lanes.
+	 *
+	 * @return int
+	 */
 	public function lanes(): int {
 		return $this->value;
 	}
 
+	/**
+	 * Label.
+	 *
+	 * @return string
+	 */
 	public function label(): string {
 		return $this->value . 'X';
 	}

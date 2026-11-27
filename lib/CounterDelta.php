@@ -75,10 +75,20 @@ final readonly class CounterDelta {
 		return new self($rates, $reset, $usable ? $previousAt : 0);
 	}
 
+	/**
+	 * Rates json.
+	 *
+	 * @return string
+	 */
 	public function ratesJson(): string {
 		return json_encode($this->rates, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION);
 	}
 
+	/**
+	 * Reset json.
+	 *
+	 * @return string
+	 */
 	public function resetJson(): string {
 		return json_encode($this->reset, JSON_THROW_ON_ERROR);
 	}

@@ -25,6 +25,7 @@ namespace Somethingwithproof\Fabric;
  * and Counters models so UFM and infiniband-diags feed the same tables.
  */
 final class UfmParser {
+	/** Counter map constant for UfmParser. */
 	private const COUNTER_MAP = [
 		'Infiniband_MBOut'               => 'PortXmitData',
 		'Infiniband_MBIn'                => 'PortRcvData',
@@ -225,6 +226,12 @@ final class UfmParser {
 		return $out;
 	}
 
+	/**
+	 * Parse port name.
+	 *
+	 * @param string $name
+	 * @return ?PortRef
+	 */
 	private static function parsePortName(string $name): ?PortRef {
 		if (preg_match('/^(?:0x)?([0-9A-Fa-f]{1,16})_([0-9]{1,3})$/D', trim($name), $m) !== 1) {
 			return null;
@@ -261,6 +268,12 @@ final class UfmParser {
 		return null;
 	}
 
+	/**
+	 * Node type.
+	 *
+	 * @param string $raw
+	 * @return NodeType
+	 */
 	private static function nodeType(string $raw): NodeType {
 		$lower = strtolower(trim($raw));
 
@@ -271,6 +284,12 @@ final class UfmParser {
 		};
 	}
 
+	/**
+	 * Max width.
+	 *
+	 * @param mixed $raw
+	 * @return ?LinkWidth
+	 */
 	private static function maxWidth(mixed $raw): ?LinkWidth {
 		if (!is_array($raw)) {
 			return is_string($raw) ? LinkWidth::fromText($raw) : null;
@@ -289,6 +308,12 @@ final class UfmParser {
 		return $best;
 	}
 
+	/**
+	 * Max speed.
+	 *
+	 * @param mixed $raw
+	 * @return ?LinkSpeed
+	 */
 	private static function maxSpeed(mixed $raw): ?LinkSpeed {
 		if (!is_array($raw)) {
 			return is_string($raw) ? LinkSpeed::fromName($raw) : null;
@@ -307,6 +332,12 @@ final class UfmParser {
 		return $best;
 	}
 
+	/**
+	 * Clean desc.
+	 *
+	 * @param string $value
+	 * @return string
+	 */
 	private static function cleanDesc(string $value): string {
 		$clean = preg_replace('/[\x00-\x1f\x7f]+/', ' ', $value);
 

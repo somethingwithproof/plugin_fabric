@@ -38,19 +38,23 @@ namespace Somethingwithproof\Fabric;
  * from the script server, gated by plugin enablement and per-fabric claims.
  */
 final class Schema {
+	/** Current schema version number. */
 	public const VERSION = 3;
 
+	/** Map of Cacti hook names to setup.php callback functions. */
 	public const HOOKS = [
-		'auth_alternate_realms'  => 'fabric_auth_alternate_realms',
-		'config_arrays'          => 'fabric_config_arrays',
-		'config_settings'        => 'fabric_config_settings',
-		'draw_navigation_text'   => 'fabric_draw_navigation_text',
-		'device_remove'          => 'fabric_device_remove',
-		'poller_bottom'          => 'fabric_poller_bottom',
-		'replicate_out'          => 'fabric_replicate_out',
-		'abilities_register'     => 'fabric_abilities_register',
-		'doctor_register_checks' => 'fabric_doctor_register_checks',
-		'casc_register_providers' => 'fabric_casc_register_providers',
+		'auth_alternate_realms'      => 'fabric_auth_alternate_realms',
+		'config_arrays'              => 'fabric_config_arrays',
+		'config_settings'            => 'fabric_config_settings',
+		'draw_navigation_text'       => 'fabric_draw_navigation_text',
+		'device_remove'              => 'fabric_device_remove',
+		'poller_bottom'              => 'fabric_poller_bottom',
+		'replicate_out'              => 'fabric_replicate_out',
+		'abilities_register'         => 'fabric_abilities_register',
+		'api_register_resources'     => 'fabric_api_register_resources',
+		'doctor_register_checks'     => 'fabric_doctor_register_checks',
+		'doctor_register_debug_info' => 'fabric_doctor_register_debug_info',
+		'casc_register_providers'    => 'fabric_casc_register_providers',
 	];
 
 	/** Columns version 2 adds to plugin_fabric_sample, for rates and discontinuities. */
@@ -59,18 +63,35 @@ final class Schema {
 	/** Columns version 3 adds to plugin_fabric_fabric, for NVIDIA UFM REST backends. */
 	private const FABRIC_V3 = ['ufm_url', 'ufm_ca_file', 'ufm_spki_pin', 'ufm_credential_id'];
 
+	/** Plugin constant for Schema. */
 	private const PLUGIN  = 'fabric';
+	/** Setting constant for Schema. */
 	private const SETTING = 'fabric_schema_version';
 
+	/**
+	 * Construct a new Schema instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
+	/**
+	 * Stored version.
+	 *
+	 * @return int
+	 */
 	public function storedVersion(): int {
 		$value = db_fetch_cell_prepared('SELECT value FROM settings WHERE name = ?', [self::SETTING], '', true, $this->connection);
 
 		return is_numeric($value) ? (int) $value : 0;
 	}
 
+	/**
+	 * Check whether current.
+	 *
+	 * @return bool
+	 */
 	public function isCurrent(): bool {
 		return $this->storedVersion() === self::VERSION;
 	}
@@ -109,10 +130,23 @@ final class Schema {
 		return true;
 	}
 
+	/**
+	 * Recorded plugin version.
+	 *
+	 * @return string
+	 */
 	public function recordedPluginVersion(): string {
 		return (string) db_fetch_cell_prepared('SELECT version FROM plugin_config WHERE directory = ?', [self::PLUGIN], '', true, $this->connection);
 	}
 
+	/**
+	 * Record plugin version.
+	 *
+	 * @param string $version
+	 * @param string $author
+	 * @param string $homepage
+	 * @return void
+	 */
 	public function recordPluginVersion(string $version, string $author, string $homepage): void {
 		db_execute_prepared('UPDATE plugin_config SET version = ?, author = ?, webpage = ? WHERE directory = ?', [$version, $author, $homepage, self::PLUGIN], true, $this->connection);
 	}
@@ -124,6 +158,11 @@ final class Schema {
 		return (int) db_fetch_cell_prepared('SELECT status FROM plugin_config WHERE directory = ?', [self::PLUGIN], '', true, $this->connection) === 1;
 	}
 
+	/**
+	 * Hooks registered.
+	 *
+	 * @return bool
+	 */
 	public function hooksRegistered(): bool {
 		$placeholders = implode(', ', array_fill(0, count(self::HOOKS), '?'));
 
@@ -144,6 +183,11 @@ final class Schema {
 		return $ok !== false && (int) db_fetch_cell_prepared("SELECT COUNT(*) FROM plugin_db_changes WHERE plugin = ? AND method = 'create'", [self::PLUGIN], '', true, $this->connection) === 0;
 	}
 
+	/**
+	 * Forget version.
+	 *
+	 * @return void
+	 */
 	public function forgetVersion(): void {
 		db_execute_prepared('DELETE FROM settings WHERE name = ?', [self::SETTING], true, $this->connection);
 	}
@@ -235,10 +279,21 @@ final class Schema {
 		return true;
 	}
 
+	/**
+	 * Allow nullable adapter.
+	 *
+	 * @return bool
+	 */
 	private function allowNullableAdapter(): bool {
 		return db_execute_prepared('ALTER TABLE `plugin_fabric_fabric` MODIFY COLUMN `adapter` varchar(32) NULL DEFAULT NULL', [], true, $this->connection) !== false;
 	}
 
+	/**
+	 * Table exists.
+	 *
+	 * @param string $table
+	 * @return bool
+	 */
 	private function tableExists(string $table): bool {
 		return db_fetch_cell_prepared('SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ?', [$table], '', true, $this->connection) > 0;
 	}

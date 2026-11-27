@@ -29,6 +29,12 @@ namespace Somethingwithproof\Fabric;
  * a file swapped between check and read is rejected.
  */
 final class SecureFile {
+	/**
+	 * Path acceptable.
+	 *
+	 * @param string $path
+	 * @return bool
+	 */
 	public static function pathAcceptable(string $path): bool {
 		return $path !== ''
 			&& strlen($path) <= 512

@@ -40,6 +40,12 @@ enum LinkSpeed: string {
 	case Ndr   = 'ndr';
 	case Xdr   = 'xdr';
 
+	/**
+	 * From rate.
+	 *
+	 * @param string $text
+	 * @return ?self
+	 */
 	public static function fromRate(string $text): ?self {
 		return match (trim($text)) {
 			'2.5 Gbps'          => self::Sdr,
@@ -55,10 +61,21 @@ enum LinkSpeed: string {
 		};
 	}
 
+	/**
+	 * From name.
+	 *
+	 * @param string $text
+	 * @return ?self
+	 */
 	public static function fromName(string $text): ?self {
 		return self::tryFrom(strtolower(trim($text)));
 	}
 
+	/**
+	 * Rank.
+	 *
+	 * @return int
+	 */
 	public function rank(): int {
 		return match ($this) {
 			self::Sdr   => 1,
@@ -73,6 +90,11 @@ enum LinkSpeed: string {
 		};
 	}
 
+	/**
+	 * Label.
+	 *
+	 * @return string
+	 */
 	public function label(): string {
 		return strtoupper($this->value);
 	}

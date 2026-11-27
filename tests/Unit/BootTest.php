@@ -78,16 +78,18 @@ it('cuts untrusted text to one bounded printable line', function () {
 
 it('registers all lifecycle, poller, replication, and ecosystem hooks', function () {
 	expect(Somethingwithproof\Fabric\Schema::HOOKS)->toBe([
-		'auth_alternate_realms'   => 'fabric_auth_alternate_realms',
-		'config_arrays'           => 'fabric_config_arrays',
-		'config_settings'         => 'fabric_config_settings',
-		'draw_navigation_text'    => 'fabric_draw_navigation_text',
-		'device_remove'           => 'fabric_device_remove',
-		'poller_bottom'           => 'fabric_poller_bottom',
-		'replicate_out'           => 'fabric_replicate_out',
-		'abilities_register'      => 'fabric_abilities_register',
-		'doctor_register_checks'  => 'fabric_doctor_register_checks',
-		'casc_register_providers' => 'fabric_casc_register_providers',
+		'auth_alternate_realms'      => 'fabric_auth_alternate_realms',
+		'config_arrays'              => 'fabric_config_arrays',
+		'config_settings'            => 'fabric_config_settings',
+		'draw_navigation_text'       => 'fabric_draw_navigation_text',
+		'device_remove'              => 'fabric_device_remove',
+		'poller_bottom'              => 'fabric_poller_bottom',
+		'replicate_out'              => 'fabric_replicate_out',
+		'abilities_register'         => 'fabric_abilities_register',
+		'api_register_resources'     => 'fabric_api_register_resources',
+		'doctor_register_checks'     => 'fabric_doctor_register_checks',
+		'doctor_register_debug_info' => 'fabric_doctor_register_debug_info',
+		'casc_register_providers'    => 'fabric_casc_register_providers',
 	]);
 
 	foreach (Somethingwithproof\Fabric\Schema::HOOKS as $callback) {

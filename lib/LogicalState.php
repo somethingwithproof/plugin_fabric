@@ -43,6 +43,11 @@ enum LogicalState: string {
 		};
 	}
 
+	/**
+	 * Number.
+	 *
+	 * @return int
+	 */
 	public function number(): int {
 		return match ($this) {
 			self::Down       => 1,

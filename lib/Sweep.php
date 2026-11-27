@@ -37,10 +37,27 @@ namespace Somethingwithproof\Fabric;
  * stored values or U (fabric_port_query()).
  */
 final class Sweep {
+	/** Topology state for Sweep. */
 	private readonly TopologySweep $topology;
+	/** Counters state for Sweep. */
 	private readonly CounterSweep $counters;
+	/** Ufm state for Sweep. */
 	private readonly UfmSweep $ufm;
 
+	/**
+	 * Construct a new Sweep instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 * @param ProcessRunner $runner
+	 * @param Settings $settings
+	 * @param int $pollerId
+	 * @param bool $pluginEnabled
+	 * @param int $toolOwner
+	 * @param ?float $deadline
+	 * @param ?UfmHttpTransport $ufmTransport
+	 * @param ?Vault $ufmVault
+	 */
 	public function __construct(
 		private readonly \PDO|false $connection,
 		private readonly Clock $clock,
@@ -128,6 +145,12 @@ final class Sweep {
 		return $this->sweepNodes($fabric, $nodes, $force, false);
 	}
 
+	/**
+	 * Allowed.
+	 *
+	 * @param Fabric $fabric
+	 * @return bool
+	 */
 	public function allowed(Fabric $fabric): bool {
 		return $fabric->enabled() && $fabric->pollerId === $this->pollerId;
 	}

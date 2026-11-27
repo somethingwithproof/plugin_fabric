@@ -24,6 +24,11 @@ namespace Somethingwithproof\Fabric;
  * such as MCP read-only ability authorization.
  */
 final class RealmRepository {
+	/**
+	 * Construct a new RealmRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 

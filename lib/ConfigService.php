@@ -28,8 +28,17 @@ namespace Somethingwithproof\Fabric;
  * are exported and resolved).
  */
 final class ConfigService {
+	/** Redacted constant for ConfigService. */
 	public const REDACTED = '[REDACTED]';
 
+	/**
+	 * Construct a new ConfigService instance.
+	 *
+	 * @param SettingsRepository $settings
+	 * @param FabricRepository $fabrics
+	 * @param CredentialRepository $credentials
+	 * @param ConfigRepository $configRepo
+	 */
 	public function __construct(
 		private readonly SettingsRepository $settings,
 		private readonly FabricRepository $fabrics,
@@ -107,6 +116,12 @@ final class ConfigService {
 		return $data;
 	}
 
+	/**
+	 * Export.
+	 *
+	 * @param string $format
+	 * @return string
+	 */
 	public function export(string $format): string {
 		return ConfigCodec::write($format, $this->exportData());
 	}
@@ -120,6 +135,12 @@ final class ConfigService {
 		return $this->plan($tree)->errors;
 	}
 
+	/**
+	 * Plan.
+	 *
+	 * @param ConfigTree $tree
+	 * @return ConfigPlan
+	 */
 	public function plan(ConfigTree $tree): ConfigPlan {
 		$errors          = [];
 		$notes           = [];
@@ -417,6 +438,13 @@ final class ConfigService {
 		return $value;
 	}
 
+	/**
+	 * Fabric differs.
+	 *
+	 * @param Fabric $a
+	 * @param Fabric $b
+	 * @return bool
+	 */
 	private function fabricDiffers(Fabric $a, Fabric $b): bool {
 		return $a->backend !== $b->backend
 			|| $a->pollerId !== $b->pollerId

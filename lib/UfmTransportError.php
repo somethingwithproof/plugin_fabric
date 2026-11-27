@@ -24,10 +24,21 @@ namespace Somethingwithproof\Fabric;
  * response text or credentials.
  */
 final class UfmTransportError extends \RuntimeException {
+	/**
+	 * Construct a new UfmTransportError instance.
+	 *
+	 * @param string $kind
+	 * @param string $reason
+	 */
 	public function __construct(public readonly string $kind, string $reason) {
 		parent::__construct($reason);
 	}
 
+	/**
+	 * To command error.
+	 *
+	 * @return CommandError
+	 */
 	public function toCommandError(): CommandError {
 		return match ($this->kind) {
 			'timeout'   => CommandError::Timeout,

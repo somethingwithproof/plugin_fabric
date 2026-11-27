@@ -25,6 +25,11 @@ namespace Somethingwithproof\Fabric;
  * files are never replicated across pollers.
  */
 final class ReplicatorRepository {
+	/**
+	 * Construct a new ReplicatorRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 

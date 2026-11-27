@@ -25,13 +25,24 @@ namespace Somethingwithproof\Fabric;
  * when the budget ran out before they were tried.
  */
 final class NodeSweepResult {
+	/** Total state for NodeSweepResult. */
 	public int $total = 0;
+	/** Read state for NodeSweepResult. */
 	public int $read = 0;
+	/** Failed state for NodeSweepResult. */
 	public int $failed = 0;
+	/** Skipped state for NodeSweepResult. */
 	public int $skipped = 0;
+	/** Duration state for NodeSweepResult. */
 	public float $duration = 0.0;
+	/** Error state for NodeSweepResult. */
 	public ?CommandError $error = null;
 
+	/**
+	 * Outcome.
+	 *
+	 * @return SweepOutcome
+	 */
 	public function outcome(): SweepOutcome {
 		return match (true) {
 			$this->total === 0           => SweepOutcome::Skipped,

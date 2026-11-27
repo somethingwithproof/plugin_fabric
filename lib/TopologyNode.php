@@ -41,6 +41,11 @@ final readonly class TopologyNode {
 	) {
 	}
 
+	/**
+	 * Identity.
+	 *
+	 * @return NodeIdentity
+	 */
 	public function identity(): NodeIdentity {
 		return new NodeIdentity($this->type, $this->portCount, $this->deviceId, $this->vendorId, $this->sysimgGuid);
 	}

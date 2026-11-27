@@ -35,8 +35,11 @@ namespace Somethingwithproof\Fabric;
  * 64 characters and never used for identity (REQ-INV-002, REQ-INV-007).
  */
 final class IbnetdiscoverParser {
+	/** Guid constant for IbnetdiscoverParser. */
 	private const GUID = '([0-9a-fA-F]{1,16})';
+	/** Name constant for IbnetdiscoverParser. */
 	private const NAME = '"([SHR])-([0-9a-f]{16})"';
+	/** Ext constant for IbnetdiscoverParser. */
 	private const EXT  = '(?:\[ext \d+\])?';
 
 	/** @var array<string, TopologyNode> */
@@ -54,6 +57,12 @@ final class IbnetdiscoverParser {
 	/** @var array<int, TopologyPort> */
 	private array $ports = [];
 
+	/**
+	 * Parse.
+	 *
+	 * @param string $output
+	 * @return Topology
+	 */
 	public function parse(string $output): Topology {
 		$this->nodes               = [];
 		$this->duplicates          = [];
@@ -189,6 +198,11 @@ final class IbnetdiscoverParser {
 		return new Topology($this->nodes, $local, array_values(array_unique($this->duplicates)), $this->duplicateIdentities);
 	}
 
+	/**
+	 * Finish.
+	 *
+	 * @return void
+	 */
 	private function finish(): void {
 		$current = $this->current;
 
@@ -238,6 +252,12 @@ final class IbnetdiscoverParser {
 		}
 	}
 
+	/**
+	 * Letter.
+	 *
+	 * @param NodeType $type
+	 * @return string
+	 */
 	private static function letter(NodeType $type): string {
 		return match ($type) {
 			NodeType::Switch  => 'S',

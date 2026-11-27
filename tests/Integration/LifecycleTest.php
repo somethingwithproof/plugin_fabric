@@ -29,7 +29,7 @@ const FABRIC_TABLES = ['plugin_fabric_claim', 'plugin_fabric_fabric', 'plugin_fa
 // What the seed action leaves: one fabric and one node.
 const FABRIC_SEEDED = ['plugin_fabric_claim' => 0, 'plugin_fabric_fabric' => 1, 'plugin_fabric_health' => 0, 'plugin_fabric_node' => 1, 'plugin_fabric_node_sweep' => 0, 'plugin_fabric_port' => 0, 'plugin_fabric_relink' => 0, 'plugin_fabric_sample' => 0, 'plugin_fabric_secret' => 0];
 
-const FABRIC_HOOKS = ['abilities_register', 'auth_alternate_realms', 'casc_register_providers', 'config_arrays', 'config_settings', 'device_remove', 'doctor_register_checks', 'draw_navigation_text', 'poller_bottom', 'replicate_out'];
+const FABRIC_HOOKS = ['abilities_register', 'api_register_resources', 'auth_alternate_realms', 'casc_register_providers', 'config_arrays', 'config_settings', 'device_remove', 'doctor_register_checks', 'doctor_register_debug_info', 'draw_navigation_text', 'poller_bottom', 'replicate_out'];
 
 beforeEach(function () {
 	lifecycle('reset');
@@ -298,6 +298,35 @@ it('migrates a version 1 sample table to version 2 and keeps its rows', function
 			'discontinuities'   => '0',
 			'discontinuity_at'  => '0',
 		]);
+});
+
+it('upgrades a schema 2 (main) install to schema 3 idempotently, keeping fabrics and nodes', function () {
+	lifecycle('install');
+	lifecycle('seed');
+	lifecycle('make_schema_2');
+	lifecycle('set_schema', '2');
+	lifecycle('set_version', '0.1.0');
+
+	$before = lifecycle('state');
+	expect($before['fabric_columns'])->not->toContain('ufm_url')
+		->and(array_keys($before['tables']))->not->toContain('plugin_fabric_secret');
+
+	$first = lifecycle('upgrade');
+	expect($first['result'])->toBeTrue()
+		->and($first['schema'])->toEqual('3')
+		->and($first['plugin']['version'])->toEqual(FABRIC_VERSION)
+		->and($first['fabric_columns'])->toContain('ufm_url', 'ufm_ca_file', 'ufm_spki_pin', 'ufm_credential_id')
+		->and(array_keys($first['tables']))->toBe(FABRIC_TABLES)
+		->and($first['tracked'])->toBe(FABRIC_TABLES)
+		->and(array_keys($first['hooks']))->toBe(FABRIC_HOOKS)
+		->and($first['tables'])->toBe(FABRIC_SEEDED);
+
+	$second = lifecycle('upgrade');
+	expect($second['result'])->toBeTrue()
+		->and($second['schema'])->toEqual('3')
+		->and($second['tables'])->toBe(FABRIC_SEEDED)
+		->and($second['tracked'])->toBe(FABRIC_TABLES)
+		->and($second['hooks'])->toBe($first['hooks']);
 });
 
 it('imports the Cacti objects once, keeps them on a reinstall, and keeps them but not its query file on uninstall', function () {

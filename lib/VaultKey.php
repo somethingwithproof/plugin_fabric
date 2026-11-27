@@ -25,6 +25,11 @@ namespace Somethingwithproof\Fabric;
  * followed by one newline) or 32 random non-printable bytes.
  */
 final class VaultKey {
+	/**
+	 * Construct a new VaultKey instance.
+	 *
+	 * @param Secret $key
+	 */
 	private function __construct(private readonly Secret $key) {
 	}
 
@@ -51,6 +56,12 @@ final class VaultKey {
 		throw CredentialError::because('the key file must hold 64 hexadecimal characters or exactly 32 random bytes');
 	}
 
+	/**
+	 * From bytes.
+	 *
+	 * @param string $bytes
+	 * @return self
+	 */
 	public static function fromBytes(#[\SensitiveParameter] string $bytes): self {
 		if (strlen($bytes) !== 32) {
 			throw CredentialError::because('a vault key is 32 bytes');
@@ -59,6 +70,11 @@ final class VaultKey {
 		return new self(new Secret($bytes));
 	}
 
+	/**
+	 * Bytes.
+	 *
+	 * @return string
+	 */
 	public function bytes(): string {
 		return $this->key->reveal();
 	}

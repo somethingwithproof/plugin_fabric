@@ -25,6 +25,11 @@ namespace Somethingwithproof\Fabric;
  * error, and the privilege warnings found on the poller (REQ-HEALTH-001).
  */
 final class FabricHealthRepository {
+	/**
+	 * Construct a new FabricHealthRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
@@ -37,12 +42,35 @@ final class FabricHealthRepository {
 		return is_array($row) ? $row : ($row === false ? null : []);
 	}
 
+	/**
+	 * Discovery.
+	 *
+	 * @param int $fabricId
+	 * @param int $attempt
+	 * @param ?CommandError $error
+	 * @param float $duration
+	 * @param int $nodes
+	 * @param int $ports
+	 * @param ?Guid $local
+	 * @return bool
+	 */
 	public function discovery(int $fabricId, int $attempt, ?CommandError $error, float $duration, int $nodes, int $ports, ?Guid $local): bool {
 		return $this->upsert($fabricId, $error === null
 			? ['discovery_attempt' => $attempt, 'discovery_success' => $attempt, 'discovery_duration' => round($duration, 3), 'discovery_error' => '', 'nodes_seen' => $nodes, 'ports_seen' => $ports, 'local_guid' => $local->text ?? '']
 			: ['discovery_attempt' => $attempt, 'discovery_duration' => round($duration, 3), 'discovery_error' => $error->value]);
 	}
 
+	/**
+	 * Links.
+	 *
+	 * @param int $fabricId
+	 * @param int $attempt
+	 * @param ?CommandError $error
+	 * @param float $duration
+	 * @param int $unmatched
+	 * @param int $skipped
+	 * @return bool
+	 */
 	public function links(int $fabricId, int $attempt, ?CommandError $error, float $duration, int $unmatched, int $skipped = 0): bool {
 		return $this->upsert($fabricId, $error === null
 			? ['links_attempt' => $attempt, 'links_success' => $attempt, 'links_duration' => round($duration, 3), 'links_error' => '', 'links_unmatched' => $unmatched, 'links_skipped' => $skipped]

@@ -183,3 +183,81 @@ it('registers read-only MCP abilities gated by View realm and Doctor + CasC prov
 	$rep = new ReplicatorRepository(false);
 	expect($rep->fabricsForPoller(1))->toBe([]);
 });
+
+it('registers decoupled doctor_register_debug_info and api_register_resources hooks and ships a valid Config/State schema', function () {
+	$GLOBALS['__fabric_db_rows'] = [
+		'FROM settings' => [['value' => (string) Schema::VERSION]],
+	];
+
+	$debugInfo = fabric_doctor_register_debug_info([]);
+	expect($debugInfo)->toHaveKey('fabric')
+		->and($debugInfo['fabric']['label'])->toBe('InfiniBand Fabric')
+		->and($debugInfo['fabric']['fields'])->toHaveKeys([
+			'schema_version',
+			'health_status',
+			'fabrics_configured',
+			'nodes_tracked',
+			'degraded_ports',
+			'identity_conflicts',
+			'ufm_vault_status',
+		])
+		->and($debugInfo['fabric']['fields']['ufm_vault_status']['private'])->toBeTrue();
+
+	// Object-registrar path works without importing any external Doctor class.
+	$debugReg = new class {
+		/** @var array<string, mixed> */
+		public array $sections = [];
+
+		/** @param array<string, mixed> $section */
+		public function register(string $id, array $section): void {
+			$this->sections[$id] = $section;
+		}
+	};
+	expect(fabric_doctor_register_debug_info($debugReg))->toBe($debugReg)
+		->and($debugReg->sections)->toHaveKey('fabric');
+
+	// Google AIP resource descriptors (plain array and object registrar).
+	$resources = fabric_api_register_resources([]);
+	expect(array_keys($resources))->toBe(['fabric.fabrics', 'fabric.nodes', 'fabric.ports']);
+
+	foreach ($resources as $key => $descriptor) {
+		expect($descriptor['plugin'])->toBe('fabric', $key)
+			->and($descriptor['read_only'])->toBeTrue($key)
+			->and($descriptor['methods'])->toBe(['get', 'list'], $key)
+			->and(json_encode($descriptor))->not->toContain('ciphertext');
+	}
+
+	$apiReg = new class {
+		/** @var array<string, mixed> */
+		public array $items = [];
+
+		/** @param array<string, mixed> $descriptor */
+		public function register(string $id, array $descriptor): void {
+			$this->items[$id] = $descriptor;
+		}
+	};
+	expect(fabric_api_register_resources($apiReg))->toBe($apiReg)
+		->and(array_keys($apiReg->items))->toBe(['fabric.fabrics', 'fabric.nodes', 'fabric.ports']);
+
+	// Static Drupal-style Config vs. State schema parses cleanly and covers all settings and tables.
+	$schemaFile = dirname(__DIR__, 2) . '/schema/fabric.schema.yaml';
+	expect(is_file($schemaFile))->toBeTrue();
+
+	$tree = Somethingwithproof\Fabric\YamlReader::parse((string) file_get_contents($schemaFile))->data;
+	expect($tree['plugin'])->toBe('fabric')
+		->and($tree['storage_separation'])->toBe('strict')
+		->and($tree['config']['casc_managed'])->toBeTrue()
+		->and($tree['state']['casc_managed'])->toBeFalse()
+		->and($tree['secret_vault']['casc_managed'])->toBeFalse()
+		->and(array_keys($tree['config']['settings']))->toEqualCanonicalizing(Settings::NAMES);
+
+	$configTables = $tree['config']['tables'];
+	$vaultTables  = $tree['secret_vault']['tables'];
+	$stateTables  = $tree['state']['tables'];
+	$allSchema    = array_merge($configTables, $vaultTables, $stateTables);
+
+	expect(array_intersect($configTables, $stateTables))->toBe([])
+		->and(array_intersect($configTables, $vaultTables))->toBe([])
+		->and(array_intersect($vaultTables, $stateTables))->toBe([])
+		->and($allSchema)->toEqualCanonicalizing(array_keys(Schema::tables()));
+});

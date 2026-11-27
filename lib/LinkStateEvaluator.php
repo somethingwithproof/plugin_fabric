@@ -40,6 +40,12 @@ namespace Somethingwithproof\Fabric;
  * missing peer can be a discovery gap on a working link.
  */
 final class LinkStateEvaluator {
+	/**
+	 * Evaluate.
+	 *
+	 * @param LinkState $link
+	 * @return LinkCondition
+	 */
 	public function evaluate(LinkState $link): LinkCondition {
 		if ($link->logical === LogicalState::Down) {
 			return LinkCondition::Down;
