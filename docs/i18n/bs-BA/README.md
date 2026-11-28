@@ -1,44 +1,36 @@
-<!-- Source: README.md; SHA256: ce5af61a1bc993ec2aae6d4f22c3885694632f2b1d5eb94e2ce88b8390e96f1e -->
+<!-- Source: README.md; SHA256: 79a16fb906f96ee79de2c719f18c38836f555440a7571a4a5ba38c64bb5b099f -->
 
 <!-- translations:start -->
-[English](../../../README.md) | [简体中文](../zh-CN/README.md) | [हिन्दी](../hi-IN/README.md) | [Español (España)](../es-ES/README.md) | [Español (Latinoamérica)](../es-419/README.md) | [العربية (السعودية)](../ar-SA/README.md) | [Afrikaans](../af-ZA/README.md) | [አማርኛ](../am-ET/README.md) | [العربية (مصر)](../ar-EG/README.md) | [العربية (المغرب)](../ar-MA/README.md) | [বাংলা](../bn-BD/README.md) | [Bosanski](README.md) | [Deutsch](../de-DE/README.md) | [فارسی](../fa-IR/README.md) | [Filipino](../fil-PH/README.md) | [Français](../fr-FR/README.md) | [Français (Maroc)](../fr-MA/README.md) | [Français (Sénégal)](../fr-SN/README.md) | [Hausa](../ha-NG/README.md) | [עברית](../he-IL/README.md) | [Hrvatski](../hr-HR/README.md) | [Bahasa Indonesia](../id-ID/README.md) | [Igbo](../ig-NG/README.md) | [Italiano](../it-IT/README.md) | [日本語](../ja-JP/README.md) | [한국어](../ko-KR/README.md) | [Malagasy](../mg-MG/README.md) | [मराठी](../mr-IN/README.md) | [Bahasa Melayu](../ms-MY/README.md) | [Nederlands](../nl-NL/README.md) | [Polski](../pl-PL/README.md) | [Português (Brasil)](../pt-BR/README.md) | [Русский](../ru-RU/README.md) | [Kinyarwanda](../rw-RW/README.md) | [Soomaali](../so-SO/README.md) | [Српски](../sr-RS/README.md) | [Svenska](../sv-SE/README.md) | [Kiswahili](../sw-KE/README.md) | [தமிழ்](../ta-IN/README.md) | [తెలుగు](../te-IN/README.md) | [ไทย](../th-TH/README.md) | [Türkçe](../tr-TR/README.md) | [Українська](../uk-UA/README.md) | [اردو](../ur-PK/README.md) | [Tiếng Việt](../vi-VN/README.md) | [isiXhosa](../xh-ZA/README.md) | [Yorùbá](../yo-NG/README.md) | [繁體中文](../zh-TW/README.md) | [isiZulu](../zu-ZA/README.md)
+[English](../../../README.md) | [简体中文](../zh-CN/README.md) | [हिन्दी](../hi-IN/README.md) | [Español (España)](../es-ES/README.md) | [Español (Latinoamérica)](../es-419/README.md) | [العربية (السعودية)](../ar-SA/README.md) | [Afrikaans](../af-ZA/README.md) | [አማርኛ](../am-ET/README.md) | [العربية (مصر)](../ar-EG/README.md) | [العربية (المغرب)](../ar-MA/README.md) | [Български](../bg-BG/README.md) | [বাংলা](../bn-BD/README.md) | [Bosanski](README.md) | [Deutsch](../de-DE/README.md) | [Ελληνικά](../el-GR/README.md) | [فارسی](../fa-IR/README.md) | [Filipino](../fil-PH/README.md) | [Français](../fr-FR/README.md) | [Français (Maroc)](../fr-MA/README.md) | [Français (Sénégal)](../fr-SN/README.md) | [Hausa](../ha-NG/README.md) | [עברית](../he-IL/README.md) | [Hrvatski](../hr-HR/README.md) | [Bahasa Indonesia](../id-ID/README.md) | [Igbo](../ig-NG/README.md) | [Italiano](../it-IT/README.md) | [日本語](../ja-JP/README.md) | [ქართული](../ka-GE/README.md) | [한국어](../ko-KR/README.md) | [Latviešu](../lv-LV/README.md) | [Malagasy](../mg-MG/README.md) | [मराठी](../mr-IN/README.md) | [Bahasa Melayu](../ms-MY/README.md) | [Nederlands](../nl-NL/README.md) | [Polski](../pl-PL/README.md) | [Português (Brasil)](../pt-BR/README.md) | [Português (Portugal)](../pt-PT/README.md) | [Русский](../ru-RU/README.md) | [Kinyarwanda](../rw-RW/README.md) | [Soomaali](../so-SO/README.md) | [Српски](../sr-RS/README.md) | [Svenska](../sv-SE/README.md) | [Kiswahili](../sw-KE/README.md) | [தமிழ்](../ta-IN/README.md) | [తెలుగు](../te-IN/README.md) | [ไทย](../th-TH/README.md) | [Türkçe](../tr-TR/README.md) | [Українська](../uk-UA/README.md) | [اردو](../ur-PK/README.md) | [Tiếng Việt](../vi-VN/README.md) | [isiXhosa](../xh-ZA/README.md) | [Yorùbá](../yo-NG/README.md) | [繁體中文](../zh-TW/README.md) | [isiZulu](../zu-ZA/README.md)
 <!-- translations:end -->
 
 # plugin_fabric
 
-Dodatak za Cacti 1.2 koji u Cacti donosi brojače InfiniBand portova, širinu i brzinu linka te pokazatelje zagušenja kao standardne uređaje, izvore podataka i grafikone. Link koji se umjesto na 4X uspostavio na 1X tada se prikazuje kao grafikon i Thold upozorenje uz računar kojem služi, u okviru Cacti dozvola, uz mogućnost da ga Maint privremeno potisne.
+Dodatak za Cacti 1.2 (`fabric`, verzija `0.1.0-dev`) koji u Cacti donosi brojače InfiniBand portova, širinu i brzinu linka te pokazatelje zagušenja kao standardne uređaje, izvore podataka i grafikone. Link koji se umjesto na 4X uspostavio na 1X tada se prikazuje kao grafikon i Thold upozorenje uz računar kojem služi, u okviru Cacti dozvola, uz prepoznavanje i potiskivanje putem Mainta.
 
-> **Status: u razvoju, još nema izdanja.** Prekretnica 2 (osnova) je spojena u granu `main`, a prekretnica 3 (Cacti objekti i upozorenja) nalazi se na pregledu. Prekretnica 1 je potvrdila dizajn na osnovu dokumentacije i izvornog koda uzvodnih projekata (PR #71); rezultati sa izvorima nalaze se u [docs/research/](../../../docs/research/). Prekretnica 2 dodaje osnovu dodatka:
->
-> - instalaciju, nadogradnju, deinstalaciju i provjeru verzije PHP 8.2
-> - oblasti dozvola View, Operator i Admin, te postavke
-> - zapise mrežne strukture
-> - granicu komandi samo za čitanje za `perfquery`, `ibnetdiscover` i `iblinkinfo`
-> - inventar po GUID-u, sa sukobima identiteta i prijedlozima ponovnog povezivanja
-> - stanje linka i keš skeniranja brojača
-> - stranice inventara, administracije i zdravlja
->
-> Prekretnica 3 dodaje Cacti objekte:
->
-> - šablone uređaja, podataka i grafikona isporučene kao Cacti XML šabloni, te upit podataka "Fabric Port"
-> - mapiranje čvora na Cacti uređaj ili kreiranje novog nakon potvrde ([ADR 0010](../../../docs/decisions/0010-one-device-per-node.md))
-> - izvore podataka brojača za grafikone, kao i GAUGE izvore podataka za stanje linka i stope za Thold ([ADR 0011](../../../docs/decisions/0011-derive-counters-and-gauge-alert-values.md))
-> - obradu prekida kontinuiteta i očitavanje zasićenih osnovnih brojača kao nepoznatih ([ADR 0012](../../../docs/decisions/0012-saturated-basic-counters-read-as-unknown.md)), ispravnost brojača i linkove grafikona na stranici porta, te rang-listu zagušenja
-> - testiranje od početka do kraja sa neizmijenjenim Thold v1.8.2 i Maint v1.3, te CI zadatak koji pokreće stvarne dijagnostičke alate nad simuliranom mrežnom strukturom
->
-> Mrežna struktura se može skenirati samo sa glavnog pollera dok se u fazi 3 ne doda podrška za udaljene prikupljače podataka. Dodatak je testiran sa lažnim alatima i simulatorom mrežne strukture ibsim, ali nikada na stvarnoj InfiniBand mrežnoj strukturi. Provjere koje zahtijevaju stvarnu mrežnu strukturu ostaju otvorene u tabeli provjera uživo na svakoj istraživačkoj stranici. Ovaj projekat nije povezan sa projektom Cacti.
+> **Status: u razvoju, još nema izdanja.** Ova grana implementira osnovu dodatka, Cacti objekte i upozoravanje, zakazana pozadinska skeniranja pollera, replikaciju na udaljene prikupljače podataka, NVIDIA UFM REST pozadinski sistem samo za čitanje sa šifriranim trezorom pristupnih podataka, Configuration-as-Code (CasC) CLI upravljanje te Cacti ekosistemske hookove (CasC, Doctor i MCP / Abilities API v2). Testirano je sa lažnim alatima, sintetičkim UFM transportima i simulatorom mrežne strukture `ibsim` (rdma-core 50.0), nikada na fizičkoj InfiniBand mrežnoj strukturi ili živom UFM serveru. Provjere koje zahtijevaju hardver ostaju otvorene u [docs/research/](../../research/). Ovaj projekat nije povezan sa projektom Cacti.
+
+## Šta je implementirano
+
+- **Životni ciklus i šema (v3)**: instalacija, idempotentna nadogradnja, deinstalacija (podrazumijevano zadržava tabele dodatka) i provjera zahtjeva za PHP 8.2 uz održavanje ulaznih tačaka ispravnim za parsiranje na PHP 8.0.
+- **Uloge pristupa i stranice**: oblasti `Fabric View` (`fabric.php`), `Fabric Operator` (`fabric_operator.php`) i `Fabric Admin` (`fabric_admin.php`, `fabric_health.php`), plus kartica postavki pod **Configuration > Settings > Fabrics**.
+- **Dijagnostički pozadinski sistem samo za čitanje (`diags`)**: strogo izvršavanje putem vektora argumenata za `perfquery`, `ibnetdiscover` i `iblinkinfo`, inventar po GUID-u sa otkrivanjem sukoba identiteta i prijedlozima ponovnog povezivanja, procjena stanja linka i skeniranje brojača po čvoru.
+- **NVIDIA UFM REST pozadinski sistem samo za čitanje (`ufm`) i šifrirani trezor**: REST klijent samo za GET sa listom dozvoljenih putanja (`/ufmRest/resources/ports`, `/ufmRest/resources/systems`, `/ufmRest/monitoring/session/0/data`, te `/ufmRestV3/...` ekvivalenti za autentifikaciju tokenom) koji puni iste tabele inventara, stanja linka, uzoraka i zdravlja kao i `diags`. Pristupni podaci (`token` ili `basic`) čuvaju se šifrirani algoritmom AES-256-GCM u `plugin_fabric_secret` pomoću vanjske 256-bitne datoteke ključa podešene preko `fabric_vault_key_file`. UFM mrežne strukture mogu se definisati putem CasC-a (`cli/fabric.php`) ili repozitorija; web obrazac za administraciju trenutno prikazuje `diags` polja.
+- **Cacti objekti, Thold i Maint**: Cacti šabloni uređaja, podataka i grafikona (`templates/fabric-templates.xml`), upit podataka skriptnog servera "Fabric Port" (`scripts/ss_fabric_ports.php`, `resource/script_server/fabric_ports.xml`), `DERIVE` izvori podataka brojača i `GAUGE` izvori podataka stanja/stope linka za Thold, praćenje prekida kontinuiteta i zasićeni osnovni brojači prijavljeni kao `U`. Maint integracija (`MaintMaintenance`) poziva `plugin_maint_check_cacti_host()` (uz povratak na hook `is_device_in_maintenance`) kako bi se čvorovi u aktivnom održavanju brojali odvojeno i isključili iz zdravstvenih upozorenja za neuspjela skeniranja i degradirane portove.
+- **Zakazana skeniranja, dijeljenje na fragmente i udaljeni prikupljači**: `poller_bottom` pokreće `poller_fabric.php` u pozadini za dospjele mrežne strukture dodijeljene trenutnom polleru, uz lijena skeniranja pokrenuta iz skriptnog servera. `INFO` deklariše `remote_collect:1, remote_poller:1`, `poller_fabric.php` podržava determinističko GUID dijeljenje (`--shard=K/N`), a `replicate_out` replicira netajne redove tabele `plugin_fabric_fabric` na udaljene prikupljače (`poller_id >= 2`). Unosi trezora (`plugin_fabric_secret`) i vanjske datoteke ključeva nikada se ne repliciraju.
+- **CasC CLI i ekosistemski hookovi**: `cli/fabric.php` za YAML/XML izvoz, validaciju, probno planiranje razlika, primjenu uslovljenu potvrdom i izvještavanje o zdravlju, plus hookovi `casc_register_providers`, `doctor_register_checks` i `abilities_register`.
 
 ## Uloge pristupa
 
 | Oblast | Pristup |
 | --- | --- |
-| Fabric View | Postojeće stranice za nadzor. |
-| Fabric Operator | Nadzor plus stranica Operacije i lične potvrde uvida za trijažu. |
-| Fabric Admin | Pristup operatera plus postojeće radnje konfigurisanja i administracije. |
+| Fabric View | Nadzor inventara i pregledi portova (`fabric.php`). |
+| Fabric Operator | View pristup plus stranica Operacije (`fabric_operator.php`) i lične potvrde uvida za trijažu. |
+| Fabric Admin | Operator pristup plus konfigurisanje, administrativne radnje (`fabric_admin.php`) i stranica zdravlja (`fabric_health.php`). |
 
-Nakon kopiranja datoteka za nadogradnju, otvorite stranicu Dodaci kao administrator da registrujete novu oblast. Dodijelite oblast Operator izričito pod **Configuration > Users** ili u korisničkim grupama. Nadogradnje zadržavaju postojeće ID-ove i dodjele oblasti View i Admin. Pristup Admin nasljeđuje pristup Operator, a pristup Operator nasljeđuje pristup View pri svakom zahtjevu; time se korisnicima ni grupama ne dodaju trajne dodjele. Postavke dodatka također zahtijevaju pristup Fabric Admin pored Cacti dozvole za postavke.
+Nakon kopiranja datoteka za nadogradnju, otvorite stranicu Dodaci kao administrator da registrujete nove oblasti i hookove. Dodijelite oblast Operator izričito pod **Configuration > Users** ili u korisničkim grupama. Nadogradnje zadržavaju postojeće ID-ove i dodjele oblasti View i Admin. Pristup Admin nasljeđuje pristup Operator, a pristup Operator nasljeđuje pristup View pri svakom zahtjevu; time se korisnicima ni grupama ne dodaju pohranjene dodjele. Postavke dodatka također zahtijevaju pristup Fabric Admin pored Cacti dozvole za postavke.
 
-Cacti dozvole za uređaje i dalje ograničavaju redove i radnje dostupne svakom korisniku; nemapirani objekti zahtijevaju administratora. Pristupni podaci, konfiguracija, mapiranje, brisanje i druge administrativne izmjene ostaju na administrativnim stranicama. Potvrde uvida traju samo u trenutnoj sesiji korisnika, najviše jedan sat i samo dok isto zapažanje ostane svježe. Nova ili promijenjena zapažanja ih poništavaju. One nikada ne označavaju neuspjelo mjerenje kao ispravno niti potiskuju upozorenja.
+Cacti dozvole za uređaje ograničavaju redove i radnje dostupne svakom korisniku; nemapirani objekti zahtijevaju administratora. Pristupni podaci, konfiguracija, mapiranje, brisanje i druge administrativne izmjene ostaju na administrativnim stranicama ili u CLI-u. Potvrde uvida traju samo u trenutnoj sesiji korisnika, najviše jedan sat i samo dok isto zapažanje ostane svježe. Nova ili promijenjena zapažanja ih poništavaju. One nikada ne označavaju neuspjelo mjerenje kao ispravno niti potiskuju upozorenja.
 
 ## Zašto
 
@@ -48,74 +40,123 @@ Degradiran InfiniBand link i dalje prenosi saobraćaj. Link širine 4X koji se p
 - **Nema konteksta uređaja.** Portovi mrežne strukture nisu Cacti objekti, pa port ne može biti prikazan na grafikonu pored računara koji napaja.
 - **Nema puta do Cacti upozorenja.** Thold i Maint rade nad Cacti izvorima podataka i uređajima.
 
-Dodatak popunjava ove praznine čitajući mrežnu strukturu putem njenih dijagnostičkih alata (a kasnije i putem UFM-a), identifikujući čvorove i portove po GUID-u i objavljujući brojače i stanje linka kao Cacti izvore podataka. Radi isključivo u režimu čitanja: nikada ne resetuje brojače niti mijenja stanje porta.
+Dodatak popunjava ove praznine čitajući mrežnu strukturu putem `infiniband-diags` ili NVIDIA UFM REST API-ja, identifikujući čvorove i portove po GUID-u i objavljujući brojače i stanje linka kao Cacti izvore podataka. Radi isključivo u režimu čitanja: nikada ne resetuje brojače niti mijenja stanje porta.
 
-## Prvo otkrivanje
+## Operacije i CLI
 
-Nova mrežna struktura nema čvorova, a skeniranja sa skriptnog servera pokreću se samo za čvor mapiran na Cacti uređaj. Prvo otkrivanje je zato ručni korak. Nakon što sačuvate omogućenu mrežnu strukturu, pokrenite ovu komandu jednom na polleru kojem je mrežna struktura dodijeljena, pod nalogom pollera, pri čemu `/path/to/cacti` zamjenjujete svojim Cacti direktorijem (apsolutna putanja radi i iz cron-a):
+### Pozadinski poller i ručna skeniranja
 
+`fabric_poller_bottom()` pokreće `poller_fabric.php` u pozadini na svakom polleru za omogućene mrežne strukture dodijeljene tom `poller_id`-u čije je skeniranje dospjelo. Također možete pokrenuti izvršioca pollera ili ručno skeniranje direktno na dodijeljenom polleru kao korisnik pollera (zamjenjujući `/path/to/cacti` vašim Cacti direktorijem):
+
+```sh
+php /path/to/cacti/plugins/fabric/poller_fabric.php [--fabric=ID] [--shard=K/N] [--force] [--debug]
+php /path/to/cacti/plugins/fabric/fabric_sweep.php --fabric=ID [--node=GUID] [--force]
 ```
-php /path/to/cacti/plugins/fabric/fabric_sweep.php --fabric=ID --force
+
+- `poller_fabric.php` pokreće sve dospjele mrežne strukture za lokalni poller (ili jednu mrežnu strukturu sa `--fabric=ID`), provodi Cacti zaključavanje registra procesa i `ClaimRepository` zakupe sa vremenskim budžetom od `max(30, intdiv(sweep_interval, 2))` sekundi, te podržava `--shard=K/N` (`0 <= K < N`) za determinističku podjelu `diags` skeniranja brojača čvorova prema GUID-u čvora.
+- `fabric_sweep.php` pokreće skeniranje na zahtjev za jednu omogućenu mrežnu strukturu (ili jedan čvor sa `--node=GUID`) dodijeljenu lokalnom polleru. `--force` zanemaruje da li je mrežna struktura dospjela dok i dalje poštuje zahtjeve za zakup.
+
+Nakon što prvo otkrivanje popuni inventar, mapirajte čvorove na Cacti uređaje na stranici Fabric Admin. Zadržite Cacti vremensko ograničenje skripte na 25 sekundi ili više: lijeno skeniranje pokrenuto čitanjem upita podataka ograničava izvršavanje alata na `script_timeout - 5` sekundi kako bi skriptni server vratio odgovor na vrijeme sa posljednjim sačuvanim uzorkom ili `U`.
+
+### NVIDIA UFM REST pozadinski sistem i trezor pristupnih podataka
+
+Mrežna struktura tipa `ufm` zahtijeva `https://` URL bez ugrađenih pristupnih podataka, nizova upita ili fragmenata. `UfmSocketTransport` provodi TLS verifikaciju partnera i imena hosta, odbija preusmjeravanja i podržava opcioni CA paket (`ufm_ca_file`) i SHA-256 SPKI pin (`ufm_spki_pin`).
+
+Za pohranu UFM pristupnih podataka u `plugin_fabric_secret`, podesite `fabric_vault_key_file` pod **Configuration > Settings > Fabrics** sa apsolutnom putanjom do obične datoteke u vlasništvu korisnika pollera (bez simboličkih veza u bilo kojem roditeljskom direktoriju, režim `0600`, koja sadrži 64 heksadecimalna znaka kao `openssl rand -hex 32` ili 32 nasumična neispisiva bajta). Dodatak nikada ne kreira niti piše datoteku ključa, a `replicate_out` nikada ne replicira `plugin_fabric_secret` niti datoteke ključeva na udaljene pollere.
+
+### Configuration-as-Code i CLI za zdravlje
+
+`cli/fabric.php` upravlja postavkama dodatka i definicijama mrežnih struktura deklarativno u YAML ili XML formatu, te izvještava o zdravlju uz uvažavanje održavanja bez pokretanja skeniranja uživo:
+
+```sh
+php /path/to/cacti/plugins/fabric/cli/fabric.php export [--format=yaml|xml] [--file=PATH]
+php /path/to/cacti/plugins/fabric/cli/fabric.php validate --file=PATH [--format=yaml|xml]
+php /path/to/cacti/plugins/fabric/cli/fabric.php plan --file=PATH [--format=yaml|xml]
+php /path/to/cacti/plugins/fabric/cli/fabric.php apply --file=PATH --confirm=PLAN_HASH [--format=yaml|xml]
+php /path/to/cacti/plugins/fabric/cli/fabric.php health [--format=text|json]
 ```
 
-Inventar se tada popunjava. Mapirajte čvorove na Cacti uređaje na stranici Fabric administracija; kasnija skeniranja pokreću se iz upita podataka. Dok nijedan čvor mrežne strukture nije mapiran, ništa ne osvježava njen inventar, pa po želji ponovo pokrenite istu komandu, na primjer putem cron-a, kako biste zabilježili nove ili nedostajuće čvorove. Stranica zdravlja prikazuje ovu komandu za svaku omogućenu mrežnu strukturu koja još nije otkrivena ili nema mapiran čvor.
+`export` kreira nove datoteke sa režimom `0600`, maskira `fabric_vault_key_file` kao `[REDACTED]`, i ispisuje imenovane reference `ufm_credential_ref` umjesto tajni. `plan` i `apply` odbijaju ugrađene vrijednosti `ufm_token`, `ufm_password`, `secret` i ugrađenu vrijednost `fabric_vault_key_file`. `apply` zahtijeva tačan `--confirm=PLAN_HASH` koji je proizveo `plan`.
 
-## Planirani opseg
+### Ekosistemski hookovi
 
-| Faza | Opseg | Prekretnice |
-|---|---|---|
-| 0, istraživanje | Matrica verzija, potvrda ponašanja uzvodnih projekata, ponašanje brojača na hardveru, model privilegija, MAD budžet, UFM API | [M1](https://github.com/somethingwithproof/plugin_fabric/milestone/1) |
-| 1, posmatranje | Inventar po GUID-u, Cacti uređaji, upit podataka za portove, izvori podataka za brojače i stanje linka, Thold upozorenja, Maint potiskivanje, stranica zdravlja | [M2](https://github.com/somethingwithproof/plugin_fabric/milestone/2), [M3](https://github.com/somethingwithproof/plugin_fabric/milestone/3), [M4](https://github.com/somethingwithproof/plugin_fabric/milestone/4) |
-| 2, UFM | UFM REST pozadinski sistem samo za čitanje, upravljanje pristupnim podacima, kontinuitet identiteta između pozadinskih sistema | [M5](https://github.com/somethingwithproof/plugin_fabric/milestone/5) |
-| 3, udaljeni rad | Udaljeni prikupljači podataka, replikacija, `remote_agent` radnje, podijeljena skeniranja za velike mrežne strukture | [M6](https://github.com/somethingwithproof/plugin_fabric/milestone/6) |
+Kada su prisutni odgovarajući Cacti dodaci ili integracije hosta, `setup.php` registruje:
 
-Izvan opsega: izmjena stanja mrežne strukture, zamjena upravitelja mrežne strukture ili podmreže, vlastiti sistem za upozorenja unutar dodatka, poseban daemon ili mrežni protokol, te Ethernet ili RoCE mrežne strukture (istraživanje).
+- `casc_register_providers`: izvozi, validira, planira i nakon potvrde primjenjuje konfiguraciju `fabric` (`yaml` i `xml`, šema v1) uz maskiranje tajni.
+- `doctor_register_checks`: obezbjeđuje četiri dijagnostičke provjere samo za čitanje (`fabric.schema`, `fabric.poller_freshness`, `fabric.identity_conflicts`, `fabric.ufm_vault`).
+- `abilities_register`: registruje tri sposobnosti samo za čitanje, nedestruktivne i idempotentne pod kategorijom `fabric`, ograničene oblašću Fabric View (i Cacti dozvolama za uređaje za greške portova): `fabric-list-fabrics`, `fabric-get-health` i `fabric-list-port-errors`.
 
-## Ciljevi kompatibilnosti
+## Opseg i granice
+
+Izvan opsega: izmjena stanja mrežne strukture, resetovanje brojača, zamjena upravitelja mrežne strukture ili podmreže, vlastiti sistem za upozorenja unutar dodatka, poseban daemon ili mrežni protokol, te Ethernet ili RoCE mrežne strukture.
+
+## Zahtjevi i kompatibilnost
 
 | Komponenta | Cilj |
 |---|---|
-| Cacti | 1.2.31 ili noviji, bez izmjena jezgra |
-| PHP | 8.2 ili noviji; `setup.php` ostaje ispravan za parsiranje na 8.0 kako bi nepodržano okruženje dobilo odbijanje umjesto pokvarenog Cacti interfejsa |
-| InfiniBand alati | infiniband-diags iz rdma-core; formati izlaza provjereni prema izvornom kodu v66.0 |
-| UFM | UFM Enterprise REST API, faza 2; matrica izdanja je isporuka prekretnice 1 |
-| Thold, Maint | Nisu potrebne izmjene |
+| Cacti | 1.2.31 ili noviji (`compat = 1.2.31`), bez izmjena jezgra |
+| PHP | 8.2 ili noviji; ulazne tačke ostaju ispravne za parsiranje na 8.0 i odbijaju aktivaciju na 8.1 kako bi nepodržano okruženje dobilo odbijanje umjesto pokvarenog Cacti interfejsa |
+| InfiniBand alati | `infiniband-diags` iz `rdma-core` (testirano u CI sa rdma-core 50.0 pod `ibsim`; formati izlaza provjereni prema izvornom kodu v66.0) |
+| UFM | NVIDIA UFM Enterprise REST API (`ufmRest` i `ufmRestV3` krajnje tačke samo za čitanje; testirano sa sintetičkim transportima u jediničnim testovima) |
+| Thold, Maint | Nisu potrebne izmjene; CI pokreće test od početka do kraja sa neizmijenjenim Thold v1.8.2 i Maint v1.3 |
 
-Zadržite Cacti vremensko ograničenje skripte na podrazumijevanoj vrijednosti od 25 sekundi ili više. Skeniranje pokrenuto čitanjem upita podataka ograničava izvršavanje alata na to vremensko ograničenje umanjeno za pet sekundi, čuvajući vrijeme za čitanje keša i odgovor. Kada budžet istekne, upit vraća posljednji aktuelni uzorak ili nepoznatu vrijednost; sljedeći ciklus ponovo pokušava skeniranje. Ovo ograničenje važi i za PHP poller. Vremensko ograničenje od pet sekundi ili manje ne ostavlja vrijeme za pokretanje alata.
+## Razvoj i testiranje
+
+CI radni tok (`.github/workflows/plugin-ci-workflow.yml`) testira PHP 8.2 do 8.5 protiv Cacti `release/1.2.31` i `1.2.x`, provjeru sintakse ulaznih tačaka na PHP 8.0, odbijanje na PHP 8.1, PHPStan, provjeru gettext/prijevoda, REUSE licenciranje, provjeru radnog toka, Thold/Maint ponovno izvršavanje od početka do kraja i `ibsim` simulaciju mrežne strukture.
+
+Sa Cacti zaključanim dijeljenim Pest okvirom za dodatke (`CACTI_PEST_BIN`) i jednokratnom Cacti bazom podataka:
+
+```sh
+# Unit tests
+"$CACTI_PEST_BIN" --configuration=phpunit.xml
+
+# Lifecycle integration tests (disposable database only)
+CACTI_PATH=/path/to/cacti FABRIC_TEST_DATABASE=disposable "$CACTI_PEST_BIN" --configuration=phpunit-integration.xml
+
+# Static analysis (against Cacti 1.2.31)
+CACTI_PATH=/path/to/cacti phpstan analyse -c phpstan.neon --no-progress
+
+# Translation template, catalogs, and localized README checks
+sh locales/build_gettext.sh --check
+
+# Simulated ibsim fixture parser check
+php tests/bin/check-ibsim-fixtures.php tests/fixtures/ibsim
+```
 
 ## Dizajn
 
-- [docs/PLAN.md](../../../docs/PLAN.md) sadrži potpun plan: arhitekturu, činjenice o uzvodnim sistemima na koje se oslanja (sa izvorima) i pretpostavke koje tek treba potvrditi, model identiteta, pravila za brojače i stanje linka, sigurnosne granice, proračune performansi, testiranje i rizike.
-- [docs/decisions/](../../../docs/decisions/) sadrži zapise o arhitekturnim odlukama (ADR) za već donesene izbore.
-- [docs/REQUIREMENTS.md](../../../docs/REQUIREMENTS.md) povezuje svaki ID zahtjeva sa njegovim zadatkom.
+- [docs/PLAN.md](../../PLAN.md) je plan arhitekture i dizajna: činjenice o uzvodnim sistemima sa izvorima, otvorene hardverske provjere, model identiteta, pravila za brojače i stanje linka, sigurnosne granice, proračuni performansi, testiranje i rizici.
+- [docs/decisions/](../../decisions/) sadrži zapise o arhitekturnim odlukama (ADR).
+- [docs/REQUIREMENTS.md](../../REQUIREMENTS.md) povezuje svaki ID zahtjeva sa njegovim zadatkom.
 
 ```mermaid
 flowchart LR
-    F[InfiniBand mrežna struktura] --> T[infiniband-diags alati, samo za čitanje]
-    F --> U[UFM REST, faza 2]
-    T --> S[Zadatak skeniranja na Cacti polleru]
+    F["InfiniBand mrežna struktura"] --> T["infiniband-diags alati, samo za čitanje"]
+    F --> U["UFM REST API, samo za čitanje"]
+    T --> S["poller_fabric.php ili lijeno skeniranje na dodijeljenom polleru"]
     U --> S
-    S --> C[(Keš uzoraka)]
-    C --> SS[Skriptni server i upit podataka]
-    SS --> R[RRD datoteke i Cacti grafikoni]
-    SS -->|poller_output| TH[Thold i Maint]
-    R --> P[Cacti dozvole za grafikone]
+    S --> C[("Keš uzoraka")]
+    C --> SS["Skriptni server i upit podataka"]
+    SS --> R["RRD datoteke i Cacti grafikoni"]
+    SS -->|poller_output| TH["Thold i Maint"]
+    C --> H["HealthEvaluator, Doctor i MCP sposobnosti"]
+    R --> P["Cacti dozvole za grafikone"]
 ```
 
 ## Kako se prati rad
 
-- **Prekretnice** prate prekretnice iz plana. Svaka ima krovni zadatak (epic) koji navodi podzadatke i dokaze o završetku.
+- **Prekretnice** prate prekretnice plana. Svaka ima epik zadatak koji navodi njegove podzadatke i dokaze o završetku.
 - **Zadaci** su označeni prema tipu: `type: requirement`, `type: research`, `type: decision`, `type: epic`. Zadaci zahtjeva navode numerisane, provjerljive zahtjeve (`REQ-AREA-NNN`) i kriterije prihvatanja.
-- **Oznake** također sadrže `area:`, `phase:`, `priority:` i `status:`. Pogledajte [CONTRIBUTING.md](../../../CONTRIBUTING.md#labels).
-- [Tabla projekta](https://github.com/users/somethingwithproof/projects/8) prikazuje sve zadatke kroz sve prekretnice.
+- **Oznake** također nose `area:`, `phase:`, `priority:` i `status:`. Pogledajte [CONTRIBUTING.md](../../../CONTRIBUTING.md#labels).
+- [Ploča projekta](https://github.com/users/somethingwithproof/projects/8) prikazuje sve zadatke kroz prekretnice.
 
 ## Doprinos
 
-Pročitajte [CONTRIBUTING.md](../../../CONTRIBUTING.md). Commit-ovi zahtijevaju DCO potpis. Rasprave o dizajnu vode se u zadacima; otvorene odluke nose oznaku `type: decision`.
+Pročitajte [CONTRIBUTING.md](../../../CONTRIBUTING.md). Commitovi zahtijevaju DCO potpis (`git commit -s`). Rasprava o dizajnu vodi se na zadacima; otvorene odluke nose oznaku `type: decision`.
 
 ## Sigurnost
 
-Ranjivosti prijavljujte privatno; pogledajte [SECURITY.md](../../../SECURITY.md).
+Prijavite ranjivosti privatno; pogledajte [SECURITY.md](../../../SECURITY.md).
 
 ## Licenca
 

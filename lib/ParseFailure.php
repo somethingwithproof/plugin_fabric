@@ -25,6 +25,13 @@ namespace Somethingwithproof\Fabric;
  * the text came from the fabric.
  */
 final class ParseFailure extends \RuntimeException {
+	/**
+	 * At.
+	 *
+	 * @param int $line
+	 * @param string $rule
+	 * @return self
+	 */
 	public static function at(int $line, string $rule): self {
 		return new self(sprintf('line %d: %s', $line, $rule));
 	}

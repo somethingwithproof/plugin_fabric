@@ -32,12 +32,25 @@ final readonly class PortRef {
 	/** InfiniBand port numbers are one octet; 255 means "all ports" in PerfMgt. */
 	public const MAX_PORT = 254;
 
+	/**
+	 * Construct a new PortRef instance.
+	 *
+	 * @param Guid $node
+	 * @param int $port
+	 * @throws \InvalidArgumentException
+	 */
 	public function __construct(public Guid $node, public int $port) {
 		if ($port < 0 || $port > self::MAX_PORT) {
 			throw new \InvalidArgumentException('port number out of range');
 		}
 	}
 
+	/**
+	 * From key.
+	 *
+	 * @param string $key
+	 * @return ?self
+	 */
 	public static function fromKey(string $key): ?self {
 		if (preg_match('/^(0x[0-9a-f]{16}):([0-9]{1,3})$/D', $key, $match) !== 1 || (int) $match[2] > self::MAX_PORT) {
 			return null;
@@ -48,10 +61,21 @@ final readonly class PortRef {
 		return $guid === null ? null : new self($guid, (int) $match[2]);
 	}
 
+	/**
+	 * Key.
+	 *
+	 * @return string
+	 */
 	public function key(): string {
 		return $this->node->text . ':' . $this->port;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param self $other
+	 * @return bool
+	 */
 	public function equals(self $other): bool {
 		return $this->port === $other->port && $this->node->equals($other->node);
 	}

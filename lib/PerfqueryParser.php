@@ -95,16 +95,79 @@ final class PerfqueryParser {
 		'QP1Dropped'                   => 64,
 	];
 
+	/** Combined extended counter widths keyed by field name for O(1) lookup. */
+	private const EXTENDED_ALL = self::EXTENDED + self::EXTENDED_CAST + self::EXTENDED_ERRORS;
+
+	/** Precomputed extended layout candidates indexed by field count for O(1) dispatch. */
+	private const EXTENDED_LAYOUTS = [
+		6  => self::EXTENDED,
+		10 => self::EXTENDED + self::EXTENDED_CAST,
+		21 => self::EXTENDED + self::EXTENDED_ERRORS,
+		25 => self::EXTENDED_ALL,
+	];
+
+	/**
+	 * Cached ordered field-name lists per extended layout size.
+	 *
+	 * @var array<int, list<string>>|null
+	 */
+	private static ?array $extendedKeys = null;
+
+	/**
+	 * Cached ordered field-name list for BASIC layout.
+	 *
+	 * @var list<string>|null
+	 */
+	private static ?array $basicKeys = null;
+
+	/** Max constant for PerfqueryParser. */
 	private const MAX = [4 => '15', 8 => '255', 16 => '65535', 32 => '4294967295', 64 => '18446744073709551615'];
+
+	/**
+	 * Cached counter name => cap decimal string per CounterGroup value.
+	 *
+	 * @var array<string, array<string, string>>|null
+	 */
+	private static ?array $capsByGroup = null;
 
 	/**
 	 * The width in bits of a counter in a group, or 0 for a selector or a
 	 * name the group does not have.
 	 */
 	public static function width(CounterGroup $group, string $name): int {
-		$layout = $group === CounterGroup::Basic ? self::BASIC : self::EXTENDED + self::EXTENDED_CAST + self::EXTENDED_ERRORS;
+		if ($name === 'PortSelect') {
+			return 0;
+		}
 
-		return $name === 'PortSelect' ? 0 : $layout[$name] ?? 0;
+		return $group === CounterGroup::Basic ? (self::BASIC[$name] ?? 0) : (self::EXTENDED_ALL[$name] ?? 0);
+	}
+
+	/**
+	 * Map every counter name in a group to its decimal cap string for fast
+	 * O(1) lookup across a port's counter loop.
+	 *
+	 * @param CounterGroup $group counter group
+	 *
+	 * @return array<string, string>
+	 */
+	public static function caps(CounterGroup $group): array {
+		if (self::$capsByGroup === null) {
+			self::$capsByGroup = [];
+
+			foreach ([CounterGroup::Basic->value => self::BASIC, CounterGroup::Extended->value => self::EXTENDED_ALL] as $key => $layout) {
+				$map = [];
+
+				foreach ($layout as $name => $width) {
+					if ($name !== 'PortSelect' && $width > 0) {
+						$map[$name] = self::MAX[$width];
+					}
+				}
+
+				self::$capsByGroup[$key] = $map;
+			}
+		}
+
+		return self::$capsByGroup[$group->value];
 	}
 
 	/**
@@ -124,7 +187,11 @@ final class PerfqueryParser {
 		$fields = [];
 		$start  = 0;
 
-		foreach (preg_split('/\r?\n/', $output) ?: [] as $index => $line) {
+		foreach (explode("\n", $output) as $index => $line) {
+			if ($line !== '' && $line[-1] === "\r") {
+				$line = substr($line, 0, -1);
+			}
+
 			$number = $index + 1;
 
 			if ($line === '') {
@@ -143,11 +210,36 @@ final class PerfqueryParser {
 				continue;
 			}
 
-			if ($header === null || preg_match('/^([A-Za-z0-9]{1,40}):\.*(0x[0-9a-f]{1,16}|[0-9]{1,20})$/', $line, $m) !== 1) {
+			if ($header === null) {
 				throw ParseFailure::at($number, 'unrecognized line');
 			}
 
-			$fields[] = [$m[1], $m[2], $number];
+			$colon = strpos($line, ':');
+
+			if ($colon === false || $colon < 1 || $colon > 40) {
+				throw ParseFailure::at($number, 'unrecognized line');
+			}
+
+			$name = substr($line, 0, $colon);
+
+			if (!ctype_alnum($name)) {
+				throw ParseFailure::at($number, 'unrecognized line');
+			}
+
+			$rawValue = ltrim(substr($line, $colon + 1), '.');
+			$valLen   = strlen($rawValue);
+
+			if (str_starts_with($rawValue, '0x')) {
+				$hex = substr($rawValue, 2);
+
+				if ($hex === '' || strlen($hex) > 16 || !ctype_xdigit($hex) || strtolower($hex) !== $hex) {
+					throw ParseFailure::at($number, 'unrecognized line');
+				}
+			} elseif ($valLen < 1 || $valLen > 20 || !ctype_digit($rawValue)) {
+				throw ParseFailure::at($number, 'unrecognized line');
+			}
+
+			$fields[] = [$name, $rawValue, $number];
 		}
 
 		if ($header !== null) {
@@ -183,16 +275,28 @@ final class PerfqueryParser {
 			throw ParseFailure::at($start, 'port out of range');
 		}
 
-		$layouts = $group === CounterGroup::Basic
-			? [self::BASIC]
-			: [self::EXTENDED, self::EXTENDED + self::EXTENDED_CAST, self::EXTENDED + self::EXTENDED_ERRORS, self::EXTENDED + self::EXTENDED_CAST + self::EXTENDED_ERRORS];
+		$fieldCount = count($fields);
+		$layout     = null;
 
-		$names  = array_column($fields, 0);
-		$layout = null;
+		if ($group === CounterGroup::Basic) {
+			if ($fieldCount === count(self::BASIC)) {
+				self::$basicKeys ??= array_keys(self::BASIC);
 
-		foreach ($layouts as $candidate) {
-			if ($names === array_keys($candidate)) {
-				$layout = $candidate;
+				if (array_column($fields, 0) === self::$basicKeys) {
+					$layout = self::BASIC;
+				}
+			}
+		} elseif (isset(self::EXTENDED_LAYOUTS[$fieldCount])) {
+			if (self::$extendedKeys === null) {
+				self::$extendedKeys = [];
+
+				foreach (self::EXTENDED_LAYOUTS as $size => $candidate) {
+					self::$extendedKeys[$size] = array_keys($candidate);
+				}
+			}
+
+			if (array_column($fields, 0) === self::$extendedKeys[$fieldCount]) {
+				$layout = self::EXTENDED_LAYOUTS[$fieldCount];
 			}
 		}
 
@@ -231,13 +335,22 @@ final class PerfqueryParser {
 		return new Counters($group, $lid, $port, $capMask, $capMask2, $values);
 	}
 
+	/**
+	 * Fits.
+	 *
+	 * @param string $value
+	 * @param int $width
+	 * @return bool
+	 */
 	private static function fits(string $value, int $width): bool {
-		if (preg_match('/^(0|[1-9][0-9]*)$/', $value) !== 1) {
+		if ($value === '' || !ctype_digit($value) || ($value !== '0' && $value[0] === '0')) {
 			return false;
 		}
 
-		$max = self::MAX[$width];
+		$max    = self::MAX[$width];
+		$valLen = strlen($value);
+		$maxLen = strlen($max);
 
-		return strlen($value) < strlen($max) || (strlen($value) === strlen($max) && strcmp($value, $max) <= 0);
+		return $valLen < $maxLen || ($valLen === $maxLen && strcmp($value, $max) <= 0);
 	}
 }

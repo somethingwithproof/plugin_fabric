@@ -32,6 +32,19 @@ namespace Somethingwithproof\Fabric;
  * them. They hold the best value enabled at both ends.
  */
 final readonly class LinkState {
+	/**
+	 * Construct a new LinkState instance.
+	 *
+	 * @param ?LogicalState $logical
+	 * @param ?PhysState $physical
+	 * @param ?LinkWidth $activeWidth
+	 * @param ?LinkSpeed $activeSpeed
+	 * @param ?LinkWidth $bestWidth
+	 * @param ?LinkSpeed $bestSpeed
+	 * @param ?LinkWidth $enabledWidth
+	 * @param ?LinkSpeed $enabledSpeed
+	 * @param bool $hasPeer
+	 */
 	public function __construct(
 		public ?LogicalState $logical,
 		public ?PhysState $physical,
@@ -45,6 +58,11 @@ final readonly class LinkState {
 	) {
 	}
 
+	/**
+	 * Unknown.
+	 *
+	 * @return self
+	 */
 	public static function unknown(): self {
 		return new self(null, null, null, null, null, null, null, null, false);
 	}

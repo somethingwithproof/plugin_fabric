@@ -19,6 +19,9 @@
 
 namespace Somethingwithproof\Fabric;
 
+/**
+ * Enumeration of relink state values.
+ */
 enum RelinkState: string {
 	case Proposed  = 'proposed';
 	case Confirmed = 'confirmed';

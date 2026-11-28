@@ -90,6 +90,11 @@ function fabric_posted_node(\Somethingwithproof\Fabric\NodeRepository $nodes): ?
 	return $node;
 }
 
+/**
+ * Denied.
+ *
+ * @return void
+ */
 function fabric_denied(): void {
 	raise_message('fabric_denied', __('Your device permissions do not allow changing this record.', 'fabric'), MESSAGE_LEVEL_ERROR);
 	header('Location: fabric_admin.php');
@@ -107,6 +112,14 @@ function fabric_require_fabric_access(\Somethingwithproof\Fabric\DeviceAccess $a
 	}
 }
 
+/**
+ * Done.
+ *
+ * @param bool $ok
+ * @param string $done
+ * @param string $failed
+ * @return void
+ */
 function fabric_done(bool $ok, string $done, string $failed): void {
 	raise_message('fabric_result', $ok ? $done : $failed, $ok ? MESSAGE_LEVEL_INFO : MESSAGE_LEVEL_ERROR);
 	header('Location: fabric_admin.php');

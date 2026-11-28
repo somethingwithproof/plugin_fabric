@@ -31,6 +31,11 @@ enum LinkCondition: string {
 	case Down      = 'down';
 	case Unknown   = 'unknown';
 
+	/**
+	 * Label.
+	 *
+	 * @return string
+	 */
 	public function label(): string {
 		return match ($this) {
 			self::Up        => __('Up', 'fabric'),

@@ -36,6 +36,16 @@ namespace Somethingwithproof\Fabric;
  * never stored as a zero.
  */
 final class CounterSweep {
+	/**
+	 * Construct a new CounterSweep instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 * @param ProcessRunner $runner
+	 * @param Settings $settings
+	 * @param int $toolOwner
+	 * @param ?float $deadline
+	 */
 	public function __construct(
 		private readonly \PDO|false $connection,
 		private readonly Clock $clock,
@@ -46,6 +56,13 @@ final class CounterSweep {
 	) {
 	}
 
+	/**
+	 * Due.
+	 *
+	 * @param Fabric $fabric
+	 * @param Node $node
+	 * @return ?bool
+	 */
 	public function due(Fabric $fabric, Node $node): ?bool {
 		$last = (new NodeSweepRepository($this->connection))->lastAttempt($node->id);
 
@@ -93,6 +110,15 @@ final class CounterSweep {
 		return $result;
 	}
 
+	/**
+	 * Sweep.
+	 *
+	 * @param Fabric $fabric
+	 * @param Node $node
+	 * @param NodeSweepResult $result
+	 * @param float $start
+	 * @return void
+	 */
 	private function sweep(Fabric $fabric, Node $node, NodeSweepResult $result, float $start): void {
 		$ports = (new NodeRepository($this->connection))->ports($node->id);
 
@@ -209,14 +235,22 @@ final class CounterSweep {
 		$read    = [];
 		$failed  = [];
 		$last    = null;
-		$pending = array_keys($targets);
-		usort($pending, static fn (int $a, int $b): int =>
-			Row::int($previous[$a . ':' . $group->value] ?? [], 'attempted_at')
-			<=> Row::int($previous[$b . ':' . $group->value] ?? [], 'attempted_at'));
+		$pending     = array_keys($targets);
+		$attemptedAt = [];
 
-		while ($pending !== [] && !$budget->spent()) {
-			$lid   = $targets[$pending[0]];
-			$batch = $node->type === NodeType::Switch ? array_slice($pending, 0, CommandBuilder::MAX_PORTS) : [$pending[0]];
+		foreach ($pending as $port) {
+			$attemptedAt[$port] = Row::int($previous[$port . ':' . $group->value] ?? [], 'attempted_at');
+		}
+
+		usort($pending, static fn (int $a, int $b): int => $attemptedAt[$a] <=> $attemptedAt[$b]);
+
+		$offset       = 0;
+		$pendingCount = count($pending);
+
+		while ($offset < $pendingCount && !$budget->spent()) {
+			$lid      = $targets[$pending[$offset]];
+			$batch    = $node->type === NodeType::Switch ? array_slice($pending, $offset, CommandBuilder::MAX_PORTS) : [$pending[$offset]];
+			$batchSet = array_flip($batch);
 
 			if ($lid < 1 || $lid > CommandBuilder::MAX_LID) {
 				// A port without a unicast LID cannot be addressed.
@@ -226,7 +260,7 @@ final class CounterSweep {
 				}
 
 				$last    = CommandError::Config;
-				$pending = array_values(array_diff($pending, $batch));
+				$offset += count($batch);
 				$budget->fail();
 
 				continue;
@@ -239,7 +273,7 @@ final class CounterSweep {
 			if ($error === null || $error === CommandError::ExitStatus) {
 				try {
 					foreach ($parser->parse($output->stdout) as $counters) {
-						if ($counters->group !== $group || !in_array($counters->port, $batch, true) || isset($got[$counters->port])) {
+						if ($counters->group !== $group || !isset($batchSet[$counters->port]) || isset($got[$counters->port])) {
 							throw ParseFailure::at(0, 'a block for a port that was not asked for');
 						}
 
@@ -300,10 +334,10 @@ final class CounterSweep {
 				}
 			}
 
-			$pending = array_values(array_diff($pending, $tried));
+			$offset += count($tried);
 		}
 
-		if ($pending !== []) {
+		if ($offset < $pendingCount) {
 			$last ??= CommandError::Budget;
 		}
 

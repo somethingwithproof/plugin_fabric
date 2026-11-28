@@ -19,10 +19,25 @@
 
 namespace Somethingwithproof\Fabric;
 
+/**
+ * Fabric repository component.
+ */
 final class FabricRepository {
+	/**
+	 * Construct a new FabricRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 */
 	public function __construct(private readonly \PDO|false $connection, private readonly Clock $clock) {
 	}
 
+	/**
+	 * Find.
+	 *
+	 * @param int $id
+	 * @return ?Fabric
+	 */
 	public function find(int $id): ?Fabric {
 		$row = db_fetch_row_prepared('SELECT * FROM plugin_fabric_fabric WHERE id = ?', [$id], true, $this->connection);
 
@@ -52,6 +67,63 @@ final class FabricRepository {
 		return $out;
 	}
 
+	/**
+	 * @return list<Fabric>|null
+	 */
+	public function forPoller(int $pollerId): ?array {
+		$rows = Row::rows(db_fetch_assoc_prepared('SELECT * FROM plugin_fabric_fabric WHERE poller_id = ? ORDER BY name, id', [$pollerId], true, $this->connection));
+
+		if ($rows === null) {
+			return null;
+		}
+
+		$out = [];
+
+		foreach ($rows as $row) {
+			$fabric = Fabric::fromRow($row);
+
+			if ($fabric !== null) {
+				$out[] = $fabric;
+			}
+		}
+
+		return $out;
+	}
+
+	/**
+	 * Return IDs of enabled fabrics assigned to $pollerId whose discovery sweep
+	 * is due based on their sweep interval.
+	 *
+	 * @return list<int>
+	 */
+	public function dueForPoller(int $pollerId): array {
+		$fabrics = $this->forPoller($pollerId) ?? [];
+		$health  = new FabricHealthRepository($this->connection);
+		$now     = $this->clock->now();
+		$due     = [];
+
+		foreach ($fabrics as $fabric) {
+			if (!$fabric->enabled()) {
+				continue;
+			}
+
+			$row = $health->find($fabric->id);
+
+			if ($row === null || Row::int($row, 'discovery_attempt') <= $now - intdiv($fabric->interval, 2)) {
+				$due[] = $fabric->id;
+			}
+		}
+
+		return $due;
+	}
+
+	/**
+	 * Name taken.
+	 *
+	 * @param string $name
+	 * @param int $exceptId
+	 * @return bool
+	 */
 	public function nameTaken(string $name, int $exceptId): bool {
 		return (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_fabric WHERE name = ? AND id != ?', [$name, $exceptId], '', true, $this->connection) > 0;
 	}
@@ -62,6 +134,10 @@ final class FabricRepository {
 	 * would import each one again, unmapped, under its own records.
 	 */
 	public function portTaken(Fabric $fabric): bool {
+		if ($fabric->backend === Backend::Ufm) {
+			return false;
+		}
+
 		return (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_fabric WHERE poller_id = ? AND adapter = ? AND adapter_port = ? AND id != ?', [$fabric->pollerId, $fabric->adapter, $fabric->adapterPort, $fabric->id], '', true, $this->connection) > 0;
 	}
 
@@ -73,15 +149,38 @@ final class FabricRepository {
 	 */
 	public function save(Fabric $fabric): int {
 		$now    = $this->clock->now();
-		$values = [$fabric->name, $fabric->backend->value, $fabric->pollerId, $fabric->interval, $fabric->adapter, $fabric->adapterPort, $fabric->adminState->value];
+		$adapter = ($fabric->backend === Backend::Ufm && $fabric->adapter === '') ? null : $fabric->adapter;
+		$values  = [
+			$fabric->name,
+			$fabric->backend->value,
+			$fabric->pollerId,
+			$fabric->interval,
+			$adapter,
+			$fabric->adapterPort,
+			$fabric->adminState->value,
+			$fabric->ufmUrl,
+			$fabric->ufmCaFile,
+			$fabric->ufmSpkiPin,
+			$fabric->ufmCredentialId,
+		];
 
 		if ($fabric->id === 0) {
-			$ok = db_execute_prepared('INSERT INTO plugin_fabric_fabric (name, backend, poller_id, sweep_interval, adapter, adapter_port, admin_state, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [...$values, $now, $now], true, $this->connection);
+			$ok = db_execute_prepared(
+				'INSERT INTO plugin_fabric_fabric (name, backend, poller_id, sweep_interval, adapter, adapter_port, admin_state, ufm_url, ufm_ca_file, ufm_spki_pin, ufm_credential_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+				[...$values, $now, $now],
+				true,
+				$this->connection,
+			);
 
 			return $ok !== false ? (int) db_fetch_insert_id($this->connection) : 0;
 		}
 
-		$ok = db_execute_prepared('UPDATE plugin_fabric_fabric SET name = ?, backend = ?, poller_id = ?, sweep_interval = ?, adapter = ?, adapter_port = ?, admin_state = ?, updated_at = ? WHERE id = ?', [...$values, $now, $fabric->id], true, $this->connection);
+		$ok = db_execute_prepared(
+			'UPDATE plugin_fabric_fabric SET name = ?, backend = ?, poller_id = ?, sweep_interval = ?, adapter = ?, adapter_port = ?, admin_state = ?, ufm_url = ?, ufm_ca_file = ?, ufm_spki_pin = ?, ufm_credential_id = ?, updated_at = ? WHERE id = ?',
+			[...$values, $now, $fabric->id],
+			true,
+			$this->connection,
+		);
 
 		return $ok !== false && $this->find($fabric->id) !== null ? $fabric->id : 0;
 	}

@@ -27,10 +27,19 @@ namespace Somethingwithproof\Fabric;
  * fits an integer. Inputs are canonical: digits only, no leading zero.
  */
 final class Decimal {
+	/** Low constant for Decimal. */
 	private const LOW = 9;
 
+	/**
+	 * Valid.
+	 *
+	 * @param string $value
+	 * @return bool
+	 */
 	public static function valid(string $value): bool {
-		return preg_match('/^(0|[1-9][0-9]{0,19})$/D', $value) === 1;
+		$len = strlen($value);
+
+		return $len >= 1 && $len <= 20 && ctype_digit($value) && ($len === 1 || $value[0] !== '0');
 	}
 
 	/**
@@ -44,19 +53,18 @@ final class Decimal {
 	 * $a minus $b as a float, exact while the difference is below 2^53.
 	 */
 	public static function difference(string $a, string $b): float {
-		[$ah, $al] = self::split($a);
-		[$bh, $bl] = self::split($b);
+		$lenA = strlen($a);
+		$lenB = strlen($b);
+
+		if ($lenA <= 15 && $lenB <= 15) {
+			return (float) ((int) $a - (int) $b);
+		}
+
+		$ah = $lenA > self::LOW ? (int) substr($a, 0, -self::LOW) : 0;
+		$al = $lenA > self::LOW ? (int) substr($a, -self::LOW) : (int) $a;
+		$bh = $lenB > self::LOW ? (int) substr($b, 0, -self::LOW) : 0;
+		$bl = $lenB > self::LOW ? (int) substr($b, -self::LOW) : (int) $b;
 
 		return (float) ($ah - $bh) * 1e9 + (float) ($al - $bl);
-	}
-
-	/**
-	 * @return array{0: int, 1: int}
-	 */
-	private static function split(string $value): array {
-		$high = strlen($value) > self::LOW ? substr($value, 0, -self::LOW) : '0';
-		$low  = strlen($value) > self::LOW ? substr($value, -self::LOW) : $value;
-
-		return [(int) $high, (int) $low];
 	}
 }

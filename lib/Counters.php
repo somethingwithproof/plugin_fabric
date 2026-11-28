@@ -28,7 +28,9 @@ namespace Somethingwithproof\Fabric;
 final readonly class Counters {
 	/** PortCounters:CapMask bits (IBA 16.1.3.1, rdma-core mad.h). */
 	public const CAP_EXT_WIDTH        = 0x200;
+	/** Cap ext width noietf constant for Counters. */
 	public const CAP_EXT_WIDTH_NOIETF = 0x400;
+	/** Cap xmit wait constant for Counters. */
 	public const CAP_XMIT_WAIT        = 0x1000;
 
 	/**
@@ -52,6 +54,11 @@ final readonly class Counters {
 		return ($this->capMask & (self::CAP_EXT_WIDTH | self::CAP_EXT_WIDTH_NOIETF)) !== 0;
 	}
 
+	/**
+	 * To json.
+	 *
+	 * @return string
+	 */
 	public function toJson(): string {
 		return json_encode($this->values, JSON_THROW_ON_ERROR);
 	}

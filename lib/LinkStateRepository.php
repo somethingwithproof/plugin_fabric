@@ -35,6 +35,12 @@ namespace Somethingwithproof\Fabric;
  * last state and age into stale, as the skipped line may have named them.
  */
 final class LinkStateRepository {
+	/**
+	 * Construct a new LinkStateRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 */
 	public function __construct(private readonly \PDO|false $connection, private readonly Clock $clock) {
 	}
 
@@ -48,9 +54,26 @@ final class LinkStateRepository {
 	public function import(Fabric $fabric, LinkReport $report, ?\Closure $owned = null): ?int {
 		$records = $report->records;
 
-		$nodes = (new NodeRepository($this->connection))->forFabric($fabric->id);
+		$nodeRepo = new NodeRepository($this->connection);
+		$nodes    = $nodeRepo->forFabric($fabric->id);
 
 		if ($nodes === null) {
+			return null;
+		}
+
+		$hasAdapters = false;
+
+		foreach ($nodes as $node) {
+			if ($node->sweepable() && $node->type !== NodeType::Switch) {
+				$hasAdapters = true;
+
+				break;
+			}
+		}
+
+		$portsByNode = $hasAdapters ? $nodeRepo->portsForFabric($fabric->id) : [];
+
+		if ($portsByNode === null) {
 			return null;
 		}
 
@@ -74,13 +97,7 @@ final class LinkStateRepository {
 				continue;
 			}
 
-			$ports = (new NodeRepository($this->connection))->ports($node->id);
-
-			if ($ports === null) {
-				return null;
-			}
-
-			foreach ($ports as $port) {
+			foreach ($portsByNode[$node->id] ?? [] as $port) {
 				if ($port->portGuid !== null) {
 					$adapters[$port->portGuid->text . ':' . $port->number] = $node->id;
 					$byGuid[$port->portGuid->text]                         = $node->id;

@@ -28,13 +28,25 @@ namespace Somethingwithproof\Fabric;
  * writes when it is not.
  */
 final class TransactionRepository {
+	/** Failed state for TransactionRepository. */
 	private bool $failed = false;
 
+	/** Insert id state for TransactionRepository. */
 	private int $insertId = 0;
 
+	/**
+	 * Construct a new TransactionRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
+	/**
+	 * Begin.
+	 *
+	 * @return bool
+	 */
 	public function begin(): bool {
 		$this->failed = false;
 
@@ -87,6 +99,11 @@ final class TransactionRepository {
 		return false;
 	}
 
+	/**
+	 * Rollback.
+	 *
+	 * @return void
+	 */
 	public function rollback(): void {
 		if ($this->active()) {
 			db_rollback_transaction($this->connection);
@@ -95,6 +112,11 @@ final class TransactionRepository {
 		$this->failed = false;
 	}
 
+	/**
+	 * Active.
+	 *
+	 * @return bool
+	 */
 	private function active(): bool {
 		return (int) db_fetch_cell_prepared('SELECT @@in_transaction', [], '', true, $this->connection) === 1;
 	}

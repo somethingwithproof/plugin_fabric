@@ -397,20 +397,18 @@ perm_expect(strpos($saved, 'The Tool Directory was not saved') !== false && $too
 list(, $saved) = perm_http($root . 'settings.php', $jar, array('__csrf_magic' => perm_token($form), 'action' => 'save', 'tab' => 'fabric', 'fabric_tool_dir' => '/usr/sbin'));
 perm_expect(strpos($saved, 'The Tool Directory was not saved') === false && $tool_dir() === '/usr/sbin', 'a root-owned tool directory closed to group and others is saved');
 
-// A fabric left on a remote poller is flagged on the health page, and a
-// save that keeps the remote poller is refused with a form error.
-// A disabled remote poller, so the form refuses it for being remote rather
-// than for being unknown.
-db_execute("REPLACE INTO poller (id, name, hostname, disabled) VALUES (2, 'fabric-remote', 'remote.invalid', 'on')");
+// Phase 3 remote collector support: a fabric assigned to a remote poller is
+// accepted by the form and no longer triggers the Phase 1 main-poller warning.
+db_execute("REPLACE INTO poller (id, name, hostname, disabled) VALUES (2, 'fabric-remote', 'remote.invalid', '')");
 db_execute("INSERT INTO plugin_fabric_fabric (name, backend, poller_id, sweep_interval, adapter, adapter_port, admin_state) VALUES ('remote', 'diags', 2, 300, 'mlx5_1', 1, 'enabled')");
 $remote = (int) db_fetch_insert_id();
 
 list(, $health) = perm_http($base . 'fabric_health.php', $jar);
-perm_expect(strpos($health, 'Fabric remote: it is assigned to poller 2') !== false, 'the health page warns about a fabric assigned to a remote poller');
+perm_expect(strpos($health, 'only the main poller can sweep') === false, 'the health page allows a fabric assigned to a remote poller');
 
 list(, $list) = perm_http($base . 'fabric_admin.php', $jar);
 list(, $saved) = perm_http($base . 'fabric_admin.php', $jar, array('__csrf_magic' => perm_token($list), 'action' => 'save_fabric', 'id' => $remote, 'name' => 'remote2', 'backend' => 'diags', 'poller_id' => 2, 'sweep_interval' => 300, 'adapter' => 'mlx5_1', 'adapter_port' => 1, 'enabled' => 'on'));
-perm_expect(strpos($saved, 'only the main poller can sweep a fabric') !== false && (string) db_fetch_cell_prepared('SELECT name FROM plugin_fabric_fabric WHERE id = ?', array($remote)) === 'remote', 'saving a fabric on a remote poller is refused with a form error');
+perm_expect(strpos($saved, 'only the main poller can sweep') === false && (string) db_fetch_cell_prepared('SELECT name FROM plugin_fabric_fabric WHERE id = ?', array($remote)) === 'remote2', 'saving a fabric on a remote poller succeeds');
 
 db_execute_prepared('DELETE FROM plugin_fabric_fabric WHERE id = ?', array($remote));
 db_execute('DELETE FROM poller WHERE id = 2');

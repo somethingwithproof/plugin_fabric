@@ -41,10 +41,14 @@ namespace Somethingwithproof\Fabric;
  * cycle's calls for one device cost one read of the cache tables.
  */
 final class PortQuery {
+	/** Delimiter constant for PortQuery. */
 	public const DELIMITER    = '!';
+	/** Index field constant for PortQuery. */
 	public const INDEX_FIELD  = 'fabricPort';
+	/** Input fields constant for PortQuery. */
 	public const INPUT_FIELDS = ['fabricPort', 'fabricGuid', 'fabricPortNum', 'fabricNode', 'fabricRemote'];
 
+	/** Cache seconds constant for PortQuery. */
 	private const CACHE_SECONDS = 30;
 
 	/** @var array<int, array{0: int, 1: array<string, PortReading>}> host id => [read at, index => port] */
@@ -64,6 +68,15 @@ final class PortQuery {
 	) {
 	}
 
+	/**
+	 * Answer.
+	 *
+	 * @param int $hostId
+	 * @param string $cmd
+	 * @param string $field
+	 * @param string $index
+	 * @return string
+	 */
 	public function answer(int $hostId, string $cmd, string $field = '', string $index = ''): string {
 		if ($hostId < 1) {
 			return $cmd === 'get' ? 'U' : '';
@@ -134,10 +147,24 @@ final class PortQuery {
 		};
 	}
 
+	/**
+	 * Clean.
+	 *
+	 * @param string $text
+	 * @return string
+	 */
 	public static function clean(string $text): string {
 		return substr(trim((string) preg_replace('/[^\x20-\x7b\x7d\x7e]+/', ' ', $text)), 0, 96);
 	}
 
+	/**
+	 * Get.
+	 *
+	 * @param int $hostId
+	 * @param string $field
+	 * @param string $index
+	 * @return string
+	 */
 	private function get(int $hostId, string $field, string $index): string {
 		if ($this->sweep !== null && !isset($this->swept[$hostId])) {
 			$this->swept[$hostId] = true;

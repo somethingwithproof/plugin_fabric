@@ -27,6 +27,16 @@ namespace Somethingwithproof\Fabric;
  * link states stay as the last good sweep left them (REQ-INV-004).
  */
 final class TopologySweep {
+	/**
+	 * Construct a new TopologySweep instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 * @param ProcessRunner $runner
+	 * @param Settings $settings
+	 * @param int $toolOwner
+	 * @param ?float $deadline
+	 */
 	public function __construct(
 		private readonly \PDO|false $connection,
 		private readonly Clock $clock,
@@ -93,6 +103,14 @@ final class TopologySweep {
 		return $this->settings->commandTimeout + self::IMPORT_SECONDS + 30;
 	}
 
+	/**
+	 * Sweep.
+	 *
+	 * @param Fabric $fabric
+	 * @param ClaimRepository $claims
+	 * @param string $holder
+	 * @return void
+	 */
 	private function sweep(Fabric $fabric, ClaimRepository $claims, string $holder): void {
 		$fabrics = new FabricRepository($this->connection, $this->clock);
 		$owned   = static fn (): bool => $claims->holdsForCommit(ClaimRepository::TOPOLOGY, $fabric->id, $holder) && $fabrics->existsForCommit($fabric->id);

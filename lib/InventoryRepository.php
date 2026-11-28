@@ -41,8 +41,15 @@ namespace Somethingwithproof\Fabric;
  * No Cacti device, graph, or data source is created or changed.
  */
 final class InventoryRepository {
+	/** Tx state for InventoryRepository. */
 	private TransactionRepository $tx;
 
+	/**
+	 * Construct a new InventoryRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 */
 	public function __construct(private readonly \PDO|false $connection, private readonly Clock $clock) {
 	}
 
@@ -71,18 +78,25 @@ final class InventoryRepository {
 		}
 
 		// Neighbor ports of the nodes that are about to go missing, for
-		// replacement proposals. Read before anything changes.
-		$vacated = [];
+		// replacement proposals. Read in one query before anything changes.
+		$vacated     = [];
+		$goingAbsent = [];
 
 		foreach ($known as $node) {
 			if ($node->presence === Presence::Present && !isset($topology->nodes[$node->guid->text]) && $node->type !== NodeType::Switch) {
-				$ports = $nodes->ports($node->id);
+				$goingAbsent[$node->id] = $node;
+			}
+		}
 
-				if ($ports === null) {
-					return null;
-				}
+		if ($goingAbsent !== []) {
+			$portsByNode = $nodes->portsForFabric($fabric->id);
 
-				foreach ($ports as $port) {
+			if ($portsByNode === null) {
+				return null;
+			}
+
+			foreach ($goingAbsent as $nodeId => $node) {
+				foreach ($portsByNode[$nodeId] ?? [] as $port) {
 					if ($port->remote !== null) {
 						$vacated[$port->remote->key()] = $node;
 					}
@@ -90,9 +104,10 @@ final class InventoryRepository {
 			}
 		}
 
-		$now      = $this->clock->now();
-		$result   = new InventoryResult();
-		$this->tx = new TransactionRepository($this->connection);
+		$now          = $this->clock->now();
+		$result       = new InventoryResult();
+		$duplicateSet = $topology->duplicates !== [] ? array_flip($topology->duplicates) : [];
+		$this->tx     = new TransactionRepository($this->connection);
 
 		if (!$this->tx->begin()) {
 			return null;
@@ -101,7 +116,7 @@ final class InventoryRepository {
 		try {
 			foreach ($topology->nodes as $guid => $seen) {
 				$stored    = $byGuid[$guid] ?? null;
-				$duplicate = in_array($guid, $topology->duplicates, true);
+				$duplicate = isset($duplicateSet[$guid]);
 
 				if ($stored === null) {
 					$id = $this->insertNode($fabric, $seen, $duplicate, $topology->signature($guid), $now);
@@ -162,6 +177,17 @@ final class InventoryRepository {
 		return $result;
 	}
 
+	/**
+	 * Insert node.
+	 *
+	 * @param Fabric $fabric
+	 * @param TopologyNode $seen
+	 * @param bool $duplicate
+	 * @param string $signature
+	 * @param int $now
+	 * @return int
+	 * @throws \RuntimeException
+	 */
 	private function insertNode(Fabric $fabric, TopologyNode $seen, bool $duplicate, string $signature, int $now): int {
 		$this->write(
 			'INSERT INTO plugin_fabric_node (fabric_id, guid, node_type, port_count, device_id, vendor_id, sysimg_guid, port0_guid, description, lid, host_id, presence, identity, conflict_seen, conflict_signature, first_seen, last_seen, revision) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?, 0)',
@@ -177,6 +203,14 @@ final class InventoryRepository {
 		return $id;
 	}
 
+	/**
+	 * Update node.
+	 *
+	 * @param Node $stored
+	 * @param TopologyNode $seen
+	 * @param int $now
+	 * @return void
+	 */
 	private function updateNode(Node $stored, TopologyNode $seen, int $now): void {
 		$this->write(
 			'UPDATE plugin_fabric_node SET port0_guid = ?, description = ?, lid = ?, presence = ?, last_seen = ?, revision = revision + 1 WHERE id = ?',

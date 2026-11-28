@@ -26,6 +26,15 @@ namespace Somethingwithproof\Fabric;
  * disconnected cable changes them on a healthy node.
  */
 final readonly class NodeIdentity {
+	/**
+	 * Construct a new NodeIdentity instance.
+	 *
+	 * @param NodeType $type
+	 * @param int $portCount
+	 * @param int $deviceId
+	 * @param int $vendorId
+	 * @param ?Guid $sysimgGuid
+	 */
 	public function __construct(
 		public NodeType $type,
 		public int $portCount,
@@ -64,6 +73,11 @@ final readonly class NodeIdentity {
 		return $fields;
 	}
 
+	/**
+	 * To json.
+	 *
+	 * @return string
+	 */
 	public function toJson(): string {
 		return json_encode([
 			'node_type'   => $this->type->value,

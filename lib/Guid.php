@@ -31,9 +31,21 @@ namespace Somethingwithproof\Fabric;
  * for "none", and a node or port with GUID 0 cannot be told apart.
  */
 final readonly class Guid {
+	/**
+	 * Construct a new Guid instance.
+	 *
+	 * @param string $text
+	 */
 	private function __construct(public string $text) {
 	}
 
+	/**
+	 * From string.
+	 *
+	 * @param string $value
+	 * @return self
+	 * @throws \InvalidArgumentException
+	 */
 	public static function fromString(string $value): self {
 		$guid = self::tryFromString($value);
 
@@ -44,16 +56,42 @@ final readonly class Guid {
 		return $guid;
 	}
 
+	/**
+	 * Try from string.
+	 *
+	 * @param string $value
+	 * @return ?self
+	 */
 	public static function tryFromString(string $value): ?self {
-		if (preg_match('/^(?:0[xX])?([0-9a-fA-F]{1,16})$/D', $value, $match) !== 1) {
+		$hex = $value;
+
+		if (str_starts_with($hex, '0x') || str_starts_with($hex, '0X')) {
+			$hex = substr($hex, 2);
+		}
+
+		$len = strlen($hex);
+
+		if ($len < 1 || $len > 16 || !ctype_xdigit($hex)) {
 			return null;
 		}
 
-		$digits = str_pad(strtolower(ltrim($match[1], '0')), 16, '0', STR_PAD_LEFT);
+		$trimmed = ltrim($hex, '0');
 
-		return $digits === '0000000000000000' ? null : new self('0x' . $digits);
+		if ($trimmed === '') {
+			return null;
+		}
+
+		$digits = $len === 16 ? strtolower($hex) : str_pad(strtolower($trimmed), 16, '0', STR_PAD_LEFT);
+
+		return new self('0x' . $digits);
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param self $other
+	 * @return bool
+	 */
 	public function equals(self $other): bool {
 		return $this->text === $other->text;
 	}

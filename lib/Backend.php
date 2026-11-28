@@ -26,10 +26,17 @@ namespace Somethingwithproof\Fabric;
  */
 enum Backend: string {
 	case Diags = 'diags';
+	case Ufm   = 'ufm';
 
+	/**
+	 * Label.
+	 *
+	 * @return string
+	 */
 	public function label(): string {
 		return match ($this) {
 			self::Diags => __('Diagnostics tools (infiniband-diags)', 'fabric'),
+			self::Ufm   => 'NVIDIA UFM REST API',
 		};
 	}
 }

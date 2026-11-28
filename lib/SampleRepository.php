@@ -26,6 +26,11 @@ namespace Somethingwithproof\Fabric;
  * time and age into stale; they are never replaced by zeros.
  */
 final class SampleRepository {
+	/**
+	 * Construct a new SampleRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
@@ -61,6 +66,16 @@ final class SampleRepository {
 		return $ok === false ? null : $delta;
 	}
 
+	/**
+	 * Record failure.
+	 *
+	 * @param int $nodeId
+	 * @param int $port
+	 * @param CounterGroup $group
+	 * @param CommandError $error
+	 * @param int $attemptedAt
+	 * @return bool
+	 */
 	public function recordFailure(int $nodeId, int $port, CounterGroup $group, CommandError $error, int $attemptedAt): bool {
 		return db_execute_prepared(
 			"INSERT INTO plugin_fabric_sample (node_id, port_number, counter_group, observed_at, attempted_at, counters, error) VALUES (?, ?, ?, 0, ?, '', ?)
@@ -94,6 +109,39 @@ final class SampleRepository {
 
 		foreach ($rows as $row) {
 			$out[Row::int($row, 'port_number') . ':' . Row::string($row, 'counter_group')] = $row;
+		}
+
+		return $out;
+	}
+
+	/**
+	 * Load every stored counter sample for a fabric in one query, grouped by
+	 * node_id and "port:group" key, avoiding per-node N+1 queries in UfmSweep.
+	 *
+	 * @param int $fabricId fabric identifier
+	 *
+	 * @return array<int, array<string, array<array-key, mixed>>>|null node_id => ("port:group" => row)
+	 */
+	public function keyedForFabric(int $fabricId): ?array {
+		$rows = Row::rows(db_fetch_assoc_prepared(
+			'SELECT s.* FROM plugin_fabric_sample s INNER JOIN plugin_fabric_node n ON n.id = s.node_id WHERE n.fabric_id = ? ORDER BY s.node_id, s.port_number, s.counter_group',
+			[$fabricId],
+			true,
+			$this->connection,
+		));
+
+		if ($rows === null) {
+			return null;
+		}
+
+		$out = [];
+
+		foreach ($rows as $row) {
+			$nodeId = Row::int($row, 'node_id');
+
+			if ($nodeId > 0) {
+				$out[$nodeId][Row::int($row, 'port_number') . ':' . Row::string($row, 'counter_group')] = $row;
+			}
 		}
 
 		return $out;

@@ -26,6 +26,17 @@ namespace Somethingwithproof\Fabric;
  * log, never parsed (REQ-EXEC-006).
  */
 final readonly class ProcessResult {
+	/**
+	 * Construct a new ProcessResult instance.
+	 *
+	 * @param ?int $exitCode
+	 * @param string $stdout
+	 * @param string $stderr
+	 * @param bool $timedOut
+	 * @param bool $tooLarge
+	 * @param bool $started
+	 * @param float $duration
+	 */
 	public function __construct(
 		public ?int $exitCode,
 		public string $stdout,

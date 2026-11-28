@@ -23,9 +23,14 @@ namespace Somethingwithproof\Fabric;
  * Counts from one applied discovery, for the health record and the log.
  */
 final class InventoryResult {
+	/** Added state for InventoryResult. */
 	public int $added = 0;
+	/** Updated state for InventoryResult. */
 	public int $updated = 0;
+	/** Missing state for InventoryResult. */
 	public int $missing = 0;
+	/** Conflicts state for InventoryResult. */
 	public int $conflicts = 0;
+	/** Proposals state for InventoryResult. */
 	public int $proposals = 0;
 }

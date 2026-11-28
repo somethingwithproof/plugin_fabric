@@ -26,18 +26,42 @@ namespace Somethingwithproof\Fabric;
  * excerpt(), never as received.
  */
 final class Log {
+	/**
+	 * Debug.
+	 *
+	 * @param string $message
+	 * @return void
+	 */
 	public static function debug(string $message): void {
 		cacti_log('DEBUG: ' . $message, false, 'FABRIC', POLLER_VERBOSITY_DEBUG);
 	}
 
+	/**
+	 * Info.
+	 *
+	 * @param string $message
+	 * @return void
+	 */
 	public static function info(string $message): void {
 		cacti_log('NOTE: ' . $message, false, 'FABRIC', POLLER_VERBOSITY_MEDIUM);
 	}
 
+	/**
+	 * Warning.
+	 *
+	 * @param string $message
+	 * @return void
+	 */
 	public static function warning(string $message): void {
 		cacti_log('WARNING: ' . $message, false, 'FABRIC');
 	}
 
+	/**
+	 * Error.
+	 *
+	 * @param string $message
+	 * @return void
+	 */
 	public static function error(string $message): void {
 		cacti_log('ERROR: ' . $message, false, 'FABRIC');
 	}

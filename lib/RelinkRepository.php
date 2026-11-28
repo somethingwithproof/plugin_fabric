@@ -25,6 +25,12 @@ namespace Somethingwithproof\Fabric;
  * moves a device mapping on its own; an operator confirms or rejects.
  */
 final class RelinkRepository {
+	/**
+	 * Construct a new RelinkRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 */
 	public function __construct(private readonly \PDO|false $connection, private readonly Clock $clock) {
 	}
 
@@ -115,6 +121,12 @@ final class RelinkRepository {
 		return $tx->commit() ? $old->hostId : null;
 	}
 
+	/**
+	 * Reject.
+	 *
+	 * @param int $id
+	 * @return bool
+	 */
 	public function reject(int $id): bool {
 		$ok = db_execute_prepared('UPDATE plugin_fabric_relink SET state = ?, decided_at = ? WHERE id = ? AND state = ?', [RelinkState::Rejected->value, $this->clock->now(), $id, RelinkState::Proposed->value], true, $this->connection);
 

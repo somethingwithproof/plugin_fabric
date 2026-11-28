@@ -26,10 +26,20 @@
  * down the whole Cacti UI.
  */
 
+/**
+ * Php supported.
+ *
+ * @return bool
+ */
 function fabric_php_supported(): bool {
 	return version_compare(PHP_VERSION, '8.2.0', '>=');
 }
 
+/**
+ * Boot.
+ *
+ * @return bool
+ */
 function fabric_boot(): bool {
 	if (!fabric_php_supported()) {
 		return false;
@@ -83,6 +93,11 @@ function plugin_fabric_version(): array {
 	return $version;
 }
 
+/**
+ * Plugin fabric install.
+ *
+ * @return void
+ */
 function plugin_fabric_install(): void {
 	if (fabric_refuse_unsupported()) {
 		return;
@@ -91,6 +106,11 @@ function plugin_fabric_install(): void {
 	plugin_fabric_upgrade(true);
 }
 
+/**
+ * Plugin fabric check config.
+ *
+ * @return bool
+ */
 function plugin_fabric_check_config(): bool {
 	if (fabric_refuse_unsupported()) {
 		return false;
@@ -178,10 +198,20 @@ function fabric_graph_allowed(int $localGraphId): bool {
 	return $localGraphId > 0 && (bool) is_graph_allowed($localGraphId);
 }
 
+/**
+ * Settings.
+ *
+ * @return \Somethingwithproof\Fabric\Settings
+ */
 function fabric_settings(): \Somethingwithproof\Fabric\Settings {
 	return (new \Somethingwithproof\Fabric\SettingsRepository(false))->load();
 }
 
+/**
+ * Templates.
+ *
+ * @return \Somethingwithproof\Fabric\TemplateInstaller
+ */
 function fabric_templates(): \Somethingwithproof\Fabric\TemplateInstaller {
 	global $config;
 
@@ -310,6 +340,11 @@ function plugin_fabric_uninstall(): void {
 	}
 }
 
+/**
+ * Config arrays.
+ *
+ * @return void
+ */
 function fabric_config_arrays(): void {
 	global $menu;
 
@@ -337,6 +372,11 @@ function fabric_repair_on_page(string $page): bool {
 	return !empty($_SESSION['sess_user_id']) && in_array($page, \Somethingwithproof\Fabric\Pages::upgradeTriggers(), true);
 }
 
+/**
+ * Config settings.
+ *
+ * @return void
+ */
 function fabric_config_settings(): void {
 	global $tabs, $settings;
 
@@ -515,4 +555,257 @@ function fabric_page_allowed(): bool {
 		&& api_plugin_is_enabled('fabric')
 		&& ($current_user['enabled'] ?? '') === 'on'
 		&& api_plugin_user_realm_auth(get_current_page());
+}
+
+/**
+ * poller_bottom hook: launch poller_fabric.php in the background for each
+ * enabled fabric assigned to this poller whose discovery sweep is due.
+ */
+function fabric_poller_bottom(): void {
+	global $config;
+
+	if (!fabric_boot()) {
+		return;
+	}
+
+	if (!(new \Somethingwithproof\Fabric\Schema(false))->isCurrent()) {
+		return;
+	}
+
+	if (!function_exists('exec_background')) {
+		include_once($config['library_path'] . '/poller.php');
+	}
+
+	$php = trim((string) read_config_option('path_php_binary'));
+
+	if ($php === '' || !is_file($php) || !is_executable($php)) {
+		return;
+	}
+
+	$poller_id = (int) ($config['poller_id'] ?? 1);
+	$clock     = new \Somethingwithproof\Fabric\SystemClock();
+	$due       = (new \Somethingwithproof\Fabric\FabricRepository(false, $clock))->dueForPoller($poller_id);
+
+	foreach ($due as $fabric_id) {
+		// @phpstan-ignore argument.type
+		exec_background($php, array('-q', __DIR__ . '/poller_fabric.php', '--fabric=' . (int) $fabric_id));
+	}
+}
+
+/**
+ * replicate_out hook: replicate non-secret fabric definitions assigned to a
+ * remote collector. Vault entries (plugin_fabric_secret) and external key
+ * files are never replicated.
+ *
+ * @param mixed $data
+ * @return mixed
+ */
+function fabric_replicate_out($data) {
+	if (!fabric_boot() || !is_array($data)) {
+		return $data;
+	}
+
+	$remote_poller_id = isset($data['remote_poller_id']) && is_numeric($data['remote_poller_id']) ? (int) $data['remote_poller_id'] : 0;
+	$rcnn_id          = $data['rcnn_id'] ?? false;
+
+	if ($remote_poller_id < 2 || $rcnn_id === false || !function_exists('replicate_out_table')) {
+		return $data;
+	}
+
+	$replicator = new \Somethingwithproof\Fabric\ReplicatorRepository(false);
+	$fabrics    = $replicator->fabricsForPoller($remote_poller_id);
+
+	// @phpstan-ignore argument.type
+	replicate_out_table($rcnn_id, $fabrics, 'plugin_fabric_fabric', $remote_poller_id);
+
+	return $data;
+}
+
+/**
+ * Health evaluator.
+ *
+ * @return \Somethingwithproof\Fabric\HealthEvaluator
+ */
+function fabric_health_evaluator(): \Somethingwithproof\Fabric\HealthEvaluator {
+	$clock = new \Somethingwithproof\Fabric\SystemClock();
+
+	return new \Somethingwithproof\Fabric\HealthEvaluator(
+		new \Somethingwithproof\Fabric\FabricRepository(false, $clock),
+		new \Somethingwithproof\Fabric\NodeRepository(false),
+		new \Somethingwithproof\Fabric\FabricHealthRepository(false),
+		new \Somethingwithproof\Fabric\NodeSweepRepository(false),
+		new \Somethingwithproof\Fabric\RelinkRepository(false, $clock),
+		new \Somethingwithproof\Fabric\SampleRepository(false),
+		$clock,
+		new \Somethingwithproof\Fabric\MaintMaintenance(),
+		fabric_settings(),
+		new \Somethingwithproof\Fabric\Schema(false),
+	);
+}
+
+/**
+ * Config service.
+ *
+ * @return \Somethingwithproof\Fabric\ConfigService
+ */
+function fabric_config_service(): \Somethingwithproof\Fabric\ConfigService {
+	$clock = new \Somethingwithproof\Fabric\SystemClock();
+
+	return new \Somethingwithproof\Fabric\ConfigService(
+		new \Somethingwithproof\Fabric\SettingsRepository(false),
+		new \Somethingwithproof\Fabric\FabricRepository(false, $clock),
+		new \Somethingwithproof\Fabric\CredentialRepository(false, $clock),
+		new \Somethingwithproof\Fabric\ConfigRepository(false),
+	);
+}
+
+/**
+ * User view allowed.
+ *
+ * @param int $userId
+ * @return bool
+ */
+function fabric_user_view_allowed(int $userId): bool {
+	if ($userId < 1 || !function_exists('is_realm_allowed')) {
+		return false;
+	}
+
+	foreach ((new \Somethingwithproof\Fabric\RealmRepository(false))->viewRealmIds() as $realmId) {
+		if (is_realm_allowed($realmId, $userId)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * User device allowed.
+ *
+ * @param int $userId
+ * @param int $hostId
+ * @return bool
+ */
+function fabric_user_device_allowed(int $userId, int $hostId): bool {
+	if ($userId < 1 || $hostId < 1) {
+		return false;
+	}
+
+	if (function_exists('is_device_allowed')) {
+		return (bool) is_device_allowed($hostId, $userId);
+	}
+
+	return false;
+}
+
+/**
+ * abilities_register hook: expose read-only Fabric abilities to Cacti MCP /
+ * Abilities API v2, gated by the Fabric View realm.
+ *
+ * @param mixed $registrar
+ */
+function fabric_abilities_register($registrar): void {
+	if (!fabric_boot() || !is_object($registrar)) {
+		return;
+	}
+
+	$provider = new \Somethingwithproof\Fabric\AbilitiesProvider(
+		fabric_health_evaluator(),
+		static function (int $userId): bool {
+			return fabric_user_view_allowed($userId);
+		},
+		static function (int $userId, int $hostId): bool {
+			return fabric_user_device_allowed($userId, $hostId);
+		},
+		static function (int $userId): bool {
+			return fabric_user_view_allowed($userId);
+		},
+	);
+
+	$provider->register($registrar);
+}
+
+/**
+ * doctor_register_checks hook: return evaluated diagnostic checks for Cacti Doctor.
+ *
+ * @param mixed $context
+ * @return list<array<string, mixed>>
+ */
+function fabric_doctor_register_checks($context = array()) {
+	if (!fabric_boot()) {
+		return array();
+	}
+
+	return (new \Somethingwithproof\Fabric\DoctorProvider(fabric_health_evaluator()))->checks();
+}
+
+/**
+ * casc_register_providers hook: register Fabric CasC provider descriptor.
+ *
+ * @param mixed $providers
+ * @return mixed
+ */
+function fabric_casc_register_providers($providers = null) {
+	if (!fabric_boot()) {
+		return $providers;
+	}
+
+	$descriptor = (new \Somethingwithproof\Fabric\CascProvider(fabric_config_service()))->descriptor();
+
+	if (is_object($providers) && method_exists($providers, 'register')) {
+		$providers->register($descriptor);
+
+		return $providers;
+	}
+
+	return $descriptor;
+}
+
+/**
+ * doctor_register_debug_info hook: contribute a redacted plain-array
+ * diagnostic snapshot for Cacti Doctor without importing external plugin classes.
+ *
+ * @param mixed $context
+ * @return list<array<string, mixed>>
+ */
+function fabric_doctor_register_debug_info($context = array()) {
+	if (!fabric_boot()) {
+		return array();
+	}
+
+	return (new \Somethingwithproof\Fabric\DoctorProvider(fabric_health_evaluator()))->debugInfo();
+}
+
+/**
+ * api_register_resources hook: expose plain-array Google AIP resource
+ * descriptors without importing external API plugin classes.
+ *
+ * @param mixed $resources
+ * @return list<mixed>
+ */
+function fabric_api_register_resources($resources = array()) {
+	if (!fabric_boot()) {
+		return is_array($resources) ? array_values($resources) : array();
+	}
+
+	$provider = new \Somethingwithproof\Fabric\ApiResourceProvider(
+		fabric_health_evaluator(),
+		static function (int $userId): bool {
+			return fabric_user_view_allowed($userId);
+		},
+		static function (int $userId, int $hostId): bool {
+			return fabric_user_device_allowed($userId, $hostId);
+		},
+		static function (int $userId): bool {
+			return fabric_user_view_allowed($userId);
+		},
+	);
+
+	$descriptors = $provider->resources();
+
+	if (is_array($resources) && $resources !== array()) {
+		return array_values(array_merge(array_values($resources), $descriptors));
+	}
+
+	return $descriptors;
 }

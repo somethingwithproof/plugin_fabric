@@ -32,12 +32,29 @@ namespace Somethingwithproof\Fabric;
  * long-lived server itself.
  */
 final class ClaimRepository {
+	/** Topology constant for ClaimRepository. */
 	public const TOPOLOGY = 'topology';
+	/** Node constant for ClaimRepository. */
 	public const NODE     = 'node';
 
+	/**
+	 * Construct a new ClaimRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 * @param Clock $clock
+	 */
 	public function __construct(private readonly \PDO|false $connection, private readonly Clock $clock) {
 	}
 
+	/**
+	 * Acquire.
+	 *
+	 * @param string $scope
+	 * @param int $key
+	 * @param string $holder
+	 * @param int $seconds
+	 * @return bool
+	 */
 	public function acquire(string $scope, int $key, string $holder, int $seconds): bool {
 		$now = $this->clock->now();
 
@@ -48,6 +65,14 @@ final class ClaimRepository {
 		return $ok !== false && $this->holds($scope, $key, $holder);
 	}
 
+	/**
+	 * Holds.
+	 *
+	 * @param string $scope
+	 * @param int $key
+	 * @param string $holder
+	 * @return bool
+	 */
 	public function holds(string $scope, int $key, string $holder): bool {
 		return (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_claim WHERE scope = ? AND claim_key = ? AND holder = ? AND expires_at >= ?', [$scope, $key, $holder, $this->clock->now()], '', true, $this->connection) === 1;
 	}
@@ -73,6 +98,14 @@ final class ClaimRepository {
 		return (int) db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_fabric_claim WHERE scope = ? AND claim_key = ? AND holder = ? AND expires_at >= ? FOR UPDATE', [$scope, $key, $holder, $this->clock->now()], '', true, $this->connection) === 1;
 	}
 
+	/**
+	 * Release.
+	 *
+	 * @param string $scope
+	 * @param int $key
+	 * @param string $holder
+	 * @return void
+	 */
 	public function release(string $scope, int $key, string $holder): void {
 		db_execute_prepared('UPDATE plugin_fabric_claim SET expires_at = 0 WHERE scope = ? AND claim_key = ? AND holder = ?', [$scope, $key, $holder], true, $this->connection);
 	}

@@ -26,6 +26,7 @@ namespace Somethingwithproof\Fabric;
  * file, never from the plugin or a command line (ADR 0009).
  */
 final readonly class Settings {
+	/** Registered setting names managed by the plugin. */
 	public const NAMES = [
 		'fabric_tool_dir',
 		'fabric_node_name_map',
@@ -36,15 +37,36 @@ final readonly class Settings {
 		'fabric_failure_budget',
 		'fabric_uninstall_keep_tables',
 		'fabric_index_down_ports',
+		'fabric_vault_key_file',
 	];
 
+	/** Default tool dir. */
 	public const DEFAULT_TOOL_DIR = '/usr/sbin';
+	/** Default mad ms. */
 	public const DEFAULT_MAD_MS   = 1000;
+	/** Default timeout. */
 	public const DEFAULT_TIMEOUT  = 60;
+	/** Default max kib. */
 	public const DEFAULT_MAX_KIB  = 8192;
+	/** Default budget. */
 	public const DEFAULT_BUDGET   = 30;
+	/** Default failures. */
 	public const DEFAULT_FAILURES = 3;
 
+	/**
+	 * Construct a new Settings instance.
+	 *
+	 * @param string $toolDir
+	 * @param string $nodeNameMap
+	 * @param int $madTimeoutMs
+	 * @param int $commandTimeout
+	 * @param int $maxOutputKib
+	 * @param int $nodeBudget
+	 * @param int $failureBudget
+	 * @param bool $keepTablesOnUninstall
+	 * @param bool $indexDownPorts
+	 * @param string $vaultKeyFile
+	 */
 	public function __construct(
 		public string $toolDir,
 		public string $nodeNameMap,
@@ -55,6 +77,7 @@ final readonly class Settings {
 		public int $failureBudget,
 		public bool $keepTablesOnUninstall,
 		public bool $indexDownPorts = false,
+		public string $vaultKeyFile = '',
 	) {
 	}
 
@@ -78,9 +101,15 @@ final readonly class Settings {
 			failureBudget: min(Row::int($row, 'fabric_failure_budget', self::DEFAULT_FAILURES, 1), 64),
 			keepTablesOnUninstall: array_key_exists('fabric_uninstall_keep_tables', $row) ? Row::bool($row, 'fabric_uninstall_keep_tables') : true,
 			indexDownPorts: Row::bool($row, 'fabric_index_down_ports'),
+			vaultKeyFile: self::path($row, 'fabric_vault_key_file') ?? '',
 		);
 	}
 
+	/**
+	 * Max output bytes.
+	 *
+	 * @return int
+	 */
 	public function maxOutputBytes(): int {
 		return $this->maxOutputKib * 1024;
 	}
@@ -169,6 +198,7 @@ final readonly class Settings {
 				'friendly_name' => __('Uninstall', 'fabric'),
 				'method'        => 'spacer',
 			],
+			'fabric_vault_key_file' => $path('UFM Vault Key File', 'Optional absolute path to a 256-bit AES-GCM vault keyfile (64 hex chars or 32 random bytes, 0600 owned by the poller user) used to encrypt NVIDIA UFM credentials.', ''),
 			'fabric_uninstall_keep_tables' => [
 				'friendly_name' => __('Keep Plugin Tables on Uninstall', 'fabric'),
 				'description'   => __('When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way.', 'fabric'),

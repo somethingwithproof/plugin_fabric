@@ -37,10 +37,15 @@ namespace Somethingwithproof\Fabric;
  * - State values are the state data source of the plan, GAUGE.
  */
 final class PortValues {
+	/** Traffic constant for PortValues. */
 	public const TRAFFIC    = 'Fabric Port Traffic';
+	/** Errors constant for PortValues. */
 	public const ERRORS     = 'Fabric Port Errors';
+	/** Congestion constant for PortValues. */
 	public const CONGESTION = 'Fabric Port Congestion';
+	/** State constant for PortValues. */
 	public const STATE      = 'Fabric Port State';
+	/** Rates constant for PortValues. */
 	public const RATES      = 'Fabric Port Alert Rates';
 
 	/** Data source name => perfquery counter, for the counter values. */
@@ -103,6 +108,12 @@ final class PortValues {
 		return array_merge(...array_values(self::templates()));
 	}
 
+	/**
+	 * Check whether counter.
+	 *
+	 * @param string $name
+	 * @return bool
+	 */
 	public static function isCounter(string $name): bool {
 		return isset(self::COUNTERS[$name]);
 	}

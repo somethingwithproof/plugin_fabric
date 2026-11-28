@@ -26,9 +26,20 @@ namespace Somethingwithproof\Fabric;
  * since the page read it, so a sweep that ran in between is never undone.
  */
 final class NodeRepository {
+	/**
+	 * Construct a new NodeRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
+	/**
+	 * Find.
+	 *
+	 * @param int $id
+	 * @return ?Node
+	 */
 	public function find(int $id): ?Node {
 		$row = db_fetch_row_prepared('SELECT * FROM plugin_fabric_node WHERE id = ?', [$id], true, $this->connection);
 
@@ -80,6 +91,39 @@ final class NodeRepository {
 
 			if ($port !== null) {
 				$out[$port->number] = $port;
+			}
+		}
+
+		return $out;
+	}
+
+	/**
+	 * Load every stored port for a fabric in one query, grouped by node_id,
+	 * avoiding per-node N+1 queries during topology and link-state imports.
+	 *
+	 * @param int $fabricId fabric identifier
+	 *
+	 * @return array<int, array<int, Port>>|null node_id => (port number => Port)
+	 */
+	public function portsForFabric(int $fabricId): ?array {
+		$rows = Row::rows(db_fetch_assoc_prepared(
+			'SELECT p.* FROM plugin_fabric_port p INNER JOIN plugin_fabric_node n ON n.id = p.node_id WHERE n.fabric_id = ? ORDER BY p.node_id, p.port_number',
+			[$fabricId],
+			true,
+			$this->connection,
+		));
+
+		if ($rows === null) {
+			return null;
+		}
+
+		$out = [];
+
+		foreach ($rows as $row) {
+			$port = Port::fromRow($row);
+
+			if ($port !== null) {
+				$out[$port->nodeId][$port->number] = $port;
 			}
 		}
 

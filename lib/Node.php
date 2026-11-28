@@ -24,6 +24,30 @@ namespace Somethingwithproof\Fabric;
  * else is an attribute.
  */
 final readonly class Node {
+	/**
+	 * Construct a new Node instance.
+	 *
+	 * @param int $id
+	 * @param int $fabricId
+	 * @param Guid $guid
+	 * @param NodeType $type
+	 * @param int $portCount
+	 * @param int $deviceId
+	 * @param int $vendorId
+	 * @param ?Guid $sysimgGuid
+	 * @param ?Guid $port0Guid
+	 * @param string $description
+	 * @param int $lid
+	 * @param int $hostId
+	 * @param Presence $presence
+	 * @param IdentityState $identity
+	 * @param ?NodeIdentity $conflictSeen
+	 * @param int $firstSeen
+	 * @param int $lastSeen
+	 * @param int $revision
+	 * @param string $conflictSignature
+	 * @param string $acceptedSignature
+	 */
 	public function __construct(
 		public int $id,
 		public int $fabricId,
@@ -89,6 +113,11 @@ final readonly class Node {
 		);
 	}
 
+	/**
+	 * Identity.
+	 *
+	 * @return NodeIdentity
+	 */
 	public function identity(): NodeIdentity {
 		return new NodeIdentity($this->type, $this->portCount, $this->deviceId, $this->vendorId, $this->sysimgGuid);
 	}
@@ -109,6 +138,13 @@ final readonly class Node {
 		return self::labelOf($this->description, $this->guid->text);
 	}
 
+	/**
+	 * Label of.
+	 *
+	 * @param string $description
+	 * @param string $guid
+	 * @return string
+	 */
 	public static function labelOf(string $description, string $guid): string {
 		return $description !== '' ? sprintf('%s (%s)', $description, $guid) : $guid;
 	}

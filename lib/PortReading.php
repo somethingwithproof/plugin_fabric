@@ -42,8 +42,19 @@ namespace Somethingwithproof\Fabric;
  *   whenever the port was ever sampled.
  */
 final readonly class PortReading {
+	/** Wide constant for PortReading. */
 	private const WIDE = ['PortXmitData', 'PortRcvData', 'PortXmitPkts', 'PortRcvPkts'];
 
+	/**
+	 * Construct a new PortReading instance.
+	 *
+	 * @param Node $node
+	 * @param Port $port
+	 * @param int $interval
+	 * @param ?Sample $basic
+	 * @param ?Sample $extended
+	 * @param Clock $clock
+	 */
 	public function __construct(
 		public Node $node,
 		public Port $port,
@@ -54,6 +65,11 @@ final readonly class PortReading {
 	) {
 	}
 
+	/**
+	 * Ref.
+	 *
+	 * @return PortRef
+	 */
 	public function ref(): PortRef {
 		return new PortRef($this->node->guid, $this->port->number);
 	}
@@ -74,6 +90,12 @@ final readonly class PortReading {
 		return $downPorts || $this->port->remote !== null || !$down;
 	}
 
+	/**
+	 * Value.
+	 *
+	 * @param string $name
+	 * @return ?string
+	 */
 	public function value(string $name): ?string {
 		if (PortValues::isCounter($name)) {
 			return $this->counter(PortValues::COUNTERS[$name]);
@@ -117,6 +139,12 @@ final readonly class PortReading {
 		return $sample === null || !$this->current($sample) ? null : $sample->rates[$counter] ?? null;
 	}
 
+	/**
+	 * Counter.
+	 *
+	 * @param string $counter
+	 * @return ?string
+	 */
 	private function counter(string $counter): ?string {
 		$sample = $this->source($counter);
 
@@ -127,6 +155,12 @@ final readonly class PortReading {
 		return $sample->counters[$counter] ?? null;
 	}
 
+	/**
+	 * Rate.
+	 *
+	 * @param string $counter
+	 * @return ?string
+	 */
 	private function rate(string $counter): ?string {
 		$rate = $this->lastRate($counter);
 
@@ -148,16 +182,33 @@ final readonly class PortReading {
 		return $value === null ? null : (string) $value;
 	}
 
+	/**
+	 * Age.
+	 *
+	 * @return ?string
+	 */
 	private function age(): ?string {
 		$at = $this->basic->observedAt ?? 0;
 
 		return $at > 0 ? (string) max(0, $this->clock->now() - $at) : null;
 	}
 
+	/**
+	 * Current.
+	 *
+	 * @param Sample $sample
+	 * @return bool
+	 */
 	private function current(Sample $sample): bool {
 		return (new FreshnessEvaluator($this->clock))->evaluate($sample->observedAt, $this->interval) === Freshness::Current;
 	}
 
+	/**
+	 * Number.
+	 *
+	 * @param float $value
+	 * @return string
+	 */
 	private static function number(float $value): string {
 		$text = rtrim(rtrim(sprintf('%.6F', $value), '0'), '.');
 

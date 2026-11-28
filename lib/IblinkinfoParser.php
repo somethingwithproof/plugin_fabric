@@ -47,14 +47,25 @@ namespace Somethingwithproof\Fabric;
  * state is then replaced as a whole or not at all.
  */
 final class IblinkinfoParser {
+	/** Prefix constant for IblinkinfoParser. */
 	private const PREFIX = '/^0x([0-9a-f]{16}) "/';
 	// From the quote that ends the local description: LID, port, and the
 	// link fields, which hold no parenthesis except "undefined (n)".
+	/** Tail constant for IblinkinfoParser. */
 	private const TAIL   = '/\G" +(\d{1,5}) +(\d{1,3})\[[ 0-9]{2}\] ==\(((?:[^()]|\(\d+\))*)\)==>  (.*)$/D';
+	/** Link constant for IblinkinfoParser. */
 	private const LINK   = '/^ *(?:(undefined \(\d+\)|\S+) +(.+?) +)?(\S+)\/ *(\S+)$/D';
+	/** Remote constant for IblinkinfoParser. */
 	private const REMOTE = '/^0x([0-9a-f]{16}) +(\d{1,5}) +(\d{1,3})\[[ 0-9]{2}\] "(.*)" \(((?:Could be \S+)?) ((?:Could be [^"]+)?)\)$/D';
+	/** None constant for IblinkinfoParser. */
 	private const NONE   = ['/^ +\[  \] "" \( \)$/D', '/^ +"Port not available"$/D'];
 
+	/**
+	 * Parse.
+	 *
+	 * @param string $output
+	 * @return LinkReport
+	 */
 	public function parse(string $output): LinkReport {
 		if ($output !== '' && !str_ends_with($output, "\n")) {
 			throw ParseFailure::at(substr_count($output, "\n") + 1, 'output does not end with a newline');

@@ -23,11 +23,17 @@ namespace Somethingwithproof\Fabric;
  * One child process while ProcRunner runs it. Internal to ProcRunner.
  */
 final class ProcJob {
+	/** Out state for ProcJob. */
 	public string $out = '';
+	/** Err state for ProcJob. */
 	public string $err = '';
+	/** Stdout eof state for ProcJob. */
 	public bool $stdoutEof = false;
+	/** Stderr eof state for ProcJob. */
 	public bool $stderrEof = false;
+	/** Too large state for ProcJob. */
 	public bool $tooLarge = false;
+	/** Exit state for ProcJob. */
 	public ?int $exit = null;
 
 	/**

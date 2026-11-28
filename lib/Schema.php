@@ -34,36 +34,64 @@ namespace Somethingwithproof\Fabric;
  * the next run. No migration touches a Cacti device, data source, graph, or
  * RRD file, runs a fabric tool, or contacts UFM (REQ-LIFE-005).
  *
- * There is no poller_bottom hook: sweeps start lazily from the script
- * server (ADR 0008), so disabling the plugin, which stops core calling the
- * hooks, and the enabled check in fabric_sweep_allowed() stop them.
+ * Poller sweeps run via poller_bottom (poller_fabric.php) as well as lazily
+ * from the script server, gated by plugin enablement and per-fabric claims.
  */
 final class Schema {
-	public const VERSION = 2;
+	/** Current schema version number. */
+	public const VERSION = 3;
 
+	/** Map of Cacti hook names to setup.php callback functions. */
 	public const HOOKS = [
-		'auth_alternate_realms' => 'fabric_auth_alternate_realms',
-		'config_arrays'        => 'fabric_config_arrays',
-		'config_settings'      => 'fabric_config_settings',
-		'draw_navigation_text' => 'fabric_draw_navigation_text',
-		'device_remove'        => 'fabric_device_remove',
+		'auth_alternate_realms'      => 'fabric_auth_alternate_realms',
+		'config_arrays'              => 'fabric_config_arrays',
+		'config_settings'            => 'fabric_config_settings',
+		'draw_navigation_text'       => 'fabric_draw_navigation_text',
+		'device_remove'              => 'fabric_device_remove',
+		'poller_bottom'              => 'fabric_poller_bottom',
+		'replicate_out'              => 'fabric_replicate_out',
+		'abilities_register'         => 'fabric_abilities_register',
+		'api_register_resources'     => 'fabric_api_register_resources',
+		'doctor_register_checks'     => 'fabric_doctor_register_checks',
+		'doctor_register_debug_info' => 'fabric_doctor_register_debug_info',
+		'casc_register_providers'    => 'fabric_casc_register_providers',
 	];
 
 	/** Columns version 2 adds to plugin_fabric_sample, for rates and discontinuities. */
 	private const SAMPLE_V2 = ['previous_at', 'rates', 'reset', 'discontinuities', 'discontinuity_at'];
 
+	/** Columns version 3 adds to plugin_fabric_fabric, for NVIDIA UFM REST backends. */
+	private const FABRIC_V3 = ['ufm_url', 'ufm_ca_file', 'ufm_spki_pin', 'ufm_credential_id'];
+
+	/** Plugin constant for Schema. */
 	private const PLUGIN  = 'fabric';
+	/** Setting constant for Schema. */
 	private const SETTING = 'fabric_schema_version';
 
+	/**
+	 * Construct a new Schema instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
+	/**
+	 * Stored version.
+	 *
+	 * @return int
+	 */
 	public function storedVersion(): int {
 		$value = db_fetch_cell_prepared('SELECT value FROM settings WHERE name = ?', [self::SETTING], '', true, $this->connection);
 
 		return is_numeric($value) ? (int) $value : 0;
 	}
 
+	/**
+	 * Check whether current.
+	 *
+	 * @return bool
+	 */
 	public function isCurrent(): bool {
 		return $this->storedVersion() === self::VERSION;
 	}
@@ -102,10 +130,23 @@ final class Schema {
 		return true;
 	}
 
+	/**
+	 * Recorded plugin version.
+	 *
+	 * @return string
+	 */
 	public function recordedPluginVersion(): string {
 		return (string) db_fetch_cell_prepared('SELECT version FROM plugin_config WHERE directory = ?', [self::PLUGIN], '', true, $this->connection);
 	}
 
+	/**
+	 * Record plugin version.
+	 *
+	 * @param string $version
+	 * @param string $author
+	 * @param string $homepage
+	 * @return void
+	 */
 	public function recordPluginVersion(string $version, string $author, string $homepage): void {
 		db_execute_prepared('UPDATE plugin_config SET version = ?, author = ?, webpage = ? WHERE directory = ?', [$version, $author, $homepage, self::PLUGIN], true, $this->connection);
 	}
@@ -117,6 +158,11 @@ final class Schema {
 		return (int) db_fetch_cell_prepared('SELECT status FROM plugin_config WHERE directory = ?', [self::PLUGIN], '', true, $this->connection) === 1;
 	}
 
+	/**
+	 * Hooks registered.
+	 *
+	 * @return bool
+	 */
 	public function hooksRegistered(): bool {
 		$placeholders = implode(', ', array_fill(0, count(self::HOOKS), '?'));
 
@@ -137,6 +183,11 @@ final class Schema {
 		return $ok !== false && (int) db_fetch_cell_prepared("SELECT COUNT(*) FROM plugin_db_changes WHERE plugin = ? AND method = 'create'", [self::PLUGIN], '', true, $this->connection) === 0;
 	}
 
+	/**
+	 * Forget version.
+	 *
+	 * @return void
+	 */
 	public function forgetVersion(): void {
 		db_execute_prepared('DELETE FROM settings WHERE name = ?', [self::SETTING], true, $this->connection);
 	}
@@ -148,6 +199,9 @@ final class Schema {
 		return [
 			1 => fn (): bool => $this->createTables(self::tables()),
 			2 => fn (): bool => $this->addColumns('plugin_fabric_sample', self::SAMPLE_V2),
+			3 => fn (): bool => $this->addColumns('plugin_fabric_fabric', self::FABRIC_V3)
+				&& $this->allowNullableAdapter()
+				&& $this->createTables(array_intersect_key(self::tables(), ['plugin_fabric_secret' => true])),
 		];
 	}
 
@@ -225,6 +279,21 @@ final class Schema {
 		return true;
 	}
 
+	/**
+	 * Allow nullable adapter.
+	 *
+	 * @return bool
+	 */
+	private function allowNullableAdapter(): bool {
+		return db_execute_prepared('ALTER TABLE `plugin_fabric_fabric` MODIFY COLUMN `adapter` varchar(32) NULL DEFAULT NULL', [], true, $this->connection) !== false;
+	}
+
+	/**
+	 * Table exists.
+	 *
+	 * @param string $table
+	 * @return bool
+	 */
 	private function tableExists(string $table): bool {
 		return db_fetch_cell_prepared('SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ?', [$table], '', true, $this->connection) > 0;
 	}
@@ -259,16 +328,39 @@ final class Schema {
 					$text('backend', 16, 'diags'),
 					$id('poller_id') + ['default' => '1'],
 					$id('sweep_interval') + ['default' => '300'],
-					$text('adapter', 32),
+					['name' => 'adapter', 'type' => 'varchar(32)', 'NULL' => true],
 					$small('adapter_port'),
 					$text('admin_state', 16, 'enabled'),
+					$text('ufm_url', 255),
+					$text('ufm_ca_file', 255),
+					$text('ufm_spki_pin', 128),
+					$id('ufm_credential_id') + ['default' => '0'],
 					$time('created_at'),
 					$time('updated_at'),
 				],
 				'primary'     => 'id',
-				// One fabric per local adapter port and poller: a second one
-				// would import the same nodes again under its own records.
-				'unique_keys' => [['name' => 'name', 'columns' => ['name']], ['name' => 'poller_adapter_port', 'columns' => ['poller_id', 'adapter', 'adapter_port']]],
+				'unique_keys' => [
+					['name' => 'name', 'columns' => ['name']],
+					['name' => 'poller_adapter_port', 'columns' => ['poller_id', 'adapter', 'adapter_port']],
+				],
+			],
+			// Encrypted UFM credentials (AES-256-GCM; key lives in external keyfile).
+			'plugin_fabric_secret' => $innodb + [
+				'comment' => 'Encrypted UFM credential vault entries',
+				'columns' => [
+					$id('id') + ['auto_increment' => true],
+					$text('name', 64),
+					$text('auth_type', 16, 'token'),
+					$text('username', 128),
+					['name' => 'nonce', 'type' => 'varbinary(12)', 'NULL' => false, 'default' => ''],
+					['name' => 'ciphertext', 'type' => 'varbinary(4096)', 'NULL' => false, 'default' => ''],
+					['name' => 'tag', 'type' => 'varbinary(16)', 'NULL' => false, 'default' => ''],
+					$text('key_id', 16),
+					$time('created_at'),
+					$time('updated_at'),
+				],
+				'primary'     => 'id',
+				'unique_keys' => [['name' => 'name', 'columns' => ['name']]],
 			],
 			// One row per node GUID and fabric (ADR 0003). Type, port count,
 			// device, vendor, and system image GUID are the attributes whose

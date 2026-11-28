@@ -1,44 +1,36 @@
-<!-- Source: README.md; SHA256: ce5af61a1bc993ec2aae6d4f22c3885694632f2b1d5eb94e2ce88b8390e96f1e -->
+<!-- Source: README.md; SHA256: 79a16fb906f96ee79de2c719f18c38836f555440a7571a4a5ba38c64bb5b099f -->
 
 <!-- translations:start -->
-[English](../../../README.md) | [简体中文](../zh-CN/README.md) | [हिन्दी](../hi-IN/README.md) | [Español (España)](../es-ES/README.md) | [Español (Latinoamérica)](../es-419/README.md) | [العربية (السعودية)](../ar-SA/README.md) | [Afrikaans](../af-ZA/README.md) | [አማርኛ](../am-ET/README.md) | [العربية (مصر)](../ar-EG/README.md) | [العربية (المغرب)](../ar-MA/README.md) | [বাংলা](../bn-BD/README.md) | [Bosanski](../bs-BA/README.md) | [Deutsch](README.md) | [فارسی](../fa-IR/README.md) | [Filipino](../fil-PH/README.md) | [Français](../fr-FR/README.md) | [Français (Maroc)](../fr-MA/README.md) | [Français (Sénégal)](../fr-SN/README.md) | [Hausa](../ha-NG/README.md) | [עברית](../he-IL/README.md) | [Hrvatski](../hr-HR/README.md) | [Bahasa Indonesia](../id-ID/README.md) | [Igbo](../ig-NG/README.md) | [Italiano](../it-IT/README.md) | [日本語](../ja-JP/README.md) | [한국어](../ko-KR/README.md) | [Malagasy](../mg-MG/README.md) | [मराठी](../mr-IN/README.md) | [Bahasa Melayu](../ms-MY/README.md) | [Nederlands](../nl-NL/README.md) | [Polski](../pl-PL/README.md) | [Português (Brasil)](../pt-BR/README.md) | [Русский](../ru-RU/README.md) | [Kinyarwanda](../rw-RW/README.md) | [Soomaali](../so-SO/README.md) | [Српски](../sr-RS/README.md) | [Svenska](../sv-SE/README.md) | [Kiswahili](../sw-KE/README.md) | [தமிழ்](../ta-IN/README.md) | [తెలుగు](../te-IN/README.md) | [ไทย](../th-TH/README.md) | [Türkçe](../tr-TR/README.md) | [Українська](../uk-UA/README.md) | [اردو](../ur-PK/README.md) | [Tiếng Việt](../vi-VN/README.md) | [isiXhosa](../xh-ZA/README.md) | [Yorùbá](../yo-NG/README.md) | [繁體中文](../zh-TW/README.md) | [isiZulu](../zu-ZA/README.md)
+[English](../../../README.md) | [简体中文](../zh-CN/README.md) | [हिन्दी](../hi-IN/README.md) | [Español (España)](../es-ES/README.md) | [Español (Latinoamérica)](../es-419/README.md) | [العربية (السعودية)](../ar-SA/README.md) | [Afrikaans](../af-ZA/README.md) | [አማርኛ](../am-ET/README.md) | [العربية (مصر)](../ar-EG/README.md) | [العربية (المغرب)](../ar-MA/README.md) | [Български](../bg-BG/README.md) | [বাংলা](../bn-BD/README.md) | [Bosanski](../bs-BA/README.md) | [Deutsch](README.md) | [Ελληνικά](../el-GR/README.md) | [فارسی](../fa-IR/README.md) | [Filipino](../fil-PH/README.md) | [Français](../fr-FR/README.md) | [Français (Maroc)](../fr-MA/README.md) | [Français (Sénégal)](../fr-SN/README.md) | [Hausa](../ha-NG/README.md) | [עברית](../he-IL/README.md) | [Hrvatski](../hr-HR/README.md) | [Bahasa Indonesia](../id-ID/README.md) | [Igbo](../ig-NG/README.md) | [Italiano](../it-IT/README.md) | [日本語](../ja-JP/README.md) | [ქართული](../ka-GE/README.md) | [한국어](../ko-KR/README.md) | [Latviešu](../lv-LV/README.md) | [Malagasy](../mg-MG/README.md) | [मराठी](../mr-IN/README.md) | [Bahasa Melayu](../ms-MY/README.md) | [Nederlands](../nl-NL/README.md) | [Polski](../pl-PL/README.md) | [Português (Brasil)](../pt-BR/README.md) | [Português (Portugal)](../pt-PT/README.md) | [Русский](../ru-RU/README.md) | [Kinyarwanda](../rw-RW/README.md) | [Soomaali](../so-SO/README.md) | [Српски](../sr-RS/README.md) | [Svenska](../sv-SE/README.md) | [Kiswahili](../sw-KE/README.md) | [தமிழ்](../ta-IN/README.md) | [తెలుగు](../te-IN/README.md) | [ไทย](../th-TH/README.md) | [Türkçe](../tr-TR/README.md) | [Українська](../uk-UA/README.md) | [اردو](../ur-PK/README.md) | [Tiếng Việt](../vi-VN/README.md) | [isiXhosa](../xh-ZA/README.md) | [Yorùbá](../yo-NG/README.md) | [繁體中文](../zh-TW/README.md) | [isiZulu](../zu-ZA/README.md)
 <!-- translations:end -->
 
 # plugin_fabric
 
-Ein Cacti-1.2-Plugin, das InfiniBand-Port-Zähler, Link-Breite und -Geschwindigkeit sowie Congestion-Indikatoren als reguläre Geräte, Datenquellen und Graphen in Cacti bereitstellt. Ein Link, der mit 1X statt 4X ausgehandelt wurde, erscheint dann als Graph und als Thold-Warnung neben dem zugehörigen Host – unter den Berechtigungen von Cacti und mit der Möglichkeit zur Unterdrückung über Maint.
+Ein Cacti-1.2-Plugin (`fabric`, Version `0.1.0-dev`), das InfiniBand-Port-Zähler, Link-Breite und -Geschwindigkeit sowie Congestion-Indikatoren als reguläre Geräte, Datenquellen und Graphen in Cacti bereitstellt. Ein Link, der mit 1X statt 4X ausgehandelt wurde, erscheint dann als Graph und als Thold-Warnung neben dem zugehörigen Host, unter den Berechtigungen von Cacti und mit Maint-Erkennung sowie -Unterdrückung.
 
-> **Status: in Entwicklung, noch kein Release.** Meilenstein 2 (Grundlage) wurde in `main` gemergt und Meilenstein 3 (Cacti-Objekte und Alarmierung) befindet sich im Review. Meilenstein 1 hat das Design anhand der Dokumentation und des Upstream-Quellcodes bestätigt (PR #71); die Ergebnisse mit Quellenangaben finden Sie unter [docs/research/](../../research). Meilenstein 2 ergänzt die Plugin-Grundlage:
->
-> - Installation, Upgrade, Deinstallation und die PHP-8.2-Prüfung
-> - Realms für View, Operator und Admin sowie Einstellungen
-> - Fabric-Datensätze
-> - die schreibgeschützte Befehlsgrenze für `perfquery`, `ibnetdiscover` und `iblinkinfo`
-> - Inventarisierung nach GUID, mit Identitätskonflikten und Vorschlägen zur Neuverknüpfung
-> - Link-Status und der Cache für Zähler-Sweeps
-> - Seiten für Inventar, Administration und Systemzustand
->
-> Meilenstein 3 ergänzt die Cacti-Objekte:
->
-> - Geräte-, Daten- und Graph-Vorlagen als Cacti-Template-XML sowie die Datenabfrage „Fabric Port“
-> - Zuordnung eines Knotens zu einem Cacti-Gerät oder dessen Erstellung nach Bestätigung ([ADR 0010](../../decisions/0010-one-device-per-node.md))
-> - Zähler-Datenquellen für Graphen sowie GAUGE-Datenquellen für Link-Status und -Raten für Thold ([ADR 0011](../../decisions/0011-derive-counters-and-gauge-alert-values.md))
-> - Behandlung von Diskontinuitäten und gesättigte Basis-Zähler als „unknown“ ([ADR 0012](../../decisions/0012-saturated-basic-counters-read-as-unknown.md)), Zählervalidität und Graph-Links auf der Port-Seite sowie ein Congestion-Ranking
-> - ein End-to-End-Test mit unverändertem Thold v1.8.2 und Maint v1.3 sowie ein CI-Job, der die echten Diagnose-Tools gegen eine simulierte Fabric ausführt
->
-> Bis Remote-Datensammler in Phase 3 unterstützt werden, kann eine Fabric nur vom Haupt-Poller aus abgefragt werden. Das Plugin wurde bislang gegen Mock-Tools und den Fabric-Simulator ibsim getestet, noch nie auf einer realen InfiniBand-Fabric. Prüfungen, die eine echte Fabric erfordern, bleiben in der Live-Checks-Tabelle der jeweiligen Research-Seite offen. Dieses Projekt steht in keiner Verbindung zum Cacti-Projekt.
+> **Status: in Entwicklung, noch kein Release.** Dieser Branch implementiert die Plugin-Grundlage, Cacti-Objekte und Alarmierung, geplante Hintergrund-Poller-Sweeps, Replikation auf Remote-Datensammler, ein schreibgeschütztes NVIDIA-UFM-REST-Backend mit verschlüsseltem Zugangsdatentresor, Configuration-as-Code-(CasC-)CLI-Verwaltung sowie Cacti-Ökosystem-Hooks (CasC, Doctor und MCP / Abilities API v2). Es wurde gegen Mock-Tools, synthetische UFM-Transporte und den Fabric-Simulator `ibsim` (rdma-core 50.0) getestet, noch nie auf einer physischen InfiniBand-Fabric oder einem Live-UFM-Server. Prüfungen, die Hardware erfordern, bleiben unter [docs/research/](../../research/) offen. Dieses Projekt steht in keiner Verbindung zum Cacti-Projekt.
+
+## Was implementiert ist
+
+- **Lebenszyklus und Schema (v3)**: Installation, idempotentes Upgrade, Deinstallation (Plugin-Tabellen bleiben standardmäßig erhalten) sowie eine PHP-8.2-Anforderungsprüfung, während Einstiegspunkte unter PHP 8.0 parsbar bleiben.
+- **Zugriffsrollen und Seiten**: die Realms `Fabric View` (`fabric.php`), `Fabric Operator` (`fabric_operator.php`) und `Fabric Admin` (`fabric_admin.php`, `fabric_health.php`) sowie ein Einstellungs-Tab unter **Configuration > Settings > Fabrics**.
+- **Schreibgeschütztes Diagnose-Backend (`diags`)**: strikte Argumentvektor-Ausführung von `perfquery`, `ibnetdiscover` und `iblinkinfo`, GUID-basiertes Inventar mit Erkennung von Identitätskonflikten und Vorschlägen zur Neuverknüpfung, Link-Status-Auswertung sowie Zähler-Sweeps pro Knoten.
+- **Schreibgeschütztes NVIDIA-UFM-REST-Backend (`ufm`) und verschlüsselter Tresor**: reiner GET-REST-Client mit Positivliste (`/ufmRest/resources/ports`, `/ufmRest/resources/systems`, `/ufmRest/monitoring/session/0/data` sowie `/ufmRestV3/...`-Pendants für Token-Authentifizierung), der dieselben Inventar-, Link-Status-, Messwert- und Zustandstabellen wie `diags` speist. Zugangsdaten (`token` oder `basic`) werden mit AES-256-GCM verschlüsselt in `plugin_fabric_secret` gespeichert, wobei eine über `fabric_vault_key_file` konfigurierte externe 256-Bit-Schlüsseldatei verwendet wird. UFM-Fabrics können über CasC (`cli/fabric.php`) oder die Repositories definiert werden; das Web-Admin-Formular stellt derzeit `diags`-Felder bereit.
+- **Cacti-Objekte, Thold und Maint**: Cacti-Geräte-, Daten- und Graph-Vorlagen (`templates/fabric-templates.xml`), die Script-Server-Datenabfrage „Fabric Port“ (`scripts/ss_fabric_ports.php`, `resource/script_server/fabric_ports.xml`), `DERIVE`-Zähler-Datenquellen und `GAUGE`-Link-Status-/Raten-Datenquellen für Thold, Diskontinuitätsverfolgung sowie als `U` gemeldete gesättigte Basis-Zähler. Die Maint-Integration (`MaintMaintenance`) fragt `plugin_maint_check_cacti_host()` ab (mit Fallback auf den Hook `is_device_in_maintenance`), sodass Knoten in aktiver Wartung separat gezählt und von Gesundheitswarnungen wegen fehlgeschlagener Sweeps und beeinträchtigter Ports ausgenommen werden.
+- **Geplante Sweeps, Sharding und Remote-Datensammler**: `poller_bottom` startet `poller_fabric.php` im Hintergrund für fällige Fabrics, die dem aktuellen Poller zugewiesen sind, neben vom Script-Server ausgelösten Lazy-Sweeps. `INFO` deklariert `remote_collect:1, remote_poller:1`, `poller_fabric.php` unterstützt deterministisches GUID-Sharding (`--shard=K/N`), und `replicate_out` repliziert nicht-geheime Zeilen aus `plugin_fabric_fabric` auf Remote-Datensammler (`poller_id >= 2`). Tresoreinträge (`plugin_fabric_secret`) und externe Schlüsseldateien werden niemals repliziert.
+- **CasC-CLI und Ökosystem-Hooks**: `cli/fabric.php` für YAML/XML-Export, Validierung, Dry-Run-Diff-Planung, bestätigungsgebundene Anwendung und Zustandsberichte sowie die Hooks `casc_register_providers`, `doctor_register_checks` und `abilities_register`.
 
 ## Zugriffsrollen
 
 | Realm | Zugriff |
 | --- | --- |
-| Fabric View | Bestehende Monitoring-Seiten. |
-| Fabric Operator | Monitoring sowie die Operations-Seite und persönliche Triage-Bestätigungen. |
-| Fabric Admin | Operator-Zugriff sowie die bestehenden Konfigurations- und Verwaltungsaktionen. |
+| Fabric View | Überwachung von Inventar und Port-Ansichten (`fabric.php`). |
+| Fabric Operator | View-Zugriff plus Operations-Seite (`fabric_operator.php`) und persönliche Triage-Bestätigungen. |
+| Fabric Admin | Operator-Zugriff plus Konfiguration, administrative Aktionen (`fabric_admin.php`) und Systemzustandsseite (`fabric_health.php`). |
 
-Nach dem Kopieren der Upgrade-Dateien öffnen Sie als Administrator die Plugins-Seite, um das neue Realm zu registrieren. Weisen Sie das Operator-Realm explizit unter **Configuration > Users** oder den Benutzergruppen zu. Upgrades behalten die bestehenden IDs und Berechtigungen der View- und Admin-Realms bei. Admin-Zugriff erbt Operator-Zugriff, und Operator-Zugriff erbt View-Zugriff bei jeder Anfrage; dadurch werden keine dauerhaften Berechtigungen zu Benutzern oder Gruppen hinzugefügt. Plugin-Einstellungen erfordern zusätzlich zur Settings-Berechtigung von Cacti auch den Fabric-Admin-Zugriff.
+Nach dem Kopieren der Upgrade-Dateien öffnen Sie als Administrator die Plugins-Seite, um neue Realms und Hooks zu registrieren. Weisen Sie das Operator-Realm explizit unter **Configuration > Users** oder in Benutzergruppen zu. Upgrades behalten bestehende IDs und Berechtigungen der View- und Admin-Realms bei. Admin-Zugriff erbt Operator-Zugriff, und Operator-Zugriff erbt View-Zugriff bei jeder Anfrage; dadurch werden keine dauerhaften Berechtigungen zu Benutzern oder Gruppen hinzugefügt. Plugin-Einstellungen erfordern zusätzlich zur Settings-Berechtigung von Cacti auch den Fabric-Admin-Zugriff.
 
-Cacti-Geräteberechtigungen schränken weiterhin die für jeden Benutzer verfügbaren Zeilen und Aktionen ein; nicht zugeordnete Objekte erfordern einen Administrator. Zugangsdaten, Konfiguration, Zuordnungen, Löschungen und sonstige administrative Änderungen verbleiben auf den Verwaltungsseiten. Bestätigungen gelten nur in der aktuellen Benutzersitzung, für höchstens eine Stunde und nur solange dieselbe Beobachtung aktuell bleibt. Neue oder geänderte Beobachtungen machen sie ungültig. Sie markieren eine fehlgeschlagene Messung niemals als fehlerfrei und unterdrücken keine Alarme.
+Cacti-Geräteberechtigungen schränken die für jeden Benutzer verfügbaren Zeilen und Aktionen ein; nicht zugeordnete Objekte erfordern einen Administrator. Zugangsdaten, Konfiguration, Zuordnungen, Löschungen und sonstige administrative Änderungen verbleiben auf den Verwaltungsseiten oder in der CLI. Bestätigungen gelten nur in der aktuellen Benutzersitzung, für höchstens eine Stunde und nur solange dieselbe Beobachtung aktuell bleibt. Neue oder geänderte Beobachtungen machen sie ungültig. Sie markieren eine fehlgeschlagene Messung niemals als fehlerfrei und unterdrücken keine Alarme.
 
 ## Warum
 
@@ -48,74 +40,123 @@ Ein beeinträchtigter InfiniBand-Link überträgt weiterhin Datenverkehr. Ein 4X
 - **Kein Gerätekontext.** Fabric-Ports sind keine Cacti-Objekte, sodass ein Port nicht neben dem Host, den er versorgt, als Graph dargestellt werden kann.
 - **Keine Anbindung an die Cacti-Alarmierung.** Thold und Maint arbeiten auf Basis von Cacti-Datenquellen und -Geräten.
 
-Das Plugin schließt diese Lücken, indem es die Fabric über die eigenen Diagnose-Tools (und später über UFM) ausliest, Knoten und Ports anhand ihrer GUID identifiziert und Zähler sowie Link-Status als Cacti-Datenquellen veröffentlicht. Es arbeitet ausschließlich lesend: Es setzt niemals Zähler zurück und ändert niemals den Port-Status.
+Das Plugin schließt diese Lücken, indem es die Fabric über `infiniband-diags` oder die NVIDIA UFM REST API ausliest, Knoten und Ports anhand ihrer GUID identifiziert und Zähler sowie Link-Status als Cacti-Datenquellen veröffentlicht. Es arbeitet ausschließlich lesend: Es setzt niemals Zähler zurück und ändert niemals den Port-Status.
 
-## Erste Erkennung
+## Betrieb und CLI
 
-Eine neue Fabric enthält noch keine Knoten, und Sweeps werden vom Script-Server nur für Knoten gestartet, die einem Cacti-Gerät zugeordnet sind. Die erste Erkennung ist daher ein manueller Schritt. Nachdem Sie eine aktivierte Fabric gespeichert haben, führen Sie diesen Befehl einmalig auf dem Poller aus, dem die Fabric zugewiesen ist – unter dem Benutzerkonto des Pollers, wobei `/path/to/cacti` durch Ihr Cacti-Verzeichnis ersetzt wird (der absolute Pfad funktioniert auch über Cron):
+### Hintergrund-Poller und manuelle Sweeps
 
+`fabric_poller_bottom()` startet `poller_fabric.php` auf jedem Poller im Hintergrund für aktivierte Fabrics, die dieser `poller_id` zugewiesen sind und deren Sweep fällig ist. Sie können den Poller-Runner oder einen manuellen Sweep auch direkt auf dem zugewiesenen Poller als Poller-Benutzer ausführen (wobei Sie `/path/to/cacti` durch Ihr Cacti-Verzeichnis ersetzen):
+
+```sh
+php /path/to/cacti/plugins/fabric/poller_fabric.php [--fabric=ID] [--shard=K/N] [--force] [--debug]
+php /path/to/cacti/plugins/fabric/fabric_sweep.php --fabric=ID [--node=GUID] [--force]
 ```
-php /path/to/cacti/plugins/fabric/fabric_sweep.php --fabric=ID --force
+
+- `poller_fabric.php` führt alle fälligen Fabrics für den lokalen Poller aus (oder eine einzelne Fabric mit `--fabric=ID`), erzwingt die Prozessregistrierungs-Sperre von Cacti sowie `ClaimRepository`-Leases mit einem Zeitbudget von `max(30, intdiv(sweep_interval, 2))` Sekunden und unterstützt `--shard=K/N` (`0 <= K < N`), um `diags`-Knotenzähler-Sweeps deterministisch nach Knoten-GUID aufzuteilen.
+- `fabric_sweep.php` führt einen Bedarfs-Sweep einer aktivierten Fabric (oder eines Knotens mit `--node=GUID`) aus, die dem lokalen Poller zugewiesen ist. `--force` ignoriert, ob die Fabric fällig ist, beachtet aber weiterhin Leases.
+
+Nachdem die erste Erkennung das Inventar gefüllt hat, ordnen Sie die Knoten auf der Seite „Fabric Admin“ Cacti-Geräten zu. Belassen Sie das Skript-Timeout von Cacti bei 25 Sekunden oder höher: Ein durch das Auslesen einer Datenabfrage gestarteter Lazy-Sweep begrenzt die Tool-Ausführung auf `script_timeout - 5` Sekunden, damit der Script-Server rechtzeitig mit dem letzten gespeicherten Messwert oder `U` antwortet.
+
+### NVIDIA-UFM-REST-Backend und Zugangsdatentresor
+
+Eine `ufm`-Fabric erfordert eine `https://`-URL ohne eingebettete Zugangsdaten, Query-Strings oder Fragmente. `UfmSocketTransport` erzwingt TLS-Peer- und Hostnamen-Verifizierung, lehnt Weiterleitungen ab und unterstützt ein optionales CA-Bundle (`ufm_ca_file`) sowie einen SHA-256-SPKI-Pin (`ufm_spki_pin`).
+
+Um UFM-Zugangsdaten in `plugin_fabric_secret` zu speichern, konfigurieren Sie `fabric_vault_key_file` unter **Configuration > Settings > Fabrics** mit einem absoluten Pfad zu einer regulären Datei im Besitz des Poller-Benutzers (keine Symlinks in einem übergeordneten Verzeichnis, Modus `0600`, mit 64 Hex-Zeichen wie aus `openssl rand -hex 32` oder 32 zufälligen nicht druckbaren Bytes). Das Plugin erstellt oder schreibt die Schlüsseldatei niemals, und `replicate_out` repliziert niemals `plugin_fabric_secret` oder Schlüsseldateien auf Remote-Poller.
+
+### Configuration-as-Code und Zustands-CLI
+
+`cli/fabric.php` verwaltet Plugin-Einstellungen und Fabric-Definitionen deklarativ in YAML oder XML und meldet den wartungsbewussten Systemzustand, ohne Live-Sweeps auszuführen:
+
+```sh
+php /path/to/cacti/plugins/fabric/cli/fabric.php export [--format=yaml|xml] [--file=PATH]
+php /path/to/cacti/plugins/fabric/cli/fabric.php validate --file=PATH [--format=yaml|xml]
+php /path/to/cacti/plugins/fabric/cli/fabric.php plan --file=PATH [--format=yaml|xml]
+php /path/to/cacti/plugins/fabric/cli/fabric.php apply --file=PATH --confirm=PLAN_HASH [--format=yaml|xml]
+php /path/to/cacti/plugins/fabric/cli/fabric.php health [--format=text|json]
 ```
 
-Anschließend füllt sich das Inventar. Ordnen Sie die Knoten auf der Seite „Fabric Admin“ Cacti-Geräten zu; spätere Sweeps starten dann über die Datenabfrage. Solange kein Knoten einer Fabric zugeordnet ist, aktualisiert nichts ihr Inventar; führen Sie denselben Befehl daher bei Bedarf erneut aus – gerne auch per Cron –, um neue oder fehlende Knoten zu erfassen. Die Statusseite zeigt diesen Befehl für jede aktivierte Fabric an, die noch nicht erkannt wurde oder keinen zugeordneten Knoten besitzt.
+`export` erstellt neue Dateien mit Modus `0600`, schwärzt `fabric_vault_key_file` als `[REDACTED]` und gibt benannte `ufm_credential_ref`-Referenzen statt Geheimnissen aus. `plan` und `apply` lehnen Inline-Werte für `ufm_token`, `ufm_password`, `secret` sowie Inline-Werte für `fabric_vault_key_file` ab. `apply` erfordert exakt das von `plan` erzeugte `--confirm=PLAN_HASH`.
 
-## Geplanter Umfang
+### Ökosystem-Hooks
 
-| Phase | Umfang | Meilensteine |
-|---|---|---|
-| 0, Forschung | Versionsmatrix, Bestätigung des Upstream-Verhaltens, Zählerverhalten auf Hardware, Berechtigungsmodell, MAD-Budget, UFM-API | [M1](https://github.com/somethingwithproof/plugin_fabric/milestone/1) |
-| 1, Beobachtung | Inventarisierung nach GUID, Cacti-Geräte, Port-Datenabfrage, Zähler- und Link-Status-Datenquellen, Thold-Alarmierung, Maint-Unterdrückung, Statusseite | [M2](https://github.com/somethingwithproof/plugin_fabric/milestone/2), [M3](https://github.com/somethingwithproof/plugin_fabric/milestone/3), [M4](https://github.com/somethingwithproof/plugin_fabric/milestone/4) |
-| 2, UFM | Schreibgeschütztes UFM-REST-Backend, Verwaltung von Zugangsdaten, Identitätskontinuität zwischen Backends | [M5](https://github.com/somethingwithproof/plugin_fabric/milestone/5) |
-| 3, Remote | Remote-Datensammler, Replikation, `remote_agent`-Aktionen, aufgeteilte Sweeps für große Fabrics | [M6](https://github.com/somethingwithproof/plugin_fabric/milestone/6) |
+Wenn die entsprechenden Cacti-Plugins oder Host-Integrationen vorhanden sind, registriert `setup.php`:
 
-Nicht im Umfang enthalten: Änderung des Fabric-Status, Ersatz eines Fabric-Managers oder Subnet-Managers, eine eigene Alarmierungs-Engine im Plugin, ein eigener Daemon oder ein eigenes Netzwerkprotokoll sowie Ethernet- oder RoCE-Fabrics (Forschung).
+- `casc_register_providers`: exportiert, validiert, plant und wendet nach Bestätigung die `fabric`-Konfiguration (`yaml` und `xml`, Schema v1) mit Schwärzung von Geheimnissen an.
+- `doctor_register_checks`: stellt vier schreibgeschützte Diagnoseprüfungen bereit (`fabric.schema`, `fabric.poller_freshness`, `fabric.identity_conflicts`, `fabric.ufm_vault`).
+- `abilities_register`: registriert drei schreibgeschützte, nicht-destruktive, idempotente Fähigkeiten unter der Kategorie `fabric`, geschützt durch das Realm Fabric View (und Cacti-Geräteberechtigungen für Portfehler): `fabric-list-fabrics`, `fabric-get-health` und `fabric-list-port-errors`.
 
-## Kompatibilitätsziele
+## Umfang und Grenzen
+
+Nicht im Umfang enthalten: Änderung des Fabric-Status, Zurücksetzen von Zählern, Ersatz eines Fabric-Managers oder Subnet-Managers, eine eigene Alarmierungs-Engine im Plugin, ein eigener Daemon oder ein eigenes Netzwerkprotokoll sowie Ethernet- oder RoCE-Fabrics.
+
+## Anforderungen und Kompatibilität
 
 | Komponente | Ziel |
 |---|---|
-| Cacti | 1.2.31 oder neuer, ohne Core-Patches |
-| PHP | 8.2 oder neuer; `setup.php` bleibt unter 8.0 parsbar, sodass eine nicht unterstützte Laufzeitumgebung eine saubere Ablehnung statt einer defekten Cacti-Oberfläche erhält |
-| InfiniBand-Tools | infiniband-diags aus rdma-core; Ausgabeformate gegen den Quellcode von v66.0 geprüft |
-| UFM | UFM Enterprise REST API, Phase 2; die Release-Matrix ist ein Ergebnis von Meilenstein 1 |
-| Thold, Maint | Keine Änderungen erforderlich |
+| Cacti | 1.2.31 oder neuer (`compat = 1.2.31`), ohne Core-Patches |
+| PHP | 8.2 oder neuer; Einstiegspunkte bleiben unter 8.0 parsbar und lehnen die Aktivierung unter 8.1 ab, sodass eine nicht unterstützte Laufzeitumgebung eine Ablehnung statt einer defekten Cacti-Oberfläche erhält |
+| InfiniBand-Tools | `infiniband-diags` aus `rdma-core` (in CI mit rdma-core 50.0 unter `ibsim` getestet; Ausgabeformate gegen den Quellcode von v66.0 geprüft) |
+| UFM | NVIDIA UFM Enterprise REST API (schreibgeschützte Endpunkte `ufmRest` und `ufmRestV3`; in Unit-Tests gegen synthetische Transporte getestet) |
+| Thold, Maint | Keine Änderungen erforderlich; CI führt einen End-to-End-Test mit unverändertem Thold v1.8.2 und Maint v1.3 aus |
 
-Belassen Sie das Skript-Timeout von Cacti beim Standardwert von 25 Sekunden oder höher. Ein durch das Auslesen einer Datenabfrage gestarteter Sweep begrenzt die Tool-Ausführung auf dieses Timeout abzüglich fünf Sekunden, um Zeit für das Lesen des Caches und die Antwort zu reservieren. Läuft das Zeitbudget ab, liefert die Abfrage den letzten aktuellen Messwert oder „unknown“; im nächsten Zyklus wird der Sweep erneut versucht. Diese Begrenzung gilt auch für den PHP-Poller. Ein Timeout von fünf Sekunden oder weniger lässt keine Zeit, ein Tool zu starten.
+## Entwicklung und Testen
+
+Der CI-Workflow (`.github/workflows/plugin-ci-workflow.yml`) testet PHP 8.2 bis 8.5 gegen Cacti `release/1.2.31` und `1.2.x`, PHP-8.0-Einstiegspunkt-Linting, PHP-8.1-Ablehnung, PHPStan, gettext-/Übersetzungsprüfung, REUSE-Lizenzierung, Workflow-Linting, Thold/Maint-End-to-End-Replay und `ibsim`-Fabric-Simulation.
+
+Mit dem gesperrten gemeinsamen Pest-Plugin-Harness von Cacti (`CACTI_PEST_BIN`) und einer Wegwerf-Cacti-Datenbank:
+
+```sh
+# Unit tests
+"$CACTI_PEST_BIN" --configuration=phpunit.xml
+
+# Lifecycle integration tests (disposable database only)
+CACTI_PATH=/path/to/cacti FABRIC_TEST_DATABASE=disposable "$CACTI_PEST_BIN" --configuration=phpunit-integration.xml
+
+# Static analysis (against Cacti 1.2.31)
+CACTI_PATH=/path/to/cacti phpstan analyse -c phpstan.neon --no-progress
+
+# Translation template, catalogs, and localized README checks
+sh locales/build_gettext.sh --check
+
+# Simulated ibsim fixture parser check
+php tests/bin/check-ibsim-fixtures.php tests/fixtures/ibsim
+```
 
 ## Design
 
-- [docs/PLAN.md](../../PLAN.md) enthält den vollständigen Plan: Architektur, zugrunde liegende Upstream-Fakten (mit Quellen) und noch zu bestätigende Annahmen, Identitätsmodell, Regeln für Zähler und Link-Status, Sicherheitsgrenzen, Performance-Berechnungen, Tests und Risiken.
-- [docs/decisions/](../../decisions) enthält Architecture Decision Records (ADRs) für bereits getroffene Entscheidungen.
+- [docs/PLAN.md](../../PLAN.md) ist der Architektur- und Designplan: Upstream-Fakten mit Quellen, offene Hardware-Prüfungen, Identitätsmodell, Regeln für Zähler und Link-Status, Sicherheitsgrenzen, Performance-Arithmetik, Tests und Risiken.
+- [docs/decisions/](../../decisions/) enthält Architecture Decision Records.
 - [docs/REQUIREMENTS.md](../../REQUIREMENTS.md) ordnet jede Anforderungs-ID dem jeweiligen Issue zu.
 
 ```mermaid
 flowchart LR
-    F[InfiniBand-Fabric] --> T[infiniband-diags-Tools, schreibgeschützt]
-    F --> U[UFM REST, Phase 2]
-    T --> S[Sweep-Job auf dem Cacti-Poller]
+    F["InfiniBand-Fabric"] --> T["infiniband-diags-Tools, schreibgeschützt"]
+    F --> U["UFM REST API, schreibgeschützt"]
+    T --> S["poller_fabric.php oder Lazy-Sweep auf zugewiesenem Poller"]
     U --> S
-    S --> C[(Sample-Cache)]
-    C --> SS[Script-Server und Datenabfrage]
-    SS --> R[RRD-Dateien und Cacti-Graphen]
-    SS -->|poller_output| TH[Thold und Maint]
-    R --> P[Cacti-Graph-Berechtigungen]
+    S --> C[("Sample-Cache")]
+    C --> SS["Script-Server und Datenabfrage"]
+    SS --> R["RRD-Dateien und Cacti-Graphen"]
+    SS -->|poller_output| TH["Thold und Maint"]
+    C --> H["HealthEvaluator, Doctor und MCP-Fähigkeiten"]
+    R --> P["Cacti-Graphberechtigungen"]
 ```
 
-## Nachverfolgung der Arbeit
+## Wie Arbeit nachverfolgt wird
 
-- **Meilensteine** folgen den Meilensteinen des Plans. Jeder besitzt ein Epic-Issue, das seine Unter-Issues und Abschlussnachweise auflistet.
-- **Issues** werden per Label typisiert: `type: requirement`, `type: research`, `type: decision`, `type: epic`. Anforderungs-Issues definieren nummerierte, testbare Anforderungen (`REQ-AREA-NNN`) und Akzeptanzkriterien.
-- **Labels** enthalten außerdem `area:`, `phase:`, `priority:` und `status:`. Siehe [CONTRIBUTING.md](../../../CONTRIBUTING.md#labels).
+- **Meilensteine** folgen den Meilensteinen des Plans. Jeder hat ein Epic-Issue, das seine Unter-Issues und Abschlussnachweise auflistet.
+- **Issues** werden nach Label typisiert: `type: requirement`, `type: research`, `type: decision`, `type: epic`. Anforderungs-Issues benennen nummerierte, testbare Anforderungen (`REQ-AREA-NNN`) und Akzeptanzkriterien.
+- **Labels** tragen außerdem `area:`, `phase:`, `priority:` und `status:`. Siehe [CONTRIBUTING.md](../../../CONTRIBUTING.md#labels).
 - Das [Projektboard](https://github.com/users/somethingwithproof/projects/8) zeigt alle Issues über alle Meilensteine hinweg.
 
 ## Mitwirken
 
-Lesen Sie [CONTRIBUTING.md](../../../CONTRIBUTING.md). Commits benötigen ein DCO-Sign-off. Design-Diskussionen finden in den Issues statt; offene Entscheidungen tragen das Label `type: decision`.
+Lesen Sie [CONTRIBUTING.md](../../../CONTRIBUTING.md). Commits benötigen ein DCO-Sign-off (`git commit -s`). Design-Diskussionen finden in Issues statt; offene Entscheidungen tragen das Label `type: decision`.
 
 ## Sicherheit
 
-Melden Sie Sicherheitslücken vertraulich; siehe [SECURITY.md](../../../SECURITY.md).
+Melden Sie Sicherheitslücken privat; siehe [SECURITY.md](../../../SECURITY.md).
 
 ## Lizenz
 

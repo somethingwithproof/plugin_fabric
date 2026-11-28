@@ -82,15 +82,12 @@ if (!(new \Somethingwithproof\Fabric\Schema(false))->isCurrent()) {
 	exit(1);
 }
 
-// Remote pollers read their own database copy, which holds no fabric
-// inventory or claims, so only the main poller sweeps until remote poller
-// support is added (docs/PLAN.md, phase 3).
 $fabric_record = (new \Somethingwithproof\Fabric\FabricRepository(false, new \Somethingwithproof\Fabric\SystemClock()))->find($fabric_id);
 $fabric_poller = (int) ($config['poller_id'] ?? 1);
 
-if ($fabric_poller !== \Somethingwithproof\Fabric\Fabric::MAIN_POLLER || ($fabric_record !== null && !$fabric_record->onMainPoller())) {
-	cacti_log(sprintf('ERROR: Fabric %d was not swept: only the main poller sweeps a fabric until remote poller support is added (this poller %d, fabric poller %d)', $fabric_id, $fabric_poller, $fabric_record !== null ? $fabric_record->pollerId : 0), false, 'FABRIC');
-	fwrite(STDERR, 'ERROR: Only the main poller sweeps a fabric until remote poller support is added' . PHP_EOL);
+if ($fabric_record !== null && $fabric_record->pollerId !== $fabric_poller) {
+	cacti_log(sprintf('ERROR: Fabric %d was not swept: assigned to poller %d, not this poller (%d)', $fabric_id, $fabric_record->pollerId, $fabric_poller), false, 'FABRIC');
+	fwrite(STDERR, 'ERROR: Fabric is assigned to another poller' . PHP_EOL);
 	exit(1);
 }
 

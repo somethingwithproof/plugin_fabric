@@ -25,15 +25,32 @@ namespace Somethingwithproof\Fabric;
  * many dead ports stops early rather than hold its claim for minutes.
  */
 final class SweepBudget {
+	/** Failures state for SweepBudget. */
 	private int $failures = 0;
 
+	/**
+	 * Construct a new SweepBudget instance.
+	 *
+	 * @param float $deadline
+	 * @param int $maxFailures
+	 */
 	public function __construct(private readonly float $deadline, private readonly int $maxFailures) {
 	}
 
+	/**
+	 * Fail.
+	 *
+	 * @return void
+	 */
 	public function fail(): void {
 		$this->failures++;
 	}
 
+	/**
+	 * Spent.
+	 *
+	 * @return bool
+	 */
 	public function spent(): bool {
 		return $this->failures >= $this->maxFailures || microtime(true) >= $this->deadline;
 	}

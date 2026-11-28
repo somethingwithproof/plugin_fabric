@@ -33,8 +33,22 @@ namespace Somethingwithproof\Fabric;
  * fabric record names an adapter and a poller, not a device.
  */
 final class AdminPage {
+	/** File constant for AdminPage. */
 	public const FILE = 'fabric_admin.php';
 
+	/**
+	 * Construct a new AdminPage instance.
+	 *
+	 * @param FabricRepository $fabrics
+	 * @param NodeRepository $nodes
+	 * @param RelinkRepository $relinks
+	 * @param PollerRepository $pollers
+	 * @param HostRepository $hosts
+	 * @param DeviceAccess $access
+	 * @param ?DeviceProvisioner $provisioner
+	 * @param ?CactiObjectRepository $objects
+	 * @param bool $canCreateDevices
+	 */
 	public function __construct(
 		private readonly FabricRepository $fabrics,
 		private readonly NodeRepository $nodes,
@@ -292,6 +306,12 @@ final class AdminPage {
 		html_end_box();
 	}
 
+	/**
+	 * Identity.
+	 *
+	 * @param NodeIdentity $identity
+	 * @return string
+	 */
 	private static function identity(NodeIdentity $identity): string {
 		return sprintf('%s, %d ports, device 0x%x, vendor 0x%x, system image %s', $identity->type->label(), $identity->portCount, $identity->deviceId, $identity->vendorId, $identity->sysimgGuid->text ?? '-');
 	}
@@ -320,6 +340,14 @@ final class AdminPage {
 		}
 	}
 
+	/**
+	 * Submit.
+	 *
+	 * @param string $action
+	 * @param int $id
+	 * @param string $label
+	 * @return void
+	 */
 	private function submit(string $action, int $id, string $label): void {
 		print '<input type="hidden" name="action" value="' . html_escape($action) . '">'
 			. '<input type="hidden" name="id" value="' . $id . '">'
@@ -327,6 +355,15 @@ final class AdminPage {
 			. '</form>';
 	}
 
+	/**
+	 * Action form.
+	 *
+	 * @param string $action
+	 * @param int $id
+	 * @param string $label
+	 * @param ?int $revision
+	 * @return string
+	 */
 	private function actionForm(string $action, int $id, string $label, ?int $revision = null): string {
 		return '<form method="post" action="' . html_escape(self::FILE) . '" style="display:inline">'
 			. '<input type="hidden" name="action" value="' . html_escape($action) . '">'
@@ -336,11 +373,28 @@ final class AdminPage {
 			. '</form>';
 	}
 
+	/**
+	 * Text.
+	 *
+	 * @param string $name
+	 * @param string $label
+	 * @param string $value
+	 * @param int $length
+	 * @return void
+	 */
 	private function text(string $name, string $label, string $value, int $length): void {
 		print '<tr><td><label for="' . html_escape($name) . '">' . html_escape($label) . '</label></td>'
 			. '<td><input type="text" id="' . html_escape($name) . '" name="' . html_escape($name) . '" value="' . html_escape($value) . '" maxlength="' . $length . '" size="' . min(60, $length) . '"></td></tr>';
 	}
 
+	/**
+	 * Checkbox.
+	 *
+	 * @param string $name
+	 * @param string $label
+	 * @param bool $checked
+	 * @return void
+	 */
 	private function checkbox(string $name, string $label, bool $checked): void {
 		print '<tr><td><label for="' . html_escape($name) . '">' . html_escape($label) . '</label></td><td><input type="checkbox" id="' . html_escape($name) . '" name="' . html_escape($name) . '" value="on"' . ($checked ? ' checked' : '') . '></td></tr>';
 	}

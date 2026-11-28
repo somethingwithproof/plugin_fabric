@@ -19,7 +19,15 @@
 
 namespace Somethingwithproof\Fabric;
 
+/**
+ * System clock component.
+ */
 final class SystemClock implements Clock {
+	/**
+	 * Now.
+	 *
+	 * @return int
+	 */
 	public function now(): int {
 		return time();
 	}

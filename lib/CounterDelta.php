@@ -51,8 +51,19 @@ final readonly class CounterDelta {
 		$rates  = [];
 		$reset  = [];
 
+		if (!$usable) {
+			foreach ($current->values as $name => $_value) {
+				$rates[$name] = null;
+			}
+
+			return new self($rates, $reset, 0);
+		}
+
+		$dt   = (float) ($now - $previousAt);
+		$caps = PerfqueryParser::caps($current->group);
+
 		foreach ($current->values as $name => $value) {
-			$before = $usable ? ($previous[$name] ?? null) : null;
+			$before = $previous[$name] ?? null;
 
 			if ($value === null || $before === null || !Decimal::valid($value) || !Decimal::valid($before)) {
 				$rates[$name] = null;
@@ -67,18 +78,28 @@ final readonly class CounterDelta {
 				continue;
 			}
 
-			$cap = PerfqueryParser::cap(PerfqueryParser::width($current->group, $name));
+			$cap = $caps[$name] ?? '';
 
-			$rates[$name] = $cap === '' || $value === $cap || $before === $cap ? null : Decimal::difference($value, $before) / ($now - $previousAt);
+			$rates[$name] = $cap === '' || $value === $cap || $before === $cap ? null : Decimal::difference($value, $before) / $dt;
 		}
 
-		return new self($rates, $reset, $usable ? $previousAt : 0);
+		return new self($rates, $reset, $previousAt);
 	}
 
+	/**
+	 * Rates json.
+	 *
+	 * @return string
+	 */
 	public function ratesJson(): string {
 		return json_encode($this->rates, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION);
 	}
 
+	/**
+	 * Reset json.
+	 *
+	 * @return string
+	 */
 	public function resetJson(): string {
 		return json_encode($this->reset, JSON_THROW_ON_ERROR);
 	}

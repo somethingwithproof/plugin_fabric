@@ -33,8 +33,16 @@ namespace Somethingwithproof\Fabric;
  *   which lets any local user send management datagrams.
  */
 final class PrivilegeProbe {
+	/** Codes constant for PrivilegeProbe. */
 	public const CODES = ['root', 'setid', 'tool_writable', 'umad_world'];
 
+	/**
+	 * Construct a new PrivilegeProbe instance.
+	 *
+	 * @param string $toolDir
+	 * @param string $deviceDir
+	 * @param int $toolOwner
+	 */
 	public function __construct(private readonly string $toolDir, private readonly string $deviceDir = '/dev/infiniband', private readonly int $toolOwner = 0) {
 	}
 
@@ -91,6 +99,12 @@ final class PrivilegeProbe {
 		return array_values(array_filter(self::CODES, static fn (string $code): bool => isset($found[$code])));
 	}
 
+	/**
+	 * Message.
+	 *
+	 * @param string $code
+	 * @return string
+	 */
 	public static function message(string $code): string {
 		return match ($code) {
 			'root'          => __('The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group.', 'fabric'),

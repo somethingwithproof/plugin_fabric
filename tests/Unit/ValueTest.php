@@ -179,15 +179,16 @@ it('validates the fabric form against its backend', function () {
 		->toBe(['name', 'poller_id', 'sweep_interval', 'adapter', 'adapter_port']);
 });
 
-it('refuses a remote poller until remote poller support is added', function () {
+it('allows poller-scoped sweeps on the assigned poller and refuses mismatched pollers', function () {
 	$good    = ['name' => 'Compute IB', 'backend' => 'diags', 'poller_id' => '2', 'sweep_interval' => '300', 'adapter' => 'mlx5_0', 'adapter_port' => '1', 'enabled' => 'on'];
 	$pollers = [1 => 'Main', 2 => 'Remote'];
 	$remote  = new Fabric(1, 'ib0', Backend::Diags, 2, 300, 'mlx5_0', 1, AdminState::Enabled);
 
-	expect(array_keys(FabricInput::parse($good, 0, $pollers)->errors))->toBe(['poller_id'])
-		->and(FabricInput::parse(['poller_id' => '1'] + $good, 0, $pollers)->errors)->toBe([])
+	expect(FabricInput::parse($good, 0, $pollers)->errors)->toBe([])
+		->and(array_keys(FabricInput::parse($good, 0, $pollers, false)->errors))->toBe(['poller_id'])
 		->and($remote->onMainPoller())->toBeFalse()
-		->and((new Sweep(false, new FixedClock(0), new ProcRunner(), Settings::fromRow([]), 2, true))->allowed($remote))->toBeFalse();
+		->and((new Sweep(false, new FixedClock(0), new ProcRunner(), Settings::fromRow([]), 2, true))->allowed($remote))->toBeTrue()
+		->and((new Sweep(false, new FixedClock(0), new ProcRunner(), Settings::fromRow([]), 1, true))->allowed($remote))->toBeFalse();
 });
 
 it('accepts only a canonical tool directory owned by the required account and closed to group and others', function () {

@@ -26,6 +26,16 @@ namespace Somethingwithproof\Fabric;
  * GUID and the port number together, then joined to a node record.
  */
 final readonly class LinkRecord {
+	/**
+	 * Construct a new LinkRecord instance.
+	 *
+	 * @param Guid $portGuid
+	 * @param int $lid
+	 * @param int $port
+	 * @param ?Guid $remotePortGuid
+	 * @param ?int $remotePort
+	 * @param LinkState $link
+	 */
 	public function __construct(
 		public Guid $portGuid,
 		public int $lid,

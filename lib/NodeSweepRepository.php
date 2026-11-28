@@ -25,6 +25,11 @@ namespace Somethingwithproof\Fabric;
  * (REQ-HEALTH-001).
  */
 final class NodeSweepRepository {
+	/**
+	 * Construct a new NodeSweepRepository instance.
+	 *
+	 * @param \PDO|false $connection
+	 */
 	public function __construct(private readonly \PDO|false $connection) {
 	}
 
@@ -39,6 +44,13 @@ final class NodeSweepRepository {
 		return is_array($row) ? Row::int($row, 'last_attempt') : null;
 	}
 
+	/**
+	 * Start.
+	 *
+	 * @param int $nodeId
+	 * @param int $now
+	 * @return bool
+	 */
 	public function start(int $nodeId, int $now): bool {
 		return db_execute_prepared(
 			'INSERT INTO plugin_fabric_node_sweep (node_id, last_attempt) VALUES (?, ?) ON DUPLICATE KEY UPDATE last_attempt = VALUES(last_attempt)',
@@ -48,6 +60,14 @@ final class NodeSweepRepository {
 		) !== false;
 	}
 
+	/**
+	 * Finish.
+	 *
+	 * @param int $nodeId
+	 * @param NodeSweepResult $result
+	 * @param int $now
+	 * @return bool
+	 */
 	public function finish(int $nodeId, NodeSweepResult $result, int $now): bool {
 		return db_execute_prepared(
 			'UPDATE plugin_fabric_node_sweep SET last_success = IF(? IN (?, ?), ?, last_success), duration = ?, ports_total = ?, ports_read = ?, ports_failed = ?, ports_skipped = ?, outcome = ?, error = ? WHERE node_id = ?',
