@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-27 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: bg-BG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "Възелът се е променил след зареждането на страницата, така че не беше извършено нищо. Прегледайте го и опитайте отново."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "Правата ви за устройства не позволяват промяна на този запис."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "Име: друга комутационна мрежа вече използва това име."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "Адаптер: друга комутационна мрежа вече обхожда този порт на адаптера на този полър. По една комутационна мрежа на порт на адаптер."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "Комутационната мрежа не можа да бъде запазена."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "Комутационната мрежа беше запазена."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "В момента се изпълнява обхождане на тази комутационна мрежа, така че нищо не беше изтрито. Опитайте отново, след като приключи."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "Комутационната мрежа и нейният инвентар бяха изтрити. Нито едно устройство в Cacti не беше променено и не беше осъществена връзка с мрежата."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "Комутационната мрежа не можа да бъде изтрита."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "Идентичността на възела не беше променена."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "Идентичността на възела беше актуализирана. Той ще се обхожда отново от следващия цикъл."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "Връзката с устройството беше преместена към новия възел."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "Предложението не можа да бъде потвърдено. Възможно е възлите да са се променили, откакто е било направено."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "Предложението не можа да бъде отхвърлено."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "Предложението беше отхвърлено."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "Връзката на възела не беше променена. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "Връзката на възела не беше променена."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "Връзката на възела беше запазена."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "Не беше създадено устройство. Вижте журнала на Cacti."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "Устройството беше създадено и възелът беше свързан с него. Изберете портовете за графики на страницата „Нови графики“."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "Инвентарът не можа да бъде прочетен за експорт."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "Шаблоните на Fabric и файлът за заявка за данни бяха инсталирани."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Шаблоните на Fabric не бяха инсталирани. Вижте таблицата „Обекти в Cacti“ и журнала на Cacti."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "Изглед за наблюдение"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "Наблюденията не можаха да бъдат прочетени. Помолете администратор да провери журнала на плъгина."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "Преглеждайте валидността на портовете, ширината и скоростта на връзките, както и изгледа за претоварване. Ескалирайте конфликтите на идентичност и повторното свързване на устройства към администратор; не нулирайте броячите."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Администриране на комутационни мрежи"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "Записите за комутационните мрежи не можаха да бъдат прочетени. Вижте журнала на Cacti."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "Комутационни мрежи"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "Действия"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "Адаптер"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "Бекенд"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "Име"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "Възли"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Полър"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "Състояние"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "Интервал на обхождане"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "Все още няма дефинирани комутационни мрежи."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "Изтрит полър (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "порт %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d секунди"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "Изтрий"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "Съдържа устройства, които нямате право да виждате"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "Експортирай"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "Изтеглете комутационните мрежи и инвентара на възлите, заедно със свързванията на устройства, като JSON преди деинсталиране, което премахва таблиците на плъгина. Той не съдържа идентификационни данни."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Комутационна мрежа: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "Нова комутационна мрежа"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "Интервал на обхождане (секунди)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "Порт на адаптера"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "Активирано"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "Запази"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "Изтриване на комутационна мрежа: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "Да се изтрие ли тази комутационна мрежа с нейните %d възела, портовете, извадките и предложенията им? %d възела са свързани с устройства в Cacti; тези устройства, източниците им на данни и RRD файловете се запазват. Не се осъществява връзка с мрежата."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "Несвързан"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "Изтрито устройство (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "Възел на комутационна мрежа: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "Устройства, съответстващи на името на възела"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (устройство %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "Няма"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Устройство в Cacti"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "Запазването свързва възела с устройството и добавя заявката за данни „Fabric Port“, която изброява портовете на възела. Нито една графика, източник на данни или настройка на устройството не се променя. Устройството трябва да се анкетира от полъра, който обхожда комутационната мрежа."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "Създай устройство за този възел"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "Тук не могат да се създават устройства."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "Създаване на устройство за %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "Създаването на устройството добавя:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "Създай"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "Конфликти на идентичност"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "Възел"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "Видяно"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "Записано"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "Няма конфликти."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "Отпечатано два пъти при едно откриване"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "Приеми видяната идентичност"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "Предложения за повторно свързване"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "Устройство"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "Липсващ възел"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "Нов възел"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "Общ съседен порт"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "Няма отворени предложения."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "Потвърди"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "Отхвърли"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "Инструменти за диагностика (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "Настройките на комутационната мрежа или плъгина са непълни или невалидни"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "Инструментът липсва или не е изпълним в конфигурираната директория"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "Инструментът надвиши времевото си ограничение и беше спрян"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "Изходът на инструмента надвиши ограничението за размер и беше отхвърлен"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "Инструментът завърши с грешка"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "Изходът на инструмента не беше в очаквания формат"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "Не е опитано: бюджетът за време или неуспехи е изчерпан"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "Таблиците на плъгина не можаха да бъдат прочетени или записани"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Шаблоните на Fabric не са инсталирани. Преинсталирайте ги от страницата за състоянието."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "Възелът вече е свързан с устройство."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "Комутационната мрежа на възела не се обхожда от главния полър, така че устройството му не може да бъде анкетирано."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "Устройството не съществува."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "Устройството се анкетира от различен полър от този, който обхожда тази комутационна мрежа, така че не може да прочете кеша ѝ."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "Устройство „%s“ от шаблона за устройство %s, име на хост %s, анкетирано от полър %d, с изключени проверки за достъпност и SNMP."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "Заявката за данни %s върху него, изброяваща портовете на възела. Сама по себе си тя не създава графика или източник на данни."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "Създадено от плъгина Fabric за възел %s. Стойностите му идват от кеша на плъгина; името на хоста е запазено име, с което никога не се осъществява връзка."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "Име: използвайте от 1 до 64 букви, цифри, интервали, точки, тирета или долни черти, започващи с буква или цифра."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "Бекенд: изберете един от посочените бекенди."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "Полър: изберете един от посочените полъри."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "Полър: само главният полър може да обхожда комутационна мрежа, докато не бъде добавена поддръжка за отдалечени полъри."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "Интервал на обхождане: въведете цял брой секунди от %d до %d."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "Адаптер: въведете локалното име на адаптера, както ядрото го именува, например mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "Порт на адаптера: въведете номера на порта на локалния адаптер от 1 до %d."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "Никога"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "преди %d секунди"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "преди %d минути"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "преди %d часа"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "преди %d дни"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Обекти в Cacti"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "Инсталирано"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "Липсва"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "Шаблони"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "Файл за заявка за данни"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "Последно инсталиране"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "Преинсталирай шаблоните"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Състояние на комутационните мрежи"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "Записите за състоянието не можаха да бъдат прочетени. Вижте журнала на Cacti."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "Обхождания на броячите"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "Откриване"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Комутационна мрежа"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "Последно откриване"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "Последно четене на връзките"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "Последно успешно откриване"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "Четене на връзките"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "Видени възли / портове"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "Пропуснати редове за връзки"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "Несъпоставени записи за връзки"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Комутационна мрежа %s: инвентарът е %s; последното успешно откриване беше %s."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Комутационна мрежа %s: назначена е на полър %d, но само главният полър може да обхожда комутационна мрежа, докато не бъде добавена поддръжка за отдалечени полъри. Тя не се обхожда; назначете я на главния полър."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Комутационна мрежа %s: записът за състоянието ѝ не можа да бъде прочетен, така че състоянието на откриване е неизвестно. Вижте журнала на Cacti."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Комутационна мрежа %s: все още не е открита. Обхожданията започват само от възел, свързан с устройство в Cacti, затова изпълнете веднъж „php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force“ на главния полър."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Комутационна мрежа %s: нито един възел не е свързан с устройство в Cacti, така че не започва обхождане и инвентарът не се обновява. Свържете възел на страницата „Администриране на комутационни мрежи“ или изпълнете „php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force“ на главния полър."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Комутационна мрежа %s: %d реда от iblinkinfo не можаха да бъдат прочетени, най-вероятно защото описание на възел имитира изхода на инструмента. Тези възли запазват последните си състояния на връзките."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Комутационна мрежа %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "деактивирано"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "Предупреждения"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "Няма предупреждения."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "Идентичност"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "%d конфликта на идентичност и %d отворени предложения за повторно свързване. Разрешете ги на страницата „Администриране на комутационни мрежи“."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "Обхождания на броячите, изискващи внимание"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "Продължителност"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "Неуспех"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "Последен успех"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "Последно обхождане"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "Резултат"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "Прочетени / Неуспешни / Пропуснати портове"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s сек"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "Всеки обходен възел завърши последното си обхождане."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "ОК, %s сек"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "Последно видяна"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "Наличие"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "Тип"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "Няма възли за показване."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "Все още няма дефинирани комутационни мрежи."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "Портове с най-високо изчакване при предаване"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "Портове с най-високо изчакване при предаване"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "Инвентарът на комутационната мрежа не можа да бъде прочетен. Вижте журнала на Cacti."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "Изчакването при предаване (transmit wait) отброява тактове, в които портът е имал данни за изпращане, но не е могъл да ги изпрати поради липса на кредити или арбитраж. Високата стойност показва претоварване към отдалечения край, а не повреда на порта или кабела му. Продължителността на такта не е публикувана за съвременните скорости на връзките, затова стойностите са в тактове в секунда, а не във време."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "Порт"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "Отдалечен край"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "Отхвърляния при предаване (в секунда)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "Изчакване при предаване (тактове в секунда)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "Нито един порт няма текуща скорост на изчакване при предаване."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "Възел на комутационна мрежа"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "Възелът не съществува или нямате право да го виждате."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "Активен"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "Най-добро поддържано от двата края"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "Валидност на броячите"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "Броячи"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "Графики"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "Връзка"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "Все още няма записани портове."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "Устройство %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "броячите на %s са наситени, публикувани като неизвестни: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "броячи на %s: %d прекъсвания, последното %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "Валиден"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "Активна"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "Под най-доброто, ограничено от разрешените стойности"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "Под най-доброто, неизвестна причина"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "Влошена"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "Неактивна"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "Комутатор"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "Канален адаптер"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "Маршрутизатор"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "Прегледайте записаните наблюдения по-долу. Потвържденията са лични за текущата сесия, изтичат при промяна на наблюденията и никога не потискат известия или не променят състоянието."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "Операции на комутационните мрежи"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "Разследване"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "Обект"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "Наблюдавано (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "Неизвестно или остаряло"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "Потвърдено; състоянието е непроменено."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "Потвърди прегледа"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "Няма налични наблюдения за устройствата, до които имате достъп."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "Оператор на комутационни мрежи"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "Преглед на комутационни мрежи"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "Обхождането се изпълнява като root. Стартирайте полъра с непривилегирован акаунт с права за четене на устройствата umad чрез група."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "Инструмент за диагностика има зададен бит setuid или setgid. Плъгинът никога не се нуждае от това."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "Инструмент за диагностика или неговата директория може да се записва от акаунт, различен от собственика, или от акаунта на полъра. Всеки, който може да записва там, определя какво изпълнява полърът."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "Устройство umad може да се чете или записва от всеки акаунт, така че всеки локален потребител може да отправя заявки към комутационната мрежа. Ограничете достъпа му до група."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "Неизвестно предупреждение"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "Инструменти за диагностика"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "Абсолютна директория на всеки полър, който обхожда комутационна мрежа, съдържаща perfquery, ibnetdiscover и iblinkinfo. Пакетите за Debian и Ubuntu ги инсталират в /usr/sbin. Никоя друга програма не се изпълнява от нея."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "Директория с инструменти"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "Карта на имената на възлите"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "Незадължителен абсолютен път до файл с карта на имената на възлите за infiniband-diags. Имената от него служат само за показване; идентичността винаги е GUID на възела."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "Време за изчакване на датаграма"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "Милисекунди, които всяка управляваща датаграма може да отнеме, преди инструментите да я повторят (тяхната опция -t)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "Време за изчакване на команда"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "Секунди, които едно изпълнение на инструмент може да отнеме, преди да бъде спряно и записано като неуспешно."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "KiB, които едно изпълнение на инструмент може да изведе. По-голям изход се отхвърля и записва като неуспешен."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "Максимален изход"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "Обхождане"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "Времеви бюджет за възел"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "Секунди, които едно обхождане на възел може да изразходва за четене на броячи. Недостигнатите портове се четат в следващия цикъл."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "Брой неуспешни портове, след които обхождането на възел спира за текущия цикъл. Порт, който не отговаря, отнема няколко секунди."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "Бюджет за неуспехи на възел"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "Индексиране на неактивни портове"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "Когато е отметнато, заявката за данни „Fabric Port“ изброява и портове, които са неактивни и нямат отдалечен край, например неизползвани портове на адаптери. Ако не е отметнато, те се пропускат, докато не станат активни."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "Деинсталиране"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "Запази таблиците на плъгина при деинсталиране"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "Когато е отметнато, деинсталирането на плъгина запазва комутационните мрежи, инвентара и извадките. Премахнете отметката, за да ги изтриете при деинсталиране; първо експортирайте инвентара от страницата „Администриране на комутационни мрежи“. Не се осъществява връзка с мрежата в нито един от случаите."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "Директорията с инструменти трябва да е абсолютен път от букви, цифри, точки, тирета, долни черти и наклонени черти, без завършваща наклонена черта."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "Директорията с инструменти не съществува или не е директория."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "Пътят до директорията с инструменти съдържа символна връзка. Въведете реалния път."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "Директорията с инструменти не е собственост на root."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "В директорията с инструменти може да записва нейната група или други потребители."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "Инструмент за диагностика не е собственост на root."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "В инструмент за диагностика може да записва неговата група или други потребители."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Плъгинът Fabric изисква PHP %s или по-нова версия. Този сървър работи с PHP %s, така че плъгинът не беше инсталиран или активиран."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Плъгинът Fabric не е активиран."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Плъгинът Fabric изисква PHP %s или по-нова версия."
+
+#: setup.php
+msgid "Management"
+msgstr "Управление"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "Директорията с инструменти не беше запазена. %s"

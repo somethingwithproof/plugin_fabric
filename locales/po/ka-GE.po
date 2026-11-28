@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-27 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: ka-GE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "კვანძი შეიცვალა გვერდის ჩატვირთვის შემდეგ, ამიტომ არაფერი გაკეთებულა. გადახედეთ მას და სცადეთ თავიდან."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "თქვენი მოწყობილობის უფლებები არ იძლევა ამ ჩანაწერის შეცვლის საშუალებას."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "სახელი: სხვა ფაბრიკი უკვე იყენებს ამ სახელს."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "ადაპტერი: სხვა ფაბრიკი უკვე ასკანირებს ამ ადაპტერის პორტს ამ პოლერზე. ერთი ფაბრიკი თითო ადაპტერის პორტზე."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "ფაბრიკის შენახვა ვერ მოხერხდა."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "ფაბრიკი შენახულია."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "ამ ფაბრიკის სკანირება მიმდინარეობს, ამიტომ არაფერი წაშლილა. სცადეთ თავიდან დასრულების შემდეგ."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "ფაბრიკი და მისი ინვენტარი წაიშალა. არც ერთი Cacti მოწყობილობა არ შეცვლილა და ფაბრიკთან კავშირი არ დამყარებულა."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "ფაბრიკის წაშლა ვერ მოხერხდა."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "კვანძის იდენტობა არ შეცვლილა."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "კვანძის იდენტობა განახლდა. მისი სკანირება განახლდება მომდევნო ციკლიდან."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "მოწყობილობის მიბმა გადატანილია ახალ კვანძზე."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "წინადადების დადასტურება ვერ მოხერხდა. შესაძლოა კვანძები შეიცვალა მისი შექმნის შემდეგ."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "წინადადების უარყოფა ვერ მოხერხდა."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "წინადადება უარყოფილია."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "კვანძის მიბმა არ შეცვლილა. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "კვანძის მიბმა არ შეცვლილა."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "კვანძის მიბმა შენახულია."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "მოწყობილობა არ შეიქმნა. იხილეთ Cacti-ს ჟურნალი."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "მოწყობილობა შეიქმნა და კვანძი მასზე მიბმულია. აირჩიეთ გრაფიკზე გამოსატანი პორტები „ახალი გრაფიკების“ გვერდზე."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "ექსპორტისთვის ინვენტარის წაკითხვა ვერ მოხერხდა."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "ფაბრიკის შაბლონები და მონაცემთა მოთხოვნის ფაილი დაყენებულია."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "ფაბრიკის შაბლონები არ დაყენდა. იხილეთ Cacti ობიექტების ცხრილი და Cacti-ს ჟურნალი."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "მონიტორინგის ხედი"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "დაკვირვებების წაკითხვა ვერ მოხერხდა. სთხოვეთ ადმინისტრატორს შეამოწმოს დანამატის ჟურნალი."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "შეამოწმეთ პორტების ვალიდურობა, ბმულის სიგანე და სიჩქარე და გადატვირთვის ხედი. იდენტობის კონფლიქტები და მოწყობილობების ხელახლა მიბმა გადაეცით ადმინისტრატორს; არ გაანულოთ მთვლელები."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "ფაბრიკის ადმინისტრატორი"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "ფაბრიკის ჩანაწერების წაკითხვა ვერ მოხერხდა. იხილეთ Cacti-ს ჟურნალი."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "ფაბრიკები"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "მოქმედებები"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "ადაპტერი"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "ბექენდი"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "სახელი"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "კვანძები"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "პოლერი"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "მდგომარეობა"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "სკანირების ინტერვალი"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "ფაბრიკები ჯერ არ არის განსაზღვრული."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "წაშლილი პოლერი (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "პორტი %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d წამი"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "წაშლა"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "შეიცავს მოწყობილობებს, რომელთა ნახვის უფლება არ გაქვთ"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "ექსპორტი"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "ჩამოტვირთეთ ფაბრიკებისა და კვანძების ინვენტარი მოწყობილობების მიბმებთან ერთად JSON ფორმატში დანამატის ცხრილების წამშლელ დეინსტალაციამდე. იგი არ შეიცავს ავტორიზაციის მონაცემებს."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "ფაბრიკი: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "ახალი ფაბრიკი"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "სკანირების ინტერვალი (წამებში)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "ადაპტერის პორტი"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "ჩართულია"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "შენახვა"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "ფაბრიკის წაშლა: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "წაიშალოს ეს ფაბრიკი მის %d კვანძთან, მათ პორტებთან, სინჯებთან და წინადადებებთან ერთად? %d კვანძი მიბმულია Cacti მოწყობილობებზე; ეს მოწყობილობები, მათი მონაცემთა წყაროები და RRD ფაილები შენახული იქნება. ფაბრიკთან კავშირი არ მყარდება."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "მიუბმელი"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "წაშლილი მოწყობილობა (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "ფაბრიკის კვანძი: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "კვანძის სახელის შესაბამისი მოწყობილობები"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (მოწყობილობა %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "არცერთი"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Cacti მოწყობილობა"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "შენახვა აბამს კვანძს მოწყობილობაზე და ამატებს მოწყობილობაზე „ფაბრიკის პორტის“ მონაცემთა მოთხოვნას, რომელიც აჩვენებს კვანძის პორტებს. არც ერთი გრაფიკი, მონაცემთა წყარო ან მოწყობილობის პარამეტრი არ იცვლება. მოწყობილობა უნდა გამოიკითხოს იმავე პოლერით, რომელიც ასკანირებს ფაბრიკს."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "მოწყობილობის შექმნა ამ კვანძისთვის"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "აქ მოწყობილობების შექმნა შეუძლებელია."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "მოწყობილობის შექმნა: %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "მოწყობილობის შექმნა ამატებს:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "შექმნა"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "იდენტობის კონფლიქტები"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "კვანძი"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "დაფიქსირებული"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "შენახული"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "კონფლიქტები არ არის."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "ორჯერ დაიბეჭდა ერთ აღმოჩენაში"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "დაფიქსირებული იდენტობის მიღება"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "ხელახლა მიბმის წინადადებები"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "მოწყობილობა"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "დაკარგული კვანძი"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "ახალი კვანძი"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "საერთო მეზობელი პორტი"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "ღია წინადადებები არ არის."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "დადასტურება"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "უარყოფა"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "დიაგნოსტიკის ხელსაწყოები (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "ფაბრიკის ან დანამატის პარამეტრები არასრულია ან არასწორია"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "ხელსაწყო აკლია ან არ არის გაშვებადი კონფიგურირებულ დირექტორიაში"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "ხელსაწყომ გადააჭარბა დროის ლიმიტს და შეჩერდა"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "ხელსაწყოს გამომავალმა გადააჭარბა ზომის ლიმიტს და უარყოფილია"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "ხელსაწყო ჩაიშალა"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "ხელსაწყოს გამომავალს არ ჰქონდა მოსალოდნელი ფორმა"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "არ განხორციელებულა: დროის ან შეცდომების ბიუჯეტი ამოიწურა"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "დანამატის ცხრილების წაკითხვა ან ჩაწერა ვერ მოხერხდა"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "ფაბრიკის შაბლონები არ არის დაყენებული. ხელახლა დააყენეთ ისინი მდგომარეობის გვერდიდან."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "კვანძი უკვე მიბმულია მოწყობილობაზე."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "კვანძის ფაბრიკს მთავარი პოლერი არ ასკანირებს, ამიტომ მისი მოწყობილობის გამოკითხვა შეუძლებელია."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "მოწყობილობა არ არსებობს."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "მოწყობილობას კითხავს სხვა პოლერი და არა ის, რომელიც ამ ფაბრიკს ასკანირებს, ამიტომ იგი ვერ წაიკითხავს ფაბრიკის ქეშს."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "მოწყობილობა \"%s\" მოწყობილობის შაბლონიდან %s, ჰოსტის სახელით %s, გამოკითხული პოლერით %d, ხელმისაწვდომობის შემოწმებისა და SNMP-ის გამორთვით."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "მასზე მონაცემთა მოთხოვნა %s, რომელიც აჩვენებს კვანძის პორტებს. თავისთავად არ ქმნის გრაფიკს და მონაცემთა წყაროს."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "შექმნილია ფაბრიკის დანამატის მიერ კვანძისთვის %s. მისი მნიშვნელობები მოდის დანამატის ქეშიდან; ჰოსტის სახელი დაჯავშნილია და მასთან კავშირი არასდროს მყარდება."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "სახელი: გამოიყენეთ 1-დან 64-მდე ასო, ციფრი, ინტერვალი, წერტილი, ტირე ან ქვედა ტირე, ასოთი ან ციფრით დაწყებული."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "ბექენდი: აირჩიეთ ერთ-ერთი ჩამოთვლილი ბექენდი."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "პოლერი: აირჩიეთ ერთ-ერთი ჩამოთვლილი პოლერი."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "პოლერი: ფაბრიკის სკანირება მხოლოდ მთავარ პოლერს შეუძლია, სანამ დაშორებული პოლერის მხარდაჭერა დაემატება."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "სკანირების ინტერვალი: შეიყვანეთ მთელი წამები %d-დან %d-მდე."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "ადაპტერი: შეიყვანეთ ლოკალური ადაპტერის სახელი ისე, როგორც მას ბირთვი უწოდებს, მაგალითად mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "ადაპტერის პორტი: შეიყვანეთ ლოკალური ადაპტერის პორტის ნომერი, 1-დან %d-მდე."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "არასდროს"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "%d წამის წინ"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "%d წუთის წინ"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "%d საათის წინ"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "%d დღის წინ"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Cacti ობიექტები"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "დაყენებულია"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "აკლია"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "შაბლონები"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "მონაცემთა მოთხოვნის ფაილი"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "ბოლო დაყენება"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "შაბლონების ხელახლა დაყენება"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "ფაბრიკის მდგომარეობა"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "მდგომარეობის ჩანაწერების წაკითხვა ვერ მოხერხდა. იხილეთ Cacti-ს ჟურნალი."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "მთვლელების სკანირებები"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "აღმოჩენა"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "ფაბრიკი"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "ბოლო აღმოჩენა"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "ბმულის ბოლო წაკითხვა"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "ბოლო წარმატებული აღმოჩენა"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "ბმულის წაკითხვა"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "დაფიქსირებული კვანძები / პორტები"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "გამოტოვებული ბმულის სტრიქონები"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "შეუსაბამო ბმულის ჩანაწერები"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "ფაბრიკი %s: ინვენტარი არის %s; ბოლო წარმატებული აღმოჩენა იყო %s."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "ფაბრიკი %s: მინიჭებულია პოლერზე %d, მაგრამ ფაბრიკის სკანირება მხოლოდ მთავარ პოლერს შეუძლია, სანამ დაშორებული პოლერის მხარდაჭერა დაემატება. იგი არ სკანირდება; მიანიჭეთ მთავარ პოლერს."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "ფაბრიკი %s: მისი მდგომარეობის ჩანაწერის წაკითხვა ვერ მოხერხდა, ამიტომ აღმოჩენის სტატუსი უცნობია. იხილეთ Cacti-ს ჟურნალი."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "ფაბრიკი %s: ჯერ არ არის აღმოჩენილი. სკანირება იწყება მხოლოდ Cacti მოწყობილობაზე მიბმული კვანძიდან, ამიტომ მთავარ პოლერზე ერთხელ გაუშვით \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\"."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "ფაბრიკი %s: არც ერთი კვანძი არ არის მიბმული Cacti მოწყობილობაზე, ამიტომ სკანირება არ იწყება და ინვენტარი არ ახლდება. მიაბით კვანძი ფაბრიკის ადმინისტრატორის გვერდზე, ან მთავარ პოლერზე გაუშვით \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\"."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "ფაბრიკი %s: %d iblinkinfo სტრიქონის წაკითხვა ვერ მოხერხდა, სავარაუდოდ იმიტომ, რომ კვანძის აღწერა ემსგავსება ხელსაწყოს გამომავალს. ეს კვანძები ინარჩუნებენ ბმულის ბოლო მდგომარეობებს."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "ფაბრიკი %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "გამორთულია"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "გაფრთხილებები"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "გაფრთხილებები არ არის."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "იდენტობა"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "%d იდენტობის კონფლიქტი და %d ხელახლა მიბმის ღია წინადადება. მოაგვარეთ ისინი ფაბრიკის ადმინისტრატორის გვერდზე."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "ყურადღების საჭიროების მქონე მთვლელების სკანირებები"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "ხანგრძლივობა"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "შეცდომა"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "ბოლო წარმატება"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "ბოლო სკანირება"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "შედეგი"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "წაკითხული / ჩაშლილი / გამოტოვებული პორტები"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s წმ"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "ყველა სკანირებულმა კვანძმა დაასრულა თავისი ბოლო სკანირება."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "OK, %s წმ"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "ბოლო დაფიქსირება"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "არსებობა"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "ტიპი"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "საჩვენებელი კვანძები არ არის."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "ფაბრიკები ჯერ არ არის განსაზღვრული."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "ყველაზე მაღალი გადაცემის მოლოდინის მქონე პორტები"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "ყველაზე მაღალი გადაცემის მოლოდინის მქონე პორტები"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "ფაბრიკის ინვენტარის წაკითხვა ვერ მოხერხდა. იხილეთ Cacti-ს ჟურნალი."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "გადაცემის მოლოდინი ითვლის ტიკებს, რომლებშიც პორტს ჰქონდა გასაგზავნი მონაცემები, მაგრამ კრედიტების ნაკლებობის ან არბიტრაჟის გამო ვერ გაგზავნა. მაღალი მნიშვნელობა მიუთითებს გადატვირთვაზე მეორე მხარისკენ და არა იმაზე, რომ პორტი ან კაბელი გაუმართავია. მიმდინარე ბმულის სიჩქარეებისთვის ტიკის ხანგრძლივობა არ ქვეყნდება, ამიტომ მნიშვნელობები არის ტიკები წამში და არა დრო."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "პორტი"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "მეორე მხარე"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "გადაცემის უარყოფები (წამში)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "გადაცემის მოლოდინი (ტიკები წამში)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "არც ერთ პორტს არ აქვს გადაცემის მოლოდინის მიმდინარე სიჩქარე."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "უცნობი"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "ფაბრიკის კვანძი"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "კვანძი არ არსებობს ან მისი ნახვის უფლება არ გაქვთ."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "აქტიური"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "ორივე მხარის მიერ მხარდაჭერილი საუკეთესო"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "მთვლელების ვალიდურობა"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "მთვლელები"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "გრაფიკები"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "ბმული"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "პორტები ჯერ არ არის ჩაწერილი."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "მოწყობილობა %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "%s მთვლელები გაჯერდა, გამოქვეყნებულია როგორც უცნობი: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "%s მთვლელები: %d წყვეტა, ბოლო %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "ვალიდური"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "ჩართული"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "საუკეთესოზე დაბალი, შეზღუდული ჩართული მნიშვნელობებით"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "საუკეთესოზე დაბალი, მიზეზი უცნობია"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "დეგრადირებული"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "გათიშული"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "კომუტატორი"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "არხის ადაპტერი"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "მარშრუტიზატორი"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "ქვემოთ იხილეთ ჩაწერილი დაკვირვებები. დადასტურებები პერსონალურია მიმდინარე სესიისთვის, ძალას კარგავს დაკვირვების შეცვლისას და არასდროს თრგუნავს გაფრთხილებებს ან ცვლის მდგომარეობას."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "ფაბრიკის ოპერაციები"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "გამოკვლევა"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "ობიექტი"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "დაფიქსირებულია (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "უცნობი ან მოძველებული"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "დადასტურებულია; მდგომარეობა უცვლელია."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "დადასტურება"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "თქვენთვის ხელმისაწვდომ მოწყობილობებზე დაკვირვებები არ მოიპოვება."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "ფაბრიკის ოპერატორი"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "ფაბრიკის ხედი"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "სკანირება გაშვებულია root-ით. გაუშვით პოლერი არაპრივილეგირებული ანგარიშით, რომელსაც umad მოწყობილობებზე წაკითხვის წვდომა ჯგუფის მეშვეობით აქვს."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "დიაგნოსტიკის ხელსაწყოს აქვს setuid ან setgid ბიტი. დანამატს იგი არასდროს სჭირდება."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "დიაგნოსტიკის ხელსაწყოში ან მის დირექტორიაში ჩაწერა შეუძლია მფლობელის გარდა სხვა ანგარიშს ან პოლერის ანგარიშს. ვისაც ჩაწერა შეუძლია, იგი განსაზღვრავს, რას გაუშვებს პოლერი."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "umad მოწყობილობა წაკითხვადი ან ჩაწერადია ყველა ანგარიშისთვის, ამიტომ ნებისმიერ ლოკალურ მომხმარებელს შეუძლია ფაბრიკის გამოკითხვა. შეზღუდეთ იგი ჯგუფით."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "უცნობი გაფრთხილება"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "დიაგნოსტიკის ხელსაწყოები"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "აბსოლუტური დირექტორია ფაბრიკის მასკანირებელ თითოეულ პოლერზე, რომელიც შეიცავს perfquery, ibnetdiscover და iblinkinfo პროგრამებს. Debian-ისა და Ubuntu-ს პაკეტები მათ /usr/sbin-ში აყენებს. აქედან სხვა პროგრამა არასდროს ეშვება."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "ხელსაწყოების დირექტორია"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "კვანძების სახელების რუკა"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "არასავალდებულო აბსოლუტური გზა infiniband-diags კვანძების სახელების რუკის ფაილამდე. მის მიერ მოწოდებული სახელები მხოლოდ საჩვენებლადაა; იდენტობა ყოველთვის კვანძის GUID-ია."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "დეიტაგრამის ტაიმაუტი"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "მილიწამები, რაც თითოეულ მართვის დეიტაგრამას შეუძლია დასჭირდეს, სანამ ხელსაწყოები მას ხელახლა სცდიან (მათი -t პარამეტრი)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "ბრძანების ტაიმაუტი"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "წამები, რაც ხელსაწყოს ერთ გაშვებას შეუძლია დასჭირდეს, სანამ შეჩერდება და ჩაშლილად ჩაიწერება."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "KiB, რაც ხელსაწყოს ერთ გაშვებას შეუძლია დაბეჭდოს. უფრო დიდი გამომავალი უარყოფილია და ჩაშლილად იწერება."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "მაქსიმალური გამომავალი"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "სკანირება"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "კვანძის დროის ბიუჯეტი"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "წამები, რაც ერთი კვანძის სკანირებამ შეიძლება დახარჯოს მთვლელების წაკითხვაზე. მიუღწეველი პორტები მომდევნო ციკლში წაიკითხება."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "ჩაშლილი პორტების რაოდენობა, რის შემდეგაც კვანძის სკანირება ჩერდება მიმდინარე ციკლისთვის. უპასუხო პორტი რამდენიმე წამს ხარჯავს."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "კვანძის შეცდომების ბიუჯეტი"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "გათიშული პორტების ინდექსაცია"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "მონიშვნის შემთხვევაში, „ფაბრიკის პორტის“ მონაცემთა მოთხოვნა ასევე აჩვენებს გათიშულ პორტებს მეორე მხარის გარეშე, მაგალითად გამოუყენებელი ადაპტერის პორტებს. მონიშვნის მოხსნისას ისინი გამოტოვებულია ჩართვამდე."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "დეინსტალაცია"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "დანამატის ცხრილების შენახვა დეინსტალაციისას"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "მონიშვნის შემთხვევაში, დანამატის დეინსტალაცია შეინახავს მის ფაბრიკებს, ინვენტარსა და სინჯებს. მონიშვნის მოხსნით დეინსტალაცია წაშლის მათ; წინასწარ გააკეთეთ ინვენტარის ექსპორტი ფაბრიკის ადმინისტრატორის გვერდიდან. ფაბრიკთან კავშირი არც ერთ შემთხვევაში არ მყარდება."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "ხელსაწყოების დირექტორია უნდა იყოს ასოების, ციფრების, წერტილების, ტირეების, ქვედა ტირეებისა და დახრილი ხაზების აბსოლუტური გზა, ბოლო დახრილი ხაზის გარეშე."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "ხელსაწყოების დირექტორია არ არსებობს ან არ არის დირექტორია."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "ხელსაწყოების დირექტორიის გზა შეიცავს სიმბოლურ ბმულს. შეიყვანეთ რეალური გზა."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "ხელსაწყოების დირექტორიის მფლობელი არ არის root."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "ხელსაწყოების დირექტორიაში ჩაწერა შეუძლია მის ჯგუფს ან სხვა მომხმარებლებს."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "დიაგნოსტიკის ხელსაწყოს მფლობელი არ არის root."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "დიაგნოსტიკის ხელსაწყოში ჩაწერა შეუძლია მის ჯგუფს ან სხვა მომხმარებლებს."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "ფაბრიკის დანამატი მოითხოვს PHP %s ან უფრო ახალ ვერსიას. ამ სერვერზე გაშვებულია PHP %s, ამიტომ დანამატი არ დაყენდა ან არ ჩაირთო."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "ფაბრიკის დანამატი არ არის ჩართული."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "ფაბრიკის დანამატი მოითხოვს PHP %s ან უფრო ახალ ვერსიას."
+
+#: setup.php
+msgid "Management"
+msgstr "მართვა"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "ხელსაწყოების დირექტორია არ შენახულა. %s"

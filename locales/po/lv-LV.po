@@ -1,0 +1,1004 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2026 Thomas Vincent <thomasvincent@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fabric 0.1.0-dev\n"
+"Report-Msgid-Bugs-To: https://github.com/somethingwithproof/plugin_fabric/issues\n"
+"PO-Revision-Date: 2026-11-27 00:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language: lv-LV\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 0 || n % 100 >= 11 && n % 100 <= 19) ? 0 : ((n % 10 == 1 && n % 100 != 11) ? 1 : 2);\n"
+
+#: fabric_admin.php
+msgid "The node changed after the page was drawn, so nothing was done. Review it and try again."
+msgstr "Mezgls tika mainīts pēc lapas ielādes, tāpēc nekas netika darīts. Pārskatiet to un mēģiniet vēlreiz."
+
+#: fabric_admin.php
+msgid "Your device permissions do not allow changing this record."
+msgstr "Jūsu ierīču atļaujas neļauj mainīt šo ierakstu."
+
+#: fabric_admin.php
+msgid "Name: another fabric already uses this name."
+msgstr "Nosaukums: cits komutācijas tīkls jau izmanto šo nosaukumu."
+
+#: fabric_admin.php
+msgid "Adapter: another fabric already sweeps this adapter port on this poller. One fabric per adapter port."
+msgstr "Adapteris: cits komutācijas tīkls jau apseko šī adaptera portu šajā aptaujātājā. Katram adaptera portam var būt tikai viens komutācijas tīkls."
+
+#: fabric_admin.php
+msgid "The fabric could not be saved."
+msgstr "Komutācijas tīklu nevarēja saglabāt."
+
+#: fabric_admin.php
+msgid "The fabric was saved."
+msgstr "Komutācijas tīkls tika saglabāts."
+
+#: fabric_admin.php
+msgid "A sweep of this fabric is running, so nothing was deleted. Try again when it finishes."
+msgstr "Pašlaik notiek šī komutācijas tīkla apsekošana, tāpēc nekas netika dzēsts. Mēģiniet vēlreiz, kad tā beigsies."
+
+#: fabric_admin.php
+msgid "The fabric and its inventory were deleted. No Cacti device was changed and the fabric was not contacted."
+msgstr "Komutācijas tīkls un tā inventārs tika dzēsti. Neviena Cacti ierīce netika mainīta, un ar komutācijas tīklu netika veidots savienojums."
+
+#: fabric_admin.php
+msgid "The fabric could not be deleted."
+msgstr "Komutācijas tīklu nevarēja dzēst."
+
+#: fabric_admin.php
+msgid "The node identity was not changed."
+msgstr "Mezgla identitāte netika mainīta."
+
+#: fabric_admin.php
+msgid "The node identity was updated. It is swept again from the next cycle."
+msgstr "Mezgla identitāte tika atjaunināta. Tas atkal tiks apsekots no nākamā cikla."
+
+#: fabric_admin.php
+msgid "The device mapping moved to the new node."
+msgstr "Ierīces piesaiste tika pārvietota uz jauno mezglu."
+
+#: fabric_admin.php
+msgid "The proposal could not be confirmed. The nodes may have changed since it was made."
+msgstr "Priekšlikumu nevarēja apstiprināt. Mezgli, iespējams, ir mainījušies kopš tā izveides."
+
+#: fabric_admin.php
+msgid "The proposal could not be rejected."
+msgstr "Priekšlikumu nevarēja noraidīt."
+
+#: fabric_admin.php
+msgid "The proposal was rejected."
+msgstr "Priekšlikums tika noraidīts."
+
+#: fabric_admin.php
+#, php-format
+msgid "The node mapping was not changed. %s"
+msgstr "Mezgla piesaiste netika mainīta. %s"
+
+#: fabric_admin.php
+msgid "The node mapping was not changed."
+msgstr "Mezgla piesaiste netika mainīta."
+
+#: fabric_admin.php
+msgid "The node mapping was saved."
+msgstr "Mezgla piesaiste tika saglabāta."
+
+#: fabric_admin.php
+msgid "No device was created. See the Cacti log."
+msgstr "Ierīce netika izveidota. Skatiet Cacti žurnālu."
+
+#: fabric_admin.php
+msgid "The device was created and the node mapped to it. Choose the ports to graph on the New Graphs page."
+msgstr "Ierīce tika izveidota, un mezgls tai tika piesaistīts. Lapā Jauni grafiki izvēlieties portus, kuriem veidot grafikus."
+
+#: fabric_admin.php
+msgid "The inventory could not be read for export."
+msgstr "Inventāru nevarēja nolasīt eksportam."
+
+#: fabric_health.php
+msgid "The Fabric templates and data query file were installed."
+msgstr "Komutācijas tīkla veidnes un datu vaicājuma fails tika instalēti."
+
+#: fabric_health.php
+msgid "The Fabric templates were not installed. See the Cacti Objects table and the Cacti log."
+msgstr "Komutācijas tīkla veidnes netika instalētas. Skatiet tabulu Cacti objekti un Cacti žurnālu."
+
+#: fabric_operator.php
+msgid "Monitoring view"
+msgstr "Uzraudzības skats"
+
+#: fabric_operator.php
+msgid "Observations could not be read. Ask an administrator to check the plugin log."
+msgstr "Novērojumus nevarēja nolasīt. Lūdziet administratoram pārbaudīt spraudņa žurnālu."
+
+#: include/operator.php
+msgid "Inspect port validity, link width and speed, and the congestion view. Escalate identity conflicts and device relinking to an administrator; do not reset counters."
+msgstr "Pārbaudiet portu derīgumu, savienojuma platumu un ātrumu, kā arī pārslodzes skatu. Identitātes konfliktus un ierīču atkārtotu sasaisti nododiet administratoram; neatiestatiet skaitītājus."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/Pages.php
+msgid "Fabric Admin"
+msgstr "Komutācijas tīkla administrēšana"
+
+#: lib/AdminPage.php
+msgid "The fabric records could not be read. See the Cacti log."
+msgstr "Komutācijas tīkla ierakstus nevarēja nolasīt. Skatiet Cacti žurnālu."
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php lib/Pages.php
+#: setup.php
+msgid "Fabrics"
+msgstr "Komutācijas tīkli"
+
+#: lib/AdminPage.php lib/OperatorPage.php
+msgid "Actions"
+msgstr "Darbības"
+
+#: lib/AdminPage.php
+msgid "Adapter"
+msgstr "Adapteris"
+
+#: lib/AdminPage.php
+msgid "Backend"
+msgstr "Aizmugursistēma"
+
+#: lib/AdminPage.php
+msgid "Name"
+msgstr "Nosaukums"
+
+#: lib/AdminPage.php
+msgid "Nodes"
+msgstr "Mezgli"
+
+#: lib/AdminPage.php
+msgid "Poller"
+msgstr "Aptaujātājs"
+
+#: lib/AdminPage.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "State"
+msgstr "Stāvoklis"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval"
+msgstr "Apsekošanas intervāls"
+
+#: lib/AdminPage.php lib/HealthPage.php
+msgid "No fabrics defined yet."
+msgstr "Vēl nav definēts neviens komutācijas tīkls."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted poller (ID %d)"
+msgstr "Dzēsts aptaujātājs (ID %d)"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "port %d"
+msgstr "ports %d"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%d seconds"
+msgstr "%d sekundes"
+
+#: lib/AdminPage.php
+msgid "Delete"
+msgstr "Dzēst"
+
+#: lib/AdminPage.php
+msgid "Holds devices you may not see"
+msgstr "Satur ierīces, kuras jūs nedrīkstat redzēt"
+
+#: lib/AdminPage.php
+msgid "Export"
+msgstr "Eksportēt"
+
+#: lib/AdminPage.php
+msgid "Download the fabrics and node inventory, with device mappings, as JSON before an uninstall that drops the plugin tables. It holds no credential."
+msgstr "Lejupielādējiet komutācijas tīklus un mezglu inventāru ar ierīču piesaistēm JSON formātā pirms atinstalēšanas, kas izdzēš spraudņa tabulas. Tas nesatur nekādus akreditācijas datus."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric: %s"
+msgstr "Komutācijas tīkls: %s"
+
+#: lib/AdminPage.php
+msgid "New Fabric"
+msgstr "Jauns komutācijas tīkls"
+
+#: lib/AdminPage.php
+msgid "Sweep Interval (seconds)"
+msgstr "Apsekošanas intervāls (sekundēs)"
+
+#: lib/AdminPage.php
+msgid "Adapter Port"
+msgstr "Adaptera ports"
+
+#: lib/AdminPage.php
+msgid "Enabled"
+msgstr "Iespējots"
+
+#: lib/AdminPage.php
+msgid "Save"
+msgstr "Saglabāt"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete Fabric: %s"
+msgstr "Dzēst komutācijas tīklu: %s"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Delete this fabric with its %d nodes, their ports, samples, and proposals? %d nodes are mapped to Cacti devices; those devices, their data sources, and RRD files are kept. The fabric is not contacted."
+msgstr "Vai dzēst šo komutācijas tīklu kopā ar tā %d mezgliem, to portiem, paraugiem un priekšlikumiem? %d mezgli ir piesaistīti Cacti ierīcēm; šīs ierīces, to datu avoti un RRD faili tiek saglabāti. Ar komutācijas tīklu netiek veidots savienojums."
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Unmapped"
+msgstr "Nepiesaistīts"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Deleted device (ID %d)"
+msgstr "Dzēsta ierīce (ID %d)"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+#, php-format
+msgid "Fabric Node: %s"
+msgstr "Komutācijas tīkla mezgls: %s"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "GUID"
+msgstr "GUID"
+
+#: lib/AdminPage.php
+msgid "Devices Matching the Node Name"
+msgstr "Ierīces, kas atbilst mezgla nosaukumam"
+
+#: lib/AdminPage.php
+#, php-format
+msgid "%s (device %d)"
+msgstr "%s (ierīce %d)"
+
+#: lib/AdminPage.php
+msgid "None"
+msgstr "Nav"
+
+#: lib/AdminPage.php
+msgid "Cacti Device"
+msgstr "Cacti ierīce"
+
+#: lib/AdminPage.php
+msgid "Saving maps the node to the device and adds the Fabric Port data query to the device, which lists the node's ports. No graph, data source, or device setting is changed. The device must be polled by the poller that sweeps the fabric."
+msgstr "Saglabāšana piesaista mezglu ierīcei un pievieno ierīcei Komutācijas tīkla porta datu vaicājumu, kas uzskaita mezgla portus. Neviens grafiks, datu avots vai ierīces iestatījums netiek mainīts. Ierīci jāaptaujā tam pašam aptaujātājam, kas apseko komutācijas tīklu."
+
+#: lib/AdminPage.php
+msgid "Create a Device for This Node"
+msgstr "Izveidot ierīci šim mezglam"
+
+#: lib/AdminPage.php
+msgid "Devices cannot be created here."
+msgstr "Šeit nevar izveidot ierīces."
+
+#: lib/AdminPage.php
+#, php-format
+msgid "Create a Device for %s"
+msgstr "Izveidot ierīci mezglam %s"
+
+#: lib/AdminPage.php
+msgid "Creating the device adds:"
+msgstr "Ierīces izveide pievieno:"
+
+#: lib/AdminPage.php
+msgid "Create"
+msgstr "Izveidot"
+
+#: lib/AdminPage.php
+msgid "Identity Conflicts"
+msgstr "Identitātes konflikti"
+
+#: lib/AdminPage.php lib/HealthPage.php lib/InventoryPage.php
+msgid "Node"
+msgstr "Mezgls"
+
+#: lib/AdminPage.php
+msgid "Seen"
+msgstr "Redzēts"
+
+#: lib/AdminPage.php
+msgid "Stored"
+msgstr "Saglabāts"
+
+#: lib/AdminPage.php
+msgid "No conflicts."
+msgstr "Nav konfliktu."
+
+#: lib/AdminPage.php
+msgid "Printed twice in one discovery"
+msgstr "Izdrukāts divreiz vienā atklāšanā"
+
+#: lib/AdminPage.php
+msgid "Accept Seen Identity"
+msgstr "Pieņemt redzēto identitāti"
+
+#: lib/AdminPage.php
+msgid "Re-link Proposals"
+msgstr "Atkārtotas sasaistes priekšlikumi"
+
+#: lib/AdminPage.php lib/InventoryPage.php
+msgid "Device"
+msgstr "Ierīce"
+
+#: lib/AdminPage.php
+msgid "Missing Node"
+msgstr "Iztrūkstošais mezgls"
+
+#: lib/AdminPage.php
+msgid "New Node"
+msgstr "Jauns mezgls"
+
+#: lib/AdminPage.php
+msgid "Shared Neighbor Port"
+msgstr "Kopīgais kaimiņa ports"
+
+#: lib/AdminPage.php
+msgid "No open proposals."
+msgstr "Nav atvērtu priekšlikumu."
+
+#: lib/AdminPage.php
+msgid "Confirm"
+msgstr "Apstiprināt"
+
+#: lib/AdminPage.php
+msgid "Reject"
+msgstr "Noraidīt"
+
+#: lib/Backend.php
+msgid "Diagnostics tools (infiniband-diags)"
+msgstr "Diagnostikas rīki (infiniband-diags)"
+
+#: lib/CommandError.php
+msgid "The fabric or plugin settings are incomplete or invalid"
+msgstr "Komutācijas tīkla vai spraudņa iestatījumi ir nepilnīgi vai nederīgi"
+
+#: lib/CommandError.php
+msgid "The tool is missing or not executable in the configured directory"
+msgstr "Rīks trūkst vai nav izpildāms konfigurētajā direktorijā"
+
+#: lib/CommandError.php
+msgid "The tool exceeded its time limit and was stopped"
+msgstr "Rīks pārsniedza laika ierobežojumu un tika apturēts"
+
+#: lib/CommandError.php
+msgid "The tool output exceeded the size limit and was discarded"
+msgstr "Rīka izvade pārsniedza lieluma ierobežojumu un tika atmesta"
+
+#: lib/CommandError.php
+msgid "The tool failed"
+msgstr "Rīka izpilde neizdevās"
+
+#: lib/CommandError.php
+msgid "The tool output did not have the expected form"
+msgstr "Rīka izvade nebija paredzamajā formātā"
+
+#: lib/CommandError.php
+msgid "Not attempted: the time or failure budget was spent"
+msgstr "Netika mēģināts: tika iztērēts laika vai kļūmju budžets"
+
+#: lib/CommandError.php
+msgid "The plugin tables could not be read or written"
+msgstr "Spraudņa tabulas nevarēja nolasīt vai tajās ierakstīt"
+
+#: lib/DeviceProvisioner.php
+msgid "The Fabric templates are not installed. Reinstall them from the health page."
+msgstr "Komutācijas tīkla veidnes nav instalētas. Pārinstalējiet tās veselības lapā."
+
+#: lib/DeviceProvisioner.php
+msgid "The node is already mapped to a device."
+msgstr "Mezgls jau ir piesaistīts ierīcei."
+
+#: lib/DeviceProvisioner.php
+msgid "The node's fabric is not swept by the main poller, so its device could not be polled."
+msgstr "Mezgla komutācijas tīklu neapseko galvenais aptaujātājs, tāpēc tā ierīci nevarēja aptaujāt."
+
+#: lib/DeviceProvisioner.php
+msgid "The device does not exist."
+msgstr "Ierīce neeksistē."
+
+#: lib/DeviceProvisioner.php
+msgid "The device is polled by another poller than the one that sweeps this fabric, so it could not read the fabric cache."
+msgstr "Ierīci aptaujā cits aptaujātājs, nevis tas, kas apseko šo komutācijas tīklu, tāpēc tā nevarēja nolasīt komutācijas tīkla kešatmiņu."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "A device \"%s\" from the %s device template, host name %s, polled by poller %d, with availability checks and SNMP off."
+msgstr "Ierīce \"%s\" no %s ierīces veidnes, resursdatora nosaukums %s, ko aptaujā aptaujātājs %d, ar izslēgtām pieejamības pārbaudēm un SNMP."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "The %s data query on it, listing the node's ports. It creates no graph and no data source by itself."
+msgstr "Datu vaicājums %s tajā, kas uzskaita mezgla portus. Pats par sevi tas neveido grafikus un datu avotus."
+
+#: lib/DeviceProvisioner.php
+#, php-format
+msgid "Created by the Fabric plugin for node %s. Its values come from the plugin cache; the host name is a reserved name that is never contacted."
+msgstr "Izveidoja komutācijas tīkla spraudnis mezglam %s. Tās vērtības tiek ņemtas no spraudņa kešatmiņas; resursdatora nosaukums ir rezervēts nosaukums, ar kuru nekad netiek veidots savienojums."
+
+#: lib/FabricInput.php
+msgid "Name: use 1 to 64 letters, digits, spaces, dots, dashes, or underscores, starting with a letter or digit."
+msgstr "Nosaukums: izmantojiet 1 līdz 64 burtus, ciparus, atstarpes, punktus, domuzīmes vai pasvītras, sākot ar burtu vai ciparu."
+
+#: lib/FabricInput.php
+msgid "Backend: choose one of the listed backends."
+msgstr "Aizmugursistēma: izvēlieties vienu no uzskaitītajām aizmugursistēmām."
+
+#: lib/FabricInput.php
+msgid "Poller: choose one of the listed pollers."
+msgstr "Aptaujātājs: izvēlieties vienu no uzskaitītajiem aptaujātājiem."
+
+#: lib/FabricInput.php
+msgid "Poller: only the main poller can sweep a fabric until remote poller support is added."
+msgstr "Aptaujātājs: līdz attālo aptaujātāju atbalsta pievienošanai komutācijas tīklu var apsekot tikai galvenais aptaujātājs."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Sweep Interval: enter whole seconds from %d to %d."
+msgstr "Apsekošanas intervāls: ievadiet veselas sekundes no %d līdz %d."
+
+#: lib/FabricInput.php
+msgid "Adapter: enter the local adapter name as the kernel names it, such as mlx5_0."
+msgstr "Adapteris: ievadiet lokālā adaptera nosaukumu tā, kā to nosauc kodols, piemēram, mlx5_0."
+
+#: lib/FabricInput.php
+#, php-format
+msgid "Adapter Port: enter the port number of the local adapter, from 1 to %d."
+msgstr "Adaptera ports: ievadiet lokālā adaptera porta numuru no 1 līdz %d."
+
+#: lib/Format.php lib/InventoryPage.php lib/OperatorPage.php
+msgid "Never"
+msgstr "Nekad"
+
+#: lib/Format.php
+#, php-format
+msgid "%d seconds ago"
+msgstr "pirms %d sekundēm"
+
+#: lib/Format.php
+#, php-format
+msgid "%d minutes ago"
+msgstr "pirms %d minūtēm"
+
+#: lib/Format.php
+#, php-format
+msgid "%d hours ago"
+msgstr "pirms %d stundām"
+
+#: lib/Format.php
+#, php-format
+msgid "%d days ago"
+msgstr "pirms %d dienām"
+
+#: lib/HealthPage.php lib/Settings.php
+msgid "Cacti Objects"
+msgstr "Cacti objekti"
+
+#: lib/HealthPage.php
+msgid "Installed"
+msgstr "Instalēts"
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Missing"
+msgstr "Trūkst"
+
+#: lib/HealthPage.php
+msgid "Templates"
+msgstr "Veidnes"
+
+#: lib/HealthPage.php
+msgid "Data Query File"
+msgstr "Datu vaicājuma fails"
+
+#: lib/HealthPage.php
+msgid "Last Install"
+msgstr "Pēdējā instalēšana"
+
+#: lib/HealthPage.php
+msgid "Reinstall the Templates"
+msgstr "Pārinstalēt veidnes"
+
+#: lib/HealthPage.php lib/Pages.php
+msgid "Fabric Health"
+msgstr "Komutācijas tīkla veselība"
+
+#: lib/HealthPage.php
+msgid "The health records could not be read. See the Cacti log."
+msgstr "Veselības ierakstus nevarēja nolasīt. Skatiet Cacti žurnālu."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps"
+msgstr "Skaitītāju apsekošanas"
+
+#: lib/HealthPage.php
+msgid "Discovery"
+msgstr "Atklāšana"
+
+#: lib/HealthPage.php
+msgid "Fabric"
+msgstr "Komutācijas tīkls"
+
+#: lib/HealthPage.php
+msgid "Last Discovery"
+msgstr "Pēdējā atklāšana"
+
+#: lib/HealthPage.php
+msgid "Last Link Read"
+msgstr "Pēdējā savienojumu nolasīšana"
+
+#: lib/HealthPage.php
+msgid "Last Successful Discovery"
+msgstr "Pēdējā veiksmīgā atklāšana"
+
+#: lib/HealthPage.php
+msgid "Link Read"
+msgstr "Savienojumu nolasīšana"
+
+#: lib/HealthPage.php
+msgid "Nodes / Ports Seen"
+msgstr "Redzētie mezgli / porti"
+
+#: lib/HealthPage.php
+msgid "Skipped Link Lines"
+msgstr "Izlaistās savienojumu rindas"
+
+#: lib/HealthPage.php
+msgid "Unmatched Link Records"
+msgstr "Neatbilstošie savienojumu ieraksti"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: the inventory is %s; the last successful discovery was %s."
+msgstr "Komutācijas tīkls %s: inventārs ir %s; pēdējā veiksmīgā atklāšana bija %s."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it is assigned to poller %d, but only the main poller can sweep a fabric until remote poller support is added. It is not swept; assign it to the main poller."
+msgstr "Komutācijas tīkls %s: tas ir piešķirts aptaujātājam %d, taču līdz attālo aptaujātāju atbalsta pievienošanai komutācijas tīklu var apsekot tikai galvenais aptaujātājs. Tas netiek apsekots; piešķiriet to galvenajam aptaujātājam."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: its health record could not be read, so its discovery state is unknown. See the Cacti log."
+msgstr "Komutācijas tīkls %s: tā veselības ierakstu nevarēja nolasīt, tāpēc tā atklāšanas stāvoklis nav zināms. Skatiet Cacti žurnālu."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: it has not been discovered. Sweeps start only from a node mapped to a Cacti device, so run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller once."
+msgstr "Komutācijas tīkls %s: tas nav atklāts. Apsekošana sākas tikai no mezgla, kas piesaistīts Cacti ierīcei, tāpēc vienreiz palaidiet \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" galvenajā aptaujātājā."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: no node is mapped to a Cacti device, so no sweep starts and the inventory is not refreshed. Map a node on the Fabric Admin page, or run \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" on the main poller."
+msgstr "Komutācijas tīkls %s: neviens mezgls nav piesaistīts Cacti ierīcei, tāpēc apsekošana nesākas un inventārs netiek atsvaidzināts. Piesaistiet mezglu Komutācijas tīkla administrēšanas lapā vai palaidiet \"php %s/plugins/fabric/fabric_sweep.php --fabric=%d --force\" galvenajā aptaujātājā."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %d iblinkinfo lines could not be read, most likely because a node description imitates the tool output. Those nodes keep their last link states."
+msgstr "Komutācijas tīkls %s: %d iblinkinfo rindas nevarēja nolasīt, visticamāk tāpēc, ka mezgla apraksts atdarina rīka izvadi. Šie mezgli saglabā savus pēdējos savienojumu stāvokļus."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "Fabric %s: %s"
+msgstr "Komutācijas tīkls %s: %s"
+
+#: lib/HealthPage.php
+msgid "disabled"
+msgstr "atspējots"
+
+#: lib/HealthPage.php
+msgid "Warnings"
+msgstr "Brīdinājumi"
+
+#: lib/HealthPage.php
+msgid "No warnings."
+msgstr "Nav brīdinājumu."
+
+#: lib/HealthPage.php lib/InventoryPage.php
+msgid "Identity"
+msgstr "Identitāte"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%d identity conflicts and %d open re-link proposals. Resolve them on the Fabric Admin page."
+msgstr "%d identitātes konflikti un %d atvērti atkārtotas sasaistes priekšlikumi. Atrisiniet tos Komutācijas tīkla administrēšanas lapā."
+
+#: lib/HealthPage.php
+msgid "Counter Sweeps Needing Attention"
+msgstr "Skaitītāju apsekošanas, kurām nepieciešama uzmanība"
+
+#: lib/HealthPage.php
+msgid "Duration"
+msgstr "Ilgums"
+
+#: lib/HealthPage.php
+msgid "Failure"
+msgstr "Kļūme"
+
+#: lib/HealthPage.php
+msgid "Last Success"
+msgstr "Pēdējā veiksmīgā reize"
+
+#: lib/HealthPage.php
+msgid "Last Sweep"
+msgstr "Pēdējā apsekošana"
+
+#: lib/HealthPage.php
+msgid "Outcome"
+msgstr "Iznākums"
+
+#: lib/HealthPage.php
+msgid "Ports Read / Failed / Skipped"
+msgstr "Nolasītie / neveiksmīgie / izlaistie porti"
+
+#: lib/HealthPage.php
+#, php-format
+msgid "%s s"
+msgstr "%s s"
+
+#: lib/HealthPage.php
+msgid "Every swept node completed its last sweep."
+msgstr "Katrs apsekotais mezgls pabeidza savu pēdējo apsekošanu."
+
+#: lib/HealthPage.php
+#, php-format
+msgid "OK, %s s"
+msgstr "Labi, %s s"
+
+#: lib/InventoryPage.php
+msgid "LID"
+msgstr "LID"
+
+#: lib/InventoryPage.php
+msgid "Last Seen"
+msgstr "Pēdējoreiz redzēts"
+
+#: lib/InventoryPage.php
+msgid "Presence"
+msgstr "Klātbūtne"
+
+#: lib/InventoryPage.php
+msgid "Type"
+msgstr "Tips"
+
+#: lib/InventoryPage.php
+msgid "No nodes to show."
+msgstr "Nav mezglu, ko rādīt."
+
+#: lib/InventoryPage.php
+msgid "No fabrics are defined yet."
+msgstr "Vēl nav definēts neviens komutācijas tīkls."
+
+#: lib/InventoryPage.php
+msgid "Ports with the highest transmit wait"
+msgstr "Porti ar vislielāko pārraides gaidīšanu"
+
+#: lib/InventoryPage.php
+msgid "Ports with the Highest Transmit Wait"
+msgstr "Porti ar vislielāko pārraides gaidīšanu"
+
+#: lib/InventoryPage.php
+msgid "The fabric inventory could not be read. See the Cacti log."
+msgstr "Komutācijas tīkla inventāru nevarēja nolasīt. Skatiet Cacti žurnālu."
+
+#: lib/InventoryPage.php
+msgid "Transmit wait counts ticks in which a port had data to send but could not send it, for lack of credits or arbitration. A high value shows congestion toward the remote end; it does not show that the port or its cable is faulty. The tick length is not published for current link speeds, so values are ticks per second, not time."
+msgstr "Pārraides gaidīšana skaita taktīs brīžus, kad portam bija nosūtāmi dati, bet tas nevarēja tos nosūtīt kredītu trūkuma vai arbitrāžas dēļ. Augsta vērtība liecina par pārslodzi virzienā uz attālo galu; tā neliecina, ka ports vai tā kabelis ir bojāts. Takts ilgums pašreizējiem savienojumu ātrumiem nav publicēts, tāpēc vērtības ir taktīs sekundē, nevis laika vienībās."
+
+#: lib/InventoryPage.php
+msgid "Port"
+msgstr "Ports"
+
+#: lib/InventoryPage.php
+msgid "Remote"
+msgstr "Attālais gals"
+
+#: lib/InventoryPage.php
+msgid "Transmit Discards (per second)"
+msgstr "Pārraides atmešana (sekundē)"
+
+#: lib/InventoryPage.php
+msgid "Transmit Wait (ticks per second)"
+msgstr "Pārraides gaidīšana (taktis sekundē)"
+
+#: lib/InventoryPage.php
+msgid "No port has a current transmit wait rate."
+msgstr "Nevienam portam nav aktuāla pārraides gaidīšanas rādītāja."
+
+#: lib/InventoryPage.php lib/LinkCondition.php
+msgid "Unknown"
+msgstr "Nezināms"
+
+#: lib/InventoryPage.php
+msgid "Fabric Node"
+msgstr "Komutācijas tīkla mezgls"
+
+#: lib/InventoryPage.php
+msgid "The node does not exist or you may not see it."
+msgstr "Mezgls neeksistē vai jums nav tiesību to skatīt."
+
+#: lib/InventoryPage.php
+msgid "Active"
+msgstr "Aktīvs"
+
+#: lib/InventoryPage.php
+msgid "Best Both Ends Support"
+msgstr "Labākais abu galu atbalstītais"
+
+#: lib/InventoryPage.php
+msgid "Counter Validity"
+msgstr "Skaitītāju derīgums"
+
+#: lib/InventoryPage.php
+msgid "Counters"
+msgstr "Skaitītāji"
+
+#: lib/InventoryPage.php
+msgid "Graphs"
+msgstr "Grafiki"
+
+#: lib/InventoryPage.php
+msgid "Link"
+msgstr "Savienojums"
+
+#: lib/InventoryPage.php
+msgid "No ports recorded yet."
+msgstr "Vēl nav reģistrēts neviens ports."
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "Device %d"
+msgstr "Ierīce %d"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters saturated, published as unknown: %s"
+msgstr "%s skaitītāji ir piesātināti un publicēti kā nezināmi: %s"
+
+#: lib/InventoryPage.php
+#, php-format
+msgid "%s counters: %d discontinuities, the last %s"
+msgstr "%s skaitītāji: %d pārtraukumi, pēdējais %s"
+
+#: lib/InventoryPage.php
+msgid "Valid"
+msgstr "Derīgs"
+
+#: lib/LinkCondition.php
+msgid "Up"
+msgstr "Aktīvs"
+
+#: lib/LinkCondition.php
+msgid "Below best, limited by enabled values"
+msgstr "Zem labākā, ierobežots ar iespējotajām vērtībām"
+
+#: lib/LinkCondition.php
+msgid "Below best, cause unknown"
+msgstr "Zem labākā, cēlonis nezināms"
+
+#: lib/LinkCondition.php
+msgid "Degraded"
+msgstr "Pasliktināts"
+
+#: lib/LinkCondition.php
+msgid "Down"
+msgstr "Neaktīvs"
+
+#: lib/NodeType.php
+msgid "Switch"
+msgstr "Komutators"
+
+#: lib/NodeType.php
+msgid "Channel adapter"
+msgstr "Kanāla adapteris"
+
+#: lib/NodeType.php
+msgid "Router"
+msgstr "Maršrutētājs"
+
+#: lib/OperatorPage.php
+msgid "Review the recorded observations below. Acknowledgments are personal to this session, expire when observations change, and never suppress alerts or change health."
+msgstr "Pārskatiet tālāk reģistrētos novērojumus. Apstiprinājumi attiecas tikai uz šo sesiju, zaudē spēku, mainoties novērojumiem, un nekad neapslāpē brīdinājumus vai nemaina veselības stāvokli."
+
+#: lib/OperatorPage.php lib/Pages.php
+msgid "Fabric Operations"
+msgstr "Komutācijas tīkla darbības"
+
+#: lib/OperatorPage.php
+msgid "Investigation"
+msgstr "Izmeklēšana"
+
+#: lib/OperatorPage.php
+msgid "Object"
+msgstr "Objekts"
+
+#: lib/OperatorPage.php
+msgid "Observed (UTC)"
+msgstr "Novērots (UTC)"
+
+#: lib/OperatorPage.php
+msgid "Unknown or stale"
+msgstr "Nezināms vai novecojis"
+
+#: lib/OperatorPage.php
+msgid "Acknowledged; health unchanged."
+msgstr "Apstiprināts; veselības stāvoklis nav mainīts."
+
+#: lib/OperatorPage.php
+msgid "Acknowledge"
+msgstr "Apstiprināt"
+
+#: lib/OperatorPage.php
+msgid "No observations are available for devices you may access."
+msgstr "Nav pieejamu novērojumu ierīcēm, kurām jums ir piekļuve."
+
+#: lib/Pages.php
+msgid "Fabric Operator"
+msgstr "Komutācijas tīkla operators"
+
+#: lib/Pages.php
+msgid "Fabric View"
+msgstr "Komutācijas tīkla skats"
+
+#: lib/PrivilegeProbe.php
+msgid "The sweep runs as root. Run the poller as an unprivileged account with read access to the umad devices through a group."
+msgstr "Apsekošana darbojas kā root lietotājs. Palaidiet aptaujātāju ar neprivileģētu kontu, kam caur grupu ir lasīšanas piekļuve umad ierīcēm."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "A diagnostics tool has the setuid or setgid bit. The plugin never needs it."
+msgstr "Diagnostikas rīkam ir iestatīts setuid vai setgid bits. Spraudnim tas nekad nav nepieciešams."
+
+#: lib/PrivilegeProbe.php
+msgid "A diagnostics tool or its directory can be written by an account other than its owner, or by the poller account. Whoever can write it chooses what the poller runs."
+msgstr "Diagnostikas rīku vai tā direktoriju var rakstīt cits konts, nevis tā īpašnieks, vai aptaujātāja konts. Ikviens, kurš to var rakstīt, nosaka, ko palaiž aptaujātājs."
+
+#: lib/PrivilegeProbe.php
+msgid "A umad device is readable or writable by every account, so any local user can query the fabric. Restrict it to a group."
+msgstr "umad ierīci var lasīt vai rakstīt jebkurš konts, tāpēc jebkurš lokālais lietotājs var vaicāt komutācijas tīklu. Ierobežojiet piekļuvi grupai."
+
+#: lib/PrivilegeProbe.php lib/ToolDirectory.php
+msgid "Unknown warning"
+msgstr "Nezināms brīdinājums"
+
+#: lib/Settings.php
+msgid "Diagnostics Tools"
+msgstr "Diagnostikas rīki"
+
+#: lib/Settings.php
+msgid "Absolute directory, on each poller that sweeps a fabric, holding perfquery, ibnetdiscover, and iblinkinfo. The Debian and Ubuntu packages install them in /usr/sbin. No other program is ever run from it."
+msgstr "Absolūtais direktorijas ceļš katrā aptaujātājā, kas apseko komutācijas tīklu, kurā atrodas perfquery, ibnetdiscover un iblinkinfo. Debian un Ubuntu pakotnes tos instalē mapē /usr/sbin. Neviena cita programma no tās nekad netiek palaista."
+
+#: lib/Settings.php
+msgid "Tool Directory"
+msgstr "Rīku direktorija"
+
+#: lib/Settings.php
+msgid "Node Name Map"
+msgstr "Mezglu nosaukumu karte"
+
+#: lib/Settings.php
+msgid "Optional absolute path to an infiniband-diags node name map file. Names it supplies are shown only; identity is always the node GUID."
+msgstr "Neobligāts absolūtais ceļš līdz infiniband-diags mezglu nosaukumu kartes failam. Tā sniegtie nosaukumi tiek izmantoti tikai attēlošanai; identitāte vienmēr ir mezgla GUID."
+
+#: lib/Settings.php
+msgid "Datagram Timeout"
+msgstr "Datagrammas noildze"
+
+#: lib/Settings.php
+msgid "Milliseconds each management datagram may take before the tools retry it (their -t option)."
+msgstr "Milisekundes, cik ilgi drīkst aizņemt katra pārvaldības datagramma, pirms rīki to mēģina vēlreiz (to opcija -t)."
+
+#: lib/Settings.php
+msgid "Command Timeout"
+msgstr "Komandas noildze"
+
+#: lib/Settings.php
+msgid "Seconds one tool run may take before it is stopped and recorded as failed."
+msgstr "Sekundes, cik ilgi drīkst ilgt viena rīka izpilde, pirms tā tiek apturēta un reģistrēta kā neveiksmīga."
+
+#: lib/Settings.php
+msgid "KiB one tool run may print. Larger output is discarded and recorded as failed."
+msgstr "KiB skaits, ko drīkst izvadīt viena rīka izpilde. Lielāka izvade tiek atmesta un reģistrēta kā neveiksmīga."
+
+#: lib/Settings.php
+msgid "Maximum Output"
+msgstr "Maksimālā izvade"
+
+#: lib/Settings.php
+msgid "Sweep"
+msgstr "Apsekošana"
+
+#: lib/Settings.php
+msgid "Node Time Budget"
+msgstr "Mezgla laika budžets"
+
+#: lib/Settings.php
+msgid "Seconds one node sweep may spend reading counters. Ports not reached are read in the next cycle."
+msgstr "Sekundes, ko viena mezgla apsekošana drīkst patērēt skaitītāju lasīšanai. Nesasniegtie porti tiek nolasīti nākamajā ciklā."
+
+#: lib/Settings.php
+msgid "Failed ports after which a node sweep stops for this cycle. A port that does not answer costs several seconds."
+msgstr "Neveiksmīgo portu skaits, pēc kura mezgla apsekošana šajā ciklā tiek apturēta. Ports, kas neatbild, patērē vairākas sekundes."
+
+#: lib/Settings.php
+msgid "Node Failure Budget"
+msgstr "Mezgla kļūmju budžets"
+
+#: lib/Settings.php
+msgid "Index Down Ports"
+msgstr "Indeksēt neaktīvos portus"
+
+#: lib/Settings.php
+msgid "When checked, the Fabric Port data query also lists ports that are down and have no remote end, such as unused adapter ports. Cleared, they are left out until they come up."
+msgstr "Ja atzīmēts, Komutācijas tīkla porta datu vaicājums uzskaita arī neaktīvos portus bez attālā gala, piemēram, neizmantotos adaptera portus. Ja atzīme nav iestatīta, tie tiek izlaisti, līdz kļūst aktīvi."
+
+#: lib/Settings.php
+msgid "Uninstall"
+msgstr "Atinstalēšana"
+
+#: lib/Settings.php
+msgid "Keep Plugin Tables on Uninstall"
+msgstr "Saglabāt spraudņa tabulas atinstalēšanas laikā"
+
+#: lib/Settings.php
+msgid "When checked, uninstalling the plugin keeps its fabrics, inventory, and samples. Clear it to have the uninstall drop them; export the inventory first from the Fabric Admin page. The fabric is never contacted either way."
+msgstr "Ja atzīmēts, atinstalējot spraudni, tiek saglabāti tā komutācijas tīkli, inventārs un paraugi. Noņemiet atzīmi, lai atinstalēšana tos izdzēstu; vispirms eksportējiet inventāru no Komutācijas tīkla administrēšanas lapas. Ar komutācijas tīklu jebkurā gadījumā netiek veidots savienojums."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory must be an absolute path of letters, digits, dots, dashes, underscores, and slashes, with no trailing slash."
+msgstr "Rīku direktorijai jābūt absolūtam ceļam no burtiem, cipariem, punktiem, domuzīmēm, pasvītrām un slīpsvītrām bez slīpsvītras beigās."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory does not exist or is not a directory."
+msgstr "Rīku direktorija neeksistē vai nav direktorija."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory path contains a symbolic link. Enter the real path."
+msgstr "Rīku direktorijas ceļš satur simbolisko saiti. Ievadiet īsto ceļu."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory is not owned by root."
+msgstr "Rīku direktorija nepieder lietotājam root."
+
+#: lib/ToolDirectory.php
+msgid "The tool directory can be written by its group or by others."
+msgstr "Rīku direktorijā var rakstīt tās grupa vai citi lietotāji."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool is not owned by root."
+msgstr "Diagnostikas rīks nepieder lietotājam root."
+
+#: lib/ToolDirectory.php
+msgid "A diagnostics tool can be written by its group or by others."
+msgstr "Diagnostikas rīku var rakstīt tā grupa vai citi lietotāji."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later. This server runs PHP %s, so the plugin was not installed or enabled."
+msgstr "Komutācijas tīkla spraudnim nepieciešama PHP %s vai jaunāka versija. Šajā serverī darbojas PHP %s, tāpēc spraudnis netika instalēts vai iespējots."
+
+#: setup.php
+msgid "The Fabric plugin is not enabled."
+msgstr "Komutācijas tīkla spraudnis nav iespējots."
+
+#: setup.php
+#, php-format
+msgid "The Fabric plugin requires PHP %s or later."
+msgstr "Komutācijas tīkla spraudnim nepieciešama PHP %s vai jaunāka versija."
+
+#: setup.php
+msgid "Management"
+msgstr "Pārvaldība"
+
+#: setup.php
+#, php-format
+msgid "The Tool Directory was not saved. %s"
+msgstr "Rīku direktorija netika saglabāta. %s"
